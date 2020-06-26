@@ -10,3 +10,8 @@
 /packages
 /VimeoClient/bin/Release
 /VimeoClient/bin/Debug
+/src/packages
+/src/VimeoClient/bin
+/src/VimeoClient/obj/Debug
+/src/VimeoClient/obj/Release
+/src/VimeoClient/obj
