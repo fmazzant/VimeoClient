@@ -1,5 +1,8 @@
 ﻿namespace VimeoClient.Response
 {
-    public class User { }
+    public class User
+    {
+
+    }
 
 }

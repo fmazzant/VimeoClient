@@ -11,33 +11,19 @@
     using VimeoClient.Common;
     using VimeoClient.Responses;
 
-    public static class VimeoScope
-    {
-        public const string PUBLIC = "public";//* Access public member data.
-        public const string PRIVATE = "private";//†	Access private member data.
-        public const string PURCHASED = "purchased";//   Access a member's Vimeo On Demand purchase history.
-        public const string CREATE = "create";// Create new Vimeo resources like showcases, groups, channels, and portfolios.To create new videos, you need the upload scope.
-        public const string EDIT = "edit";// Edit existing Vimeo resources, including videos.
-        public const string DELETE = "delete";//  Delete existing Vimeo resources, including videos.
-        public const string INTERACT = "interact";// Interact with Vimeo resources, such as liking a video or following a member.
-        public const string PUBUPLOAD = "upload";// Upload videos.
-        public const string PROMO_CODES = "promo_codes";// Add, remove, and review Vimeo On Demand promotions.
-        public const string VIDEO_FILES = "video_files";// Access video files belonging to members with Vimeo Pro membership or higher.
-    }
-
     /// <summary>
-    /// 
+    /// Provides a set of methods for connecting to Vimeo REST webapi
     /// </summary>
     public class Vimeo
     {
         /// <summary>
-        /// 
+        /// Properites
         /// </summary>
         public VimeoProperties Properties { get; private set; }
             = new VimeoProperties { };
 
         /// <summary>
-        /// 
+        /// Creates an instance
         /// </summary>
         public Vimeo()
             : this(new VimeoProperties { })
@@ -46,7 +32,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Creates an instance with auth information to access private or public information
         /// </summary>
         /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
@@ -65,7 +51,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Creates an instance with Vimeo Properties
         /// </summary>
         /// <param name="properties"></param>
         public Vimeo(VimeoProperties properties)
@@ -75,13 +61,16 @@
         }
 
         /// <summary>
-        /// 
+        /// Vimeo End Point root
         /// </summary>
         /// <returns></returns>
         protected RestBuilder Root() => Rest
             .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
             .CertificateValidation((sender, cert, chain, errors) =>
             {
+#if DEBUG
+                return true;
+#endif
                 if (Properties.ValidCertificates == null) return false;
                 var certificate = cert.GetCertHashString();
                 var noErrors = errors == SslPolicyErrors.None;
@@ -90,43 +79,75 @@
             });
 
         /// <summary>
-        /// 
+        /// Vimeo End Point root with Bearer authentication
         /// </summary>
         /// <returns></returns>
         protected RestBuilder RootAuthorization() => Root()
-            .OnStart((e) =>
+            .Authentication(() =>
             {
-                Console.WriteLine(e.Url);
-            })
-            .Authentication(() => new AuthenticationHeaderValue("Bearer", Properties.AccessToken));
-
+                if (string.IsNullOrEmpty(Properties.AccessToken))
+                    throw new ArgumentNullException("AccessToken is empty or null. Call the client credentials grant or the authorization code grant to get the access token");
+                return new AuthenticationHeaderValue("Bearer", Properties.AccessToken);
+            });
 
         /// <summary>
-        /// 
+        /// Using the client credentials grant. Access only public information.
         /// </summary>
         /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
         /// <returns></returns>
         public RestResult<AccessTokenResponse> GetAccessToken(string clientId, string clientSecret) => Root()
-            .Authentication(() =>
-            {
-                var token = $"{clientId}:{clientSecret}";
-                var tokenBytes = Encoding.ASCII.GetBytes(token);
-                var encoded = Convert.ToBase64String(tokenBytes);
-                return new AuthenticationHeaderValue("Basic", encoded);
-            })
+            .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}"))))
             .Command("/oauth/authorize/client")
-            .Payload(new AccessTokenPayload { })
+            .Payload(new AccessTokenPayload
+            {
+                grant_type = "client_credentials",
+                scope = "public"
+            })
             .Post<AccessTokenResponse>();
 
         /// <summary>
-        /// 
+        /// Using the authorization code grant - STEP 1. Access public and private information.
+        /// </summary>
+        /// <param name="response_type"></param>
+        /// <param name="client_id"></param>
+        /// <param name="redirect_uri"></param>
+        /// <param name="state"></param>
+        /// <param name="scope"></param>
+        /// <returns></returns>
+        public RestResult<string> GetAccessToken(string response_type, string client_id, string redirect_uri, string state, string[] scopes) => Root()
+            .Command("/oauth/authorize")
+            .Parameter("response_type", response_type)
+            .Parameter("client_id", client_id)
+            .Parameter("redirect_uri", redirect_uri)
+            .Parameter("state", state)
+            .Parameter("scope", scopes == null ? VimeoScope.PUBLIC : string.Join(" ", scopes))
+            .OnStart((e) => Console.WriteLine(e.Url))
+            .Get();
+
+        /// <summary>
+        /// Using the authorization code grant - STEP 2. Access public and private information.
+        /// </summary>
+        /// <param name="authenticationCode"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public RestResult<AccessTokenResponse> PostAccessToken(string authenticationCode, string requestUri) => Root()
+            .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Properties.ClientId}:{Properties.ClientSecret}"))))
+            .Command("/oauth/access_token")
+            .Payload(new PostAccessTokenBody
+            {
+                grant_type = "authorization_code",
+                code = authenticationCode,
+                redirect_uri = requestUri
+            }).Post<AccessTokenResponse>();
+
+        /// <summary>
+        /// Tutotial is Public scope
         /// </summary>
         /// <returns></returns>
         public RestResult<Tutorial> Tutorial() => RootAuthorization()
           .Command("/tutorial")
           .Get<Tutorial>();
-
 
         /// <summary>
         /// 
