@@ -13,7 +13,8 @@
     <PackageProjectUrl>https://github.com/fmazzant/VimeoClient</PackageProjectUrl>
     <RepositoryUrl>https://github.com/fmazzant/VimeoClient</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageTags>vimeo, vimeo-client</PackageTags>
+    <PackageTags>vimeo, vimeo-client, c-sharp, dotnet-standard, http-client, restclient, mafe, json, rest, fluent</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
