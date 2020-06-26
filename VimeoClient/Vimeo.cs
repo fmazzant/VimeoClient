@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Net.Http.Headers;
     using System.Net.Security;
+    using System.Text;
     using RestClient;
     using RestClient.Generic;
     using VimeoClient.Common;
@@ -83,6 +84,38 @@
                 Console.WriteLine(e.Url);
             })
             .Authentication(() => new AuthenticationHeaderValue("Bearer", Properties.AccessToken));
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="authCode"></param>
+        /// <param name="cid"></param>
+        /// <param name="secret"></param>
+        /// <param name="redirect"></param>
+        /// <returns></returns>
+        public RestResult<string> GetAccessToken(string authCode, string clientId, string clientSecret, string redirect) => Root()
+            .Header((h) =>
+            {
+
+            })
+            .Authentication(() =>
+            {
+                var token = $"{clientId}:{clientSecret}";
+                var tokenBytes = Encoding.ASCII.GetBytes(token);
+                var encoded = Convert.ToBase64String(tokenBytes);
+                return new AuthenticationHeaderValue("Basic", encoded);
+            })
+            .Command("/oauth/access_token")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((p) =>
+            {
+                p.Add("grant_type", "authorization_code");
+                p.Add("code", authCode);
+                p.Add("redirect_uri", redirect);
+            })
+
+            .Post();
 
         /// <summary>
         /// 
