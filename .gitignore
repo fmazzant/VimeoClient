@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs
+/VimeoClient/bin/Debug/netstandard2.0
+/VimeoClient/obj
