@@ -25,46 +25,16 @@
         /// <returns></returns>
         protected RestBuilder RootUserAuthorization() => RootAuthorization().Command("/users");
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public RestResult<string> GetUser(int userId) => RootUserAuthorization()
-          .Command(userId)
-          .Get();
+        #region[ESSENTIALS]
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user_id"></param>
-        /// <returns></returns>
-        public RestResult<string> GetFeedByUserId(int user_id) => RootUserAuthorization()
-            .Command($"/{user_id}/feed")
-            .Get();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user_id"></param>
-        /// <param name="offset"></param>
-        /// <param name="page"></param>
-        /// <param name="per_page"></param>
-        /// <returns></returns>
-        public RestResult<string> GetFeedByUserId(int user_id, string offset, string page, string per_page) => RootUserAuthorization()
-            .Command($"/{user_id}/feed")
-            .Parameter("offset", offset)
-            .Parameter("page", page)
-            .Parameter("per_page", per_page)
-            .Get();
-
-        /// <summary>
-        /// 
+        /// This method edits the Vimeo account of the authenticated user.
+        /// PATCH https://api.vimeo.com/users/{user_id}
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public RestResult<string> Patch(int user_id, UserBody body) => RootUserAuthorization()
+        public RestResult<string> EditTheUser(int user_id, UserBody body) => RootUserAuthorization()
             .Command(user_id)
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -93,5 +63,64 @@
                 pars.Add("users", body.users);
             })
             .Patch();
+
+        /// <summary>
+        /// This method returns the authenticated user.
+        /// GET https://api.vimeo.com/users/{user_id}
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public RestResult<string> GetTheUser(int userId) => RootUserAuthorization()
+          .Command(userId)
+          .Get();
+        #endregion
+
+        #region[FEEDS]
+
+        /// <summary>
+        /// This method returns every video in the authenticated user's feed.
+        /// GET https://api.vimeo.com/users/{user_id}/feed
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosInTheUserFeed(int user_id) => RootUserAuthorization()
+            .Command($"/{user_id}/feed")
+            .Get();
+
+        /// <summary>
+        /// This method returns every video in the authenticated user's feed.
+        /// GET https://api.vimeo.com/users/{user_id}/feed
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="offset"></param>
+        /// <param name="page"></param>
+        /// <param name="per_page"></param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosInTheUserFeed(int user_id, string offset, string page, string per_page) => RootUserAuthorization()
+            .Command($"/{user_id}/feed")
+            .Parameter("offset", offset)
+            .Parameter("page", page)
+            .Parameter("per_page", per_page)
+            .Get();
+        #endregion
+
+        #region[ FOLLOERS ]
+
+        /// <summary>
+        /// This method determines whether the authenticated user is a follower of the specified user.
+        /// GET https://api.vimeo.com/users/{user_id}/following/{follow_user_id}
+        /// </summary>
+        /// <param name="follow_user_id"></param>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfTheUserIsFollowingAnotherUser(int follow_user_id, int user_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/following")
+            .Command(follow_user_id)
+            .Get();
+       
+        #endregion
+
+
     }
 }

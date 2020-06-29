@@ -22,41 +22,15 @@
         /// <returns></returns>
         protected RestBuilder RootMeAuthorization() => RootAuthorization().Command("/me");
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public RestResult<string> Get() => RootMeAuthorization()
-            .Get();
+        #region[ ESSENTIALS ]
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public RestResult<string> GetFeed() => RootMeAuthorization()
-            .Command("/feed")
-            .Get();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="offset"></param>
-        /// <param name="page"></param>
-        /// <param name="per_page"></param>
-        /// <returns></returns>
-        public RestResult<string> GetFeedWithPaging(string offset, string page, string per_page) => RootAuthorization()
-            .Command("/me/feed")
-            .Parameter("offset", offset)
-            .Parameter("page", page)
-            .Parameter("per_page", per_page)
-            .Get();
-
-        /// <summary>
-        /// 
+        /// This method edits the Vimeo account of the authenticated user.
+        /// PATCH https://api.vimeo.com/me
         /// </summary>
         /// <param name="body"></param>
         /// <returns></returns>
-        public RestResult<string> Patch(UserBody body) => RootMeAuthorization()
+        public RestResult<string> EditTheUser(UserBody body) => RootMeAuthorization()
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
@@ -84,5 +58,58 @@
                 pars.Add("users", body.users);
             })
             .Patch();
+
+        /// <summary>
+        /// This method returns the authenticated user.
+        /// GET https://api.vimeo.com/me
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> GetTheUser() => RootMeAuthorization()
+            .Get();
+        #endregion
+
+        #region[FEEDS]
+
+        /// <summary>
+        /// This method returns every video in the authenticated user's feed.
+        /// GET https://api.vimeo.com/me/feed
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosInTheUserFeed() => RootMeAuthorization()
+            .Command("/feed")
+            .Get();
+
+        /// <summary>
+        /// This method returns every video in the authenticated user's feed.
+        /// GET https://api.vimeo.com/me/feed
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="page"></param>
+        /// <param name="per_page"></param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosInTheUserFeedWithPaging(string offset, string page, string per_page) => RootMeAuthorization()
+            .Command("/me/feed")
+            .Parameter("offset", offset)
+            .Parameter("page", page)
+            .Parameter("per_page", per_page)
+            .Get();
+
+        #endregion
+
+        #region[FOLLOWERS]
+
+        /// <summary>
+        /// This method determines whether the authenticated user is a follower of the specified user.
+        /// GET https://api.vimeo.com/users/me/following/{follow_user_id}
+        /// </summary>
+        /// <param name="follow_user_id"></param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfTheUserIsFollowingAnotherUser(int follow_user_id) => RootMeAuthorization()
+            .Command("/following")
+            .Command(follow_user_id)
+            .Get();
+
+        #endregion
+
     }
 }
