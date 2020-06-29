@@ -140,6 +140,48 @@
             .Command("/followers")
             .Get();
 
+        /// <summary>
+        /// This method returns every follower of the authenticated user.
+        /// </summary>
+        /// <param name="direction">
+        /// The sort direction of the results.Option descriptions:
+        ///     asc - Sort the results in ascending order.
+        ///     desc - Sort the results in descending order.
+        ///     asc
+        ///     desc
+        /// </param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results</param>
+        /// <param name="sort">
+        /// The way to sort the results.Option descriptions:
+        ///     alphabetical - Sort the results alphabetically.
+        ///     date - Sort the results by date followed.
+        ///     alphabetical
+        ///     date
+        /// </param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheFollowersOfTheUserWithPaging(string direction, int page, int per_page, string query, string sort)
+        {
+            var builder = RootMeAuthorization().Command("/followers");
+
+            if (!string.IsNullOrEmpty(direction))
+                builder = builder.Parameter("direction", direction);
+
+            if (page > 0)
+                builder = builder.Parameter("page", page);
+
+            if (per_page > 0)
+                builder = builder.Parameter("per_page", per_page);
+
+            if (!string.IsNullOrEmpty(query))
+                builder = builder.Parameter("query", query);
+
+            if (!string.IsNullOrEmpty(sort))
+                builder = builder.Parameter("sort", sort);
+
+            return builder.Get();
+        }
 
         /// <summary>
         /// This method returns every user that the authenticated user is following.
@@ -149,6 +191,59 @@
         public RestResult<string> GetAllTheUsersThatTheUserIsFollowing() => RootMeAuthorization()
             .Command("/following")
             .Get();
+
+        /// <summary>
+        /// This method returns every follower of the authenticated user.
+        /// </summary>
+        /// <param name="direction">
+        /// The sort direction of the results.Option descriptions:
+        ///     asc - Sort the results in ascending order.
+        ///     desc - Sort the results in descending order.
+        ///     asc
+        ///     desc
+        /// </param>
+        /// <param name="filter">
+        /// The attribute by which to filter the results.Option descriptions:
+        ///     online - Return users who are currently online.
+        ///     online
+        /// </param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results</param>
+        /// <param name="sort">
+        /// The way to sort the results.Option descriptions:
+        ///     alphabetical - Sort the results alphabetically.
+        ///     date - Sort the results by date followed.
+        ///     alphabetical
+        ///     date
+        /// </param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheUsersThatTheUserIsFollowing(string direction, string filter, int page, int per_page, string query, string sort)
+        {
+            var builder = RootMeAuthorization()
+                .Command("/following");
+
+            if (!string.IsNullOrEmpty(direction))
+                builder = builder.Parameter("direction", direction);
+
+            if (!string.IsNullOrEmpty(filter))
+                builder = builder.Parameter("filter", filter);
+
+            if (page > 0)
+                builder = builder.Parameter("page", page);
+
+            if (per_page > 0)
+                builder = builder.Parameter("per_page", per_page);
+
+            if (!string.IsNullOrEmpty(query))
+                builder = builder.Parameter("query", query);
+
+            if (!string.IsNullOrEmpty(sort))
+                builder = builder.Parameter("sort", sort);
+
+            return builder.Get();
+        }
+
 
         /// <summary>
         /// This method causes the authenticated user to stop following another user.
