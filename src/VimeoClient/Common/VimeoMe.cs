@@ -102,12 +102,34 @@
         /// This method determines whether the authenticated user is a follower of the specified user.
         /// GET https://api.vimeo.com/users/me/following/{follow_user_id}
         /// </summary>
-        /// <param name="follow_user_id"></param>
+        /// <param name="follow_user_id">The ID of the user to follow.</param>
         /// <returns></returns>
         public RestResult<string> CheckIfTheUserIsFollowingAnotherUser(int follow_user_id) => RootMeAuthorization()
             .Command("/following")
             .Command(follow_user_id)
             .Get();
+
+        /// <summary>
+        /// This method causes the authenticated user to become the follower of multiple users. 
+        /// In the body of the request, specify the list of users to follow asan array of URIs, 
+        /// where user01_id, user02_id, user03_id, and so on, are the user IDs of the users in question:
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> FollowAListOfUsers() => RootMeAuthorization()
+            .Command("/following")
+            .Post();
+
+        /// <summary>
+        /// This method causes the authenticated user to become the follower of the specified user.
+        /// PUT https://api.vimeo.com/users/{user_id}/following/{follow_user_id}
+        /// </summary>
+        /// <param name="follow_user_id"></param>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public RestResult<string> FollowASpecificUser(int follow_user_id) => RootMeAuthorization()
+            .Command("/following")
+            .Command(follow_user_id)
+            .Put();
 
         #endregion
 
