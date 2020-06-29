@@ -143,8 +143,39 @@
             .Command(follow_user_id)
             .Put();
 
+        /// <summary>
+        /// This method returns every follower of the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheFollowersOfTheUser(int user_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/followers")
+            .Get();
+
+        /// <summary>
+        /// This method returns every user that the authenticated user is following.
+        /// GET https://api.vimeo.com/users/{user_id}/following
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheUsersThatTheUserIsFollowing(int user_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/following")
+            .Get();
+
+        /// <summary>
+        /// This method causes the authenticated user to stop following another user.
+        /// DELETE https://api.vimeo.com/users/{user_id}/following/{follow_user_id}
+        /// </summary>
+        /// <param name="follow_user_id"></param>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public RestResult<string> UnfollowAUser(int follow_user_id, int user_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/following")
+            .Command(follow_user_id)
+            .Delete();
+
         #endregion
-
-
     }
 }
