@@ -7,20 +7,29 @@
     /// <summary>
     /// 
     /// </summary>
-    public class VimeoMe : Vimeo
+    public class VimeoMe
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="properties"></param>
-        public VimeoMe(VimeoProperties properties)
-            : base(properties) { }
+        public VimeoProperties Properties { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RestBuilder RootAuthorization { get; private set; }
+
+        public VimeoMe(VimeoProperties properties, RestBuilder rootAuthorization)
+        {
+            this.Properties = properties;
+            this.RootAuthorization = rootAuthorization;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        protected RestBuilder RootMeAuthorization() => RootAuthorization().Command("/me");
+        protected RestBuilder RootMeAuthorization() => RootAuthorization.Command("/me");
 
         #region[ ESSENTIALS ]
 

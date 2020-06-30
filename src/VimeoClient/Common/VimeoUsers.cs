@@ -8,22 +8,29 @@
     /// <summary>
     /// These are the most common methods for working with users.
     /// </summary>
-    public class VimeoUsers : Vimeo
+    public class VimeoUsers
     {
-        //https://developer.vimeo.com/api/reference/users
+        /// <summary>
+        /// 
+        /// </summary>
+        public VimeoProperties Properties { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="properties"></param>
-        public VimeoUsers(VimeoProperties properties)
-           : base(properties) { }
+        public RestBuilder RootAuthorization { get; private set; }
+
+        public VimeoUsers(VimeoProperties properties, RestBuilder rootAuthorization)
+        {
+            this.Properties = properties;
+            this.RootAuthorization = rootAuthorization;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        protected RestBuilder RootUserAuthorization() => RootAuthorization().Command("/users");
+        protected RestBuilder RootUserAuthorization() => RootAuthorization.Command("/users");
 
         #region[ESSENTIALS]
 

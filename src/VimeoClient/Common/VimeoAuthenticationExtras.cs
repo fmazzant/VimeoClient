@@ -1,11 +1,32 @@
-﻿namespace VimeoClient.Common
+﻿using RestClient;
+using System.Net.NetworkInformation;
+
+namespace VimeoClient.Common
 {
     /// <summary>
     /// 
     /// </summary>
-    public class VimeoAuthenticationExtras : Vimeo
+    public class VimeoAuthenticationExtras
     {
-        public VimeoAuthenticationExtras(VimeoProperties properties)
-               : base(properties) { }
+        /// <summary>
+        /// 
+        /// </summary>
+        public VimeoProperties Properties { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RestBuilder RootAuthorization { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="rootAuthorization"></param>
+        public VimeoAuthenticationExtras(VimeoProperties properties, RestBuilder rootAuthorization)
+        {
+            this.Properties = properties;
+            this.RootAuthorization = rootAuthorization;
+        }
     }
 }

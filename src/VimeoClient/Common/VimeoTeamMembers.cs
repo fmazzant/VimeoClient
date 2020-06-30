@@ -1,11 +1,31 @@
-﻿namespace VimeoClient.Common
+﻿using RestClient;
+
+namespace VimeoClient.Common
 {
     /// <summary>
     /// 
     /// </summary>
-    public class VimeoTeamMembers : Vimeo
+    public class VimeoTeamMembers
     {
-        public VimeoTeamMembers(VimeoProperties properties)
-            : base(properties) { }
+        /// <summary>
+        /// 
+        /// </summary>
+        public VimeoProperties Properties { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RestBuilder RootAuthorization { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="rootAuthorization"></param>
+        public VimeoTeamMembers(VimeoProperties properties, RestBuilder rootAuthorization)
+        {
+            this.Properties = properties;
+            this.RootAuthorization = rootAuthorization;
+        }
     }
 }

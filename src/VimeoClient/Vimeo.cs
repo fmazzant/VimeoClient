@@ -152,87 +152,87 @@
         /// <summary>
         /// 
         /// </summary>
-        public VimeoMe Me => new VimeoMe(Properties);
+        public VimeoMe Me => new VimeoMe(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoUsers Users => new VimeoUsers(Properties);
+        public VimeoUsers Users => new VimeoUsers(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(Properties);
+        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(Properties);
+        public VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoCategories Categories => new VimeoCategories(Properties);
+        public VimeoCategories Categories => new VimeoCategories(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(Properties);
+        public VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoFolders Folders => new VimeoFolders(Properties);
+        public VimeoFolders Folders => new VimeoFolders(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoGroups Groups => new VimeoGroups(Properties);
+        public VimeoGroups Groups => new VimeoGroups(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoLikes Likes => new VimeoLikes(Properties);
+        public VimeoLikes Likes => new VimeoLikes(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoLive Live => new VimeoLive(Properties);
+        public VimeoLive Live => new VimeoLive(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoOnDemand OnDemand => new VimeoOnDemand(Properties);
+        public VimeoOnDemand OnDemand => new VimeoOnDemand(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoPortfolios Portfolios => new VimeoPortfolios(Properties);
+        public VimeoPortfolios Portfolios => new VimeoPortfolios(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoShowCases ShowCases => new VimeoShowCases(Properties);
+        public VimeoShowCases ShowCases => new VimeoShowCases(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoTags Tags => new VimeoTags(Properties);
+        public VimeoTags Tags => new VimeoTags(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoTeamMembers TeamMembers => new VimeoTeamMembers(Properties);
+        public VimeoTeamMembers TeamMembers => new VimeoTeamMembers(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoVideos Videos => new VimeoVideos(Properties);
+        public VimeoVideos Videos => new VimeoVideos(Properties, RootAuthorization());
 
         /// <summary>
         /// 
         /// </summary>
-        public VimeoWatchLaterQueue WatchLaterQueue => new VimeoWatchLaterQueue(Properties);
+        public VimeoWatchLaterQueue WatchLaterQueue => new VimeoWatchLaterQueue(Properties, RootAuthorization());
 
     }
 }
