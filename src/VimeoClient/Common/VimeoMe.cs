@@ -19,6 +19,11 @@
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="rootAuthorization"></param>
         public VimeoMe(VimeoProperties properties, RestBuilder rootAuthorization)
         {
             this.Properties = properties;
@@ -354,7 +359,7 @@
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheVideosThatAUserHasWatched(int? page, int? per_page)
+        public RestResult<string> GetAllTheVideosThatAUserHasWatched(int? page = null, int? per_page = null)
         {
             var root = RootMeAuthorization()
                 .Command("/watched")
