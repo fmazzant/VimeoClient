@@ -16,19 +16,4 @@
         public const string PROMO_CODES = "promo_codes";// Add, remove, and review Vimeo On Demand promotions.
         public const string VIDEO_FILES = "video_files";// Access video files belonging to members with Vimeo Pro membership or higher.
     }
-
-    public static class VimeoDirection
-    {
-        public const string ASC = "asc";//asc - Sort the results in ascending order.
-        public const string DESC = "desc";//desc - Sort the results in descending order.
-    }
-
-    public static class VimeoSort
-    {
-        public const string ALPHABETICAL = "alphabetical";// - Sort the results alphabetically.
-        public const string DATE = "date";// - Sort the results by creation date.
-        public const string FOLLOWERS = "followers";// - Sort the results by number of followers.
-        public const string RELEVANT = "relevant";// - Sort the results by relevance.
-        public const string VIDEOS = "videos";// - Sort the results by number of videos.
-    }
 }

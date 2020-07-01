@@ -323,5 +323,49 @@
             .Get();
 
         #endregion
+
+        #region [ WATCH HISTORY ]
+
+        /// <summary>
+        /// This method deletes the specified video from the authenticated user's watch history.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> DeleteSpecificVideoFromTheUserWatchHistory(int video_id) => RootMeAuthorization()
+            .Command("/watched")
+            .Command("/videos")
+            .Command(video_id)
+            .Delete();
+
+        /// <summary>
+        /// This method deletes the entire watch history of the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> DeleteTheUserWatchHistory() => RootMeAuthorization()
+            .Command("/watched")
+            .Command("/videos")
+            .Delete();
+
+        /// <summary>
+        /// This method returns every video on the authenticated user's watch history.
+        /// NOTE: 
+        ///     This endpoint is deprecated. Any request to it returns empty data with HTTP status code 200.
+        /// </summary>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosThatAUserHasWatched(int? page, int? per_page)
+        {
+            var root = RootMeAuthorization()
+                .Command("/watched")
+                .Command("/videos");
+
+            if (page > 0) root = root.Parameter("page", page);
+            if (per_page > 0) root = root.Parameter("per_page", per_page);
+
+            return root.Get();
+        }
+
+        #endregion
     }
 }
