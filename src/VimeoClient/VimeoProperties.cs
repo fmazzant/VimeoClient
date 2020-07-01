@@ -36,5 +36,10 @@
         /// </summary>
         public string EndPoint { get; set; }
          = "https://api.vimeo.com";
+
+        /// <summary>
+        /// If debug mode the debug is true
+        /// </summary>
+        public bool Debug => true;
     }
 }

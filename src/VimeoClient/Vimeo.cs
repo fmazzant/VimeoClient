@@ -68,9 +68,7 @@
             .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
             .CertificateValidation((sender, cert, chain, errors) =>
             {
-#if DEBUG
-                return true;
-#endif
+                if (Properties.Debug) return true;
                 if (Properties.ValidCertificates == null) return false;
                 var certificate = cert.GetCertHashString();
                 var noErrors = errors == SslPolicyErrors.None;
