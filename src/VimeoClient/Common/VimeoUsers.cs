@@ -349,5 +349,50 @@
             .Get();
 
         #endregion
+
+        #region [ SEARCH ]
+
+        /// <summary>
+        /// This method returns user search results.
+        /// </summary>
+        /// <param name="direction">The sort direction of the results.Option descriptions: VimeoDirection static class</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns></returns>
+        public RestResult<string> SearchForUsers(string direction = null, string query = null, string sort = null, int? page = null, int? per_page = null)
+        {
+            var root = RootUserAuthorization();
+
+            if (!string.IsNullOrEmpty(direction))
+            {
+                root = root.Parameter("direction", direction);
+            }
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                root = root.Parameter("query", query);
+            }
+
+            if (!string.IsNullOrEmpty(sort))
+            {
+                root = root.Parameter("sort", direction);
+            }
+
+            if (page > 0)
+            {
+                root = root.Parameter("page", page);
+            }
+
+            if (per_page > 0)
+            {
+                root = root.Parameter("per_page", per_page);
+            }
+
+            return root.Get();
+        }
+
+        #endregion
     }
 }
