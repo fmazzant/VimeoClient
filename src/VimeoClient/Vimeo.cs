@@ -1,12 +1,12 @@
 ﻿namespace VimeoClient
 {
+    using RestClient;
+    using RestClient.Generic;
     using System;
     using System.Collections.Generic;
     using System.Net.Http.Headers;
     using System.Net.Security;
     using System.Text;
-    using RestClient;
-    using RestClient.Generic;
     using VimeoClient.Bodies;
     using VimeoClient.Common;
     using VimeoClient.Responses;

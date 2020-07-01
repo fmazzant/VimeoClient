@@ -31,7 +31,7 @@
         /// <returns></returns>
         protected RestBuilder RootMeAuthorization() => RootAuthorization.Command("/me");
 
-        #region[ ESSENTIALS ]
+        #region [ ESSENTIALS ]
 
         /// <summary>
         /// This method edits the Vimeo account of the authenticated user.
@@ -77,7 +77,7 @@
             .Get();
         #endregion
 
-        #region[FEEDS]
+        #region [ FEEDS ]
 
         /// <summary>
         /// This method returns every video in the authenticated user's feed.
@@ -105,7 +105,7 @@
 
         #endregion
 
-        #region[FOLLOWERS]
+        #region [ FOLLOWERS ]
 
         /// <summary>
         /// This method determines whether the authenticated user is a follower of the specified user.
@@ -265,6 +265,62 @@
             .Command("/following")
             .Command(follow_user_id)
             .Delete();
+
+        #endregion
+
+        #region [ PICTURES ]
+
+        /// <summary>
+        /// This method adds a portrait image to the authenticated user's Vimeo account. 
+        /// Send the binary data of the image file to the location that you receivefrom the link field in the response. 
+        /// For step-by-step instructions, seeWorking with Thumbnail Uploads.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public RestResult<string> AddPictureToTheUserAccount(byte[] image) => RootMeAuthorization()
+            .Command("/pictures")
+            .Payload(image)
+            .Post();
+
+        /// <summary>
+        /// This method removes the specified portrait image from the authenticated user's Vimeo account.
+        /// </summary>
+        /// <param name="portraitset_id"></param>
+        /// <returns></returns>
+        public RestResult<string> DeletePictureFromTheUserAccount(int portraitset_id) => RootMeAuthorization()
+            .Command("/pictures")
+            .Command(portraitset_id)
+            .Delete();
+
+        /// <summary>
+        /// This method edits the specified portrait image belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portraitset_id"></param>
+        /// <param name="active"></param>
+        /// <returns></returns>
+        public RestResult<string> EditPictureInTheUserAaccount(int portraitset_id, bool active) => RootMeAuthorization()
+            .Command("/pictures")
+            .Command(portraitset_id)
+            .Parameter("active", active)
+            .Patch();
+
+        /// <summary>
+        /// This method returns a single portrait image belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portraitset_id"></param>
+        /// <returns></returns>
+        public RestResult<string> GetSpecificPictureThatBelongsToTheUser(int portraitset_id) => RootMeAuthorization()
+            .Command("/pictures")
+            .Command(portraitset_id)
+            .Get();
+
+        /// <summary>
+        /// This method returns every portrait image belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> GetAllThePicturesThatBelongToTheUser() => RootMeAuthorization()
+            .Command("/pictures")
+            .Get();
 
         #endregion
     }

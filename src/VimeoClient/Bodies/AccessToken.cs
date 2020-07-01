@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VimeoClient.Response;
+﻿using VimeoClient.Response;
 
 namespace VimeoClient.Bodies
 {

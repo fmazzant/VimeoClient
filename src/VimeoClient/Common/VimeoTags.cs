@@ -5,7 +5,7 @@ namespace VimeoClient.Common
     /// <summary>
     /// 
     /// </summary>
-    public class VimeoTags 
+    public class VimeoTags
     {
         /// <summary>
         /// 

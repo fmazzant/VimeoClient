@@ -5,7 +5,7 @@ namespace VimeoClient.Common
     /// <summary>
     /// 
     /// </summary>
-    public class VimeoShowCases  
+    public class VimeoShowCases
     {
         /// <summary>
         /// 

@@ -3,7 +3,6 @@
     using RestClient;
     using RestClient.Generic;
     using VimeoClient.Bodies;
-    using VimeoClient.Response;
 
     /// <summary>
     /// These are the most common methods for working with users.
@@ -20,6 +19,11 @@
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <param name="rootAuthorization"></param>
         public VimeoUsers(VimeoProperties properties, RestBuilder rootAuthorization)
         {
             this.Properties = properties;
@@ -32,7 +36,7 @@
         /// <returns></returns>
         protected RestBuilder RootUserAuthorization() => RootAuthorization.Command("/users");
 
-        #region[ESSENTIALS]
+        #region [ ESSENTIALS ]
 
         /// <summary>
         /// This method edits the Vimeo account of the authenticated user.
@@ -82,7 +86,7 @@
           .Get();
         #endregion
 
-        #region[FEEDS]
+        #region [ FEEDS ]
 
         /// <summary>
         /// This method returns every video in the authenticated user's feed.
@@ -281,6 +285,68 @@
             .Command("/following")
             .Command(follow_user_id)
             .Delete();
+
+        #endregion
+
+        #region [ PICTURES ]
+
+        /// <summary>
+        /// This method adds a portrait image to the authenticated user's Vimeo account. 
+        /// Send the binary data of the image file to the location that you receivefrom the link field in the response. 
+        /// For step-by-step instructions, seeWorking with Thumbnail Uploads.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public RestResult<string> AddPictureToTheUserAccount(int user_id, byte[] image) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/pictures")
+            .Payload(image)
+            .Post();
+
+
+        /// <summary>
+        /// This method removes the specified portrait image from the authenticated user's Vimeo account.
+        /// </summary>
+        /// <param name="portraitset_id"></param>
+        /// <returns></returns>
+        public RestResult<string> DeletePictureFromTheUserAccount(int user_id, int portraitset_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/pictures")
+            .Command(portraitset_id)
+            .Delete();
+
+        /// <summary>
+        /// This method edits the specified portrait image belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portraitset_id"></param>
+        /// <param name="active"></param>
+        /// <returns></returns>
+        public RestResult<string> EditPictureInTheUserAaccount(int user_id, int portraitset_id, bool active) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/pictures")
+            .Command(portraitset_id)
+            .Parameter("active", active)
+            .Patch();
+
+        /// <summary>
+        /// This method returns a single portrait image belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portraitset_id"></param>
+        /// <returns></returns>
+        public RestResult<string> GetSpecificPictureThatBelongsToTheUser(int user_id, int portraitset_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/pictures")
+            .Command(portraitset_id)
+            .Get();
+
+        /// <summary>
+        /// This method returns every portrait image belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> GetAllThePicturesThatBelongToTheUser(int user_id) => RootUserAuthorization()
+            .Command(user_id)
+            .Command("/pictures")
+            .Get();
 
         #endregion
     }

@@ -1,5 +1,8 @@
 ﻿namespace VimeoClient
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class VimeoScope
     {
         public const string PUBLIC = "public";//* Access public member data.

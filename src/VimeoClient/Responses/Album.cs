@@ -1,5 +1,5 @@
 ﻿namespace VimeoClient.Response
 {
-    public class Album {  }
+    public class Album { }
 
 }

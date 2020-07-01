@@ -1,5 +1,4 @@
 ﻿using RestClient;
-using System.Net.NetworkInformation;
 
 namespace VimeoClient.Common
 {
