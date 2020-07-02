@@ -1,5 +1,6 @@
 ﻿using RestClient;
 using RestClient.Generic;
+using VimeoClient.Filter.Category;
 
 namespace VimeoClient.Common
 {
@@ -52,16 +53,15 @@ namespace VimeoClient.Common
         /// <param name="sort">The way to sort the results.
         ///     last_video_featured_time
         ///     name
-        ///    Use: VimeoCategory.VimeoCategorySort
         ///  </param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllCategories(string direction = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> GetAllCategories(CategoryDirection? direction = null, string sort = null, int? page = null, int? per_page = null)
         {
             var root = RootAuthorization.Command("/categories");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
             }
@@ -217,25 +217,29 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(int user_id, string direction = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(int user_id,
+            CategoryDirection? direction = null,
+            CategorySortFollows? sort = null,
+            int? page = null,
+            int? per_page = null)
         {
             var root = RootAuthorization
                 .Command($"/users/{user_id}/categories");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
-            if (page > 0)
+            if (page.HasValue)
             {
                 root = root.Parameter("page", page);
             }
-            if (per_page > 0)
+            if (per_page.HasValue)
             {
                 root = root.Parameter("per_page", per_page);
             }
@@ -308,31 +312,31 @@ namespace VimeoClient.Common
         ///     conditional_featured - Return featured videos.
         ///     embeddable - Return embeddable videos.</param>
         /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). This parameter is required only when filter is embeddable.</param>
-        /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
+        /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
         public RestResult<string> GetAllTheVideosInACategory(string category,
-            string direction = null,
-            string filter = null,
+            CategoryDirection? direction = null,
+            CategoryFilter? filter = null,
             bool? filter_embeddable = null,
-            string sort = null,
+            CategorySort? sort = null,
             int? page = null,
             int? per_page = null)
         {
             var root = RootAuthorization
                 .Command($"/categories/{category}/videos");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
             {
                 root = root.Parameter("sort", direction);
             }
 
-            if (!string.IsNullOrEmpty(filter))
+            if (filter.HasValue)
             {
                 root = root.Parameter("filter", filter);
             }
@@ -371,24 +375,6 @@ namespace VimeoClient.Common
 
         #endregion
 
-        /// <summary>
-        /// The way to sort the results
-        /// </summary>
-        public static class VimeoCategorySort
-        {
-            public const string last_video_featured_time = "last_video_featured_time";
-            public const string name = "name";
 
-        }
-
-        /// <summary>
-        /// The attribute by which to filter the results
-        /// </summary>
-        public static class VimeoCategoryFilter
-        {
-            public const string conditional_featured = "conditional_featured";
-            public const string embeddable = "embeddable";
-
-        }
     }
 }

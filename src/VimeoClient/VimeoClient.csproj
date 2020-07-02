@@ -32,4 +32,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\RestClient\src\RestClient\RestClient.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Body\Category\" />
+  </ItemGroup>
 </Project>
