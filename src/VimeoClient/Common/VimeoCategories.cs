@@ -21,8 +21,7 @@ namespace VimeoClient.Common
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
-        public RestBuilder RootAuthorizationCategories() => RootAuthorization
-            .Command("/categories");
+
 
         /// <summary>
         /// Create a new instance of VimeoCategories class
@@ -42,8 +41,8 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <returns></returns>
-        public RestResult<string> GetASpecificCategory(string category) => RootAuthorizationCategories()
-            .Command(category)
+        public RestResult<string> GetASpecificCategory(string category) => RootAuthorization
+            .Command($"/categories/{category}")
             .Get();
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public RestResult<string> GetAllCategories(string direction = null, string sort = null, int? page = null, int? per_page = null)
         {
-            var root = RootAuthorizationCategories();
+            var root = RootAuthorization.Command("/categories");
 
             if (!string.IsNullOrEmpty(direction))
             {
@@ -101,8 +100,8 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public RestResult<string> GetAllTheChannelsInACategory(string category, string direction = null, string query = null, string sort = null, int? page = null, int? per_page = null)
         {
-            var root = RootAuthorizationCategories()
-                .Command($"/{category}/channels");
+            var root = RootAuthorization
+                .Command($"/categories/{category}/channels");
 
             if (!string.IsNullOrEmpty(direction))
             {
@@ -132,6 +131,47 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Groups ]
+
+        /// <summary>
+        /// This method returns every group that belongs to the specified category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="direction">The sort direction of the results.Option descriptions: VimeoDirection static class</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheGroupsInACategory(string category, string direction = null, string query = null, string sort = null, int? page = null, int? per_page = null)
+        {
+            var root = RootAuthorization
+                .Command($"/categories/{category}/groups");
+
+            if (!string.IsNullOrEmpty(direction))
+            {
+                root = root.Parameter("direction", direction);
+            }
+            if (!string.IsNullOrEmpty(query))
+            {
+                root = root.Parameter("query", query);
+            }
+            if (!string.IsNullOrEmpty(sort))
+            {
+                root = root.Parameter("sort", direction);
+            }
+
+            if (page > 0)
+            {
+                root = root.Parameter("page", page);
+            }
+            if (per_page > 0)
+            {
+                root = root.Parameter("per_page", per_page);
+            }
+
+            return root.Get();
+        }
+
 
         #endregion
 
