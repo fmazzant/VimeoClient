@@ -1,4 +1,4 @@
-﻿namespace VimeoClient.Channel.Filter
+﻿namespace VimeoClient.Filter.Channel
 {
     /// <summary>
     /// Description direction String  The sort direction of the results.Option descriptions:

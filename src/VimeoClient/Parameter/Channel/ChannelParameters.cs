@@ -1,4 +1,4 @@
-﻿namespace VimeoClient.Channel.Parameter
+﻿namespace VimeoClient.Parameter.Channel
 {
     using System.Collections.Generic;
 

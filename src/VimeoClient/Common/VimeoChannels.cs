@@ -1,12 +1,10 @@
-﻿
-
-namespace VimeoClient.Common
+﻿namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
     using System;
-    using VimeoClient.Channel.Filter;
-    using VimeoClient.Channel.Parameter;
+    using VimeoClient.Filter.Channel;
+    using VimeoClient.Parameter.Channel;
 
     /// <summary>
     /// 
