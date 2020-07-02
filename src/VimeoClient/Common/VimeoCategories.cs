@@ -21,8 +21,6 @@ namespace VimeoClient.Common
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
-
-
         /// <summary>
         /// Create a new instance of VimeoCategories class
         /// </summary>
@@ -366,8 +364,8 @@ namespace VimeoClient.Common
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
-                pars.Add("category", categories != null 
-                    ? string.Join("\n", categories) 
+                pars.Add("category", categories != null
+                    ? string.Join("\n", categories)
                     : string.Empty);
             })
             .Put();
