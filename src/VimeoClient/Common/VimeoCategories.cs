@@ -172,10 +172,28 @@ namespace VimeoClient.Common
             return root.Get();
         }
 
-
         #endregion
 
         #region [ Users ]
+
+        /// <summary>
+        /// This method causes the authenticated user to follow the specified category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<string> CauseTheUserToFollowASpecificCategory(int category, int user_id) => RootAuthorization
+            .Command($"/users/{user_id}/categories/{category}")
+            .Put();
+
+        /// <summary>
+        /// This method causes the authenticated user to follow the specified category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <returns></returns>
+        public RestResult<string> CauseTheUserToFollowASpecificCategory(int category) => RootAuthorization
+           .Command($"/me/categories/{category}")
+           .Put();
 
         #endregion
 
