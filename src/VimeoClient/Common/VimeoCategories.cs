@@ -388,7 +388,5 @@ namespace VimeoClient.Common
             .Put();
 
         #endregion
-
-
     }
 }
