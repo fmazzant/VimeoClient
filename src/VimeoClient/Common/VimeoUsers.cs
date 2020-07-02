@@ -369,12 +369,10 @@
             {
                 root = root.Parameter("direction", direction);
             }
-
             if (!string.IsNullOrEmpty(query))
             {
                 root = root.Parameter("query", query);
             }
-
             if (!string.IsNullOrEmpty(sort))
             {
                 root = root.Parameter("sort", direction);
@@ -384,7 +382,6 @@
             {
                 root = root.Parameter("page", page);
             }
-
             if (per_page > 0)
             {
                 root = root.Parameter("per_page", per_page);
