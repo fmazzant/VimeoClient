@@ -2,7 +2,8 @@
 {
     using RestClient;
     using RestClient.Generic;
-    using VimeoClient.Bodies;
+    using VimeoClient.Body;
+    using VimeoClient.Filter.User;
 
     /// <summary>
     /// These are the most common methods for working with users.
@@ -45,7 +46,7 @@
         /// <param name="user_id"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public RestResult<string> EditTheUser(int user_id, UserBody body) => RootUserAuthorization()
+        public RestResult<string> EditTheUser(int user_id, UserEditParameters body) => RootUserAuthorization()
             .Command(user_id)
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -185,25 +186,30 @@
         ///     date
         /// </param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheFollowersOfTheUserWithPaging(int user_id, string direction, int page, int per_page, string query, string sort)
+        public RestResult<string> GetAllTheFollowersOfTheUserWithPaging(int user_id,
+            UserDirection? direction,
+            int? page,
+            int? per_page,
+            string query,
+            UserSort? sort)
         {
             var builder = RootUserAuthorization()
                 .Command(user_id)
                 .Command("/followers");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
                 builder = builder.Parameter("direction", direction);
 
-            if (page > 0)
+            if (page.HasValue)
                 builder = builder.Parameter("page", page);
 
-            if (per_page > 0)
+            if (per_page.HasValue)
                 builder = builder.Parameter("per_page", per_page);
 
             if (!string.IsNullOrEmpty(query))
                 builder = builder.Parameter("query", query);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
                 builder = builder.Parameter("sort", sort);
 
             return builder.Get();
@@ -246,28 +252,34 @@
         ///     date
         /// </param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheUsersThatTheUserIsFollowing(int user_id, string direction, string filter, int page, int per_page, string query, string sort)
+        public RestResult<string> GetAllTheUsersThatTheUserIsFollowing(int user_id,
+            UserDirection? direction,
+            string filter,
+            int? page,
+            int? per_page,
+            string query,
+            UserSort? sort)
         {
             var builder = RootUserAuthorization()
                 .Command(user_id)
                 .Command("/following");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
                 builder = builder.Parameter("direction", direction);
 
             if (!string.IsNullOrEmpty(filter))
                 builder = builder.Parameter("filter", filter);
 
-            if (page > 0)
+            if (page.HasValue)
                 builder = builder.Parameter("page", page);
 
-            if (per_page > 0)
+            if (per_page.HasValue)
                 builder = builder.Parameter("per_page", per_page);
 
             if (!string.IsNullOrEmpty(query))
                 builder = builder.Parameter("query", query);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
                 builder = builder.Parameter("sort", sort);
 
             return builder.Get();
@@ -355,17 +367,17 @@
         /// <summary>
         /// This method returns user search results.
         /// </summary>
-        /// <param name="direction">The sort direction of the results.Option descriptions: VimeoDirection static class</param>
+        /// <param name="direction">The sort direction of the results.</param>
         /// <param name="query">The search query to use to filter the results.</param>
-        /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
+        /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> SearchForUsers(string direction = null, string query = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> SearchForUsers(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null)
         {
             var root = RootUserAuthorization();
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction != null)
             {
                 root = root.Parameter("direction", direction);
             }
@@ -373,7 +385,7 @@
             {
                 root = root.Parameter("query", query);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort != null)
             {
                 root = root.Parameter("sort", direction);
             }

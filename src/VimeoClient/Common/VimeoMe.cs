@@ -2,7 +2,8 @@
 {
     using RestClient;
     using RestClient.Generic;
-    using VimeoClient.Bodies;
+    using VimeoClient.Body;
+    using VimeoClient.Filter.User;
 
     /// <summary>
     /// 
@@ -44,7 +45,7 @@
         /// </summary>
         /// <param name="body"></param>
         /// <returns></returns>
-        public RestResult<string> EditTheUser(UserBody body) => RootMeAuthorization()
+        public RestResult<string> EditTheUser(UserEditParameters body) => RootMeAuthorization()
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
@@ -175,23 +176,27 @@
         ///     date
         /// </param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheFollowersOfTheUserWithPaging(string direction, int page, int per_page, string query, string sort)
+        public RestResult<string> GetAllTheFollowersOfTheUserWithPaging(UserDirection? direction,
+            int? page,
+            int? per_page,
+            string query,
+            UserSort? sort)
         {
             var builder = RootMeAuthorization().Command("/followers");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
                 builder = builder.Parameter("direction", direction);
 
-            if (page > 0)
+            if (page.HasValue)
                 builder = builder.Parameter("page", page);
 
-            if (per_page > 0)
+            if (per_page.HasValue)
                 builder = builder.Parameter("per_page", per_page);
 
             if (!string.IsNullOrEmpty(query))
                 builder = builder.Parameter("query", query);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
                 builder = builder.Parameter("sort", sort);
 
             return builder.Get();
@@ -232,27 +237,32 @@
         ///     date
         /// </param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheUsersThatTheUserIsFollowing(string direction, string filter, int page, int per_page, string query, string sort)
+        public RestResult<string> GetAllTheUsersThatTheUserIsFollowing(UserDirection? direction,
+            string filter,
+            int? page,
+            int? per_page,
+            string query,
+            UserSort? sort)
         {
             var builder = RootMeAuthorization()
                 .Command("/following");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
                 builder = builder.Parameter("direction", direction);
 
             if (!string.IsNullOrEmpty(filter))
                 builder = builder.Parameter("filter", filter);
 
-            if (page > 0)
+            if (page.HasValue)
                 builder = builder.Parameter("page", page);
 
-            if (per_page > 0)
+            if (per_page.HasValue)
                 builder = builder.Parameter("per_page", per_page);
 
             if (!string.IsNullOrEmpty(query))
                 builder = builder.Parameter("query", query);
 
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
                 builder = builder.Parameter("sort", sort);
 
             return builder.Get();
@@ -365,8 +375,8 @@
                 .Command("/watched")
                 .Command("/videos");
 
-            if (page > 0) root = root.Parameter("page", page);
-            if (per_page > 0) root = root.Parameter("per_page", per_page);
+            if (page.HasValue) root = root.Parameter("page", page);
+            if (per_page.HasValue) root = root.Parameter("per_page", per_page);
 
             return root.Get();
         }

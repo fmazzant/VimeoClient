@@ -4,7 +4,7 @@
     using RestClient.Generic;
     using System;
     using VimeoClient.Filter.Channel;
-    using VimeoClient.Parameter.Channel;
+    using VimeoClient.Body.Channel;
 
     /// <summary>
     /// 

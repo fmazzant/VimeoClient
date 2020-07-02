@@ -7,7 +7,7 @@
     using System.Net.Http.Headers;
     using System.Net.Security;
     using System.Text;
-    using VimeoClient.Bodies;
+    using VimeoClient.Body;
     using VimeoClient.Common;
     using VimeoClient.Responses;
 

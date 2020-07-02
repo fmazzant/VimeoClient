@@ -1,6 +1,6 @@
-﻿namespace VimeoClient.Bodies
+﻿namespace VimeoClient.Body
 {
-    public class UserBody
+    public class UserEditParameters
     {
         public string available_for_hire { get; set; }
         public string bio { get; set; }

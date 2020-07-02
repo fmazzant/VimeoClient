@@ -1,6 +1,6 @@
 ﻿using VimeoClient.Response;
 
-namespace VimeoClient.Bodies
+namespace VimeoClient.Body
 {
     public class AccessTokenPayload
     {
