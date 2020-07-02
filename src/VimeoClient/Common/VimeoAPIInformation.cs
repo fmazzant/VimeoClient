@@ -5,22 +5,22 @@ using VimeoClient.Response;
 namespace VimeoClient.Common
 {
     /// <summary>
-    /// 
+    /// Vimeo API Information
     /// </summary>
     public class VimeoAPIInformation
     {
         /// <summary>
-        /// 
+        /// Vimeo Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// 
+        /// Root Authorization
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
         /// <summary>
-        /// 
+        /// Create a new instance of VimeoAPIInformation class
         /// </summary>
         /// <param name="properties"></param>
         /// <param name="rootAuthorization"></param>
