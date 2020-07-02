@@ -1,7 +1,7 @@
 ﻿namespace VimeoClient
 {
     /// <summary>
-    /// 
+    /// Scope
     /// </summary>
     public static class VimeoScope
     {
