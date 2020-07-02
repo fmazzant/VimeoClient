@@ -121,6 +121,10 @@
             {
                 root = root.Parameter("direction", direction);
             }
+            if (filter.HasValue)
+            {
+                root = root.Parameter("filter", filter);
+            }
             if (!string.IsNullOrEmpty(query))
             {
                 root = root.Parameter("query", query);
@@ -167,6 +171,10 @@
             {
                 root = root.Parameter("direction", direction);
             }
+            if (filter.HasValue)
+            {
+                root = root.Parameter("filter", filter);
+            }
             if (!string.IsNullOrEmpty(query))
             {
                 root = root.Parameter("query", query);
@@ -210,6 +218,10 @@
             if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
+            }
+            if (filter.HasValue)
+            {
+                root = root.Parameter("filter", filter);
             }
             if (!string.IsNullOrEmpty(query))
             {
