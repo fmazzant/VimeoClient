@@ -4,22 +4,22 @@ using RestClient.Generic;
 namespace VimeoClient.Common
 {
     /// <summary>
-    /// 
+    /// Vimeo Authentication Extras
     /// </summary>
     public class VimeoAuthenticationExtras
     {
         /// <summary>
-        /// 
+        /// Vimeo properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// 
+        /// Root Authorization
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
         /// <summary>
-        /// 
+        /// Create a new instance of VimeoAuthenticationExtras class
         /// </summary>
         /// <param name="properties"></param>
         /// <param name="rootAuthorization"></param>
@@ -60,8 +60,12 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public RestResult<string> AuthorizeClientWithOAuth(string scope, string grant_type = "client_credentials") => RootAuthorization
             .Command("/oauth/authorize/client")
-            .Parameter("scope", scope)
-            .Parameter("grant_type", grant_type)
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((pars) =>
+            {
+                pars.Add("scope", scope);
+                pars.Add("grant_type", grant_type);
+            })
             .Post();
 
         #endregion
@@ -77,9 +81,13 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public RestResult<string> ConvertOAuth1AccessTokenToAnOAuth2AccessToken(string token, string token_secret, string grant_type = "vimeo_oauth1") => RootAuthorization
             .Command("/oauth/authorize/vimeo_oauth1")
-            .Parameter("token", token)
-            .Parameter("token_secret", token_secret)
-            .Parameter("grant_type", grant_type)
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((pars) =>
+            {
+                pars.Add("token", token);
+                pars.Add("token_secret", token_secret);
+                pars.Add("grant_type", grant_type);
+            })
             .Post();
 
         #endregion
@@ -95,9 +103,13 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public RestResult<string> ExchangeAnAuthorizationCodeForAnAccessToken(string code, string redirect_uri, string grant_type = "authorization_code") => RootAuthorization
             .Command("/oauth/access_token")
-            .Parameter("code", code)
-            .Parameter("grant_type", grant_type)
-            .Parameter("redirect_uri", redirect_uri)
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((pars) =>
+            {
+                pars.Add("code", code);
+                pars.Add("grant_type", grant_type);
+                pars.Add("redirect_uri", redirect_uri);
+            })
             .Post();
 
         #endregion
