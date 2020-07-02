@@ -91,4 +91,22 @@
         /// </summary>
         videos
     }
+
+    /// <summary>
+    /// The way to sort the results.Option descriptions:
+    /// 	alphabetical - Sort the results alphabetically.
+    /// 	date - Sort the results by creation date.
+    /// </summary>
+    public enum ChannelSortAllModerators
+    {
+        /// <summary>
+        /// alphabetical - Sort the results alphabetically
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by creation date
+        /// </summary>
+        date
+    }
 }

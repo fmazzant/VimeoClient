@@ -6,6 +6,7 @@
     using VimeoClient.Filter.Channel;
     using VimeoClient.Body.Channel;
     using VimeoClient.Response;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Use channels to organize videos by theme or some other grouping. 
@@ -247,22 +248,148 @@
 
         #region [Categories]
 
-        public RestResult<string> AddAChannelToAListOfCategories(int channel_id, Channel[] channels) => throw new NotImplementedException();
-        public RestResult<string> AddAChannelToASpecificCategory(string category, int channel_id) => throw new NotImplementedException();
-        public RestResult<string> GetAllTheCategoriesToWhichAChannelBelongs(int channel_id) => throw new NotImplementedException();
-        public RestResult<string> RemoveAChannelFromACategory(string category, int channel_id) => throw new NotImplementedException();
+        /// <summary>
+        /// This method adds the specified channel to multiple categories
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="channels">The array of category URIs to add.</param>
+        /// <returns></returns>
+        public RestResult<string> AddAChannelToAListOfCategories(int channel_id, Category[] channels) => RootAuthorization
+            .Command($"/channels/{channel_id}/categories")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((p) =>
+            {
+                foreach (Category cat in channels)
+                    p.Add("channels[]", "");
+            })
+            .Put();
+
+        /// <summary>
+        /// This method adds the specified channel to a single category. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> AddAChannelToASpecificCategory(string category, int channel_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/categories/{category}")
+            .Put();
+
+        /// <summary>
+        /// This method returns every category to which the specified channel belongs.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheCategoriesToWhichAChannelBelongs(int channel_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/categories")
+            .Get();
+
+        /// <summary>
+        /// This method removes a channel from the specified category. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> RemoveAChannelFromACategory(string category, int channel_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/categories/{category}")
+            .Delete();
 
         #endregion
 
         #region [ Moderators]
 
-        public RestResult<string> AddAListOfModeratorsToAChannel() => throw new NotImplementedException();
-        public RestResult<string> AddASpecificModeratorToAChannel() => throw new NotImplementedException();
-        public RestResult<string> GetASpecificModeratorOfAChannel() => throw new NotImplementedException();
-        public RestResult<string> GetAllTheModeratorsOfAChannel() => throw new NotImplementedException();
-        public RestResult<string> RemoveAListOfModeratorsFromAChannel() => throw new NotImplementedException();
-        public RestResult<string> RemoveASpecificModeratorFromAChannel() => throw new NotImplementedException();
-        public RestResult<string> ReplaceTheModeratorsOfAChannel() => throw new NotImplementedException();
+        /// <summary>
+        /// This method adds multiple users as moderators to the specified channel. 
+        /// The authenticated user must be a follower of a requested user to add this person as a channel moderator.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_uri">The URI of a user to add as a moderator.</param>
+        /// <returns></returns>
+        public RestResult<string> AddAListOfModeratorsToAChannel(int channel_id, string user_uri) => RootAuthorization
+            .Command($"/channels/{channel_id}/moderators")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((p) => p.Add("user_uri", user_uri))
+            .Put();
+
+        /// <summary>
+        /// This method adds a single user as a moderator to the specified channel. 
+        /// The authenticated user must be a follower of the requested user to add them as a channel moderator.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_id">The ID of the user</param>
+        /// <returns></returns>
+        public RestResult<string> AddASpecificModeratorToAChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/moderators/{user_id}")
+            .Put();
+
+        /// <summary>
+        /// This method returns a single moderator of the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_id">The ID of the user</param>
+        /// <returns></returns>
+        public RestResult<string> GetASpecificModeratorOfAChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/moderators/{user_id}")
+            .Get();
+
+        /// <summary>
+        /// This method returns every moderator of the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheModeratorsOfAChannel(int channel_id,
+            ChannelDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            ChannelSortAllModerators? sort = null) => RootAuthorization
+               .Command($"/channels/{channel_id}/moderators")
+               .Parameter((p) =>
+               {
+                   if (direction.HasValue) p.Add(new RestParameter { Key = "direction", Value = direction });
+                   if (!string.IsNullOrEmpty(query)) p.Add(new RestParameter { Key = "query", Value = query });
+                   if (sort.HasValue) p.Add(new RestParameter { Key = "sort", Value = sort });
+                   if (page.HasValue) p.Add(new RestParameter { Key = "page", Value = page });
+                   if (per_page.HasValue) p.Add(new RestParameter { Key = "per_page", Value = per_page });
+               })
+            .Get();
+
+        /// <summary>
+        /// This method removes multiple moderators from the specified channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_uri">The URI of a user to remove as a moderator.</param>
+        /// <returns></returns>
+        public RestResult<string> RemoveAListOfModeratorsFromAChannel(int channel_id, string user_uri) => RootAuthorization
+            .Command($"/channels/{channel_id}/moderators")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((p) =>
+            {
+                p.Add("user_uri", user_uri);
+            })
+            .Delete();
+
+        /// <summary>
+        /// This method removes a single moderator from the specified channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<string> RemoveASpecificModeratorFromAChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/moderators/{user_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method replaces the current list of channel moderators with a new list. 
+        /// The authenticated user must be the owner of the channel and a follower of each requested user to add them as a channel moderator.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_uri">The URI of the user to add as a moderator.</param>
+        /// <returns></returns>
+        public RestResult<string> ReplaceTheModeratorsOfAChannel(int channel_id, string user_uri) => RootAuthorization
+            .Command($"/channels/{channel_id}/moderators")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((p) => p.Add("user_uri", user_uri))
+            .Patch();
 
         #endregion
 
