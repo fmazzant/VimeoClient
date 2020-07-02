@@ -195,6 +195,87 @@ namespace VimeoClient.Common
            .Command($"/me/categories/{category}")
            .Put();
 
+        /// <summary>
+        /// This method determines whether the authenticated user follows the specified category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfTheUserFollowsACategory(string category, int user_id) => RootAuthorization
+            .Command($"/users/{user_id}/categories/{category}")
+            .Get();
+
+        /// <summary>
+        /// This method determines whether the authenticated user follows the specified category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfTheUserFollowsACategory(string category) => RootAuthorization
+            .Command($"/me/categories/{category}")
+            .Get();
+
+        /// <summary>
+        /// This method returns every category that the authenticated user follows.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(int user_id, string direction = null, string sort = null, int? page = null, int? per_page = null)
+        {
+            var root = RootAuthorization
+                .Command($"/users/{user_id}/categories");
+
+            if (!string.IsNullOrEmpty(direction))
+            {
+                root = root.Parameter("direction", direction);
+            }
+            if (!string.IsNullOrEmpty(sort))
+            {
+                root = root.Parameter("sort", direction);
+            }
+
+            if (page > 0)
+            {
+                root = root.Parameter("page", page);
+            }
+            if (per_page > 0)
+            {
+                root = root.Parameter("per_page", per_page);
+            }
+
+            return root.Get();
+        }
+
+
+        /// <summary>
+        /// This method returns every category that the authenticated user follows.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(string direction = null, string sort = null, int? page = null, int? per_page = null)
+        {
+            var root = RootAuthorization
+                .Command($"/me/categories");
+
+            if (!string.IsNullOrEmpty(direction))
+            {
+                root = root.Parameter("direction", direction);
+            }
+            if (!string.IsNullOrEmpty(sort))
+            {
+                root = root.Parameter("sort", direction);
+            }
+
+            if (page > 0)
+            {
+                root = root.Parameter("page", page);
+            }
+            if (per_page > 0)
+            {
+                root = root.Parameter("per_page", per_page);
+            }
+
+            return root.Get();
+        }
+
         #endregion
 
         #region [ Videos ]
