@@ -364,10 +364,6 @@ namespace VimeoClient.Common
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
-                //pars.Add("category", categories != null
-                //    ? string.Join("\n", categories)
-                //    : string.Empty);
-
                 foreach (var cat in categories)
                     pars.Add("category[]", cat);
             })

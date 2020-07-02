@@ -148,29 +148,40 @@
           .Get<Tutorial>();
 
         /// <summary>
-        /// 
+        /// Me Information
         /// </summary>
         public VimeoMe Me => new VimeoMe(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Users Information
         /// </summary>
         public VimeoUsers Users => new VimeoUsers(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// API Information
         /// </summary>
         public VimeoAPIInformation APIInformation => new VimeoAPIInformation(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Authentication Extras
         /// </summary>
         public VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Categories on Vimeo are sets of videos for particular genres (like comedy) or other characteristics (like being experimental). 
+        /// All the videos in these sets have been hand-chosen by Vimeo staff, but you can bring your videos to our attention 
+        /// by recommending them for up to two main categories and one subcategory. 
+        /// See our Help Center for more details.
         /// </summary>
         public VimeoCategories Categories => new VimeoCategories(Properties, RootAuthorization());
+
+        /// <summary>
+        /// Use channels to organize videos by theme or some other grouping. 
+        /// You can incorporate your own videos as well as videos from other Vimeo members on any channel that you create. 
+        /// Vimeo Basic subscribers get one channel, while paid Vimeo members can have an unlimited number. 
+        /// See our Help Center for more details.
+        /// </summary>
+        public VimeoChannels Channels => new VimeoChannels(Properties, RootAuthorization());
 
         /// <summary>
         /// 
