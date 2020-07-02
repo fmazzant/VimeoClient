@@ -245,7 +245,6 @@ namespace VimeoClient.Common
             return root.Get();
         }
 
-
         /// <summary>
         /// This method returns every category that the authenticated user follows.
         /// </summary>
@@ -280,6 +279,99 @@ namespace VimeoClient.Common
 
         #region [ Videos ]
 
+        /// <summary>
+        /// This method returns a single video in the specified category. 
+        /// You can use this method to determine whether the video belongs to the category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> GetASpecificVideoInACategory(string category, int video_id) => RootAuthorization
+            .Command($"/categories/{category}/videos/{video_id}")
+            .Get();
+
+        /// <summary>
+        /// This method returns every category that contains the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheCategoriesToWhichAVideoBelongs(int video_id) => RootAuthorization
+            .Command($"/videos/{video_id}/categories")
+            .Get();
+
+        /// <summary>
+        /// This method returns every video that belongs to the specified category.
+        /// </summary>
+        /// <param name="category">The name of the category.</param>
+        /// <param name="direction">The sort direction of the results.Option descriptions:
+        ///     asc - Sort the results in ascending order.
+        ///     desc - Sort the results in descending order.</param>
+        /// <param name="filter">The attribute by which to filter the results.Option descriptions:
+        ///     conditional_featured - Return featured videos.
+        ///     embeddable - Return embeddable videos.</param>
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). This parameter is required only when filter is embeddable.</param>
+        /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosInACategory(string category,
+            string direction = null,
+            string filter = null,
+            bool? filter_embeddable = null,
+            string sort = null,
+            int? page = null,
+            int? per_page = null)
+        {
+            var root = RootAuthorization
+                .Command($"/categories/{category}/videos");
+
+            if (!string.IsNullOrEmpty(direction))
+            {
+                root = root.Parameter("direction", direction);
+            }
+            if (!string.IsNullOrEmpty(sort))
+            {
+                root = root.Parameter("sort", direction);
+            }
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                root = root.Parameter("filter", filter);
+            }
+
+            root = root.Parameter("filter_embeddable", (filter_embeddable ?? false).ToString());
+
+            if (page > 0)
+            {
+                root = root.Parameter("page", page);
+            }
+            if (per_page > 0)
+            {
+                root = root.Parameter("per_page", per_page);
+            }
+
+            return root.Get();
+        }
+
+        /// <summary>
+        /// This method suggests up to two categories and one subcategory for the specified video. 
+        /// The authenticated user must be the owner of the video. 
+        /// Vimeo makes the final determination about whether the video belongs in these categories.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="category">An array of the names of the desired categories.</param>
+        /// <returns></returns>
+        public RestResult<string> SuggestCategoriesForAVideo(int video_id, string[] categories) => RootAuthorization
+            .Command($"/videos/{video_id}/categories")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((pars) =>
+            {
+                pars.Add("category", categories != null 
+                    ? string.Join("\n", categories) 
+                    : string.Empty);
+            })
+            .Put();
+
         #endregion
 
         /// <summary>
@@ -289,6 +381,16 @@ namespace VimeoClient.Common
         {
             public const string last_video_featured_time = "last_video_featured_time";
             public const string name = "name";
+
+        }
+
+        /// <summary>
+        /// The attribute by which to filter the results
+        /// </summary>
+        public static class VimeoCategoryFilter
+        {
+            public const string conditional_featured = "conditional_featured";
+            public const string embeddable = "embeddable";
 
         }
     }
