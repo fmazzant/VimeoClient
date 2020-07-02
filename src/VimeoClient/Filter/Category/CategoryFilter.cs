@@ -86,6 +86,74 @@
     }
 
     /// <summary>
+    /// The way to sort the results
+    /// </summary>
+    public enum CategorySortAllCategory
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        last_video_featured_time,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        name
+    }
+
+    /// <summary>
+    /// The way to sort the results
+    /// </summary>
+    public enum CategorySortAllChannel
+    {
+        /// <summary>
+        /// Sort the results alphabetically
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by date
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Sort the results by number of followers
+        /// </summary>
+        followers,
+
+        /// <summary>
+        /// Sort the results by number of videos
+        /// </summary>
+        videos
+    }
+
+    /// <summary>
+    /// The way to sort the results
+    /// </summary>
+    public enum CategorySortAllGroup
+    {
+        /// <summary>
+        /// Sort the results alphabetically
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by date
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Sort the results by number of members
+        /// </summary>
+        members,
+
+        /// <summary>
+        /// Sort the results by number of videos
+        /// </summary>
+        videos
+    }
+
+    /// <summary>
     /// The attribute by which to filter the results
     /// </summary>
     public enum CategoryFilter

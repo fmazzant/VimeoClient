@@ -47,9 +47,7 @@ namespace VimeoClient.Common
         /// <summary>
         /// This method returns every available category.
         /// </summary>
-        /// <param name="direction">The sort direction of the results.Option descriptions:
-        ///     asc - Sort the results in ascending order.
-        ///     desc - Sort the results in descending order.</param>
+        /// <param name="direction">The sort direction of the results.</param>
         /// <param name="sort">The way to sort the results.
         ///     last_video_featured_time
         ///     name
@@ -57,7 +55,10 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllCategories(CategoryDirection? direction = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> GetAllCategories(CategoryDirection? direction = null,
+            CategorySortAllCategory? sort = null,
+            int? page = null,
+            int? per_page = null)
         {
             var root = RootAuthorization.Command("/categories");
 
@@ -65,16 +66,16 @@ namespace VimeoClient.Common
             {
                 root = root.Parameter("direction", direction);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
             {
                 root = root.Parameter("sort", direction);
             }
 
-            if (page > 0)
+            if (page.HasValue)
             {
                 root = root.Parameter("page", page);
             }
-            if (per_page > 0)
+            if (per_page.HasValue)
             {
                 root = root.Parameter("per_page", per_page);
             }
@@ -96,12 +97,17 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheChannelsInACategory(string category, string direction = null, string query = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> GetAllTheChannelsInACategory(string category,
+            CategoryDirection? direction = null,
+            string query = null,
+            CategorySortAllChannel? sort = null,
+            int? page = null,
+            int? per_page = null)
         {
             var root = RootAuthorization
                 .Command($"/categories/{category}/channels");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
             }
@@ -109,16 +115,16 @@ namespace VimeoClient.Common
             {
                 root = root.Parameter("query", query);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
             {
                 root = root.Parameter("sort", direction);
             }
 
-            if (page > 0)
+            if (page.HasValue)
             {
                 root = root.Parameter("page", page);
             }
-            if (per_page > 0)
+            if (per_page.HasValue)
             {
                 root = root.Parameter("per_page", per_page);
             }
@@ -140,12 +146,17 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheGroupsInACategory(string category, string direction = null, string query = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> GetAllTheGroupsInACategory(string category,
+            CategoryDirection? direction = null,
+            string query = null,
+            CategorySortAllGroup? sort = null,
+            int? page = null,
+            int? per_page = null)
         {
             var root = RootAuthorization
                 .Command($"/categories/{category}/groups");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
             }
@@ -153,16 +164,16 @@ namespace VimeoClient.Common
             {
                 root = root.Parameter("query", query);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
             {
                 root = root.Parameter("sort", direction);
             }
 
-            if (page > 0)
+            if (page.HasValue)
             {
                 root = root.Parameter("page", page);
             }
-            if (per_page > 0)
+            if (per_page.HasValue)
             {
                 root = root.Parameter("per_page", per_page);
             }
@@ -251,25 +262,28 @@ namespace VimeoClient.Common
         /// This method returns every category that the authenticated user follows.
         /// </summary>
         /// <returns></returns>
-        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(string direction = null, string sort = null, int? page = null, int? per_page = null)
+        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(CategoryDirection? direction = null,
+            CategorySortFollows? sort = null,
+            int? page = null,
+            int? per_page = null)
         {
             var root = RootAuthorization
                 .Command($"/me/categories");
 
-            if (!string.IsNullOrEmpty(direction))
+            if (direction.HasValue)
             {
                 root = root.Parameter("direction", direction);
             }
-            if (!string.IsNullOrEmpty(sort))
+            if (sort.HasValue)
             {
                 root = root.Parameter("sort", direction);
             }
 
-            if (page > 0)
+            if (page.HasValue)
             {
                 root = root.Parameter("page", page);
             }
-            if (per_page > 0)
+            if (per_page.HasValue)
             {
                 root = root.Parameter("per_page", per_page);
             }
