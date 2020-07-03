@@ -28,7 +28,6 @@
         public Vimeo()
             : this(new VimeoProperties { })
         {
-
         }
 
         /// <summary>
