@@ -476,7 +476,35 @@
             .Command($"/me/channels/{channel_id}")
             .Get();
 
-        public RestResult<string> GetAllTheFollowersOfAChannel(int channel_id) => throw new NotImplementedException();
+        /// <summary>
+        /// This method returns every follower of the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheFollowersOfAChannel(int channel_id,
+            ChannelFollowersOfAChannelFilter filter,
+            ChannelDirection? direction,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            ChannelSortAllModerators? sort = null) => RootAuthorization
+            .Command($"/channels/{channel_id}/users")
+            .Parameter((p) =>
+            {
+                p.Add(new RestParameter { Key = "filter", Value = filter });
+                if (direction.HasValue) p.Add(new RestParameter { Key = "direction", Value = direction });
+                if (page.HasValue) p.Add(new RestParameter { Key = "page", Value = page });
+                if (per_page.HasValue) p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                if (!string.IsNullOrEmpty(query)) p.Add(new RestParameter { Key = "query", Value = query });
+                if (sort.HasValue) p.Add(new RestParameter { Key = "sort", Value = sort });
+            })
+            .Get();
 
         /// <summary>
         /// This method subscribes the authenticated user to the specified channel.

@@ -31,6 +31,17 @@
     }
 
     /// <summary>
+    /// The attribute by which to filter the results
+    /// </summary>
+    public enum ChannelFollowersOfAChannelFilter
+    {
+        /// <summary>
+        /// Return moderators
+        /// </summary>
+        moderators
+    }
+
+    /// <summary>
     /// The way to sort the results
     /// </summary>
     public enum ChannelSortGetAllChannel
