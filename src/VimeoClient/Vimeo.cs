@@ -28,10 +28,7 @@
         public Vimeo()
             : this(new VimeoProperties { })
         {
-            if (1 == 1)
-            {
-                Console.WriteLine("aa");
-            }
+
         }
 
         /// <summary>
