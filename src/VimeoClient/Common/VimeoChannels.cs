@@ -3,10 +3,9 @@
     using RestClient;
     using RestClient.Generic;
     using System;
-    using VimeoClient.Filter.Channel;
     using VimeoClient.Body.Channel;
+    using VimeoClient.Filter.Channel;
     using VimeoClient.Response;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Use channels to organize videos by theme or some other grouping. 
@@ -647,9 +646,9 @@
             string containing_uri = null,
             ChannelDirection? direction = null,
             ChannelFilter? filter = null,
-            bool? filter_embeddable = null, 
-            int? page = null, 
-            int?per_page = null, 
+            bool? filter_embeddable = null,
+            int? page = null,
+            int? per_page = null,
             string query = null,
             ChannelSortGetAllVideos? sort = null) => throw new NotImplementedException();
 

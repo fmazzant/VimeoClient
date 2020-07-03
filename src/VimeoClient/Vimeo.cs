@@ -9,7 +9,7 @@
     using System.Text;
     using VimeoClient.Body;
     using VimeoClient.Common;
-    using VimeoClient.Responses;
+    using VimeoClient.Response;
 
     /// <summary>
     /// Provides a set of methods for connecting to Vimeo REST webapi

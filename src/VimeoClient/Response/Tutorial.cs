@@ -1,4 +1,4 @@
-﻿namespace VimeoClient.Responses
+﻿namespace VimeoClient.Response
 {
     /// <summary>
     /// 
