@@ -1,7 +1,7 @@
-﻿using VimeoClient.Response;
-
-namespace VimeoClient.Body
+﻿namespace VimeoClient.Body
 {
+    using VimeoClient.Response;
+
     public class AccessTokenPayload
     {
         public string grant_type { get; set; } = "client_credentials";
