@@ -383,7 +383,9 @@ namespace VimeoClient.Common
             .FormUrlEncoded((pars) =>
             {
                 foreach (var cat in categories)
+                {
                     pars.Add("category[]", cat);
+                }
             })
             .Put();
 

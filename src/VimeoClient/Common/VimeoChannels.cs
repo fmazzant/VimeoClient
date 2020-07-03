@@ -59,7 +59,9 @@
             .FormUrlEncoded((pars) =>
             {
                 foreach (var item in obj.ToEnumerable())
+                {
                     pars.Add(item.Key, item.Value);
+                }
             })
             .Post();
 
@@ -84,7 +86,9 @@
             .FormUrlEncoded((pars) =>
             {
                 foreach (var item in obj.ToEnumerable())
+                {
                     pars.Add(item.Key, item.Value);
+                }
             })
             .Patch();
 
@@ -259,7 +263,9 @@
             .FormUrlEncoded((p) =>
             {
                 foreach (Category cat in channels)
+                {
                     p.Add("channels[]", "");
+                }
             })
             .Put();
 
@@ -344,11 +350,30 @@
                .Command($"/channels/{channel_id}/moderators")
                .Parameter((p) =>
                {
-                   if (direction.HasValue) p.Add(new RestParameter { Key = "direction", Value = direction });
-                   if (!string.IsNullOrEmpty(query)) p.Add(new RestParameter { Key = "query", Value = query });
-                   if (sort.HasValue) p.Add(new RestParameter { Key = "sort", Value = sort });
-                   if (page.HasValue) p.Add(new RestParameter { Key = "page", Value = page });
-                   if (per_page.HasValue) p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                   if (direction.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "direction", Value = direction });
+                   }
+
+                   if (!string.IsNullOrEmpty(query))
+                   {
+                       p.Add(new RestParameter { Key = "query", Value = query });
+                   }
+
+                   if (sort.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "sort", Value = sort });
+                   }
+
+                   if (page.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "page", Value = page });
+                   }
+
+                   if (per_page.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                   }
                })
             .Get();
 
@@ -409,9 +434,20 @@
             .Command($"/channels/{channel_id}/privacy/users")
             .Parameter((p) =>
             {
-                if (direction.HasValue) p.Add(new RestParameter { Key = "direction", Value = direction });
-                if (page.HasValue) p.Add(new RestParameter { Key = "page", Value = page });
-                if (per_page.HasValue) p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                if (direction.HasValue)
+                {
+                    p.Add(new RestParameter { Key = "direction", Value = direction });
+                }
+
+                if (page.HasValue)
+                {
+                    p.Add(new RestParameter { Key = "page", Value = page });
+                }
+
+                if (per_page.HasValue)
+                {
+                    p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                }
             })
             .Get();
 
@@ -427,7 +463,9 @@
             .FormUrlEncoded((p) =>
             {
                 foreach (User u in users)
+                {
                     p.Add("users[]", "");
+                }
             })
             .Put();
 
@@ -499,19 +537,29 @@
                 p.Add(new RestParameter { Key = "filter", Value = filter });
 
                 if (direction.HasValue)
+                {
                     p.Add(new RestParameter { Key = "direction", Value = direction });
+                }
 
                 if (page.HasValue)
+                {
                     p.Add(new RestParameter { Key = "page", Value = page });
+                }
 
                 if (per_page.HasValue)
+                {
                     p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                }
 
                 if (!string.IsNullOrEmpty(query))
+                {
                     p.Add(new RestParameter { Key = "query", Value = query });
+                }
 
                 if (sort.HasValue)
+                {
                     p.Add(new RestParameter { Key = "sort", Value = sort });
+                }
             })
             .Get();
 

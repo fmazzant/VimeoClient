@@ -44,10 +44,14 @@
             dict.Add("privacy", this.privacy.ToString());
 
             if (string.IsNullOrEmpty(this.description))
+            {
                 dict.Add("description", this.description);
+            }
 
             if (string.IsNullOrEmpty(this.link))
+            {
                 dict.Add("link", this.link);
+            }
 
             return dict;
         }

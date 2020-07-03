@@ -28,7 +28,10 @@
         public Vimeo()
             : this(new VimeoProperties { })
         {
-
+            if (1 == 1)
+            {
+                Console.WriteLine("aa");
+            }
         }
 
         /// <summary>
@@ -68,8 +71,16 @@
             .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
             .CertificateValidation((sender, cert, chain, errors) =>
             {
-                if (Properties.Debug) return true;
-                if (Properties.ValidCertificates == null) return false;
+                if (Properties.Debug)
+                {
+                    return true;
+                }
+
+                if (Properties.ValidCertificates == null)
+                {
+                    return false;
+                }
+
                 var certificate = cert.GetCertHashString();
                 var noErrors = errors == SslPolicyErrors.None;
                 var contains = Properties.ValidCertificates.Contains(certificate);
@@ -84,7 +95,10 @@
             .Authentication(() =>
             {
                 if (string.IsNullOrEmpty(Properties.AccessToken))
+                {
                     throw new ArgumentNullException("AccessToken is empty or null. Call the client credentials grant or the authorization code grant to get the access token");
+                }
+
                 return new AuthenticationHeaderValue("Bearer", Properties.AccessToken);
             });
 

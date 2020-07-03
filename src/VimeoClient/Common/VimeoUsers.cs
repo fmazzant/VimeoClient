@@ -198,19 +198,29 @@
                 .Command("/followers");
 
             if (direction.HasValue)
+            {
                 builder = builder.Parameter("direction", direction);
+            }
 
             if (page.HasValue)
+            {
                 builder = builder.Parameter("page", page);
+            }
 
             if (per_page.HasValue)
+            {
                 builder = builder.Parameter("per_page", per_page);
+            }
 
             if (!string.IsNullOrEmpty(query))
+            {
                 builder = builder.Parameter("query", query);
+            }
 
             if (sort.HasValue)
+            {
                 builder = builder.Parameter("sort", sort);
+            }
 
             return builder.Get();
         }
@@ -265,22 +275,34 @@
                 .Command("/following");
 
             if (direction.HasValue)
+            {
                 builder = builder.Parameter("direction", direction);
+            }
 
             if (!string.IsNullOrEmpty(filter))
+            {
                 builder = builder.Parameter("filter", filter);
+            }
 
             if (page.HasValue)
+            {
                 builder = builder.Parameter("page", page);
+            }
 
             if (per_page.HasValue)
+            {
                 builder = builder.Parameter("per_page", per_page);
+            }
 
             if (!string.IsNullOrEmpty(query))
+            {
                 builder = builder.Parameter("query", query);
+            }
 
             if (sort.HasValue)
+            {
                 builder = builder.Parameter("sort", sort);
+            }
 
             return builder.Get();
         }
