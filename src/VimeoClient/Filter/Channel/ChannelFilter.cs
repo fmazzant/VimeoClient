@@ -27,7 +27,12 @@
         /// <summary>
         /// Return moderated channels
         /// </summary>
-        featured
+        featured,
+
+        /// <summary>
+        /// Return embeddable videos
+        /// </summary>
+        embeddable
     }
 
     /// <summary>
@@ -71,6 +76,57 @@
         /// </summary>
         videos,
 
+    }
+
+    /// <summary>
+    /// The way to sort the results
+    /// </summary>
+    public enum ChannelSortGetAllVideos
+    {
+        /// <summary>
+        /// Sort the results alphabetically
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by number of comments
+        /// </summary>
+        comments,
+
+        /// <summary>
+        /// Sort the results by creation date
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Use the default sorting method.
+        /// </summary>
+        default_,
+
+        /// <summary>
+        /// Sort the results by duration.
+        /// </summary>
+        duration,
+
+        /// <summary>
+        /// Sort the results by number of likes.
+        /// </summary>
+        likes,
+
+        /// <summary>
+        /// Sort the results as the user has arranged them.
+        /// </summary>
+        manual,
+
+        /// <summary>
+        /// Sort the results by last modification.
+        /// </summary>
+        modified_time,
+
+        /// <summary>
+        /// Sort the results by number of plays.
+        /// </summary>
+        plays,
     }
 
     /// <summary>

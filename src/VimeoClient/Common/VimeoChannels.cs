@@ -498,11 +498,21 @@
             .Parameter((p) =>
             {
                 p.Add(new RestParameter { Key = "filter", Value = filter });
-                if (direction.HasValue) p.Add(new RestParameter { Key = "direction", Value = direction });
-                if (page.HasValue) p.Add(new RestParameter { Key = "page", Value = page });
-                if (per_page.HasValue) p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                if (!string.IsNullOrEmpty(query)) p.Add(new RestParameter { Key = "query", Value = query });
-                if (sort.HasValue) p.Add(new RestParameter { Key = "sort", Value = sort });
+
+                if (direction.HasValue)
+                    p.Add(new RestParameter { Key = "direction", Value = direction });
+
+                if (page.HasValue)
+                    p.Add(new RestParameter { Key = "page", Value = page });
+
+                if (per_page.HasValue)
+                    p.Add(new RestParameter { Key = "per_page", Value = per_page });
+
+                if (!string.IsNullOrEmpty(query))
+                    p.Add(new RestParameter { Key = "query", Value = query });
+
+                if (sort.HasValue)
+                    p.Add(new RestParameter { Key = "sort", Value = sort });
             })
             .Get();
 
@@ -548,23 +558,116 @@
 
         #region [ Tags ]
 
-        public RestResult<string> AddAListOfTagsToAChannel() => throw new NotImplementedException();
-        public RestResult<string> AddASpecificTagToAChannel() => throw new NotImplementedException();
-        public RestResult<string> CheckIfATagHasBeenAddedToAChannel() => throw new NotImplementedException();
-        public RestResult<string> GetAllTheTagsThatHaveBeenAddedToAChannel() => throw new NotImplementedException();
-        public RestResult<string> RemoveATagFromAChannel() => throw new NotImplementedException();
+        /// <summary>
+        /// This method adds multiple tags to the specified channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">channel_id</param>
+        /// <param name="tags">An array of tags to assign.</param>
+        /// <returns></returns>
+        public RestResult<string> AddAListOfTagsToAChannel(int channel_id, Tag[] tags) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method adds a single tag to the specified channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel </param>
+        /// <param name="word">The word to use as the tag. </param>
+        /// <returns></returns>
+        public RestResult<string> AddASpecificTagToAChannel(int channel_id, string word) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method determines whether a tag has been added to the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="word">The word to use as the tag.</param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfATagHasBeenAddedToAChannel(int channel_id, string word) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every tag that has been added to the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheTagsThatHaveBeenAddedToAChannel(int channel_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method removes a single tag from the specified channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel</param>
+        /// <param name="word">The word to use as the tag</param>
+        /// <returns></returns>
+        public RestResult<string> RemoveATagFromAChannel(int channel_id, string word) => throw new NotImplementedException();
 
         #endregion
 
         #region [ Videos ]
 
-        public RestResult<string> AddAListOfVideosToAChannel() => throw new NotImplementedException();
-        public RestResult<string> AddASpecificVideoToAChannel() => throw new NotImplementedException();
-        public RestResult<string> GetASpecificVideoInAChannel() => throw new NotImplementedException();
-        public RestResult<string> GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo() => throw new NotImplementedException();
-        public RestResult<string> GetAllTheVideosInAChannel() => throw new NotImplementedException();
-        public RestResult<string> RemoveAListOfVideosFromAChannel() => throw new NotImplementedException();
-        public RestResult<string> RemoveASpecificVideoFromAChannel() => throw new NotImplementedException();
+        /// <summary>
+        /// This method adds multiple videos to the specified channel. The authenticated user must be a moderator of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="tags">
+        /// A member of an array representing the URIs of the videos to add. 
+        /// For each member in the array, use the format {"video_uri":"x"} where x is a video URI. 
+        /// For more information on batch requests like this, 
+        /// see Using Common Formats and Parameters.
+        /// </param>
+        /// <returns></returns>
+        public RestResult<string> AddAListOfVideosToAChannel(int channel_id, Video[] tags) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method adds a single video to the specified channel. The authenticated user must be a moderator of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> AddASpecificVideoToAChannel(int channel_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns a single video in the specified channel. You can use it to determine whether the video is in the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">	The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> GetASpecificVideoInAChannel(int channel_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every channel to which the authenticated user can add or remove the specified video. 
+        /// The authenticated user must be a moderator of the channel.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every video in the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheVideosInAChannel(int channel_id,
+            string containing_uri = null,
+            ChannelDirection? direction = null,
+            ChannelFilter? filter = null,
+            bool? filter_embeddable = null, 
+            int? page = null, 
+            int?per_page = null, 
+            string query = null,
+            ChannelSortGetAllVideos? sort = null) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method removes multiple videos from the specified channel. The authenticated user must be a moderator of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_uri">The URI of a video to remove.</param>
+        /// <returns></returns>
+        public RestResult<string> RemoveAListOfVideosFromAChannel(int channel_id, string video_uri) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method removes a single video from the specified channel. The authenticated user must be a moderator of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult<string> RemoveASpecificVideoFromAChannel(int channel_id, int video_id) => throw new NotImplementedException();
 
         #endregion
     }
