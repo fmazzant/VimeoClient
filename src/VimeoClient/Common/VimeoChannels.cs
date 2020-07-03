@@ -246,7 +246,7 @@
 
         #endregion
 
-        #region [Categories]
+        #region [Categories ]
 
         /// <summary>
         /// This method adds the specified channel to multiple categories
@@ -295,7 +295,7 @@
 
         #endregion
 
-        #region [ Moderators]
+        #region [ Moderators ]
 
         /// <summary>
         /// This method adds multiple users as moderators to the specified channel. 
@@ -393,25 +393,132 @@
 
         #endregion
 
-        #region [ Private channel members]
+        #region [ Private channel members ]
 
-        public RestResult<string> GetAllTheUsersWhoCanAccessAPrivateChannel() => throw new NotImplementedException();
-        public RestResult<string> PermitAListOfUsersToAccessAPrivateChannel() => throw new NotImplementedException();
-        public RestResult<string> PermitASpecificUserToAccessAPrivateChannel() => throw new NotImplementedException();
-        public RestResult<string> RestrictAUserFromAccessingAPrivateChannel() => throw new NotImplementedException();
+        /// <summary>
+        /// This method returns all the users who have access to the specified private channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns></returns>
+        public RestResult<string> GetAllTheUsersWhoCanAccessAPrivateChannel(int channel_id,
+            ChannelDirection? direction = null,
+            int? page = null,
+            int? per_page = null) => RootAuthorization
+            .Command($"/channels/{channel_id}/privacy/users")
+            .Parameter((p) =>
+            {
+                if (direction.HasValue) p.Add(new RestParameter { Key = "direction", Value = direction });
+                if (page.HasValue) p.Add(new RestParameter { Key = "page", Value = page });
+                if (per_page.HasValue) p.Add(new RestParameter { Key = "per_page", Value = per_page });
+            })
+            .Get();
+
+        /// <summary>
+        /// This method gives multiple users access to the specified private channel. The authenticated user must be the owner of the channel
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="users">The array of either the user URIs or the user IDs to permit to access the private channel.</param>
+        /// <returns></returns>
+        public RestResult<string> PermitAListOfUsersToAccessAPrivateChannel(int channel_id, User[] users) => RootAuthorization
+            .Command($"/channels/{channel_id}/privacy/users")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((p) =>
+            {
+                foreach (User u in users)
+                    p.Add("users[]", "");
+            })
+            .Put();
+
+        /// <summary>
+        /// This method gives a single user access to the specified private channel. The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<string> PermitASpecificUserToAccessAPrivateChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/privacy/users/{user_id}")
+            .Put();
+
+        /// <summary>
+        /// This method prevents a single user from being able to access the specified private channel. 
+        /// The authenticated user must be the owner of the channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<string> RestrictAUserFromAccessingAPrivateChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/channels/{channel_id}/privacy/users/{user_id}")
+            .Delete();
 
         #endregion
 
-        #region [ Subscriptions and subscribers]
+        #region [ Subscriptions and subscribers ]
 
-        public RestResult<string> CheckIfAUserFollowsAChannel() => throw new NotImplementedException();
-        public RestResult<string> GetAllTheFollowersOfAChannel() => throw new NotImplementedException();
-        public RestResult<string> SubscribeTheUserToASpecificChannel() => throw new NotImplementedException();
-        public RestResult<string> UnsubscribeTheUserFromASpecificChannel() => throw new NotImplementedException();
+        /// <summary>
+        /// This method determines whether the specified user is a follower of a particular channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="user_id">The ID of the user</param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfAUserFollowsAChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/users/{user_id}/channels/{channel_id}")
+            .Get();
+
+        /// <summary>
+        /// This method determines whether the specified user is a follower of a particular channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <returns></returns>
+        public RestResult<string> CheckIfAUserFollowsAChannel(int channel_id) => RootAuthorization
+            .Command($"/me/channels/{channel_id}")
+            .Get();
+
+        public RestResult<string> GetAllTheFollowersOfAChannel(int channel_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method subscribes the authenticated user to the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel</param>
+        /// <param name="user_id">The ID of the user</param>
+        /// <returns></returns>
+        public RestResult<string> SubscribeTheUserToASpecificChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/users/{user_id}/channels/{channel_id}")
+            .Put();
+
+        /// <summary>
+        /// This method subscribes the authenticated user to the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel</param>
+        /// <returns></returns>
+        public RestResult<string> SubscribeTheUserToASpecificChannel(int channel_id) => RootAuthorization
+            .Command($"/me/channels/{channel_id}")
+            .Put();
+
+        /// <summary>
+        /// This method unsubscribes the authenticated user from the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel</param>
+        /// <param name="user_id">The ID of the user</param>
+        /// <returns></returns>
+        public RestResult<string> UnsubscribeTheUserFromASpecificChannel(int channel_id, int user_id) => RootAuthorization
+            .Command($"/users/{user_id}/channels/{channel_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method unsubscribes the authenticated user from the specified channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel</param>
+        /// <returns></returns>
+        public RestResult<string> UnsubscribeTheUserFromASpecificChannel(int channel_id) => RootAuthorization
+           .Command($"/me/channels/{channel_id}")
+           .Delete();
 
         #endregion
 
-        #region [ Tags]
+        #region [ Tags ]
 
         public RestResult<string> AddAListOfTagsToAChannel() => throw new NotImplementedException();
         public RestResult<string> AddASpecificTagToAChannel() => throw new NotImplementedException();
@@ -421,7 +528,7 @@
 
         #endregion
 
-        #region [ Videos]
+        #region [ Videos ]
 
         public RestResult<string> AddAListOfVideosToAChannel() => throw new NotImplementedException();
         public RestResult<string> AddASpecificVideoToAChannel() => throw new NotImplementedException();
