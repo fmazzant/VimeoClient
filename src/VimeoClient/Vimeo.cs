@@ -224,64 +224,75 @@ namespace VimeoClient
         public VimeoChannels Channels => new VimeoChannels(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// An embed preset is a reusable collection of settings for customizing the appearance and behavior of the embeddable Vimeo player. 
+        /// This feature is available to Vimeo Pro, Business, and Premium members. 
+        /// For more information, see our Help Center.
         /// </summary>
         public VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Folders
         /// </summary>
         public VimeoFolders Folders => new VimeoFolders(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// A group is a community within Vimeo for collaborating, sharing, and engaging with videos. Groups can be public, where anyone can join, or they can be private, where membership is by invitation only. 
+        /// For more information, see our Help Center.
         /// </summary>
         public VimeoGroups Groups => new VimeoGroups(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// A like is a video interaction where a Vimeo member indicates that they liked a video.
         /// </summary>
         public VimeoLikes Likes => new VimeoLikes(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Please note that Vimeo's live API is available only to Vimeo Enterprise customers. Learn more about Vimeo Enterprise.
         /// </summary>
         public VimeoLive Live => new VimeoLive(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// On Demand
         /// </summary>
         public VimeoOnDemand OnDemand => new VimeoOnDemand(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Portfolios are customizable websites for showcasing videos. 
+        /// Vimeo Pro, Business, and Premium subscribers have access to this feature. For more information, see our Help Center.
         /// </summary>
         public VimeoPortfolios Portfolios => new VimeoPortfolios(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// A showcase (previously album) is a collection of videos for public or private sharing. 
+        /// When developing for this feature, keep in mind that our endpoint syntax uses the original album nomenclature, although this is subject to change in the future. 
+        /// For more information about showcases, see our Help Center.
         /// </summary>
         public VimeoShowCases ShowCases => new VimeoShowCases(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Tags are pieces of metadata for categorizing or labeling videos.
         /// </summary>
         public VimeoTags Tags => new VimeoTags(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Team Members
         /// </summary>
         public VimeoTeamMembers TeamMembers => new VimeoTeamMembers(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// Videos
         /// </summary>
         public VimeoVideos Videos => new VimeoVideos(Properties, RootAuthorization());
 
         /// <summary>
-        /// 
+        /// The Watch Later queue contains all the videos that a Vimeo member has flagged to watch later.
         /// </summary>
         public VimeoWatchLaterQueue WatchLaterQueue => new VimeoWatchLaterQueue(Properties, RootAuthorization());
 
+        /// <summary>
+        /// As you work with the Vimeo API, some common themes begin to emerge, with some common strategies for optimizing your success. 
+        /// We've collected these here for your easy reference.
+        /// </summary>
+        public VimeoCommonFormatsParameters CommonFormatsParameters => new VimeoCommonFormatsParameters(Properties, RootAuthorization());
     }
 }
