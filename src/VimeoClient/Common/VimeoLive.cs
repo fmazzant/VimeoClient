@@ -39,12 +39,12 @@ namespace VimeoClient.Common
     public class VimeoLive
     {
         /// <summary>
-        /// VimeoProperties
+        /// Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// RestBuilder
+        /// Root Authorization
         /// </summary>
         public RestBuilder RootAuthorization { get; private set; }
 
