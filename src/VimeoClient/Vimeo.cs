@@ -42,7 +42,9 @@ namespace VimeoClient
     using VimeoClient.Response;
 
     /// <summary>
-    /// Provides a set of methods for connecting to Vimeo REST webapi
+    /// Provides a set of methods for connecting to Vimeo REST webapi.
+    /// Build something great. Vimeo's API supports flexible, high-quality video integration with your custom apps.
+    /// Version Vimeo API: 3.2
     /// </summary>
     public class Vimeo
     {
