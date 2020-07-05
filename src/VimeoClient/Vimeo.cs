@@ -119,7 +119,8 @@ namespace VimeoClient
         /// Vimeo End Point root with Bearer authentication
         /// </summary>
         /// <returns></returns>
-        protected RestBuilder RootAuthorization() => Root().Compression()
+        protected RestBuilder RootAuthorization() => Root()
+            .Compression() //gzip
             .Authentication(() =>
             {
                 if (string.IsNullOrEmpty(Properties.AccessToken))

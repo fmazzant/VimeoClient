@@ -32,6 +32,7 @@ namespace VimeoClient.Common
     using RestClient;
     using RestClient.Generic;
     using VimeoClient.Filter.Category;
+    using VimeoClient.Response;
 
     /// <summary>
     /// Categories on Vimeo are sets of videos for particular genres (like comedy) or other characteristics (like being experimental). 
@@ -85,7 +86,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllCategories(CategoryDirection? direction = null,
+        public RestResult<Pagination<Category>> GetAllCategories(CategoryDirection? direction = null,
             CategorySortAllCategory? sort = null,
             int? page = null,
             int? per_page = null)
@@ -110,7 +111,36 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            return root.Get();
+            var result = root.Get<Pagination<Category>>();
+
+            result.Content.NextAction = () => GetAllCategories(result.Content.paging.next);
+            result.Content.PreviousAction = () => GetAllCategories(result.Content.paging.previous);
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method returns every available category.
+        /// </summary>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="sort">The way to sort the results.
+        ///     last_video_featured_time
+        ///     name
+        ///  </param>
+        /// <param name="query">Url paginated</param>
+        /// <returns></returns>
+        internal RestResult<Pagination<Category>> GetAllCategories(string query)
+        {
+            if (string.IsNullOrEmpty(query)) return null;
+
+            var root = RootAuthorization.Command("/categories").Command(query);
+
+            var result = root.Get<Pagination<Category>>();
+
+            result.Content.NextAction = () => GetAllCategories(result.Content.paging.next);
+            result.Content.PreviousAction = () => GetAllCategories(result.Content.paging.previous);
+
+            return result;
         }
 
         #endregion
