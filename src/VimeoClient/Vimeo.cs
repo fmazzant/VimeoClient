@@ -128,7 +128,7 @@ namespace VimeoClient
             {
 
             })
-            .Compression() //gzip
+            .EnableGZipCompression() //gzip
             .Authentication(() =>
             {
                 if (string.IsNullOrEmpty(Properties.AccessToken))
