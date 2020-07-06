@@ -3,21 +3,33 @@
     using RestClient.Generic;
     using System;
     using System.Collections.Generic;
+    using System.Text.Json.Serialization;
 
     public class VimeoList<T>
     {
-        public int total { get; set; }
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
 
-        public T[] data { get; set; }
+        [JsonPropertyName("data")]
+        public T[] Data { get; set; }
     }
 
     public class Pagination<T>
     {
-        public int total { get; set; }
-        public int page { get; set; }
-        public int per_page { get; set; }
-        public Paging paging { get; set; }
-        public List<T> data { get; set; }
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
+
+        [JsonPropertyName("page")]
+        public int Page { get; set; }
+
+        [JsonPropertyName("per_page")]
+        public int PerPage { get; set; }
+
+        [JsonPropertyName("paging")]
+        public Paging Paging { get; set; }
+
+        [JsonPropertyName("data")]
+        public List<T> Data { get; set; }
 
         internal Func<RestResult<Pagination<T>>> NextAction { get; set; }
         public RestResult<Pagination<T>> Next() => NextAction();

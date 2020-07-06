@@ -1,20 +1,44 @@
 ﻿namespace VimeoClient.Model
 {
     using System.Collections.Generic;
+    using System.Text.Json.Serialization;
 
     public class Category
     {
-        public string uri { get; set; }
-        public string name { get; set; }
-        public string link { get; set; }
-        public string parent { get; set; }
-        public bool top_level { get; set; }
-        public Pictures pictures { get; set; }
-        public string last_video_featured_time { get; set; }
-        public AlbumMetadata metadata { get; set; }
-        public List<string> options { get; set; }
-        public int total { get; set; }
-        public List<Subcategory> subcategories { get; set; }
-        public Pictures icon { get; set; }
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("link")]
+        public string Link { get; set; }
+
+        [JsonPropertyName("parent")]
+        public string Parent { get; set; }
+
+        [JsonPropertyName("top_level")]
+        public bool TopLevel { get; set; }
+
+        [JsonPropertyName("pictures")]
+        public Pictures Pictures { get; set; }
+
+        [JsonPropertyName("last_video_featured_time")]
+        public string LastVideoFeaturedTime { get; set; }
+
+        [JsonPropertyName("metadata")]
+        public AlbumMetadata Metadata { get; set; }
+
+        [JsonPropertyName("options")]
+        public List<string> Options { get; set; }
+
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
+
+        [JsonPropertyName("subcategories")]
+        public List<Subcategory> SubCategories { get; set; }
+
+        [JsonPropertyName("icon")]
+        public Pictures Icon { get; set; }
     }
 }
