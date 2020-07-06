@@ -84,8 +84,8 @@ namespace VimeoClient.Model
         /// <summary>
         /// All the subcategories that belong to the category, if the current category is a top-level parent.
         /// </summary>
-        [JsonPropertyName("top_level")]
-        public Subcategory[] subcategories { get; set; }
+        [JsonPropertyName("subcategories")]
+        public Subcategory[] Subcategories { get; set; }
 
         /// <summary>
         /// Whether the category isn't a subcategory of another category.
