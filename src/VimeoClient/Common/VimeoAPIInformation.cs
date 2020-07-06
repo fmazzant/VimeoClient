@@ -31,6 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
+    using System.Threading.Tasks;
     using VimeoClient.Model;
 
     /// <summary>
@@ -64,7 +65,13 @@ namespace VimeoClient.Common
         /// This method returns the full OpenAPI specification for the Vimeo API.
         /// </summary>
         /// <returns></returns>
-        public RestResult<APIApp> GetTheAPISpecification() => RootAuthorization
-            .Get<APIApp>();
+        public Task<RestResult<APIApp>> GetTheAPISpecificationAsync() => RootAuthorization
+            .GetAsync<APIApp>();
+
+        /// <summary>
+        /// This method returns the full OpenAPI specification for the Vimeo API.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<APIApp> GetTheAPISpecification() => GetTheAPISpecificationAsync().Result;
     }
 }
