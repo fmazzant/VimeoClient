@@ -29,9 +29,7 @@
 
 namespace VimeoClient.Model
 {
-    using System.Dynamic;
     using System.Text.Json.Serialization;
-    using VimeoClient.Filter.Category;
 
     /// <summary>
     /// Metadata about the category

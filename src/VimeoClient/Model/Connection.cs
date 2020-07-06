@@ -40,24 +40,68 @@ namespace VimeoClient.Model
         /// Information about the channels related to this category.
         /// </summary>
         [JsonPropertyName("channels")]
-        public Channel Channel { get; set; }
+        public ConnectionEntityChannel Channel { get; set; }
 
         /// <summary>
         /// Information about the groups related to this category.
         /// </summary>
         [JsonPropertyName("groups")]
-        public Group Group { get; set; }
+        public ConnectionEntityGroup Group { get; set; }
 
         /// <summary>
         /// Information about the users related to this category.
         /// </summary>
         [JsonPropertyName("users")]
-        public User User { get; set; }
+        public ConnectionEntityUser User { get; set; }
 
         /// <summary>
         /// Information about the videos related to this category.
         /// </summary>
         [JsonPropertyName("videos")]
-        public Video Video { get; set; }
+        public ConnectionEntityVideo Video { get; set; }
     }
+
+    /// <summary>
+    /// A collection of information
+    /// </summary>
+    public class ConnectionEntity
+    {
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The total number of entities on this connection.
+        /// </summary>
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+    }
+
+    /// <summary>
+    /// Information about the channels related to this category.
+    /// </summary>
+    public class ConnectionEntityChannel : ConnectionEntity { }
+
+    /// <summary>
+    /// Information about the groups related to this category.
+    /// </summary>
+    public class ConnectionEntityGroup : ConnectionEntity { }
+
+    /// <summary>
+    /// Information about the users related to this category.
+    /// </summary>
+    public class ConnectionEntityUser : ConnectionEntity { }
+
+    /// <summary>
+    /// Information about the videos related to this category.
+    /// </summary>
+    public class ConnectionEntityVideo : ConnectionEntity { }
 }
