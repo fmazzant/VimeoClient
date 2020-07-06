@@ -31,8 +31,6 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
-    using System;
-    using System.Collections.Generic;
     using VimeoClient.Filter.Category;
     using VimeoClient.Model;
     using VimeoClient.Response;
@@ -73,7 +71,10 @@ namespace VimeoClient.Common
         /// This method returns the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 200 OK	The category was returned.
+        /// 404 Not Found   No such category exists.
+        /// </returns>
         public RestResult<Category> GetASpecificCategory(string category) => RootAuthorization
             .Command($"/categories/{category}")
             .Get<Category>();
@@ -369,8 +370,9 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.OnPreviewContentResponseAsString((json)=> { 
-            
+            var result = root.OnPreviewContentResponseAsString((json) =>
+            {
+
             }).Get<Pagination<Category>>();
 
             result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.Paging.Next);

@@ -32,24 +32,24 @@ namespace VimeoClient.Model
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// The container of the category's parent category, if the current category is a subcategory.
+    /// An action indicating if the authenticated user has followed the category.
     /// </summary>
-    public class Subcategory
+    public class Follow
     {
         /// <summary>
-        /// The URL to access the subcategory in a browser.
+        /// Whether the authenticated user has followed the category.
         /// </summary>
-        [JsonPropertyName("link")]
-        public string Link { get; set; }
+        [JsonPropertyName("added")]
+        public bool Added { get; set; }
 
         /// <summary>
-        /// The display name that identifies the subcategory.
+        /// The time in ISO 8601 format when the user followed the category, or the null value if the user hasn't followed the category.
         /// </summary>
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+        [JsonPropertyName("added_time")]
+        public string AddedTime { get; set; }
 
         /// <summary>
-        /// The unique identifier to access the subcategory.resource.
+        /// The URI for following or unfollowing the category: PUT to this URI to follow the category, or DELETE to this URI to unfollow the category.
         /// </summary>
         [JsonPropertyName("uri")]
         public string Uri { get; set; }

@@ -32,26 +32,32 @@ namespace VimeoClient.Model
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// The container of the category's parent category, if the current category is a subcategory.
+    /// A collection of information that is connected to this resource.
     /// </summary>
-    public class Subcategory
+    public class Connection
     {
         /// <summary>
-        /// The URL to access the subcategory in a browser.
+        /// Information about the channels related to this category.
         /// </summary>
-        [JsonPropertyName("link")]
-        public string Link { get; set; }
+        [JsonPropertyName("channels")]
+        public Channel Channel { get; set; }
 
         /// <summary>
-        /// The display name that identifies the subcategory.
+        /// Information about the groups related to this category.
         /// </summary>
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+        [JsonPropertyName("groups")]
+        public Group Group { get; set; }
 
         /// <summary>
-        /// The unique identifier to access the subcategory.resource.
+        /// Information about the users related to this category.
         /// </summary>
-        [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        [JsonPropertyName("users")]
+        public User User { get; set; }
+
+        /// <summary>
+        /// Information about the videos related to this category.
+        /// </summary>
+        [JsonPropertyName("videos")]
+        public Video Video { get; set; }
     }
 }

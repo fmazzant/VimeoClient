@@ -29,29 +29,25 @@
 
 namespace VimeoClient.Model
 {
+    using System.Dynamic;
     using System.Text.Json.Serialization;
+    using VimeoClient.Filter.Category;
 
     /// <summary>
-    /// The container of the category's parent category, if the current category is a subcategory.
+    /// Metadata about the category
     /// </summary>
-    public class Subcategory
+    public class Metadata
     {
         /// <summary>
-        /// The URL to access the subcategory in a browser.
+        /// A collection of information that is connected to this resource.
         /// </summary>
-        [JsonPropertyName("link")]
-        public string Link { get; set; }
+        [JsonPropertyName("connections")]
+        public Connection connections { get; set; }
 
         /// <summary>
-        /// The display name that identifies the subcategory.
+        /// The permissible actions related to the category.
         /// </summary>
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// The unique identifier to access the subcategory.resource.
-        /// </summary>
-        [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        [JsonPropertyName("interactions")]
+        public Interaction interactions { get; set; }
     }
 }
