@@ -4,6 +4,13 @@
     using System;
     using System.Collections.Generic;
 
+    public class VimeoList<T>
+    {
+        public int total { get; set; }
+
+        public T[] data { get; set; }
+    }
+
     public class Pagination<T>
     {
         public int total { get; set; }

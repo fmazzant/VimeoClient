@@ -39,7 +39,7 @@ namespace VimeoClient
     using System.Text;
     using VimeoClient.Body;
     using VimeoClient.Common;
-    using VimeoClient.Response;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Provides a set of methods for connecting to Vimeo REST webapi.
@@ -120,6 +120,14 @@ namespace VimeoClient
         /// </summary>
         /// <returns></returns>
         protected RestBuilder RootAuthorization() => Root()
+            .OnPreviewContentRequestAsString((json) =>
+            {
+
+            })
+            .OnPreviewContentResponseAsString((json) =>
+            {
+
+            })
             .Compression() //gzip
             .Authentication(() =>
             {

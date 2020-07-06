@@ -31,7 +31,10 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
+    using System;
+    using System.Collections.Generic;
     using VimeoClient.Filter.Category;
+    using VimeoClient.Model;
     using VimeoClient.Response;
 
     /// <summary>
@@ -71,9 +74,9 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <returns></returns>
-        public RestResult<string> GetASpecificCategory(string category) => RootAuthorization
+        public RestResult<Category> GetASpecificCategory(string category) => RootAuthorization
             .Command($"/categories/{category}")
-            .Get();
+            .Get<Category>();
 
         /// <summary>
         /// This method returns every available category.
@@ -288,7 +291,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(int user_id,
+        public RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(int user_id,
             CategoryDirection? direction = null,
             CategorySortFollows? sort = null,
             int? page = null,
@@ -315,14 +318,32 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            return root.Get();
+            var result = root.Get<Pagination<Category>>();
+            result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(user_id, result.Content.paging.next);
+            result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(user_id, result.Content.paging.previous);
+
+            return result;
         }
 
         /// <summary>
         /// This method returns every category that the authenticated user follows.
         /// </summary>
         /// <returns></returns>
-        public RestResult<string> GetAllTheCategoriesThatTheUserFollows(CategoryDirection? direction = null,
+        internal RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(int user_id, string query)
+        {
+            var root = RootAuthorization
+                .Command($"/users/{user_id}/categories");
+
+            var result = root.Get<Pagination<Category>>();
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method returns every category that the authenticated user follows.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(CategoryDirection? direction = null,
             CategorySortFollows? sort = null,
             int? page = null,
             int? per_page = null)
@@ -348,9 +369,25 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            return root.Get();
+            var result = root.Get<Pagination<Category>>();
+
+            result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.paging.next);
+            result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.paging.previous);
+
+            return result;
         }
 
+        /// <summary>
+        /// This method returns every category that the authenticated user follows.
+        /// </summary>
+        /// <returns></returns>
+        internal RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(string query)
+        {
+            var root = RootAuthorization
+                .Command($"/me/categories")
+                .Command(query);
+            return root.Get<Pagination<Category>>();
+        }
         #endregion
 
         #region [ Videos ]
@@ -363,8 +400,8 @@ namespace VimeoClient.Common
         /// <param name="video_id">The ID of the video.</param>
         /// <returns></returns>
         public RestResult<string> GetASpecificVideoInACategory(string category, int video_id) => RootAuthorization
-            .Command($"/categories/{category}/videos/{video_id}")
-            .Get();
+        .Command($"/categories/{category}/videos/{video_id}")
+        .Get();
 
         /// <summary>
         /// This method returns every category that contains the specified video.

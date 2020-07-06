@@ -29,7 +29,7 @@
 
 namespace VimeoClient.Body
 {
-    using VimeoClient.Response;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Access Token Payload

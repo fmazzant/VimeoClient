@@ -34,7 +34,7 @@ namespace VimeoClient.Common
     using System;
     using VimeoClient.Body.Channel;
     using VimeoClient.Filter.Channel;
-    using VimeoClient.Response;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Use channels to organize videos by theme or some other grouping. 

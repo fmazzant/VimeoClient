@@ -31,7 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
-    using VimeoClient.Response;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Vimeo API Information
