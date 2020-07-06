@@ -71,7 +71,9 @@ namespace VimeoClient.Common
         /// <summary>
         /// This method returns the full OpenAPI specification for the Vimeo API.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// <list type="200">200 OK	Standard request.</list>
+        /// </returns>
         public RestResult<APIApp> GetTheAPISpecification() => GetTheAPISpecificationAsync().Result;
     }
 }
