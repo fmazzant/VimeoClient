@@ -369,7 +369,9 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Category>>();
+            var result = root.OnPreviewContentResponseAsString((json)=> { 
+            
+            }).Get<Pagination<Category>>();
 
             result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.paging.next);
             result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.paging.previous);
