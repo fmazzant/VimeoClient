@@ -116,8 +116,8 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Category>>();
 
-            result.Content.NextAction = () => GetAllCategories(result.Content.Paging.next);
-            result.Content.PreviousAction = () => GetAllCategories(result.Content.Paging.previous);
+            result.Content.NextAction = () => GetAllCategories(result.Content.Paging.Next);
+            result.Content.PreviousAction = () => GetAllCategories(result.Content.Paging.Previous);
 
             return result;
         }
@@ -140,8 +140,8 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Category>>();
 
-            result.Content.NextAction = () => GetAllCategories(result.Content.Paging.next);
-            result.Content.PreviousAction = () => GetAllCategories(result.Content.Paging.previous);
+            result.Content.NextAction = () => GetAllCategories(result.Content.Paging.Next);
+            result.Content.PreviousAction = () => GetAllCategories(result.Content.Paging.Previous);
 
             return result;
         }
@@ -319,8 +319,8 @@ namespace VimeoClient.Common
             }
 
             var result = root.Get<Pagination<Category>>();
-            result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(user_id, result.Content.Paging.next);
-            result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(user_id, result.Content.Paging.previous);
+            result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(user_id, result.Content.Paging.Next);
+            result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(user_id, result.Content.Paging.Previous);
 
             return result;
         }
@@ -373,8 +373,8 @@ namespace VimeoClient.Common
             
             }).Get<Pagination<Category>>();
 
-            result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.Paging.next);
-            result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.Paging.previous);
+            result.Content.NextAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.Paging.Next);
+            result.Content.PreviousAction = () => GetAllTheCategoriesThatTheUserFollows(result.Content.Paging.Previous);
 
             return result;
         }

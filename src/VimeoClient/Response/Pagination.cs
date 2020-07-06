@@ -40,11 +40,18 @@
 
     public class Paging
     {
-        public string next { get; set; }
-        public string previous { get; set; }
-        public string first { get; set; }
-        public string last { get; set; }
+        [JsonPropertyName("next")]
+        public string Next { get; set; }
 
-        public bool IsSinglePage => first == last;
+        [JsonPropertyName("previous")]
+        public string Previous { get; set; }
+
+        [JsonPropertyName("first")]
+        public string First { get; set; }
+
+        [JsonPropertyName("last")]
+        public string Last { get; set; }
+
+        public bool IsSinglePage => First == Last;
     }
 }
