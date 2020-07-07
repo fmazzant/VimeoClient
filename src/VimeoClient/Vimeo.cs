@@ -213,12 +213,12 @@ namespace VimeoClient
         /// <summary>
         /// API Information
         /// </summary>
-        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(Properties, this);
+        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(this);
 
         /// <summary>
         /// Authentication Extras
         /// </summary>
-        public VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(Properties, RootAuthorization());
+        public VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(this);
 
         /// <summary>
         /// Categories on Vimeo are sets of videos for particular genres (like comedy) or other characteristics (like being experimental). 
@@ -226,7 +226,7 @@ namespace VimeoClient
         /// by recommending them for up to two main categories and one subcategory. 
         /// See our Help Center for more details.
         /// </summary>
-        public VimeoCategories Categories => new VimeoCategories(Properties, this);
+        public VimeoCategories Categories => new VimeoCategories(this);
 
         /// <summary>
         /// Use channels to organize videos by theme or some other grouping. 

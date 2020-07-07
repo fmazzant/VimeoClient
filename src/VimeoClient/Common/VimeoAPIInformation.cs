@@ -59,11 +59,19 @@ namespace VimeoClient.Common
         /// Create a new instance of VimeoAPIInformation class
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="rootAuthorization"></param>
-        public VimeoAPIInformation(VimeoProperties properties, Vimeo vimeo)
+        public VimeoAPIInformation(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            Properties = properties;
+        }
+
+        /// <summary>
+        /// Create a new instance of VimeoAPIInformation class
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoAPIInformation(Vimeo vimeo)
+        {
             Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         /// <summary>

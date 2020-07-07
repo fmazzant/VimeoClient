@@ -48,6 +48,7 @@ namespace VimeoClient.Common
         /// Vimeo Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
+
         /// <summary>
         /// Vimeo
         /// </summary>
@@ -62,11 +63,19 @@ namespace VimeoClient.Common
         /// Create a new instance of VimeoCategories class
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="rootAuthorization"></param>
-        public VimeoCategories(VimeoProperties properties, Vimeo vimeo)
+        public VimeoCategories(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            Properties = properties;
+        }
+
+        /// <summary>
+        /// Create a new instance of VimeoCategories class
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoCategories(Vimeo vimeo)
+        {
             Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ Essentials ]
@@ -121,35 +130,15 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Category>>();
 
-            if (result?.Content?.Paging != null)
+            if (result?.Content?.Paging != null && result?.Content?.Paging.Next != null)
             {
-                result.Content.NextAction = () => GetAllCategories(result.Content.Paging.Next);
-                result.Content.PreviousAction = () => GetAllCategories(result.Content.Paging.Previous);
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Category>>();
             }
-            return result;
-        }
 
-        /// <summary>
-        /// This method returns every available category.
-        /// </summary>
-        /// <param name="direction">The sort direction of the results.</param>
-        /// <param name="sort">The way to sort the results.
-        ///     last_video_featured_time
-        ///     name
-        ///  </param>
-        /// <param name="query">Url paginated</param>
-        /// <returns></returns>
-        internal RestResult<Pagination<Category>> GetAllCategories(string query)
-        {
-            if (string.IsNullOrEmpty(query)) return null;
-
-            var root = RootAuthorization().Command("/categories").Command(query);
-
-            var result = root.Get<Pagination<Category>>();
-
-            result.Content.NextAction = () => GetAllCategories(result.Content.Paging.Next);
-            result.Content.PreviousAction = () => GetAllCategories(result.Content.Paging.Previous);
-
+            if (result?.Content?.Paging != null && result?.Content?.Paging.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Category>>();
+            }
             return result;
         }
 
@@ -205,26 +194,14 @@ namespace VimeoClient.Common
             var result = root.Get<Pagination<Channel>>();
 
             if (result.Content.Paging?.Next != null)
-                result.Content.NextAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Next);
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Channel>>();
+            }
 
             if (result.Content.Paging?.Previous != null)
-                result.Content.PreviousAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Previous);
-
-            return result;
-        }
-
-        public RestResult<Pagination<Channel>> GetAllTheChannelsInACategoryPage(string query)
-        {
-            var root = RootAuthorization()
-                .Command(query);
-
-            var result = root.Get<Pagination<Channel>>();
-
-            if (result.Content.Paging?.Next != null)
-                result.Content.NextAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Next);
-
-            if (result.Content.Paging?.Previous != null)
-                result.Content.PreviousAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Previous);
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Channel>>();
+            }
 
             return result;
         }
@@ -243,7 +220,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheGroupsInACategory(string category,
+        public RestResult<Pagination<Group>> GetAllTheGroupsInACategory(string category,
             CategoryDirection? direction = null,
             string query = null,
             CategorySortAllGroup? sort = null,
@@ -275,7 +252,19 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            return root.Get();
+            var result = root.Get<Pagination<Group>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
+            }
+
+            return result;
         }
 
         #endregion

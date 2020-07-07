@@ -40,6 +40,11 @@ namespace VimeoClient.Common
     public class VimeoAuthenticationExtras
     {
         /// <summary>
+        /// Vimeo
+        /// </summary>
+        public Vimeo Vimeo { get; private set; }
+
+        /// <summary>
         /// Vimeo properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
@@ -47,17 +52,25 @@ namespace VimeoClient.Common
         /// <summary>
         /// Root Authorization
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
 
         /// <summary>
         /// Create a new instance of VimeoAuthenticationExtras class
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="rootAuthorization"></param>
-        public VimeoAuthenticationExtras(VimeoProperties properties, RestBuilder rootAuthorization)
+        public VimeoAuthenticationExtras(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+        }
+
+        /// <summary>
+        /// Create a new instance of VimeoAuthenticationExtras class
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoAuthenticationExtras(Vimeo vimeo)
+        {
+            Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ ESSENTIALS ]
@@ -69,7 +82,7 @@ namespace VimeoClient.Common
         /// 204 No Content	    The token was revoked.
         /// 400 Bad Request     Access can't be revoked for an OAuth 1 token.
         /// </returns>
-        public RestResult RevokeTheCurrentAccessToken() => RootAuthorization
+        public RestResult RevokeTheCurrentAccessToken() => RootAuthorization()
             .Command("/tokens")
             .Delete();
 
@@ -80,7 +93,7 @@ namespace VimeoClient.Common
         /// 200 OK	            The token was verified.
         /// 401 Unauthorized    The token isn't a valid OAuth 2 token.
         /// </returns>
-        public RestResult<Auth> VerifyAnOAuth2AccessToken() => RootAuthorization
+        public RestResult<Auth> VerifyAnOAuth2AccessToken() => RootAuthorization()
             .Command("/oauth/verify")
             .Get<Auth>();
 
@@ -98,7 +111,7 @@ namespace VimeoClient.Common
         /// 200 OK	The authorization was successful.
         /// 401 Unauthorized Error code 8001: No such client secret exists.
         /// </returns>
-        public RestResult<Auth> AuthorizeClientWithOAuth(string scope, string grant_type = "client_credentials") => RootAuthorization
+        public RestResult<Auth> AuthorizeClientWithOAuth(string scope, string grant_type = "client_credentials") => RootAuthorization()
             .Command("/oauth/authorize/client")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -124,7 +137,7 @@ namespace VimeoClient.Common
         ///     The token is invalid.
         ///     The token has unauthorized scopes.
         /// </returns>
-        public RestResult<Auth> ConvertOAuth1AccessTokenToAnOAuth2AccessToken(string token, string token_secret, string grant_type = "vimeo_oauth1") => RootAuthorization
+        public RestResult<Auth> ConvertOAuth1AccessTokenToAnOAuth2AccessToken(string token, string token_secret, string grant_type = "vimeo_oauth1") => RootAuthorization()
             .Command("/oauth/authorize/vimeo_oauth1")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -152,7 +165,7 @@ namespace VimeoClient.Common
         ///     The authorization code is invalid.
         ///     The redirect URI doesn't match the URI to create the authorization code.
         /// </returns>
-        public RestResult<Auth> ExchangeAnAuthorizationCodeForAnAccessToken(string code, string redirect_uri, string grant_type = "authorization_code") => RootAuthorization
+        public RestResult<Auth> ExchangeAnAuthorizationCodeForAnAccessToken(string code, string redirect_uri, string grant_type = "authorization_code") => RootAuthorization()
             .Command("/oauth/access_token")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>

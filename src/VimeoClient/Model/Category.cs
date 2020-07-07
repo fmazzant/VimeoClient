@@ -31,6 +31,9 @@ namespace VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
+    /// <summary>
+    /// The category representation consists of the following fields.
+    /// </summary>
     public class Category
     {
         /// <summary>
