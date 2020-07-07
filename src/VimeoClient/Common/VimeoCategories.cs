@@ -164,7 +164,7 @@ namespace VimeoClient.Common
         /// 200 OK	        The channels were returned.
         /// 404 Not Found   No such category exists.
         /// </returns>
-        public RestResult<string> GetAllTheChannelsInACategory(string category,
+        public RestResult<Pagination<Channel>> GetAllTheChannelsInACategory(string category,
             CategoryDirection? direction = null,
             string query = null,
             CategorySortAllChannel? sort = null,
@@ -196,8 +196,31 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            return root.Get();
+            var result = root.Get<Pagination<Channel>>();
+
+            result.Content.NextAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Next);
+            result.Content.PreviousAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Previous);
+
+            return result;
         }
+
+        /// <summary>
+        /// This method returns every channel that belongs to the specified uri page.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        internal RestResult<Pagination<Channel>> GetAllTheChannelsInACategoryPage(string uri)
+        {
+            var result = RootAuthorization
+                .Command(uri)
+                .Get<Pagination<Channel>>();
+
+            result.Content.NextAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Next);
+            result.Content.PreviousAction = () => GetAllTheChannelsInACategoryPage(result.Content.Paging.Previous);
+
+            return result;
+        }
+
 
         #endregion
 
