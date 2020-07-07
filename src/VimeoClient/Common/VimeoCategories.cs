@@ -473,7 +473,10 @@ namespace VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 200 OK	The videos were returned.
+        /// 404 Not Found   No such category exists.
+        /// </returns>
         public RestResult<Pagination<Video>> GetAllTheVideosInACategory(string category,
             CategoryDirection? direction = null,
             CategoryFilter? filter = null,
