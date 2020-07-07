@@ -51,19 +51,32 @@ namespace VimeoClient.Common
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// Root Authorization
+        /// Vimeo
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public Vimeo Vimeo { get; private set; }
 
         /// <summary>
-        /// Create an instance of VimeoChannels
+        /// Root Authorization
+        /// </summary>
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
+
+        /// <summary>
+        /// Create a new instance of VimeoCategories class
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="rootAuthorization"></param>
-        public VimeoChannels(VimeoProperties properties, RestBuilder rootAuthorization)
+        public VimeoChannels(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+        }
+
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoChannels(Vimeo vimeo)
+        {
+            Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ Essential ]
@@ -83,7 +96,7 @@ namespace VimeoClient.Common
         /// <param name="link"></param>
         /// <returns></returns>
         public RestResult<string> CreateAChannel(ChannelEditParameters obj)
-            => RootAuthorization
+            => RootAuthorization()
             .Command($"/channels")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -100,7 +113,8 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel</param>
         /// <returns></returns>
-        public RestResult<string> DeleteAChannel(int channel_id) => RootAuthorization
+        public RestResult<string> DeleteAChannel(int channel_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}")
             .Delete();
 
@@ -110,7 +124,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id"> The ID of the channel.</param>
         /// <param name="obj">The channel.</param>
         /// <returns></returns>
-        public RestResult<string> EditAChannel(int channel_id, ChannelEditParameters obj) => RootAuthorization
+        public RestResult<string> EditAChannel(int channel_id, ChannelEditParameters obj) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}")
              .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -127,7 +142,8 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel</param>
         /// <returns></returns>
-        public RestResult<string> GetASpecificChannel(int channel_id) => RootAuthorization
+        public RestResult<string> GetASpecificChannel(int channel_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}")
             .Get();
 
@@ -148,7 +164,7 @@ namespace VimeoClient.Common
             string query = null,
             ChannelSortGetAllChannel? sort = null)
         {
-            var root = RootAuthorization
+            var root = RootAuthorization()
                 .Command("/channels");
 
             if (direction.HasValue)
@@ -198,7 +214,7 @@ namespace VimeoClient.Common
             string query = null,
             ChannelSortGetAllChannelSubscribe? sort = null)
         {
-            var root = RootAuthorization
+            var root = RootAuthorization()
                 .Command($"/users/{user_id}/channels");
 
             if (direction.HasValue)
@@ -246,7 +262,7 @@ namespace VimeoClient.Common
             string query = null,
             ChannelSortGetAllChannelSubscribe? sort = null)
         {
-            var root = RootAuthorization
+            var root = RootAuthorization()
                 .Command($"/me/channels");
 
             if (direction.HasValue)
@@ -287,7 +303,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="channels">The array of category URIs to add.</param>
         /// <returns></returns>
-        public RestResult<string> AddAChannelToAListOfCategories(int channel_id, Category[] channels) => RootAuthorization
+        public RestResult<string> AddAChannelToAListOfCategories(int channel_id, Category[] channels) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/categories")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((p) =>
@@ -305,7 +322,8 @@ namespace VimeoClient.Common
         /// <param name="category">The name of the category.</param>
         /// <param name="channel_id">The ID of the channel.</param>
         /// <returns></returns>
-        public RestResult<string> AddAChannelToASpecificCategory(string category, int channel_id) => RootAuthorization
+        public RestResult<string> AddAChannelToASpecificCategory(string category, int channel_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/categories/{category}")
             .Put();
 
@@ -314,7 +332,8 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
         /// <returns></returns>
-        public RestResult<string> GetAllTheCategoriesToWhichAChannelBelongs(int channel_id) => RootAuthorization
+        public RestResult<string> GetAllTheCategoriesToWhichAChannelBelongs(int channel_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/categories")
             .Get();
 
@@ -324,7 +343,8 @@ namespace VimeoClient.Common
         /// <param name="category">The name of the category.</param>
         /// <param name="channel_id">The ID of the channel.</param>
         /// <returns></returns>
-        public RestResult<string> RemoveAChannelFromACategory(string category, int channel_id) => RootAuthorization
+        public RestResult<string> RemoveAChannelFromACategory(string category, int channel_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/categories/{category}")
             .Delete();
 
@@ -339,7 +359,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_uri">The URI of a user to add as a moderator.</param>
         /// <returns></returns>
-        public RestResult<string> AddAListOfModeratorsToAChannel(int channel_id, string user_uri) => RootAuthorization
+        public RestResult<string> AddAListOfModeratorsToAChannel(int channel_id, string user_uri) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/moderators")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((p) => p.Add("user_uri", user_uri))
@@ -352,7 +373,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_id">The ID of the user</param>
         /// <returns></returns>
-        public RestResult<string> AddASpecificModeratorToAChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> AddASpecificModeratorToAChannel(int channel_id, int user_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/moderators/{user_id}")
             .Put();
 
@@ -362,7 +384,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_id">The ID of the user</param>
         /// <returns></returns>
-        public RestResult<string> GetASpecificModeratorOfAChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> GetASpecificModeratorOfAChannel(int channel_id, int user_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/moderators/{user_id}")
             .Get();
 
@@ -376,7 +399,8 @@ namespace VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            ChannelSortAllModerators? sort = null) => RootAuthorization
+            ChannelSortAllModerators? sort = null) 
+            => RootAuthorization()
                .Command($"/channels/{channel_id}/moderators")
                .Parameter((p) =>
                {
@@ -413,7 +437,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_uri">The URI of a user to remove as a moderator.</param>
         /// <returns></returns>
-        public RestResult<string> RemoveAListOfModeratorsFromAChannel(int channel_id, string user_uri) => RootAuthorization
+        public RestResult<string> RemoveAListOfModeratorsFromAChannel(int channel_id, string user_uri) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/moderators")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((p) =>
@@ -428,7 +453,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<string> RemoveASpecificModeratorFromAChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> RemoveASpecificModeratorFromAChannel(int channel_id, int user_id) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/moderators/{user_id}")
             .Delete();
 
@@ -439,7 +465,8 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_uri">The URI of the user to add as a moderator.</param>
         /// <returns></returns>
-        public RestResult<string> ReplaceTheModeratorsOfAChannel(int channel_id, string user_uri) => RootAuthorization
+        public RestResult<string> ReplaceTheModeratorsOfAChannel(int channel_id, string user_uri) 
+            => RootAuthorization()
             .Command($"/channels/{channel_id}/moderators")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((p) => p.Add("user_uri", user_uri))
@@ -460,7 +487,7 @@ namespace VimeoClient.Common
         public RestResult<string> GetAllTheUsersWhoCanAccessAPrivateChannel(int channel_id,
             ChannelDirection? direction = null,
             int? page = null,
-            int? per_page = null) => RootAuthorization
+            int? per_page = null) => RootAuthorization()
             .Command($"/channels/{channel_id}/privacy/users")
             .Parameter((p) =>
             {
@@ -487,7 +514,7 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="users">The array of either the user URIs or the user IDs to permit to access the private channel.</param>
         /// <returns></returns>
-        public RestResult<string> PermitAListOfUsersToAccessAPrivateChannel(int channel_id, User[] users) => RootAuthorization
+        public RestResult<string> PermitAListOfUsersToAccessAPrivateChannel(int channel_id, User[] users) => RootAuthorization()
             .Command($"/channels/{channel_id}/privacy/users")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((p) =>
@@ -505,7 +532,7 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<string> PermitASpecificUserToAccessAPrivateChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> PermitASpecificUserToAccessAPrivateChannel(int channel_id, int user_id) => RootAuthorization()
             .Command($"/channels/{channel_id}/privacy/users/{user_id}")
             .Put();
 
@@ -516,7 +543,7 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<string> RestrictAUserFromAccessingAPrivateChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> RestrictAUserFromAccessingAPrivateChannel(int channel_id, int user_id) => RootAuthorization()
             .Command($"/channels/{channel_id}/privacy/users/{user_id}")
             .Delete();
 
@@ -530,7 +557,7 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="user_id">The ID of the user</param>
         /// <returns></returns>
-        public RestResult<string> CheckIfAUserFollowsAChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> CheckIfAUserFollowsAChannel(int channel_id, int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/channels/{channel_id}")
             .Get();
 
@@ -539,7 +566,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
         /// <returns></returns>
-        public RestResult<string> CheckIfAUserFollowsAChannel(int channel_id) => RootAuthorization
+        public RestResult<string> CheckIfAUserFollowsAChannel(int channel_id) => RootAuthorization()
             .Command($"/me/channels/{channel_id}")
             .Get();
 
@@ -560,7 +587,7 @@ namespace VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            ChannelSortAllModerators? sort = null) => RootAuthorization
+            ChannelSortAllModerators? sort = null) => RootAuthorization()
             .Command($"/channels/{channel_id}/users")
             .Parameter((p) =>
             {
@@ -599,7 +626,7 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel</param>
         /// <param name="user_id">The ID of the user</param>
         /// <returns></returns>
-        public RestResult<string> SubscribeTheUserToASpecificChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> SubscribeTheUserToASpecificChannel(int channel_id, int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/channels/{channel_id}")
             .Put();
 
@@ -608,7 +635,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel</param>
         /// <returns></returns>
-        public RestResult<string> SubscribeTheUserToASpecificChannel(int channel_id) => RootAuthorization
+        public RestResult<string> SubscribeTheUserToASpecificChannel(int channel_id) => RootAuthorization()
             .Command($"/me/channels/{channel_id}")
             .Put();
 
@@ -618,7 +645,7 @@ namespace VimeoClient.Common
         /// <param name="channel_id">The ID of the channel</param>
         /// <param name="user_id">The ID of the user</param>
         /// <returns></returns>
-        public RestResult<string> UnsubscribeTheUserFromASpecificChannel(int channel_id, int user_id) => RootAuthorization
+        public RestResult<string> UnsubscribeTheUserFromASpecificChannel(int channel_id, int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/channels/{channel_id}")
             .Delete();
 
@@ -627,7 +654,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel</param>
         /// <returns></returns>
-        public RestResult<string> UnsubscribeTheUserFromASpecificChannel(int channel_id) => RootAuthorization
+        public RestResult<string> UnsubscribeTheUserFromASpecificChannel(int channel_id) => RootAuthorization()
            .Command($"/me/channels/{channel_id}")
            .Delete();
 
