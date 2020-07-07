@@ -119,7 +119,7 @@ namespace VimeoClient
         /// Vimeo End Point root with Bearer authentication
         /// </summary>
         /// <returns></returns>
-        protected RestBuilder RootAuthorization() => Root()
+        public RestBuilder RootAuthorization() => Root()
             .OnPreviewContentRequestAsString((json) =>
             {
 
@@ -201,17 +201,19 @@ namespace VimeoClient
         /// <summary>
         /// Me Information
         /// </summary>
-        public VimeoMe Me => new VimeoMe(Properties, RootAuthorization());
+        public VimeoMe Me
+            => new VimeoMe(Properties, this);
 
         /// <summary>
         /// Users Information
         /// </summary>
-        public VimeoUsers Users => new VimeoUsers(Properties, RootAuthorization());
+        public VimeoUsers Users
+            => new VimeoUsers(Properties, this);
 
         /// <summary>
         /// API Information
         /// </summary>
-        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(Properties, RootAuthorization());
+        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(Properties, this);
 
         /// <summary>
         /// Authentication Extras
@@ -224,7 +226,7 @@ namespace VimeoClient
         /// by recommending them for up to two main categories and one subcategory. 
         /// See our Help Center for more details.
         /// </summary>
-        public VimeoCategories Categories => new VimeoCategories(Properties, RootAuthorization());
+        public VimeoCategories Categories => new VimeoCategories(Properties, this);
 
         /// <summary>
         /// Use channels to organize videos by theme or some other grouping. 

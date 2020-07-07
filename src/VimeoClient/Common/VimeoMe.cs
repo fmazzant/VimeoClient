@@ -46,26 +46,31 @@ namespace VimeoClient.Common
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
+        /// Vimeo
+        /// </summary>
+        public Vimeo Vimeo { get; private set; }
+
+        /// <summary>
         /// Root Authorization
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
 
         /// <summary>
         /// VimeoMe
         /// </summary>
         /// <param name="properties"></param>
         /// <param name="rootAuthorization"></param>
-        public VimeoMe(VimeoProperties properties, RestBuilder rootAuthorization)
+        public VimeoMe(VimeoProperties properties, Vimeo vimeo)
         {
             this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+            this.Vimeo = vimeo;
         }
 
         /// <summary>
         /// Root Me Authorization
         /// </summary>
         /// <returns></returns>
-        protected RestBuilder RootMeAuthorization() => RootAuthorization.Command("/me");
+        protected RestBuilder RootMeAuthorization() => RootAuthorization().Command("/me");
 
         #region [ ESSENTIALS ]
 

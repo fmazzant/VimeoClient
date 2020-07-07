@@ -31,10 +31,10 @@
         [JsonPropertyName("data")]
         public List<T> Data { get; set; }
 
-        internal Func<RestResult<Pagination<T>>> NextAction { get; set; }
+        internal Func<RestResult<Pagination<T>>> NextAction { get; set; } = new Func<RestResult<Pagination<T>>>(() => { return null; });
         public RestResult<Pagination<T>> Next() => NextAction();
 
-        internal Func<RestResult<Pagination<T>>> PreviousAction { get; set; }
+        internal Func<RestResult<Pagination<T>>> PreviousAction { get; set; } = new Func<RestResult<Pagination<T>>>(() => { return null; });
         public RestResult<Pagination<T>> Previous() => PreviousAction();
     }
 

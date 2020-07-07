@@ -46,26 +46,31 @@ namespace VimeoClient.Common
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
+        /// Vimeo
+        /// </summary>
+        public Vimeo Vimeo { get; private set; }
+
+        /// <summary>
         /// Root Authorization
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
 
         /// <summary>
         /// Create a new instance of VimeoAPIInformation class
         /// </summary>
         /// <param name="properties"></param>
         /// <param name="rootAuthorization"></param>
-        public VimeoAPIInformation(VimeoProperties properties, RestBuilder rootAuthorization)
+        public VimeoAPIInformation(VimeoProperties properties, Vimeo vimeo)
         {
             Properties = properties;
-            RootAuthorization = rootAuthorization;
+            Vimeo = vimeo;
         }
 
         /// <summary>
         /// This method returns the full OpenAPI specification for the Vimeo API.
         /// </summary>
         /// <returns></returns>
-        public Task<RestResult<APIApp>> GetTheAPISpecificationAsync() => RootAuthorization
+        public Task<RestResult<APIApp>> GetTheAPISpecificationAsync() => RootAuthorization()
             .GetAsync<APIApp>();
 
         /// <summary>
