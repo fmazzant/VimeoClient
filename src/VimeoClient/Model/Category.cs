@@ -55,7 +55,7 @@ namespace VimeoClient.Model
         /// Metadata about the category.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public Metadata Metadata { get; set; }
+        public CategoryMetadata Metadata { get; set; }
 
         /// <summary>
         /// The display name that identifies the category.

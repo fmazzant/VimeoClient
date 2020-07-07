@@ -34,7 +34,7 @@ namespace VimeoClient.Model
     /// <summary>
     /// Metadata about the category
     /// </summary>
-    public class Metadata
+    public class CategoryMetadata
     {
         /// <summary>
         /// A collection of information that is connected to this resource.
