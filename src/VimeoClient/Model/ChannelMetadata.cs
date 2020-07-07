@@ -99,7 +99,7 @@ namespace VimeoClient.Model
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("add_moderators")]
-        public ChannelInteractions add_moderators { get; set; }
+        public ChannelInteractions AddModerators { get; set; }
 
         /// <summary>
         /// When a channel appears in the context of adding or removing a video from it (/videos/{video_id}/available_channels), 
@@ -107,21 +107,20 @@ namespace VimeoClient.Model
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("add_to")]
-        public ChannelInteractionsAddToEntity add_to { get; set; }
+        public ChannelInteractionsAddToEntity AddTo { get; set; }
 
         /// <summary>
         /// An action indicating if the authenticated user has followed this channel. This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("follow")]
-        public ChannelInteractionsFollowEntity follow { get; set; }
+        public ChannelInteractionsFollowEntity Follow { get; set; }
 
         /// <summary>
         /// An action indicating that the authenticated user is a moderator of the channel and may therefore add or remove videos from the channel. 
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("moderate_videos")]
-        public ChannelInteractionsModerateVideosEntity moderate_videos { get; set; }
-
+        public ChannelInteractionsModerateVideosEntity ModerateVideos { get; set; }
     }
 
     /// <summary>
