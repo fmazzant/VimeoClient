@@ -26,6 +26,7 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
+
 namespace VimeoClient.Model
 {
     using System.Text.Json.Serialization;
@@ -129,6 +130,17 @@ namespace VimeoClient.Model
     /// </summary>
     public class ChannelInteractionsAddModeratorsEntity
     {
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 
     /// <summary>
@@ -138,6 +150,17 @@ namespace VimeoClient.Model
     /// </summary>
     public class ChannelInteractionsAddToEntity
     {
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 
     /// <summary>
@@ -145,6 +168,34 @@ namespace VimeoClient.Model
     /// </summary>
     public class ChannelInteractionsFollowEntity
     {
+        /// <summary>
+        /// Whether the authenticated user has followed this channel.This data requires a bearer token with the private scope.
+        /// </summary>
+        [JsonPropertyName("added")]
+        public bool Added { get; set; }
+
+        /// <summary>
+        /// The time in ISO 8601 format that the user followed this channel, or the null value if the user hasn't followed the channel. 
+        /// This data requires a bearer token with the private scope.
+        /// </summary>
+        [JsonPropertyName("added_time")]
+        public string AddedTime { get; set; }
+
+        /// <summary>
+        /// Whether the authenticated user is a moderator or subscriber. This data requires a bearer token with the private scope.
+        /// Option descriptions:
+        ///     - moderator     The authenticated user is a moderator.
+        ///     - subscriber    The authenticated user is a subscriber.
+        /// </summary>
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// The URI for following or unfollowing this channel.PUT to this URI to follow the channel, or DELETE to this URI to unfollow the channel.
+        /// This data requires a bearer token with the private scope.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 
     /// <summary>
@@ -153,6 +204,16 @@ namespace VimeoClient.Model
     /// </summary>
     public class ChannelInteractionsModerateVideosEntity
     {
-    }
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
 
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
+    }
 }
