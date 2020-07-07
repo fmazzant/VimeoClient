@@ -32,39 +32,9 @@ namespace VimeoClient.Model
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// A collection of information that is connected to this resource.
-    /// </summary>
-    public class Connection
-    {
-        /// <summary>
-        /// Information about the channels related to this category.
-        /// </summary>
-        [JsonPropertyName("channels")]
-        public ConnectionEntityChannel Channel { get; set; }
-
-        /// <summary>
-        /// Information about the groups related to this category.
-        /// </summary>
-        [JsonPropertyName("groups")]
-        public ConnectionEntityGroup Group { get; set; }
-
-        /// <summary>
-        /// Information about the users related to this category.
-        /// </summary>
-        [JsonPropertyName("users")]
-        public ConnectionEntityUser User { get; set; }
-
-        /// <summary>
-        /// Information about the videos related to this category.
-        /// </summary>
-        [JsonPropertyName("videos")]
-        public ConnectionEntityVideo Video { get; set; }
-    }
-
-    /// <summary>
     /// A collection of information
     /// </summary>
-    public class ConnectionEntity
+    public class GenericRelatedEntity
     {
         /// <summary>
         /// An array of HTTP methods permitted on this URI.
@@ -84,24 +54,4 @@ namespace VimeoClient.Model
         [JsonPropertyName("uri")]
         public string Uri { get; set; }
     }
-
-    /// <summary>
-    /// Information about the channels related to this category.
-    /// </summary>
-    public class ConnectionEntityChannel : ConnectionEntity { }
-
-    /// <summary>
-    /// Information about the groups related to this category.
-    /// </summary>
-    public class ConnectionEntityGroup : ConnectionEntity { }
-
-    /// <summary>
-    /// Information about the users related to this category.
-    /// </summary>
-    public class ConnectionEntityUser : ConnectionEntity { }
-
-    /// <summary>
-    /// Information about the videos related to this category.
-    /// </summary>
-    public class ConnectionEntityVideo : ConnectionEntity { }
 }

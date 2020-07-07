@@ -40,7 +40,7 @@ namespace VimeoClient.Model
         /// A collection of information that is connected to this resource.
         /// </summary>
         [JsonPropertyName("connections")]
-        public Connection connections { get; set; }
+        public CategoryConnection connections { get; set; }
 
         /// <summary>
         /// The permissible actions related to the category.

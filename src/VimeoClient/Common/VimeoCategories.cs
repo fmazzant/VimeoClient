@@ -160,7 +160,10 @@ namespace VimeoClient.Common
         /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 200 OK	        The channels were returned.
+        /// 404 Not Found   No such category exists.
+        /// </returns>
         public RestResult<string> GetAllTheChannelsInACategory(string category,
             CategoryDirection? direction = null,
             string query = null,
