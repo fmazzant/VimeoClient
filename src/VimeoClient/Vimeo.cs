@@ -306,6 +306,6 @@ namespace VimeoClient
         /// As you work with the Vimeo API, some common themes begin to emerge, with some common strategies for optimizing your success. 
         /// We've collected these here for your easy reference.
         /// </summary>
-        public VimeoCommonFormatsParameters CommonFormatsParameters => new VimeoCommonFormatsParameters(Properties, RootAuthorization());
+        public VimeoCommonFormatsParameters CommonFormatsParameters => new VimeoCommonFormatsParameters(this);
     }
 }
