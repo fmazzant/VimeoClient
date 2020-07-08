@@ -34,7 +34,7 @@ namespace VimeoClient.Model
     /// <summary>
     /// The video representation consists of the following fields.
     /// </summary>
-    public class Video
+    public class Video:VimeoIdentity
     {
         /// <summary>
         /// The categories to which this video belongs.
@@ -226,12 +226,6 @@ namespace VimeoClient.Model
         /// </summary>
         [JsonPropertyName("upload")]
         public VideoUpload Upload { get; set; }
-
-        /// <summary>
-        /// The video's canonical relative URI.
-        /// </summary>
-        [JsonPropertyName("uri")]
-        public string Uri { get; set; }
 
         /// <summary>
         /// The video owner.

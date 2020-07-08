@@ -29,12 +29,14 @@
 
 namespace VimeoClient.Model
 {
+    using System;
+    using System.Linq;
     using System.Text.Json.Serialization;
 
     /// <summary>
     /// The category representation consists of the following fields.
     /// </summary>
-    public class Category
+    public class Category : VimeoIdentity
     {
         /// <summary>
         /// The active icon for the category.
@@ -94,12 +96,6 @@ namespace VimeoClient.Model
         /// Whether the category isn't a subcategory of another category.
         /// </summary>
         [JsonPropertyName("top_level")]
-        public bool TopLevel { get; set; }
-
-        /// <summary>
-        /// The unique identifier to access the category resource.
-        /// </summary>
-        [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public bool TopLevel { get; set; }  
     }
 }

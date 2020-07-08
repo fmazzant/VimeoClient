@@ -29,12 +29,13 @@
 
 namespace VimeoClient.Model
 {
+    using System.IO;
     using System.Text.Json.Serialization;
 
     /// <summary>
     /// The channel representation consists of the following fields.
     /// </summary>
-    public class Channel
+    public class Channel:VimeoIdentity
     {
         /// <summary>
         /// The active icon for the category.
@@ -85,15 +86,9 @@ namespace VimeoClient.Model
         public Tag[] Tags { get; set; }
 
         /// <summary>
-        /// The unique identifier to access the channel resource.
-        /// </summary>
-        [JsonPropertyName("uri")]
-        public string uri { get; set; }
-
-        /// <summary>
         /// The Vimeo user who owns the channel.
         /// </summary>
         [JsonPropertyName("user")]
-        public User user { get; set; }
+        public User User { get; set; }
     }
 }
