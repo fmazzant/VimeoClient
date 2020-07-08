@@ -938,7 +938,6 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Video>>();
 
-
             if (result.Content.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
