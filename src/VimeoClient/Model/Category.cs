@@ -81,12 +81,6 @@ namespace VimeoClient.Model
         public Picture Pictures { get; set; }
 
         /// <summary>
-        /// The resource key of the category.
-        /// </summary>
-        [JsonPropertyName("resource_key")]
-        public string ResourceKey { get; set; }
-
-        /// <summary>
         /// All the subcategories that belong to the category, if the current category is a top-level parent.
         /// </summary>
         [JsonPropertyName("subcategories")]

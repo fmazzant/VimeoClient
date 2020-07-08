@@ -35,7 +35,7 @@ namespace VimeoClient.Model
     /// <summary>
     /// The channel representation consists of the following fields.
     /// </summary>
-    public class Channel:VimeoIdentity
+    public class Channel : VimeoIdentity
     {
         /// <summary>
         /// The active icon for the category.
@@ -72,12 +72,6 @@ namespace VimeoClient.Model
         /// </summary>
         [JsonPropertyName("metadata")]
         public ChannelMetadata Metadata { get; set; }
-
-        /// <summary>
-        /// The channel resource key.
-        /// </summary>
-        [JsonPropertyName("resource_key")]
-        public string ResourceKey { get; set; }
 
         /// <summary>
         /// An array of all tags assigned to the channel.

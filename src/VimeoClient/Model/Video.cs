@@ -34,7 +34,7 @@ namespace VimeoClient.Model
     /// <summary>
     /// The video representation consists of the following fields.
     /// </summary>
-    public class Video:VimeoIdentity
+    public class Video : VimeoIdentity
     {
         /// <summary>
         /// The categories to which this video belongs.
@@ -164,12 +164,6 @@ namespace VimeoClient.Model
         /// </summary>
         [JsonPropertyName("release_time")]
         public string ReleaseTime { get; set; }
-
-        /// <summary>
-        ///  The resource key string of the video.
-        /// </summary>
-        [JsonPropertyName("resource_key")]
-        public string ResourceKey { get; set; }
 
         /// <summary>
         /// 360 spatial data.

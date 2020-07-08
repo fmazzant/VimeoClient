@@ -37,10 +37,16 @@ namespace VimeoClient
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// 
+    /// Vimeo Indentity
     /// </summary>
     public class VimeoIdentity
     {
+        /// <summary>
+        /// The resource key of the entity.
+        /// </summary>
+        [JsonPropertyName("resource_key")]
+        public string ResourceKey { get; set; }
+
         /// <summary>
         /// The unique identifier to access the category resource.
         /// </summary>
@@ -52,5 +58,10 @@ namespace VimeoClient
         /// </summary>
         public string Identity => Uri.Split('/').Last();
 
+        /// <summary>
+        /// The unique indetity get Uri
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => Identity;
     }
 }
