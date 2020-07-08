@@ -29,12 +29,17 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// A collection of stats associated with this video.
     /// </summary>
     public class VideoState
     {
-        //        stats.plays Number
-        //The current total number of times that the video has been played.
+        /// <summary>
+        /// The current total number of times that the video has been played.
+        /// </summary>
+        [JsonPropertyName("pays")]
+        public int Plays { get; set; }
     }
 }

@@ -29,12 +29,17 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// The transcode information for a video upload.
     /// </summary>
     public class VideoTranscode
     {
-        //        transcode.status String
-        //Status code for this video's availability.
+        /// <summary>
+        /// Status code for this video's availability.
+        /// </summary>
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
     }
 }

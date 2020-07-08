@@ -29,30 +29,63 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// The upload information for this video.
     /// </summary>
     public class VideoUpload
     {
-        //    upload.approach String
-        //The approach for uploading the video.
-        //    upload.complete_uri String
-        //The URI for completing the upload.
-        //    upload.form String
-        //The HTML form for uploading a video through the post approach.
-        //    upload.link String
-        //The link of the video to capture through the pull approach.
-        //    upload.redirect_url String
-        //The redirect URL for the upload app.
-        //    upload.size Number
-        //The file size in bytes of the uploaded video.
-        //    upload.status String
-        //The status code for the availability of the uploaded video:
-        //Option descriptions:
-        //complete - The upload is complete.
-        //error - The upload ended with an error.
-        //in_progress - The upload is underway.
-        //    upload.upload_link String
-        //The link for sending video file data.
+        /// <summary>
+        /// The approach for uploading the video.
+        /// </summary>
+        [JsonPropertyName("approach")]
+        public string Approach { get; set; }
+
+        /// <summary>
+        /// The URI for completing the upload.
+        /// </summary>
+        [JsonPropertyName("complete_uri")]
+        public string CompleteUri { get; set; }
+
+        /// <summary>
+        /// The HTML form for uploading a video through the post approach.
+        /// </summary>
+        [JsonPropertyName("form")]
+        public string Form { get; set; }
+
+        /// <summary>
+        /// The link of the video to capture through the pull approach.
+        /// </summary>
+        [JsonPropertyName("link")]
+        public string Link { get; set; }
+
+        /// <summary>
+        /// The redirect URL for the upload app.
+        /// </summary>
+        [JsonPropertyName("redirect_url")]
+        public string RedirectUrl { get; set; }
+
+        /// <summary>
+        /// The file size in bytes of the uploaded video.
+        /// </summary>
+        [JsonPropertyName("size")]
+        public int Size { get; set; }
+
+        /// <summary>
+        /// The status code for the availability of the uploaded video:
+        /// Option descriptions:
+        ///     complete - The upload is complete.
+        ///     error - The upload ended with an error.
+        ///     in_progress - The upload is underway.
+        /// </summary>
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+
+        /// <summary>
+        /// The link for sending video file data.
+        /// </summary>
+        [JsonPropertyName("upload_link")]
+        public string UploadLink { get; set; }
     }
 }

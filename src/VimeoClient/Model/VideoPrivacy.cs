@@ -29,35 +29,56 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// The video's privacy setting.
     /// </summary>
     public class VideoPrivacy
     {
-        //        privacy.add Boolean
-        //Whether the video can be added to collections.
-        //    privacy.comments    String
-        //Who can comment on the video:
-        //Option descriptions:
-        //anybody - Anyone can comment on the video.
-        //contacts - Only contacts can comment on the video.
-        //nobody - No one can comment on the video.
-        //    privacy.download Boolean
-        //The video's download permission setting.
-        //    privacy.embed String
-        //The video's embed permission setting:
-        //Option descriptions:
-        //private - The video is private.
-        //public - Anyone can embed the video.
-        //    privacy.view String
-        //The general privacy setting for the video:
-        //Option descriptions:
-        //anybody - Anyone can view the video.
-        //contacts - Only contacts can view the video.
-        //disable - Hide from vimeo
-        //nobody - No one besides the owner can view the video.
-        //password - Anyone with the video's password can view the video.
-        //unlisted - Not searchable from vimeo.com
-        //users - Only people with a Vimeo account can view the video.
+        /// <summary>
+        /// Whether the video can be added to collections.
+        /// </summary>
+        [JsonPropertyName("add")]
+        public bool Add { get; set; }
+
+        /// <summary>
+        /// Who can comment on the video:
+        /// Option descriptions:
+        ///     anybody - Anyone can comment on the video.
+        ///     contacts - Only contacts can comment on the video.
+        ///     nobody - No one can comment on the video.
+        /// </summary>
+        [JsonPropertyName("comments")]
+        public bool Comments { get; set; }
+
+        /// <summary>
+        /// The video's download permission setting.
+        /// </summary>
+        [JsonPropertyName("download")]
+        public bool Download { get; set; }
+
+        /// <summary>
+        ///The video's embed permission setting:
+        /// Option descriptions:
+        ///     private - The video is private.
+        ///     public - Anyone can embed the video.
+        /// </summary>
+        [JsonPropertyName("embed")]
+        public string Embed { get; set; }
+
+        /// <summary>
+        /// The general privacy setting for the video:
+        /// Option descriptions:
+        ///     anybody - Anyone can view the video.
+        ///     contacts - Only contacts can view the video.
+        ///     disable - Hide from vimeo
+        ///     nobody - No one besides the owner can view the video.
+        ///     password - Anyone with the video's password can view the video.
+        ///     unlisted - Not searchable from vimeo.com
+        ///     users - Only people with a Vimeo account can view the video.
+        /// </summary>
+        [JsonPropertyName("view")]
+        public string View { get; set; }
     }
 }
