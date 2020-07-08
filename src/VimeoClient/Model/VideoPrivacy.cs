@@ -50,7 +50,7 @@ namespace VimeoClient.Model
         ///     nobody - No one can comment on the video.
         /// </summary>
         [JsonPropertyName("comments")]
-        public bool Comments { get; set; }
+        public string Comments { get; set; }
 
         /// <summary>
         /// The video's download permission setting.

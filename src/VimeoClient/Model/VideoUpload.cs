@@ -70,7 +70,7 @@ namespace VimeoClient.Model
         /// The file size in bytes of the uploaded video.
         /// </summary>
         [JsonPropertyName("size")]
-        public int Size { get; set; }
+        public int? Size { get; set; }
 
         /// <summary>
         /// The status code for the availability of the uploaded video:

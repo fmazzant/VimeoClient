@@ -40,7 +40,7 @@ namespace VimeoClient.Model
         /// Whether the user has liked the video.
         /// </summary>
         [JsonPropertyName("added")]
-        public string Added { get; set; }
+        public bool Added { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the user liked the video.

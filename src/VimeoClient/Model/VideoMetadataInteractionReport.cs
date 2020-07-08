@@ -45,7 +45,7 @@ namespace VimeoClient.Model
         /// <summary>
         /// A list of valid reasons for reporting a video.
         /// </summary>
-        [JsonPropertyName("options")]
+        [JsonPropertyName("reason")]
         public string[] Reason { get; set; }
 
         /// <summary>
