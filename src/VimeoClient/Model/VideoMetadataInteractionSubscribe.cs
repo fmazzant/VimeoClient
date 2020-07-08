@@ -29,18 +29,35 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Subscription information for an On Demand video.
     /// </summary>
     public class VideoMetadataInteractionSubscribe
     {
-        //        metadata.interactions.subscribe.drm Boolean
-        //Whether the video has DRM.
-        //metadata.interactions.subscribe.expires_time String
-        //The time in ISO 8601 format when the subscription expires.
-        //metadata.interactions.subscribe.purchase_time String
-        //The tine in ISO 8601 format when the subscription was purchased.
-        //metadata.interactions.subscribe.stream  String
-        //The stream type.
+        /// <summary>
+        /// Whether the video has DRM.
+        /// </summary>
+        [JsonPropertyName("drm")]
+        public bool drm { get; set; }
+
+        /// <summary>
+        /// The time in ISO 8601 format when the subscription expires.
+        /// </summary>
+        [JsonPropertyName("expires_time")]
+        public string expires_time { get; set; }
+
+        /// <summary>
+        /// The tine in ISO 8601 format when the subscription was purchased.
+        /// </summary>
+        [JsonPropertyName("purchase_time")]
+        public string purchase_time { get; set; }
+
+        /// <summary>
+        /// The stream type.
+        /// </summary>
+        [JsonPropertyName("stream")]
+        public string stream { get; set; }
     }
 }

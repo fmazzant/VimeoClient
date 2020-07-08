@@ -29,19 +29,35 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Information about removing this video from the user's list of watched videos.
     /// </summary>
     public class VideoMetadataInteractionWatched
     {
-        //        watched videos.
-        //metadata.interactions.watched.added Boolean
-        //Whether the user has watched the video.
-        //metadata.interactions.watched.added_time String
-        //The time in ISO 8601 format when the user watched the video.
-        //metadata.interactions.watched.options Array
-        //An array of HTTP methods permitted on this URI.
-        //metadata.interactions.watched.uri String
-        //The API URI that resolves to the connection data.
+        /// <summary>
+        /// Whether the user has watched the video.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public bool added { get; set; }
+
+        /// <summary>
+        /// The time in ISO 8601 format when the user watched the video.
+        /// </summary>
+        [JsonPropertyName("added_time")]
+        public string added_time { get; set; }
+
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string uri { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿
+using System.Text.Json.Serialization;
+/// <summary>
 /// 
 /// The MIT License (MIT)
 /// 
@@ -26,7 +28,6 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-
 namespace VimeoClient.Model
 {
     /// <summary>
@@ -35,9 +36,16 @@ namespace VimeoClient.Model
     /// </summary>
     public class VideoMetadataInteractionAlbum
     {
-        //        metadata.interactions.album.options Array
-        //An array of HTTP methods permitted on this URI.
-        //metadata.interactions.album.uri String
-        //The API URI that resolves to the connection data.
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 }

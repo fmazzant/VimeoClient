@@ -29,15 +29,24 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// When a video is referenced by a channel URI, if the user is a moderator of the channel, 
     /// include information about removing the video from the channel. 
     /// </summary>
     public class VideoMetadataInteractionChannel
     {
-        //        metadata.interactions.channel.options Array
-        //An array of HTTP methods permitted on this URI.
-        //metadata.interactions.channel.uri String
-        //The API URI that resolves to the connection data.
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 }

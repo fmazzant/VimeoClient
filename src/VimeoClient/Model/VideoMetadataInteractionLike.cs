@@ -29,18 +29,35 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Information about whether the authenticated user has liked this video.
     /// </summary>
     public class VideoMetadataInteractionLike
     {
-        //        metadata.interactions.like.added Boolean
-        //Whether the user has liked the video.
-        //metadata.interactions.like.added_time String
-        //The time in ISO 8601 format when the user liked the video.
-        //metadata.interactions.like.options Array
-        //An array of HTTP methods permitted on this URI.
-        //metadata.interactions.like.uri String
-        //The API URI that resolves to the connection data.
+        /// <summary>
+        /// Whether the user has liked the video.
+        /// </summary>
+        [JsonPropertyName("added")]
+        public string Added { get; set; }
+
+        /// <summary>
+        /// The time in ISO 8601 format when the user liked the video.
+        /// </summary>
+        [JsonPropertyName("added_time")]
+        public string AddedTime { get; set; }
+
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 }

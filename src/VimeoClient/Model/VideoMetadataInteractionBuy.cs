@@ -26,41 +26,71 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// The Buy interaction for a On Demand video.
     /// </summary>
     public class VideoMetadataInteractionBuy
     {
-        //        metadata.interactions.buy.currency String
-        //The currency code for the current user's region.
-        //metadata.interactions.buy.display_price String
-        //Formatted price to display to buy an On Demand video.
-        //metadata.interactions.buy.download  String
-        //The user's download access to this On Demand video:
-        //Option descriptions:
-        //available - The video is available for download.
-        //purchased - The user has purchased the video.
-        //restricted - The user isn't permitted to download the video.
-        //unavailable - The video isn't available for download.
-        //metadata.interactions.buy.drm Boolean
-        //Whether the video has DRM.
-        //metadata.interactions.buy.link String
-        //The URL to buy the On Demand video on Vimeo.
-        //metadata.interactions.buy.price Number
-        //The numeric value of the price for buying the On Demand video.
-        //metadata.interactions.buy.purchase_time String
-        //The time in ISO 8601 format when the On Demand video was purchased.
-        //metadata.interactions.buy.stream String
-        //The user's streaming access to this On Demand video:
-        //Option descriptions:
-        //available - The video is available for streaming.
-        //purchased - The user has purchased the video.
-        //restricted - The user isn't permitted to stream the video.
-        //unavailable - The video isn't available for streaming
-        //metadata.interactions.buy.uri String
-        //The product URI to purchase the On Demand video.
+        /// <summary>
+        /// The currency code for the current user's region.
+        /// </summary>
+        [JsonPropertyName("currency")]
+        public string Currency { get; set; }
+
+        /// <summary>
+        /// Formatted price to display to buy an On Demand video.
+        /// </summary>
+        [JsonPropertyName("display_price")]
+        public string display_price { get; set; }
+
+        /// <summary>
+        /// The user's download access to this On Demand video:
+        /// Option descriptions:
+        ///     available - The video is available for download.
+        ///     purchased - The user has purchased the video.
+        ///     restricted - The user isn't permitted to download the video.
+        ///     unavailable - The video isn't available for download.
+        /// </summary>
+        [JsonPropertyName("download")]
+        public string download { get; set; }
+
+        /// <summary>
+        /// Whether the video has DRM
+        /// </summary>
+        [JsonPropertyName("drm")]
+        public bool drm { get; set; }
+
+        /// <summary>
+        /// The Price
+        /// </summary>
+        [JsonPropertyName("price")]
+        public decimal price { get; set; }
+
+        /// <summary>
+        /// The time in ISO 8601 format when the On Demand video was purchased.
+        /// </summary>
+        [JsonPropertyName("purchase_time")]
+        public string purchase_time { get; set; }
+
+        /// <summary>
+        ///The user's streaming access to this On Demand video:
+        ///Option descriptions:
+        /// available - The video is available for streaming.
+        /// purchased - The user has purchased the video.
+        /// restricted - The user isn't permitted to stream the video.
+        /// unavailable - The video isn't available for streaming
+        /// </summary>
+        [JsonPropertyName("stream")]
+        public string stream { get; set; }
+
+        /// <summary>
+        /// The product URI to purchase the On Demand video.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string uri { get; set; }
     }
 }

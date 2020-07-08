@@ -29,16 +29,29 @@
 
 namespace VimeoClient.Model
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Information about where and how to report a video.
     /// </summary>
     public class VideoMetadataInteractionReport
     {
-        //        metadata.interactions.report.options Array
-        //An array of HTTP methods permitted on this URI.
-        //metadata.interactions.report.reason Array
-        //A list of valid reasons for reporting a video.
-        //metadata.interactions.report.uri String
-        //The API URI that resolves to the connection data.
+        /// <summary>
+        /// An array of HTTP methods permitted on this URI.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] Options { get; set; }
+
+        /// <summary>
+        /// A list of valid reasons for reporting a video.
+        /// </summary>
+        [JsonPropertyName("options")]
+        public string[] reason { get; set; }
+
+        /// <summary>
+        /// The API URI that resolves to the connection data.
+        /// </summary>
+        [JsonPropertyName("uri")]
+        public string Uri { get; set; }
     }
 }
