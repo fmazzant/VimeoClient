@@ -46,6 +46,6 @@ namespace VimeoClient.Model
         ///  A list of resource URIs related to the video.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public VideoMetadataInteractions Interactions { get; set; }
+        public VideoMetadataInteraction Interactions { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace VimeoClient.Model
     /// <summary>
     /// A list of resource URIs related to the video.
     /// </summary>
-    public class VideoMetadataInteractions
+    public class VideoMetadataInteraction
     {
         /// <summary>
         /// When a video is referenced by an album URI, if the user is a moderator of the album, 
