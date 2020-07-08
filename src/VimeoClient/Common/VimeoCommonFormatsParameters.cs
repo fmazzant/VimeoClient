@@ -88,6 +88,20 @@ namespace VimeoClient
              .Command(command)
              .Parameter("fields", string.Join(",", fields))
              .Get();
+
+        /// <summary>
+        /// The fields parameter enables you to specify exactly which fields of a representation to return. 
+        /// If the field doesn't appear among your choices, the API doesn't return it, which can speed up response time dramatically.
+        /// -> GET https://api.vimeo.com/me?fields=uri,name,metadata.connections.albums
+        /// this.FieldFiltering("/me", new string[]{ "uri", "name", "metadata", "connections", "albums"});
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public RestResult<T> FieldFiltering<T>(string command, string[] fields) where T : new() => RootAuthorization()
+             .Command(command)
+             .Parameter("fields", string.Join(",", fields))
+             .Get<T>();
         #endregion
 
         #region [ Using the sort and direction parameters ]
