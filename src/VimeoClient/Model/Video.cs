@@ -305,7 +305,110 @@ namespace VimeoClient.Model
     /// </summary>
     public class VideoMetadataConnection
     {
+        /// <summary>
+        /// Information about the albums that contain this video. 
+        /// This data requires a bearer token with the private scope.
+        /// </summary>
+        [JsonPropertyName("albums")]
+        public GenericRelatedEntity albums { get; set; }
 
+        /// <summary>
+        /// Information about the albums to which this video may be added. 
+        /// This data requires a bearer token with the private scope.
+        /// </summary>
+        [JsonPropertyName("available_albums")]
+        public GenericRelatedEntity available_albums { get; set; }
+
+        /// <summary>
+        /// Information about the channels to which this video may be added. 
+        /// This data requires a bearer token with the private scope.
+        /// </summary>
+        [JsonPropertyName("available_channels")]
+        public GenericRelatedEntity available_channels { get; set; }
+
+        /// <summary>
+        /// Information about the comments
+        /// </summary>
+        [JsonPropertyName("comments")]
+        public GenericRelatedEntity comments { get; set; }
+
+        /// <summary>
+        /// Information about the users credited in this video.
+        /// </summary>
+        [JsonPropertyName("credits")]
+        public GenericRelatedEntity credits { get; set; }
+
+        /// <summary>
+        /// Information about the users who have liked this video.
+        /// </summary>
+        [JsonPropertyName("likes")]
+        public GenericRelatedEntity likes { get; set; }
+
+        /// <summary>
+        /// Information about this video's ondemand data.
+        /// </summary>
+        [JsonPropertyName("ondemand")]
+        public GenericRelatedEntity ondemand { get; set; }
+
+        /// <summary>
+        /// Information about this video's thumbnails.
+        /// </summary>
+        [JsonPropertyName("pictures")]
+        public GenericRelatedEntity pictures { get; set; }
+
+        /// <summary>
+        /// The DRM playback status connection for this video.
+        /// </summary>
+        [JsonPropertyName("playback")]
+        public GenericRelatedEntity playback { get; set; }
+
+        /// <summary>
+        /// Information about the user's publish to social history for this video.
+        /// </summary>
+        [JsonPropertyName("publish_to_social")]
+        public GenericRelatedEntity publish_to_social { get; set; }
+
+        /// <summary>
+        ///  The recommendations for this video.
+        /// </summary>
+        [JsonPropertyName("recommendations")]
+        public GenericRelatedEntity recommendations { get; set; }
+
+        /// <summary>
+        /// Related content for this video.
+        /// </summary>
+        [JsonPropertyName("related")]
+        public GenericRelatedEntity related { get; set; }
+
+        /// <summary>
+        /// Information about the video's season.
+        /// </summary>
+        [JsonPropertyName("season")]
+        public GenericRelatedEntity season { get; set; }
+
+        /// <summary>
+        /// Information about this video's text tracks.
+        /// </summary>
+        [JsonPropertyName("texttracks")]
+        public GenericRelatedEntity texttracks { get; set; }
+
+        /// <summary>
+        /// Information about this video's VOD trailer.
+        /// </summary>
+        [JsonPropertyName("trailer")]
+        public GenericRelatedEntity trailer { get; set; }
+
+        /// <summary>
+        ///  Information about the user privacy of this video, if the video privacy is users.
+        /// </summary>
+        [JsonPropertyName("users_with_access")]
+        public GenericRelatedEntity users_with_access { get; set; }
+
+        /// <summary>
+        /// Information about the versions of this video.
+        /// </summary>
+        [JsonPropertyName("versions")]
+        public GenericRelatedEntity versions { get; set; }
     }
 
     /// <summary>

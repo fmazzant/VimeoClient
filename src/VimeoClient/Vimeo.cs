@@ -234,7 +234,7 @@ namespace VimeoClient
         /// Vimeo Basic subscribers get one channel, while paid Vimeo members can have an unlimited number. 
         /// See our Help Center for more details.
         /// </summary>
-        public VimeoChannels Channels => new VimeoChannels(Properties, RootAuthorization());
+        public VimeoChannels Channels => new VimeoChannels(this);
 
         /// <summary>
         /// An embed preset is a reusable collection of settings for customizing the appearance and behavior of the embeddable Vimeo player. 
