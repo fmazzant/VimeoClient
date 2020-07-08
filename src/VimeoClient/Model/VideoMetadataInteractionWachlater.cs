@@ -40,13 +40,13 @@ namespace VimeoClient.Model
         /// Whether the user has added the video to their Watch later list.
         /// </summary>
         [JsonPropertyName("added")]
-        public bool added { get; set; }
+        public bool Added { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the user added the video to their Watch Later list.
         /// </summary>
         [JsonPropertyName("added_time")]
-        public string added_time { get; set; }
+        public string AddedTime { get; set; }
 
         /// <summary>
         /// An array of HTTP methods permitted on this URI.
@@ -58,7 +58,7 @@ namespace VimeoClient.Model
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string uri { get; set; }
+        public string Uri { get; set; }
 
     }
 }

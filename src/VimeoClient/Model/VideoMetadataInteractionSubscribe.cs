@@ -40,24 +40,24 @@ namespace VimeoClient.Model
         /// Whether the video has DRM.
         /// </summary>
         [JsonPropertyName("drm")]
-        public bool drm { get; set; }
+        public bool DRM { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the subscription expires.
         /// </summary>
         [JsonPropertyName("expires_time")]
-        public string expires_time { get; set; }
+        public string ExpiresTime { get; set; }
 
         /// <summary>
         /// The tine in ISO 8601 format when the subscription was purchased.
         /// </summary>
         [JsonPropertyName("purchase_time")]
-        public string purchase_time { get; set; }
+        public string PurchaseTime { get; set; }
 
         /// <summary>
         /// The stream type.
         /// </summary>
         [JsonPropertyName("stream")]
-        public string stream { get; set; }
+        public string Stream { get; set; }
     }
 }
