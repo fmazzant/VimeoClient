@@ -91,9 +91,6 @@ namespace VimeoClient.Common
         ///     anybody - Anyone can access the channel.
         ///     moderators - Only moderators can access the channel.
         ///     user - Only moderators and designated users can access the channel.
-        /// </param>
-        /// <param name="description"></param>
-        /// <param name="link"></param>
         /// <returns></returns>
         public RestResult<string> CreateAChannel(ChannelEditParameters obj)
             => RootAuthorization()
