@@ -26,48 +26,26 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// The video's metadata.
     /// </summary>
-    public class APIApp
+    public class VideoMetadata
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
+        /// <summary>
+        /// A list of resource URIs related to the video.
+        /// </summary>
+        [JsonPropertyName("connections")]
+        public VideoMetadataConnection Connections { get; set; }
 
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        /// <summary>
+        ///  A list of resource URIs related to the video.
+        /// </summary>
+        [JsonPropertyName("interactions")]
+        public VideoMetadataInteractions Interactions { get; set; }
     }
 }

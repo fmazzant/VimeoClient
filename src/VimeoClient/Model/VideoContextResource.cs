@@ -26,48 +26,20 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// The contextual resource: a user, group, or channel representation, or an object of a tag.
     /// </summary>
-    public class APIApp
+    public class VideoContextResource
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        /// <summary>
+        /// The contextual resource type.
+        /// </summary>
+        [JsonPropertyName("resource_type")]
+        public string ResourceType { get; set; }
     }
 }

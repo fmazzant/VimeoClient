@@ -26,48 +26,33 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// The upload information for this video.
     /// </summary>
-    public class APIApp
+    public class VideoUpload
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //    upload.approach String
+        //The approach for uploading the video.
+        //    upload.complete_uri String
+        //The URI for completing the upload.
+        //    upload.form String
+        //The HTML form for uploading a video through the post approach.
+        //    upload.link String
+        //The link of the video to capture through the pull approach.
+        //    upload.redirect_url String
+        //The redirect URL for the upload app.
+        //    upload.size Number
+        //The file size in bytes of the uploaded video.
+        //    upload.status String
+        //The status code for the availability of the uploaded video:
+        //Option descriptions:
+        //complete - The upload is complete.
+        //error - The upload ended with an error.
+        //in_progress - The upload is underway.
+        //    upload.upload_link String
+        //The link for sending video file data.
     }
 }

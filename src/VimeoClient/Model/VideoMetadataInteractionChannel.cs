@@ -26,48 +26,18 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// When a video is referenced by a channel URI, if the user is a moderator of the channel, 
+    /// include information about removing the video from the channel. 
     /// </summary>
-    public class APIApp
+    public class VideoMetadataInteractionChannel
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        metadata.interactions.channel.options Array
+        //An array of HTTP methods permitted on this URI.
+        //metadata.interactions.channel.uri String
+        //The API URI that resolves to the connection data.
     }
 }

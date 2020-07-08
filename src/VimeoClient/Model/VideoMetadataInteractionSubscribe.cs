@@ -26,48 +26,21 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// Subscription information for an On Demand video.
     /// </summary>
-    public class APIApp
+    public class VideoMetadataInteractionSubscribe
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        metadata.interactions.subscribe.drm Boolean
+        //Whether the video has DRM.
+        //metadata.interactions.subscribe.expires_time String
+        //The time in ISO 8601 format when the subscription expires.
+        //metadata.interactions.subscribe.purchase_time String
+        //The tine in ISO 8601 format when the subscription was purchased.
+        //metadata.interactions.subscribe.stream  String
+        //The stream type.
     }
 }

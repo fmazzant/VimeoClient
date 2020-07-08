@@ -26,48 +26,19 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// Information about where and how to report a video.
     /// </summary>
-    public class APIApp
+    public class VideoMetadataInteractionReport
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        metadata.interactions.report.options Array
+        //An array of HTTP methods permitted on this URI.
+        //metadata.interactions.report.reason Array
+        //A list of valid reasons for reporting a video.
+        //metadata.interactions.report.uri String
+        //The API URI that resolves to the connection data.
     }
 }

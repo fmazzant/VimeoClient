@@ -26,48 +26,38 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// The video's privacy setting.
     /// </summary>
-    public class APIApp
+    public class VideoPrivacy
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        privacy.add Boolean
+        //Whether the video can be added to collections.
+        //    privacy.comments    String
+        //Who can comment on the video:
+        //Option descriptions:
+        //anybody - Anyone can comment on the video.
+        //contacts - Only contacts can comment on the video.
+        //nobody - No one can comment on the video.
+        //    privacy.download Boolean
+        //The video's download permission setting.
+        //    privacy.embed String
+        //The video's embed permission setting:
+        //Option descriptions:
+        //private - The video is private.
+        //public - Anyone can embed the video.
+        //    privacy.view String
+        //The general privacy setting for the video:
+        //Option descriptions:
+        //anybody - Anyone can view the video.
+        //contacts - Only contacts can view the video.
+        //disable - Hide from vimeo
+        //nobody - No one besides the owner can view the video.
+        //password - Anyone with the video's password can view the video.
+        //unlisted - Not searchable from vimeo.com
+        //users - Only people with a Vimeo account can view the video.
     }
 }

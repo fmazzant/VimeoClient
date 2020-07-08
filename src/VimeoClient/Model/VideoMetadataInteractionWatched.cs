@@ -26,48 +26,22 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// Information about removing this video from the user's list of watched videos.
     /// </summary>
-    public class APIApp
+    public class VideoMetadataInteractionWatched
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        watched videos.
+        //metadata.interactions.watched.added Boolean
+        //Whether the user has watched the video.
+        //metadata.interactions.watched.added_time String
+        //The time in ISO 8601 format when the user watched the video.
+        //metadata.interactions.watched.options Array
+        //An array of HTTP methods permitted on this URI.
+        //metadata.interactions.watched.uri String
+        //The API URI that resolves to the connection data.
     }
 }

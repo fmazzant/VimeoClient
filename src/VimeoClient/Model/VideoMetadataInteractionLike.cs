@@ -26,48 +26,21 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// Information about whether the authenticated user has liked this video.
     /// </summary>
-    public class APIApp
+    public class VideoMetadataInteractionLike
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        metadata.interactions.like.added Boolean
+        //Whether the user has liked the video.
+        //metadata.interactions.like.added_time String
+        //The time in ISO 8601 format when the user liked the video.
+        //metadata.interactions.like.options Array
+        //An array of HTTP methods permitted on this URI.
+        //metadata.interactions.like.uri String
+        //The API URI that resolves to the connection data.
     }
 }

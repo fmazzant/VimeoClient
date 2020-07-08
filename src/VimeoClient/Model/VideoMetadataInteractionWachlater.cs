@@ -26,48 +26,21 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
-    using System.Text.Json.Serialization;
-
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// Information about whether this video appears on the authenticated user's Watch Later list.
     /// </summary>
-    public class APIApp
+    public class VideoMetadataInteractionWachlater
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
-
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        //        metadata.interactions.watchlater.added Boolean
+        //Whether the user has added the video to their Watch later list.
+        //metadata.interactions.watchlater.added_time String
+        //The time in ISO 8601 format when the user added the video to their Watch Later list.
+        //metadata.interactions.watchlater.options Array
+        //An array of HTTP methods permitted on this URI.
+        //metadata.interactions.watchlater.uri String
+        //The API URI that resolves to the connection data.
     }
 }

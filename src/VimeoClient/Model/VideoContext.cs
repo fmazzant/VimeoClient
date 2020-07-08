@@ -26,48 +26,31 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-///
 
 namespace VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// Return an OpenAPI specification.
+    /// The context of the video's subscription, if this video is part of a subscription.
     /// </summary>
-    public class APIApp
+    public class VideoContext
     {
-        [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
+        /// <summary>
+        /// The contextual action:
+        /// Option descriptions:
+        ///     Added to - An Added To action.
+        ///     Appearance by - An Appearance By action.
+        ///     Liked by - A Liked By action.
+        ///     Uploaded by - An Unloaded By action.
+        /// </summary>
+        [JsonPropertyName("action")]
+        public string Action { get; set; }
 
-        [JsonPropertyName("info")]
-        public Info Info { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Info
-    {
-        [JsonPropertyName("title")]
-        public string Title { get; set; }
-
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
-
-        [JsonPropertyName("version")]
-        public string Version { get; set; }
-
-        [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Contact
-    {
-        [JsonPropertyName("url")]
-        public string Url { get; set; }
+        /// <summary>
+        /// The contextual resource: a user, group, or channel representation, or an object of a tag.
+        /// </summary>
+        [JsonPropertyName("resource")]
+        public VideoContextResource Resource { get; set; }
     }
 }
