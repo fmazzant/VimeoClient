@@ -241,12 +241,12 @@ namespace VimeoClient
         /// This feature is available to Vimeo Pro, Business, and Premium members. 
         /// For more information, see our Help Center.
         /// </summary>
-        public VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(Properties, RootAuthorization());
+        public VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(this);
 
         /// <summary>
         /// Folders
         /// </summary>
-        public VimeoFolders Folders => new VimeoFolders(Properties, RootAuthorization());
+        public VimeoFolders Folders => new VimeoFolders(this);
 
         /// <summary>
         /// A group is a community within Vimeo for collaborating, sharing, and engaging with videos. Groups can be public, where anyone can join, or they can be private, where membership is by invitation only. 
