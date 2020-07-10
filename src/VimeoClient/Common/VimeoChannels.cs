@@ -956,7 +956,11 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="video_uri">The URI of a video to remove.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 204 No Content	The videos were removed.
+        /// 403 Forbidden The authenticated user can't remove videos from this channel, or a video can't be removed from the channel.
+        /// 404 Not Found   No such channel or user exists.
+        /// </returns>
         public RestResult RemoveAListOfVideosFromAChannel(string channel_id, string video_uri) => RootAuthorization()
            .Command($"/channels/{channel_id}/videos")
            .FormUrlEncoded(true, (p) => p.Add("video_uri", video_uri))
@@ -967,7 +971,11 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
         /// <param name="video_id">The ID of the video.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// 403 Forbidden The authenticated user can't remove videos from this channel, or the video can't be removed from the channel.
+        /// 404 Not Found   No such channel or video exists.
+        /// </returns>
         public RestResult RemoveASpecificVideoFromAChannel(string channel_id, string video_id) => RootAuthorization()
            .Command($"/channels/{channel_id}/videos/{video_id}")
            .Delete();
