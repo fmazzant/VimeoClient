@@ -243,7 +243,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection direction, int? page = null, int? per_page, string query = null, FilderAllVideoSort sort) => throw new NotImplementedException();
+        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns all the videos that belong to the specified folder.
@@ -255,7 +255,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection direction, int? page = null, int? per_page, string query = null, FilderAllVideoSort sort) => throw new NotImplementedException();
+        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null) => throw new NotImplementedException();
 
         /// <summary>
         /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
