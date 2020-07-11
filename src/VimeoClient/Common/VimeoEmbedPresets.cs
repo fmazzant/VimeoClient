@@ -31,6 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
+    using System.Runtime.CompilerServices;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -275,8 +276,33 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Timeline events ]
-        //Add a timeline event thumbnail to a video
-        //Get a timeline event thumbnail
+        
+        /// <summary>
+        /// This method adds a timeline event thumbnail to the specified video. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 201 Created	The timeline event thumbnail was added.
+        /// 403 Forbidden The authenticated user can't add a timeline event thumbnail to the video.
+        /// 404 Not Found   No such video exists.
+        /// </returns>
+        public RestResult<Picture> AddTimelineEventThumbnailToAVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/timelinethumbnails")
+            .Post<Picture>();
+
+        /// <summary>
+        /// This method returns a single timeline event thumbnail that belongs to the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="thumbnail_id">The ID of the timeline event thumbnail.</param>
+        /// <returns>
+        /// 200 OK	The timeline event thumbnail was returned.
+        /// 403 Forbidden The authenticated user can't access the timeline event thumbnail.
+        /// </returns>
+        public RestResult<Picture> GetTimelineEventThumnail(int video_id, int thumbnail_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/timelinethumbnails/{thumbnail_id}")
+            .Get<Picture>();
+
         #endregion
 
         #region [ Videos ]
