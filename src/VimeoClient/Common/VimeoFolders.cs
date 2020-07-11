@@ -187,10 +187,109 @@ namespace VimeoClient.Common
 
         #region [ Videos ]
         //Add a list of videos to a folder
-        //Add a specific video to a folder
+        /// <summary>
+        /// This method adds multiple videos to the specified folder. The authenticated user must be the owner of the folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="uris">A comma-separated list of video URIs to add.</param>
+        /// <returns></returns>
+        public RestResult AddAListOfVideosToAFolder(int project_id, int user_id, string[] uris) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method adds multiple videos to the specified folder. The authenticated user must be the owner of the folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="uris">A comma-separated list of video URIs to add.</param>
+        /// <returns>
+        /// 204 No Content	The videos were added.
+        /// 400 Bad Request Error code 2204: The input is invalid.
+        /// 401 Unauthorized Error code 8000: The user credentials are invalid.
+        /// 404 Not Found   Error code 5000: No such folder or video exists.
+        /// </returns>
+        public RestResult AddAListOfVideosToAFolder(int project_id, string[] uris) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method adds a single video to the specified folder. The authenticated user must be the owner of the folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was added.
+        /// 404 Not Found   Error code 5000: No such user, folder, or video exists.
+        /// </returns>
+        public RestResult AddASpecificVideoToAFolder(int project_id, int user_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method adds a single video to the specified folder. The authenticated user must be the owner of the folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was added.
+        /// 404 Not Found   Error code 5000: No such user, folder, or video exists.
+        /// </returns>
+        public RestResult AddASpecificVideoToAFolder(int project_id, int video_id) => throw new NotImplementedException();
+
         //Get all the videos in a folder
-        //Remove a list of videos from a folder
-        //Remove a specific video from a folder
+        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection direction, int? page=null, int? per_page, string query = null, FilderAllVideoSort sort) => throw new NotImplementedException();
+
+
+        /// <summary>
+        /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <returns>
+        /// 204 No Content	The videos were removed.
+        /// 400 Bad Request Error code 2204: The input is invalid.
+        /// 401 Unauthorized Error code 8000: The user credentials are invalid.
+        /// 404 Not Found   Error code 5000: No such folder exists.
+        /// </returns>
+        public RestResult RemoveAListOfVideosFromAFolder(int user_id, int project_id, string uris, bool should_delete_clips) => throw new NullReferenceException();
+
+        /// <summary>
+        /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="uris">A comma-separated list of the video URIs to remove.</param>
+        /// <param name="should_delete_clips">Whether to delete the videos when removing them from the folder.</param>
+        /// <returns>
+        /// 204 No Content	The videos were removed.
+        /// 400 Bad Request Error code 2204: The input is invalid.
+        /// 401 Unauthorized Error code 8000: The user credentials are invalid.
+        /// 404 Not Found   Error code 5000: No such folder exists.
+        /// </returns>
+        public RestResult RemoveAListOfVideosFromAFolder(int project_id, string uris, bool should_delete_clips) => throw new NullReferenceException();
+
+        /// <summary>
+        /// This method removes a single video from the specified folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// 400 Bad Request Error code 2204: The input is invalid.
+        /// 401 Unauthorized Error code 8000: The user credentials are invalid.
+        /// 404 Not Found   Error code 5000: No such video exists in the folder.
+        /// </returns>
+        public RestResult RemoveASpecificVideoFromAFolder(int project_id, int user_id, int video_id) => throw new NullReferenceException();
+
+        /// <summary>
+        /// This method removes a single video from the specified folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// 400 Bad Request Error code 2204: The input is invalid.
+        /// 401 Unauthorized Error code 8000: The user credentials are invalid.
+        /// 404 Not Found   Error code 5000: No such video exists in the folder.
+        /// </returns>
+        public RestResult RemoveASpecificVideoFromAFolder(int project_id, int video_id) => throw new NullReferenceException();
+
         #endregion
 
     }

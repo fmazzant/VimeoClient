@@ -31,11 +31,6 @@ namespace VimeoClient.Filter.Folder
         date,
 
         /// <summary>
-        /// default
-        /// </summary>
-        __default,
-
-        /// <summary>
         /// modified_time
         /// </summary>
         modified_time,
@@ -44,5 +39,31 @@ namespace VimeoClient.Filter.Folder
         /// name
         /// </summary>
         name,
+    }
+
+    /// <summary>
+    /// The way to sort the results
+    /// </summary>
+    public enum FilderAllVideoSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically.
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by date
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Sort the results by duration
+        /// </summary>
+        duration,
+
+        /// <summary>
+        ///  Sort the results by the date of the last user action.
+        /// </summary>
+        last_user_action_event_date,
     }
 }
