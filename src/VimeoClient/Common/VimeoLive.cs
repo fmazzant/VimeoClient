@@ -39,24 +39,37 @@ namespace VimeoClient.Common
     public class VimeoLive
     {
         /// <summary>
-        /// Properties
+        /// Vimeo Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// Root Authorization
+        /// Vimeo
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public Vimeo Vimeo { get; private set; }
 
         /// <summary>
-        /// VimeoLive
+        /// Root Authorization
         /// </summary>
-        /// <param name="properties">VimeoProperties</param>
-        /// <param name="rootAuthorization">RestBuilder</param>
-        public VimeoLive(VimeoProperties properties, RestBuilder rootAuthorization)
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
+
+        /// <summary>
+        /// Create a new instance of VimeoCategories class
+        /// </summary>
+        /// <param name="properties"></param>
+        public VimeoLive(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+        }
+
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoLive(Vimeo vimeo)
+        {
+            Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ Essentials ]

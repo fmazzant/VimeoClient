@@ -39,25 +39,37 @@ namespace VimeoClient.Common
     public class VimeoPortfolios
     {
         /// <summary>
-        /// Properties
+        /// Vimeo Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// Root Authorization
+        /// Vimeo
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public Vimeo Vimeo { get; private set; }
 
         /// <summary>
-        /// Portfolios are customizable websites for showcasing videos. 
-        /// Vimeo Pro, Business, and Premium subscribers have access to this feature.For more information, see our Help Center.
+        /// Root Authorization
+        /// </summary>
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
+
+        /// <summary>
+        /// Create a new instance of VimeoCategories class
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="rootAuthorization"></param>
-        public VimeoPortfolios(VimeoProperties properties, RestBuilder rootAuthorization)
+        public VimeoPortfolios(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+        }
+
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoPortfolios(Vimeo vimeo)
+        {
+            Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ Essentials ]

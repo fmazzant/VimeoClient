@@ -40,24 +40,37 @@ namespace VimeoClient.Common
     public class VimeoShowCases
     {
         /// <summary>
-        /// Properties
+        /// Vimeo Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// Root Authorization
+        /// Vimeo
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public Vimeo Vimeo { get; private set; }
 
         /// <summary>
-        /// A showcase (previously album) is a collection of videos for public or private sharing. 
+        /// Root Authorization
+        /// </summary>
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
+
+        /// <summary>
+        /// Create a new instance of VimeoCategories class
         /// </summary>
         /// <param name="properties"></param>
-        /// <param name="rootAuthorization"></param>
-        public VimeoShowCases(VimeoProperties properties, RestBuilder rootAuthorization)
+        public VimeoShowCases(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+        }
+
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoShowCases(Vimeo vimeo)
+        {
+            Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ Essentials ]

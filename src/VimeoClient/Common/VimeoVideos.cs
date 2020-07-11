@@ -38,24 +38,37 @@ namespace VimeoClient.Common
     public class VimeoVideos
     {
         /// <summary>
-        /// Properties
+        /// Vimeo Properties
         /// </summary>
         public VimeoProperties Properties { get; private set; }
 
         /// <summary>
-        /// RootAuthorization
+        /// Vimeo
         /// </summary>
-        public RestBuilder RootAuthorization { get; private set; }
+        public Vimeo Vimeo { get; private set; }
 
         /// <summary>
-        /// VimeoVideos
+        /// Root Authorization
         /// </summary>
-        /// <param name="properties">VimeoProperties</param>
-        /// <param name="rootAuthorization">RestBuilder</param>
-        public VimeoVideos(VimeoProperties properties, RestBuilder rootAuthorization)
+        public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
+
+        /// <summary>
+        /// Create a new instance of VimeoCategories class
+        /// </summary>
+        /// <param name="properties"></param>
+        public VimeoVideos(VimeoProperties properties)
+           : this(new Vimeo(properties))
         {
-            this.Properties = properties;
-            this.RootAuthorization = rootAuthorization;
+        }
+
+        /// <summary>
+        /// Create a new instance
+        /// </summary>
+        /// <param name="vimeo"></param>
+        public VimeoVideos(Vimeo vimeo)
+        {
+            Vimeo = vimeo;
+            Properties = vimeo.Properties;
         }
 
         #region [ Essentials ]
