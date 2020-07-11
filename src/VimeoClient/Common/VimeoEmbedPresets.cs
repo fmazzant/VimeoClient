@@ -419,7 +419,10 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
         /// <param name="preset_id">The ID of the embed preset</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 204 No Content	The embed preset was removed.
+        /// 404 Not Found   No such video or embed preset exists.
+        /// </returns>
         public RestResult RemoveAnEmbedPresetFromVideo(int video_id, int preset_id) => RootAuthorization()
             .Command($"/videos/{video_id}/presets/{preset_id}")
             .Delete();
