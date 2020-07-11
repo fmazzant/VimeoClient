@@ -32,6 +32,7 @@ namespace VimeoClient.Common
     using RestClient;
     using RestClient.Generic;
     using System.Runtime.CompilerServices;
+    using System.Threading;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -276,7 +277,7 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Timeline events ]
-        
+
         /// <summary>
         /// This method adds a timeline event thumbnail to the specified video. The authenticated user must be the owner of the video.
         /// </summary>
@@ -306,10 +307,116 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Videos ]
-        //Add an embed preset to a video
-        //Check if an embed preset has been added to a video
-        //Get all the videos that have a specific embed preset
+
+        /// <summary>
+        /// This method adds an embed preset to the specified video. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <returns>
+        /// 204 No Content	The embed preset was added to the video.
+        /// </returns>
+        public RestResult AddEmbedPresetToAVideo(int video_id, int preset_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/presets/{preset_id}")
+            .Put();
+
+        /// <summary>
+        /// This method determines whether a video has the specified embed preset.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <returns>
+        /// 204 No Content	The embed preset has been added to the video.
+        /// 404 Not Found   No such video or embed preset exists.
+        /// </returns>
+        public RestResult CheckIfAnEmbedPresetHasBeenAddedToAVideo(int video_id, int preset_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/presets/{preset_id}")
+            .Get();
+
+        /// <summary>
+        /// This method returns every video to which the specified embed preset has been added. The authenticated user must be the owner of videos.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The videos were returned.
+        /// </returns>
+        public RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int user_id, int preset_id, int? page = null, int? per_page = null)
+        {
+            var root = RootAuthorization()
+                .Command($"/users/{user_id}/presets/{preset_id}/videos")
+                .Parameter((p) =>
+                {
+                    if (page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "page", Value = page });
+                    }
+                    if (per_page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                    }
+                });
+
+            var result = root.Get<Pagination<Video>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method returns every video to which the specified embed preset has been added. The authenticated user must be the owner of videos.
+        /// </summary>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The videos were returned.
+        /// </returns>
+        public RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int preset_id, int? page = null, int? per_page = null)
+        {
+            var root = RootAuthorization()
+                .Command($"/me/presets/{preset_id}/videos")
+                .Parameter((p) =>
+                {
+                    if (page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "page", Value = page });
+                    }
+                    if (per_page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                    }
+                });
+
+            var result = root.Get<Pagination<Video>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
+            }
+
+            return result;
+        }
+
+
         //Remove an embed preset from a video
+
         #endregion
     }
 }
