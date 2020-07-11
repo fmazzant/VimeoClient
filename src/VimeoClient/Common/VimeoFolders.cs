@@ -232,9 +232,30 @@ namespace VimeoClient.Common
         /// </returns>
         public RestResult AddASpecificVideoToAFolder(int project_id, int video_id) => throw new NotImplementedException();
 
-        //Get all the videos in a folder
-        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection direction, int? page=null, int? per_page, string query = null, FilderAllVideoSort sort) => throw new NotImplementedException();
+        /// <summary>
+        /// This method returns all the videos that belong to the specified folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="page">	The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns></returns>
+        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection direction, int? page = null, int? per_page, string query = null, FilderAllVideoSort sort) => throw new NotImplementedException();
 
+        /// <summary>
+        /// This method returns all the videos that belong to the specified folder.
+        /// </summary>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="page">	The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns></returns>
+        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection direction, int? page = null, int? per_page, string query = null, FilderAllVideoSort sort) => throw new NotImplementedException();
 
         /// <summary>
         /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
