@@ -414,8 +414,15 @@ namespace VimeoClient.Common
             return result;
         }
 
-
-        //Remove an embed preset from a video
+        /// <summary>
+        /// This method removes the specified embed preset from a video. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="preset_id">The ID of the embed preset</param>
+        /// <returns></returns>
+        public RestResult RemoveAnEmbedPresetFromVideo(int video_id, int preset_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/presets/{preset_id}")
+            .Delete();
 
         #endregion
     }
