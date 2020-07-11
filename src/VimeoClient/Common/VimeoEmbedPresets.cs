@@ -210,9 +210,68 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Custom logos ]
+
         //Add a custom logo for the user
-        //Get a specific custom logo for the user
-        //Get all the custom logos that belong to the user
+        /// <summary>
+        /// This method adds a custom logo representing the authenticated user for display in the embedded player.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns>
+        /// 201 Created	The custom logo was added.
+        /// 403 Forbidden The authenticated user can't add the custom logo.
+        /// </returns>
+        public RestResult<Picture> AddACustomLogoForTheUser(int user_id) => RootAuthorization()
+            .Command($"/users/{user_id}/customlogos")
+            .Post<Picture>();
+
+        //Add a custom logo for the user
+        /// <summary>
+        /// This method adds a custom logo representing the authenticated user for display in the embedded player.
+        /// </summary>
+        /// <returns>
+        /// 201 Created	The custom logo was added.
+        /// 403 Forbidden The authenticated user can't add the custom logo.
+        /// </returns>
+        public RestResult<Picture> AddACustomLogoForTheUser() => RootAuthorization()
+            .Command($"/me/customlogos")
+            .Post<Picture>();
+
+        /// <summary>
+        /// This method returns a single custom logo belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="logo_id">The ID of the custom logo.</param>
+        /// <returns></returns>
+        public RestResult<Picture> GetASpecificCustomLogoForThwUser(int user_id, int logo_id) => RootAuthorization()
+            .Command($"/users/{user_id}/customlogos/{logo_id}")
+            .Get<Picture>();
+
+        /// <summary>
+        /// This method returns a single custom logo belonging to the authenticated user.
+        /// </summary>
+        /// <param name="logo_id">The ID of the custom logo.</param>
+        /// <returns></returns>
+        public RestResult<Picture> GetASpecificCustomLogoForThwUser(int logo_id) => RootAuthorization()
+           .Command($"/me/customlogos/{logo_id}")
+           .Get<Picture>();
+
+        /// <summary>
+        /// This method returns every custom logo that belongs to the authenticated user or team owner.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser(int user_id) => RootAuthorization()
+            .Command($"/users/{user_id}/customlogos")
+            .Get<VimeoList<Picture>>();
+
+        /// <summary>
+        /// This method returns every custom logo that belongs to the authenticated user or team owner.
+        /// </summary>
+        /// <returns></returns>
+        public RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser() => RootAuthorization()
+            .Command($"/me/customlogos")
+            .Get<VimeoList<Picture>>();
+
         #endregion
 
         #region [ Timeline events ]

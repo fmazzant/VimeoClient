@@ -307,5 +307,14 @@ namespace VimeoClient
         /// We've collected these here for your easy reference.
         /// </summary>
         public VimeoCommonFormatsParameters CommonFormatsParameters => new VimeoCommonFormatsParameters(this);
+
+        /// <summary>
+        /// Invoke generic Get
+        /// </summary>
+        /// <typeparam name="T">Response's type</typeparam>
+        /// <param name="uri">Uri to call</param>
+        /// <returns></returns>
+        public RestResult<T> Get<T>(string uri) where T : new()
+            => RootAuthorization().Command(uri).Get<T>();
     }
 }
