@@ -120,7 +120,6 @@ namespace VimeoClient.Common
             .Command($"/groups/{group_id}")
             .Get<Group>();
 
-        //Get all groups
         /// <summary>
         /// This method returns every available group.
         /// </summary>
