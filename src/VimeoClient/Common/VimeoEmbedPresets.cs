@@ -31,8 +31,6 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
-    using System.Runtime.CompilerServices;
-    using System.Threading;
     using VimeoClient.Model;
     using VimeoClient.Response;
 

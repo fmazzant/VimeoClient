@@ -27,14 +27,15 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.User
+namespace VimeoClient.Filter.Group
 {
     /// <summary>
-    /// Description direction String  The sort direction of the results.Option descriptions:
+    /// Description direction String  The sort direction of the results.
+    /// Option descriptions:
     /// 	asc - Sort the results in ascending order.
     /// 	desc - Sort the results in descending order.
     /// </summary>
-    public enum UserDirection
+    public enum GroupDirection
     {
         /// <summary>
         /// Sort the results in ascending order
@@ -48,37 +49,48 @@ namespace VimeoClient.Filter.User
     }
 
     /// <summary>
-    /// The way to sort the results.Option descriptions:
-    ///     alphabetical - Sort the results alphabetically.
-    ///     date - Sort the results by creation date.
-    ///     followers - Sort the results by number of followers.
-    ///     relevant - Sort the results by relevance.
-    ///     videos - Sort the results by number of videos.
+    /// The attribute by which to filter the results
     /// </summary>
-    public enum UserSort
+    public enum GroupFilter
     {
         /// <summary>
-        /// Sort the results alphabetically.
+        /// Return featured groups
+        /// </summary>
+        featured,
+    }
+
+    /// <summary>
+    /// The way to sort the results.Option descriptions:
+    /// alphabetical - Sort the results alphabetically.
+    /// date - Sort the results by creation date.
+    /// followers - Sort the results by number of followers.
+    /// relevant - Sort the results by relevance.This option is available for search queries only.
+    /// videos - Sort the results by number of videos.
+    /// </summary>
+    public enum GroupSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically
         /// </summary>
         alphabetical,
 
         /// <summary>
-        /// Sort the results by creation date.
+        /// Sort the results by creation date
         /// </summary>
         date,
 
         /// <summary>
-        /// Sort the results by number of followers.
+        /// Sort the results by number of followers
         /// </summary>
         followers,
 
         /// <summary>
-        /// Sort the results by relevance.
+        /// Sort the results by relevance.This option is available for search queries only
         /// </summary>
         relevant,
 
         /// <summary>
-        /// Sort the results by number of videos.
+        /// Sort the results by number of videos
         /// </summary>
         videos
     }

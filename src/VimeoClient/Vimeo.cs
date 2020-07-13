@@ -120,6 +120,10 @@ namespace VimeoClient
         /// </summary>
         /// <returns></returns>
         public RestBuilder RootAuthorization() => Root()
+            .OnStart((e) =>
+            {
+                Console.WriteLine($"{e.Url} starting...");
+            })
             .OnPreviewContentRequestAsString((json) =>
             {
 
@@ -127,6 +131,10 @@ namespace VimeoClient
             .OnPreviewContentResponseAsString((json) =>
             {
 
+            })
+            .OnCompleted((e) =>
+            {
+                Console.WriteLine($"completed.");
             })
             .EnableGZipCompression() //gzip
             .Authentication(() =>

@@ -29,7 +29,6 @@
 
 namespace VimeoClient.Model
 {
-    using System.IO;
     using System.Text.Json.Serialization;
 
     /// <summary>

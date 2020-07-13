@@ -29,8 +29,6 @@
 
 namespace VimeoClient.Model
 {
-    using System;
-    using System.Linq;
     using System.Text.Json.Serialization;
 
     /// <summary>
@@ -90,6 +88,6 @@ namespace VimeoClient.Model
         /// Whether the category isn't a subcategory of another category.
         /// </summary>
         [JsonPropertyName("top_level")]
-        public bool TopLevel { get; set; }  
+        public bool TopLevel { get; set; }
     }
 }

@@ -31,8 +31,6 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
-    using System;
-    using System.Collections.Generic;
     using VimeoClient.Body.Channel;
     using VimeoClient.Filter.Channel;
     using VimeoClient.Model;
@@ -845,7 +843,9 @@ namespace VimeoClient.Common
             .FormUrlEncoded(true, (p) =>
             {
                 foreach (var item in video_uri)
+                {
                     p.Add("video_uri", item.Uri);
+                }
             })
            .Put();
 
