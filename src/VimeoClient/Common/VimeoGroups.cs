@@ -33,6 +33,7 @@ namespace VimeoClient.Common
     using RestClient.Generic;
     using VimeoClient.Filter.Group;
     using VimeoClient.Filter.User;
+    using VimeoClient.Filter.Video;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -472,10 +473,117 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Videos ]
-        //Add a video to a group
+
+        /// <summary>
+        /// This method adds a video to the specified group. The authenticated user must be the owner of the group.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// HTTP Status	Explanation
+        /// 200 OK The video was added.
+        /// 202 Accepted The video is in pending status.
+        /// 403 Forbidden
+        ///     The video is already in the group.
+        ///     The authenticated user can't add videos to the group.
+        /// </returns>
+        public RestResult<Video> AddAVideoToAGroup(int group_id, int video_id) => RootAuthorization()
+            .Command($"/groups/{group_id}/videos/{video_id}")
+            .Put<Video>();
+
         //Get a specific video in a group
-        //Get all the videos in a group
-        //Remove a video from a group
+        /// <summary>
+        /// This method returns a single video from the specified group. You can use this method to determine whether the video belongs to the group.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 200 OK	The video was returned.
+        /// 404 Not Found	No such video or group exists.
+        /// </returns>
+        public RestResult<Video> GetASpecificVideoInAGroup(int group_id, int video_id) => RootAuthorization()
+           .Command($"/groups/{group_id}/videos/{video_id}")
+           .Get<Video>();
+
+        /// <summary>
+        /// This method returns every video from the specified group.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). 
+        /// This parameter is required only when filter is embeddable.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns></returns>
+        public RestResult<Pagination<Video>> GetAllTheVideosInAGroup(int group_id, VideoDirection? direction = null,
+           VideoFilter? filter = null,
+           bool? filter_embeddable = null,
+           int? page = null,
+           int? per_page = null,
+           string query = null,
+           VideoSort? sort = null)
+        {
+            var root = RootAuthorization()
+               .Command($"/groups/{group_id}/videos")
+               .Parameter((p) =>
+               {
+                   if (direction.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "direction", Value = direction });
+                   }
+                   if (filter.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "filter", Value = filter });
+                   }
+                   if (filter_embeddable.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "filter_embeddable", Value = filter_embeddable });
+                   }
+                   if (page.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "page", Value = page });
+                   }
+                   if (per_page.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                   }
+                   if (query != null)
+                   {
+                       p.Add(new RestParameter { Key = "query", Value = query });
+                   }
+                   if (sort.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "sort", Value = sort });
+                   }
+               });
+
+            var result = root.Get<Pagination<Video>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method removes a video from the specified group. The authenticated user must be the owner of the group.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public RestResult RemoveAVideoFromAGroup(int group_id, int video_id) => RootAuthorization()
+            .Command($"/groups/{group_id}/videos/{video_id}")
+            .Delete();
         #endregion
     }
 }
