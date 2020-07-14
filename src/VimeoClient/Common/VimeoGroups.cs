@@ -187,8 +187,55 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Subscriptions ]
-        //Add the user to a group
-        //Remove the user from a group
+
+        /// <summary>
+        /// This method adds the authenticated user to the specified group.
+        /// </summary>
+        /// <param name="user_id">Number  The ID of the user.</param>
+        /// <param name="group_id">Number  The ID of the group.</param>
+        /// <returns>
+        /// 204 No Content	The user joined the group.
+        /// 403 Forbidden   The authenticated user can't join the group. 
+        ///     Possible reasons are that the group isn't public or that its privacy setting is members.
+        /// </returns>
+        public RestResult AddTheUserToAGroup(int user_id, int group_id) => RootAuthorization()
+            .Command($"/users/{user_id}/groups/{group_id}")
+            .Put();
+
+        /// <summary>
+        /// This method adds the authenticated user to the specified group.
+        /// </summary>
+        /// <param name="group_id">Number  The ID of the group.</param>
+        /// <returns>
+        /// 204 No Content	The user joined the group.
+        /// 403 Forbidden   The authenticated user can't join the group. 
+        ///     Possible reasons are that the group isn't public or that its privacy setting is members.
+        /// </returns>
+        public RestResult AddTheUserToAGroup(int group_id) => RootAuthorization()
+            .Command($"/me/groups/{group_id}")
+            .Put();
+
+        /// <summary>
+        /// This method removes the authenticated user from the specified group. 
+        /// The authenticated user can't be the owner of the group; assign a new owner through a PATCH request first.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <returns></returns>
+        public RestResult RemoveTheUserFromAGroup(int user_id, int group_id) => RootAuthorization()
+            .Command($"/users/{user_id}/groups/{group_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method removes the authenticated user from the specified group. 
+        /// The authenticated user can't be the owner of the group; assign a new owner through a PATCH request first.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <returns></returns>
+        public RestResult RemoveTheUserFromAGroup(int group_id) => RootAuthorization()
+            .Command($"/me/groups/{group_id}")
+            .Delete();
+
         #endregion
 
         #region [ Users ]
