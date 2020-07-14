@@ -48,6 +48,17 @@ namespace VimeoClient.Filter.User
     }
 
     /// <summary>
+    /// The attribute by which to filter the results
+    /// </summary>
+    public enum UserFilter
+    {
+        /// <summary>
+        /// Return group moderators
+        /// </summary>
+        moderators,
+    }
+
+    /// <summary>
     /// The way to sort the results.Option descriptions:
     ///     alphabetical - Sort the results alphabetically.
     ///     date - Sort the results by creation date.

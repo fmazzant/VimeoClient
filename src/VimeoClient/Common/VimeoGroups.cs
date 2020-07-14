@@ -32,6 +32,7 @@ namespace VimeoClient.Common
     using RestClient;
     using RestClient.Generic;
     using VimeoClient.Filter.Group;
+    using VimeoClient.Filter.User;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -221,7 +222,10 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="group_id">The ID of the group.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 204 No Content	The user was removed from the group.
+        /// 403 Forbidden	The authenticated user can't leave the group.
+        /// </returns>
         public RestResult RemoveTheUserFromAGroup(int user_id, int group_id) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
             .Delete();
@@ -231,7 +235,10 @@ namespace VimeoClient.Common
         /// The authenticated user can't be the owner of the group; assign a new owner through a PATCH request first.
         /// </summary>
         /// <param name="group_id">The ID of the group.</param>
-        /// <returns></returns>
+        /// <returns>
+        /// 204 No Content	The user was removed from the group.
+        /// 403 Forbidden	The authenticated user can't leave the group.
+        /// </returns>
         public RestResult RemoveTheUserFromAGroup(int group_id) => RootAuthorization()
             .Command($"/me/groups/{group_id}")
             .Delete();
@@ -239,9 +246,229 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Users ]
-        //Check if a user has joined a group
-        //Get all the groups that the user has joined
-        //Get all the members of a group
+
+        /// <summary>
+        /// This method determines whether the authenticated user belongs to the specified group.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <returns>
+        /// 204 No Content	The user belongs to the group.
+        /// 404 Not Found	No such group exists.
+        ///                 The authenticated user isn't a member of the group.
+        /// </returns>
+        public RestResult CheckIfAUserHasJoinedAGroup(int user_id, int group_id) => RootAuthorization()
+            .Command($"/users/{user_id}/groups/{group_id}")
+            .Get();
+
+        /// <summary>
+        /// This method determines whether the authenticated user belongs to the specified group.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <returns>
+        /// 204 No Content	The user belongs to the group.
+        /// 404 Not Found	No such group exists.
+        ///                 The authenticated user isn't a member of the group.
+        /// </returns>
+        public RestResult CheckIfAUserHasJoinedAGroup(int group_id) => RootAuthorization()
+           .Command($"/me/groups/{group_id}")
+           .Get();
+
+        /// <summary>
+        /// This method returns every group to which the authenticated user belongs.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns>
+        /// 200 OK	The groups were returned
+        /// </returns>
+        public RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(int user_id, GroupDirection? direction = null,
+            string filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            GroupSort? sort = null)
+        {
+            var root = RootAuthorization()
+                .Command($"/users/{user_id}/groups")
+                .Parameter((p) =>
+                {
+                    if (direction.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "direction", Value = direction });
+                    }
+                    if (filter != null)
+                    {
+                        p.Add(new RestParameter { Key = "filter", Value = filter });
+                    }
+                    if (page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "page", Value = page });
+                    }
+                    if (per_page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                    }
+                    if (query != null)
+                    {
+                        p.Add(new RestParameter { Key = "query", Value = query });
+                    }
+                    if (sort.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "sort", Value = sort });
+                    }
+                });
+
+            var result = root.Get<Pagination<Group>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method returns every group to which the authenticated user belongs.
+        /// </summary>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns>
+        /// 200 OK	The groups were returned
+        /// </returns>
+        public RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(GroupDirection? direction = null,
+            GroupFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            GroupSort? sort = null)
+        {
+            var root = RootAuthorization()
+                .Command($"/me/groups")
+                .Parameter((p) =>
+                {
+                    if (direction.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "direction", Value = direction });
+                    }
+                    if (filter.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "filter", Value = filter });
+                    }
+                    if (page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "page", Value = page });
+                    }
+                    if (per_page.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                    }
+                    if (query != null)
+                    {
+                        p.Add(new RestParameter { Key = "query", Value = query });
+                    }
+                    if (sort.HasValue)
+                    {
+                        p.Add(new RestParameter { Key = "sort", Value = sort });
+                    }
+                });
+
+            var result = root.Get<Pagination<Group>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// This method returns every user who belongs to the specified group.
+        /// </summary>
+        /// <param name="group_id">The ID of the group.</param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns>
+        /// 200 OK	The members were returned.
+        /// 404 Not Found   No such group exists.
+        /// </returns>
+        public RestResult<Pagination<User>> GetAllTheMembersOfAGroup(int group_id, UserDirection? direction = null,
+            UserFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            UserSort? sort = null)
+        {
+            var root = RootAuthorization()
+               .Command($"/groups/{group_id}/users")
+               .Parameter((p) =>
+               {
+                   if (direction.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "direction", Value = direction });
+                   }
+                   if (filter.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "filter", Value = filter });
+                   }
+                   if (page.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "page", Value = page });
+                   }
+                   if (per_page.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "per_page", Value = per_page });
+                   }
+                   if (query != null)
+                   {
+                       p.Add(new RestParameter { Key = "query", Value = query });
+                   }
+                   if (sort.HasValue)
+                   {
+                       p.Add(new RestParameter { Key = "sort", Value = sort });
+                   }
+               });
+
+            var result = root.Get<Pagination<User>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<User>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<User>>();
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region [ Videos ]

@@ -57,6 +57,11 @@ namespace VimeoClient.Filter.Group
         /// Return featured groups
         /// </summary>
         featured,
+
+        /// <summary>
+        /// Return moderated groups.
+        /// </summary>
+        moderated,
     }
 
     /// <summary>
