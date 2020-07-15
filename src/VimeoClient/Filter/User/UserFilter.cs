@@ -56,6 +56,21 @@ namespace VimeoClient.Filter.User
         /// Return group moderators
         /// </summary>
         moderators,
+
+        /// <summary>
+        /// Consider extra content only.
+        /// </summary>
+        extra,
+
+        /// <summary>
+        /// Consider main content only.
+        /// </summary>
+        main,
+
+        /// <summary>
+        /// Consider trailer content only.
+        /// </summary>
+        trailer,
     }
 
     /// <summary>
