@@ -30,6 +30,8 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using RestClient.Generic;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Tags are pieces of metadata for categorizing or labeling videos.
@@ -72,7 +74,16 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
-        //Get a tag
+        /// <summary>
+        /// This method returns the specified tag.
+        /// </summary>
+        /// <param name="word">The tag to return.</param>
+        /// <returns>
+        /// 200 OK	The tag was returned.
+        /// </returns>
+        public RestResult<Tag> GetATag(string word) => RootAuthorization()
+            .Command($"/tags/{word}")
+            .Get<Tag>();
         #endregion
     }
 }
