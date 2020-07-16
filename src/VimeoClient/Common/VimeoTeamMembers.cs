@@ -71,7 +71,14 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
-        //Get membership information about a team
+        /// <summary>
+        /// This method returns information about the membership of the specified team. Usage is currently limited to the team join forms.
+        /// </summary>
+        /// <param name="code">The code corresponding to the desired team. This value appears under TeamUser > code.</param>
+        /// <returns></returns>
+        public RestResult GetMembershipInformationAboutATeam(string code) => RootAuthorization()
+            .Command($"/teammembers/{code}")
+            .Get();
         #endregion
     }
 }
