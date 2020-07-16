@@ -30,7 +30,7 @@ namespace VimeoClient.Body.Folder
     /// <summary>
     /// Body Folder Edit Parameters
     /// </summary>
-    public class FolderEditParameters:IEditParameters
+    public class FolderEditParameters : IEditParameters
     {
         public string Name { get; set; }
         public int IncomingWebhooksId { get; set; }

@@ -105,7 +105,9 @@ namespace VimeoClient.Common
                 foreach (var item in obj.ToEnumerable())
                 {
                     if (item.Value != null)
+                    {
                         pars.Add(item.Key, item.Value);
+                    }
                 }
             })
             .Post<Channel>();
