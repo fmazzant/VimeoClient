@@ -30,6 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\RestClient\src\RestClient\RestClient.csproj" />
+    <PackageReference Include="Mafe.RestClient" Version="1.6.0-rc1" />
   </ItemGroup>
 </Project>

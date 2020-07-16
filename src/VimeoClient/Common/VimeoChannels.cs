@@ -191,7 +191,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
             if (page.HasValue)
             {

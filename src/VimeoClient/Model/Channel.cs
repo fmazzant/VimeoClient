@@ -49,6 +49,12 @@ namespace VimeoClient.Model
         public string CreatedTime { get; set; }
 
         /// <summary>
+        /// The display name that identifies the channel.
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// A brief explanation of the channel's content.
         /// </summary>
         [JsonPropertyName("description")]
@@ -83,5 +89,11 @@ namespace VimeoClient.Model
         /// </summary>
         [JsonPropertyName("user")]
         public User User { get; set; }
+
+        /// <summary>
+        /// Override ToString method
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => $"{Identity} - {Name}";
     }
 }
