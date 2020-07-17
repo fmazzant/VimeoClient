@@ -59,6 +59,6 @@ namespace VimeoClient
         /// The unique indetity get Uri
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => $"Identity number {Identity}";
+        public override string ToString() => $"Identity: {Identity}";
     }
 }
