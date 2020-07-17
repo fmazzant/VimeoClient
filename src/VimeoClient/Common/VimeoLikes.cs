@@ -154,8 +154,6 @@ namespace VimeoClient.Common
             .Command($"/me/likes/{video_id}")
             .Get();
 
-        //Get all the users who have liked a video
-
         /// <summary>
         /// This method returns every user who has liked the specified video.
         /// </summary>
