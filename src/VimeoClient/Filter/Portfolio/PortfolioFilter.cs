@@ -27,34 +27,46 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Body
+namespace VimeoClient.Filter.Portfolio
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     /// <summary>
-    /// User Edit Parameters
+    /// direction String  The sort direction of the results
     /// </summary>
-    public class UserEditParameters
+    public enum PortfolioDirection
     {
-        public string available_for_hire { get; set; }
-        public string bio { get; set; }
-        public string content_filter { get; set; }
-        public string gender { get; set; }
-        public string link { get; set; }
-        public string name { get; set; }
-        public string password { get; set; }
-        public string grid { get; set; }
-        public string masonry { get; set; }
-        public string profile_preferences { get; set; }
-        public string videos_privacy_add { get; set; }
-        public string videos_privacy_comments { get; set; }
-        public string anybody { get; set; }
-        public string contacts { get; set; }
-        public string nobody { get; set; }
-        public string videos_privacy_embed { get; set; }
-        public string whitelist { get; set; }
-        public string videos_privacy_view { get; set; }
-        public string disable { get; set; }
-        public string unlisted { get; set; }
-        public string users { get; set; }
-        public string videos_privacy_download { get; internal set; }
+        /// <summary>
+        /// Sort the results in ascending order.
+        /// </summary>
+        asc,
+
+        /// <summary>
+        /// Sort the results in descending order.
+        /// </summary>
+        desc
     }
-}
+
+    /// <summary>
+    /// sort String  The way to sort the results
+    /// </summary>
+    public enum PortfolioSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically.
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by creation date.
+        /// </summary>
+        date
+    }
+
+
+    page Number  The page number of the results to show.
+  per_page Number The number of items to show on each page of results, up to a maximum of 100.
+query String  The search query to use to filter the results.
+  }

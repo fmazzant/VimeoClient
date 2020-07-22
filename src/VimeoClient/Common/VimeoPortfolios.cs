@@ -30,6 +30,11 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using RestClient.Generic;
+    using System;
+    using VimeoClient.Filter.Portfolio;
+    using VimeoClient.Model;
+    using VimeoClient.Response;
 
     /// <summary>
     /// Portfolios are customizable websites for showcasing videos.
@@ -73,8 +78,54 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
-        //Get a specific portfolio
-        //Get all the portfolios that belong to the user
+
+        /// <summary>
+        /// This method returns a single portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <returns></returns>
+        public RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id, int user_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns a single portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <returns></returns>
+        public RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns></returns>
+        public RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(int user_id,
+            PortfolioDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            PortfolioSort? sort = null) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="direction">The sort direction of the results</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns></returns>
+        public RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            PortfolioSort? sort = null) => throw new NotImplementedException();
+
         #endregion
 
         #region [ Videos ]
