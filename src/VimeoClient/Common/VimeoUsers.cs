@@ -33,6 +33,7 @@ namespace VimeoClient.Common
     using RestClient.Generic;
     using VimeoClient.Body;
     using VimeoClient.Filter.User;
+    using VimeoClient.Model;
 
     /// <summary>
     /// These are the most common methods for working with users.
@@ -125,9 +126,9 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public RestResult<string> GetTheUser(int userId) => RootUserAuthorization()
+        public RestResult<User> GetTheUser(int userId) => RootUserAuthorization()
           .Command(userId)
-          .Get();
+          .Get<User>();
         #endregion
 
         #region [ FEEDS ]

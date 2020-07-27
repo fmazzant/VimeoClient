@@ -33,6 +33,7 @@ namespace VimeoClient.Common
     using RestClient.Generic;
     using VimeoClient.Body;
     using VimeoClient.Filter.User;
+    using VimeoClient.Model;
 
     /// <summary>
     // These are the most common methods for working with myself user.
@@ -122,8 +123,8 @@ namespace VimeoClient.Common
         /// GET https://api.vimeo.com/me
         /// </summary>
         /// <returns></returns>
-        public RestResult<string> GetTheUser() => RootMeAuthorization()
-            .Get();
+        public RestResult<User> GetTheUser() => RootMeAuthorization()
+            .Get<User>();
         #endregion
 
         #region [ FEEDS ]
