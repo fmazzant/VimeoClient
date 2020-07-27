@@ -33,6 +33,7 @@ namespace VimeoClient.Common
     using RestClient.Generic;
     using System;
     using VimeoClient.Filter.Portfolio;
+    using VimeoClient.Filter.Video;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -129,10 +130,118 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Videos ]
-        //Add a video to a portfolio
-        //Get a specific video in a portfolio
-        //Get all the videos in a portfolio
-        //Remove a video from a portfolio
+        /// <summary>
+        /// This method adds a video to the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">Number  The ID of the user</param>
+        /// <param name="portfolio_id">Number  The ID of the portfolio</param>
+        /// <param name="video_id">Number  The ID of the video</param>
+        /// <returns>
+        /// 204 No Content	The video was added.
+        /// 404 Not Found   No such portfolio or video exists.
+        /// </returns>
+        public RestResult AddAVideoToAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method adds a video to the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">Number  The ID of the portfolio</param>
+        /// <param name="video_id">Number  The ID of the video</param>
+        /// <returns>
+        /// 204 No Content	The video was added.
+        /// 404 Not Found   No such portfolio or video exists.
+        /// </returns>
+        public RestResult AddAVideoToAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns a single video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// The video was returned.
+        /// </returns>
+        public RestResult<Video> GetASpecificVideoInAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns a single video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// The video was returned.
+        /// </returns>
+        public RestResult<Video> GetASpecificVideoInAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="containing_uri">The page that contains the video URI.</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). 
+        /// This parameter is required only when filter is embeddable.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns>The videos were returned.</returns>
+        public RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int user_id, int portfolio_id,
+            string containing_uri,
+            VideoFilter? filter = null,
+            bool filter_embeddable = false,
+            int? page = null,
+            int? per_page = null,
+            VideoSort? sort = null
+            ) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="containing_uri">The page that contains the video URI.</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). 
+        /// This parameter is required only when filter is embeddable.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="sort">The way to sort the results</param>
+        /// <returns>The videos were returned.</returns>
+        public RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id,
+           string containing_uri,
+           VideoFilter? filter = null,
+           bool filter_embeddable = false,
+           int? page = null,
+           int? per_page = null,
+           VideoSort? sort = null
+           ) => throw new NotImplementedException();
+
+        public RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method removes a video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// 404 Not Found   No such portfolio or video exists.
+        /// </returns>
+        public RestResult RemoveAVideoFromPortfoli(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method removes a video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// 404 Not Found   No such portfolio or video exists.
+        /// </returns>
+        public RestResult RemoveAVideoFromPortfoli(int portfolio_id, int video_id) => throw new NotImplementedException();
+
         #endregion
     }
 }
