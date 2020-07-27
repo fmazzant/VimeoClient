@@ -66,7 +66,7 @@ namespace VimeoClient.Filter.Portfolio
     }
 
 
-    page Number  The page number of the results to show.
-  per_page Number The number of items to show on each page of results, up to a maximum of 100.
-query String  The search query to use to filter the results.
+//    page Number  The page number of the results to show.
+//  per_page Number The number of items to show on each page of results, up to a maximum of 100.
+//query String  The search query to use to filter the results.
   }
