@@ -77,7 +77,22 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
-        //Create a showcase
+        /// <summary>
+        /// This method creates a new showcase for the specified user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="name">The name of the showcase.</param>
+        /// <param name="brand_color">The hexadecimal code for the color of the player buttons and showcase controls.</param>
+        /// <param name="description">The description of the showcase.</param>
+        /// <param name="hide_nav">Whether to hide Vimeo navigation when displaying the showcase.</param>
+        /// <param name="hide_upcoming">Whether to include the upcoming live event in the showcase.</param>
+        /// <param name="layout">The type of layout for presenting the showcase</param>
+        /// <param name="password">The showcase's password. This field is required only when privacy is password.</param>
+        /// <param name="privacy">The privacy level of the showcase</param>
+        /// <param name="review_mode">Whether showcase videos use the review mode URL.</param>
+        /// <param name="sort">The default sort order of the videos as they appear in the showcase</param>
+        /// <param name="theme">The color theme of the showcase</param>
+        /// <returns></returns>
         public RestResult<Album> CreateAShowcase(int user_id,
             string name,
             string brand_color = null,
@@ -97,6 +112,21 @@ namespace VimeoClient.Common
             })
             .Post<Album>();
 
+        /// <summary>
+        /// This method creates a new showcase for the specified user.
+        /// </summary>
+        /// <param name="name">The name of the showcase.</param>
+        /// <param name="brand_color">The hexadecimal code for the color of the player buttons and showcase controls.</param>
+        /// <param name="description">The description of the showcase.</param>
+        /// <param name="hide_nav">Whether to hide Vimeo navigation when displaying the showcase.</param>
+        /// <param name="hide_upcoming">Whether to include the upcoming live event in the showcase.</param>
+        /// <param name="layout">The type of layout for presenting the showcase</param>
+        /// <param name="password">The showcase's password. This field is required only when privacy is password.</param>
+        /// <param name="privacy">The privacy level of the showcase</param>
+        /// <param name="review_mode">Whether showcase videos use the review mode URL.</param>
+        /// <param name="sort">The default sort order of the videos as they appear in the showcase</param>
+        /// <param name="theme">The color theme of the showcase</param>
+        /// <returns></returns>
         public RestResult<Album> CreateAShowcase(string name,
            string brand_color = null,
            string description = null,
