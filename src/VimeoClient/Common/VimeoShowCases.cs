@@ -30,6 +30,9 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using RestClient.Generic;
+    using VimeoClient.Filter.ShowCase;
+    using VimeoClient.Model;
 
     /// <summary>
     /// A showcase (previously album) is a collection of videos for public or private sharing. 
@@ -75,6 +78,44 @@ namespace VimeoClient.Common
 
         #region [ Essentials ]
         //Create a showcase
+        public RestResult<Album> CreateAShowcase(int user_id,
+            string name,
+            string brand_color = null,
+            string description = null,
+            bool hide_nav = false,
+            bool hide_upcoming = false,
+            ShowCasesLayout? layout = null,
+            string password = null,
+            ShowCasesPrivacy? privacy = null,
+            bool review_mode = false,
+            ShowCasesSort? sort = null,
+            ShowCasesTheme? theme = null) => RootAuthorization()
+            .Command($"/users/{user_id}/albums")
+            .FormUrlEncoded(true, (p) =>
+            {
+
+            })
+            .Post<Album>();
+
+        public RestResult<Album> CreateAShowcase(string name,
+           string brand_color = null,
+           string description = null,
+           bool hide_nav = false,
+           bool hide_upcoming = false,
+           ShowCasesLayout? layout = null,
+           string password = null,
+           ShowCasesPrivacy? privacy = null,
+           bool review_mode = false,
+           ShowCasesSort? sort = null,
+           ShowCasesTheme? theme = null) => RootAuthorization()
+           .Command($"/me/albums")
+           .FormUrlEncoded(true, (p) =>
+           {
+
+           })
+           .Post<Album>();
+
+
         //Delete a showcase
         //Edit a showcase
         //Get a specific showcase
