@@ -120,7 +120,7 @@ namespace VimeoClient.Common
                 pars.Add("unlisted", body.unlisted);
                 pars.Add("users", body.users);
             })
-            .Patch();
+            .Patch<User>();
 
         /// <summary>
         /// This method returns the authenticated user.
@@ -180,8 +180,10 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public virtual RestResult FollowAListOfUsers(IList<User> users) => RootMeAuthorization()
             .Command("/following")
-            .FormUrlEncoded(true, (p) => {
-                p.Add("users", "");
+            .FormUrlEncoded(true, (p) =>
+            {
+                if (users != null)
+                    p.Add("users[]", $"{string.Join(",", users.Select(u => u.Uri))}");
             })
             .Post();
 
