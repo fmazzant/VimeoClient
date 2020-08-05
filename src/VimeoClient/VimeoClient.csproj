@@ -30,6 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mafe.RestClient" Version="1.7.0-alpha1" />
+    <PackageReference Include="Mafe.RestClient" Version="1.7.0" />
   </ItemGroup>
 </Project>
