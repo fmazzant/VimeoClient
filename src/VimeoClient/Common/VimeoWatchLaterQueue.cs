@@ -84,7 +84,7 @@ namespace VimeoClient
         /// <returns>
         /// 204 No Content	The video was added.
         /// </returns>
-        public RestResult AddAVideoToUserWathLaterQueue(int user_id, int video_id) => RootAuthorization()
+        public virtual RestResult AddAVideoToUserWathLaterQueue(int user_id, int video_id) => RootAuthorization()
             .Command($"/users/{user_id}/watchlater/{video_id}")
             .Put();
 
@@ -95,7 +95,7 @@ namespace VimeoClient
         /// <returns>
         /// 204 No Content	The video was added.
         /// </returns>
-        public RestResult AddAVideoToUserWathLaterQueue(int video_id) => RootAuthorization()
+        public virtual RestResult AddAVideoToUserWathLaterQueue(int video_id) => RootAuthorization()
             .Command($"/me/watchlater/{video_id}")
             .Put();
 
@@ -108,7 +108,7 @@ namespace VimeoClient
         /// 200 OK	The video is in the user's Watch Later queue.
         /// 404 Not Found   The video isn't in the user's Watch Later queue.
         /// </returns>
-        public RestResult<Video> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueue(int user_id, int video_id) => RootAuthorization()
+        public virtual RestResult<Video> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueue(int user_id, int video_id) => RootAuthorization()
             .Command($"/users/{user_id}/watchlater/{video_id}")
             .Get<Video>();
 
@@ -121,7 +121,7 @@ namespace VimeoClient
         /// 200 OK	The video is in the user's Watch Later queue.
         /// 404 Not Found   The video isn't in the user's Watch Later queue.
         /// </returns>
-        public RestResult<Video> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueue(int video_id) => RootAuthorization()
+        public virtual RestResult<Video> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueue(int video_id) => RootAuthorization()
            .Command($"/me/watchlater/{video_id}")
            .Get<Video>();
 
@@ -142,7 +142,7 @@ namespace VimeoClient
         /// 304 Not Modified
         ///     The user hasn't added any videos to their Watch Later queue since the given If-Modified-Since header.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosInTheUserWatchLaterQueue(string user_id,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInTheUserWatchLaterQueue(string user_id,
             VideoDirection? direction = null,
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
@@ -216,7 +216,7 @@ namespace VimeoClient
         /// 304 Not Modified
         ///     The user hasn't added any videos to their Watch Later queue since the given If-Modified-Since header.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosInTheUserWatchLaterQueue(VideoDirection? direction = null,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInTheUserWatchLaterQueue(VideoDirection? direction = null,
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,

@@ -88,7 +88,7 @@ namespace VimeoClient.Common
         /// 200 OK	The category was returned.
         /// 404 Not Found   No such category exists.
         /// </returns>
-        public RestResult<Category> GetASpecificCategory(string category) => RootAuthorization()
+        public virtual RestResult<Category> GetASpecificCategory(string category) => RootAuthorization()
             .Command($"/categories/{category}")
             .Get<Category>();
 
@@ -103,7 +103,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Category>> GetAllCategories(CategoryDirection? direction = null,
+        public virtual RestResult<Pagination<Category>> GetAllCategories(CategoryDirection? direction = null,
             CategorySortAllCategory? sort = null,
             int? page = null,
             int? per_page = null)
@@ -159,7 +159,7 @@ namespace VimeoClient.Common
         /// 200 OK	        The channels were returned.
         /// 404 Not Found   No such category exists.
         /// </returns>
-        public RestResult<Pagination<Channel>> GetAllTheChannelsInACategory(string category,
+        public virtual RestResult<Pagination<Channel>> GetAllTheChannelsInACategory(string category,
             CategoryDirection? direction = null,
             string query = null,
             CategorySortAllChannel? sort = null,
@@ -220,7 +220,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Group>> GetAllTheGroupsInACategory(string category,
+        public virtual RestResult<Pagination<Group>> GetAllTheGroupsInACategory(string category,
             CategoryDirection? direction = null,
             string query = null,
             CategorySortAllGroup? sort = null,
@@ -279,7 +279,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 204 No Content	The user is following the category.
         /// </returns>
-        public RestResult CauseTheUserToFollowASpecificCategory(int category, string user_id) => RootAuthorization()
+        public virtual RestResult CauseTheUserToFollowASpecificCategory(int category, string user_id) => RootAuthorization()
             .Command($"/users/{user_id}/categories/{category}")
             .Put();
 
@@ -288,7 +288,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <returns></returns>
-        public RestResult CauseTheUserToFollowASpecificCategory(string category) => RootAuthorization()
+        public virtual RestResult CauseTheUserToFollowASpecificCategory(string category) => RootAuthorization()
            .Command($"/me/categories/{category}")
            .Put();
 
@@ -300,7 +300,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 204 No Content	The user has stopped following the category.
         /// </returns>
-        public RestResult CauseTheUserToStopFollowingACategory(string category, string user_id) => RootAuthorization()
+        public virtual RestResult CauseTheUserToStopFollowingACategory(string category, string user_id) => RootAuthorization()
             .Command($"/users/{user_id}/categories/{category}")
             .Delete();
 
@@ -311,7 +311,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 204 No Content	The user has stopped following the category.
         /// </returns>
-        public RestResult CauseTheUserToStopFollowingACategory(string category) => RootAuthorization()
+        public virtual RestResult CauseTheUserToStopFollowingACategory(string category) => RootAuthorization()
            .Command($"/me/categories/{category}")
            .Delete();
 
@@ -323,7 +323,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 204 No Content	The user is following the category.
         /// </returns>
-        public RestResult CheckIfTheUserFollowsACategory(string category, string user_id) => RootAuthorization()
+        public virtual RestResult CheckIfTheUserFollowsACategory(string category, string user_id) => RootAuthorization()
             .Command($"/users/{user_id}/categories/{category}")
             .Get();
 
@@ -334,7 +334,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 204 No Content	The user is following the category.
         /// </returns>
-        public RestResult CheckIfTheUserFollowsACategory(string category) => RootAuthorization()
+        public virtual RestResult CheckIfTheUserFollowsACategory(string category) => RootAuthorization()
             .Command($"/me/categories/{category}")
             .Get();
 
@@ -346,7 +346,7 @@ namespace VimeoClient.Common
         /// 200 OK	The categories were returned.
         /// 403 Forbidden Error code 3200: Only the authenticated user can access this information.
         /// </returns>
-        public RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(string user_id,
+        public virtual RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(string user_id,
             CategoryDirection? direction = null,
             CategorySortFollows? sort = null,
             int? page = null,
@@ -392,7 +392,7 @@ namespace VimeoClient.Common
         /// This method returns every category that the authenticated user follows.
         /// </summary>
         /// <returns></returns>
-        public RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(CategoryDirection? direction = null,
+        public virtual RestResult<Pagination<Category>> GetAllTheCategoriesThatTheUserFollows(CategoryDirection? direction = null,
             CategorySortFollows? sort = null,
             int? page = null,
             int? per_page = null)
@@ -446,7 +446,7 @@ namespace VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found   No such category exists, or the video doesn't belong to it.
         /// </returns>
-        public RestResult<Video> GetASpecificVideoInACategory(string category, string video_id) => RootAuthorization()
+        public virtual RestResult<Video> GetASpecificVideoInACategory(string category, string video_id) => RootAuthorization()
             .Command($"/categories/{category}/videos/{video_id}")
             .Get<Video>();
 
@@ -455,7 +455,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
         /// <returns></returns>
-        public RestResult<VimeoList<Category>> GetAllTheCategoriesToWhichAVideoBelongs(string video_id) => RootAuthorization()
+        public virtual RestResult<VimeoList<Category>> GetAllTheCategoriesToWhichAVideoBelongs(string video_id) => RootAuthorization()
             .Command($"/videos/{video_id}/categories")
             .Get<VimeoList<Category>>();
 
@@ -477,7 +477,7 @@ namespace VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found   No such category exists.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosInACategory(string category,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInACategory(string category,
             CategoryDirection? direction = null,
             CategoryFilter? filter = null,
             bool? filter_embeddable = null,
@@ -540,7 +540,7 @@ namespace VimeoClient.Common
         /// 403 Forbidden The authenticated user doesn't own this video.
         /// 404 Not Found   No such video exists, or no such category exists.
         /// </returns>
-        public RestResult<Category> SuggestCategoriesForAVideo(string video_id, string[] categories) => RootAuthorization()
+        public virtual RestResult<Category> SuggestCategoriesForAVideo(string video_id, string[] categories) => RootAuthorization()
             .Command($"/videos/{video_id}/categories")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>

@@ -91,7 +91,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 403 Forbidden Error code 3200: The authenticated user can't create folders.
         /// </returns>
-        public RestResult<Project> CreateAFolder(int user_id, FolderEditParameters parameters) => throw new NotImplementedException();
+        public virtual RestResult<Project> CreateAFolder(int user_id, FolderEditParameters parameters) => throw new NotImplementedException();
 
         /// <summary>
         /// This method creates a new folder for the authenticated user.
@@ -104,7 +104,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 403 Forbidden Error code 3200: The authenticated user can't create folders. 
         /// </returns>
-        public RestResult<Project> CreateAFolder(FolderEditParameters parameters) => throw new NotImplementedException();
+        public virtual RestResult<Project> CreateAFolder(FolderEditParameters parameters) => throw new NotImplementedException();
 
         /// <summary>
         /// This method deletes the specified folder and optionally also the videos that it contains. The authenticated user must be the owner of the folder.
@@ -118,7 +118,7 @@ namespace VimeoClient.Common
         /// 403 Forbidden Error code 3200: The authenticated user can't delete the folder.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public RestResult DeleteAFolder(int project_id, int user_id, bool should_delete_clips) => throw new NotImplementedException();
+        public virtual RestResult DeleteAFolder(int project_id, int user_id, bool should_delete_clips) => throw new NotImplementedException();
 
         /// <summary>
         /// This method deletes the specified folder and optionally also the videos that it contains. The authenticated user must be the owner of the folder.
@@ -131,7 +131,7 @@ namespace VimeoClient.Common
         /// 403 Forbidden Error code 3200: The authenticated user can't delete the folder.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public RestResult DeleteAFolder(int project_id, bool should_delete_clips) => throw new NotImplementedException();
+        public virtual RestResult DeleteAFolder(int project_id, bool should_delete_clips) => throw new NotImplementedException();
 
         /// <summary>
         /// This method edits the specified folder. The authenticated user must be the owner of the folder.
@@ -140,7 +140,7 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="parameters">Body</param>
         /// <returns></returns>
-        public RestResult<Project> EditAFolder(int project_id, int user_id, FolderEditParameters parameters) => throw new NotImplementedException();
+        public virtual RestResult<Project> EditAFolder(int project_id, int user_id, FolderEditParameters parameters) => throw new NotImplementedException();
 
         /// <summary>
         /// This method edits the specified folder. The authenticated user must be the owner of the folder.
@@ -148,7 +148,7 @@ namespace VimeoClient.Common
         /// <param name="project_id">The ID of the folder.</param>
         /// <param name="parameters">Body</param>
         /// <returns></returns>
-        public RestResult<Project> EditAFolder(int project_id, FolderEditParameters parameters) => throw new NotImplementedException();
+        public virtual RestResult<Project> EditAFolder(int project_id, FolderEditParameters parameters) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns a single folder belonging to the authenticated user.
@@ -160,7 +160,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public RestResult<Project> GetASpecificFolder(int project_id, int user_id) => throw new NotImplementedException();
+        public virtual RestResult<Project> GetASpecificFolder(int project_id, int user_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns a single folder belonging to the authenticated user.
@@ -171,7 +171,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public RestResult<Project> GetASpecificFolder(int project_id) => throw new NotImplementedException();
+        public virtual RestResult<Project> GetASpecificFolder(int project_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns all the folders belonging to the authenticated user.
@@ -182,7 +182,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Project>> GetAllTheFoldersThatBelongToTheUser(int user_id, FolderDirection direction, FolderSort sort, int? page = null, int? per_page = null) => throw new NotImplementedException();
+        public virtual RestResult<Pagination<Project>> GetAllTheFoldersThatBelongToTheUser(int user_id, FolderDirection direction, FolderSort sort, int? page = null, int? per_page = null) => throw new NotImplementedException();
         #endregion
 
         #region [ Videos ]
@@ -194,7 +194,7 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="uris">A comma-separated list of video URIs to add.</param>
         /// <returns></returns>
-        public RestResult AddAListOfVideosToAFolder(int project_id, int user_id, string[] uris) => throw new NotImplementedException();
+        public virtual RestResult AddAListOfVideosToAFolder(int project_id, int user_id, string[] uris) => throw new NotImplementedException();
 
         /// <summary>
         /// This method adds multiple videos to the specified folder. The authenticated user must be the owner of the folder.
@@ -207,7 +207,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder or video exists.
         /// </returns>
-        public RestResult AddAListOfVideosToAFolder(int project_id, string[] uris) => throw new NotImplementedException();
+        public virtual RestResult AddAListOfVideosToAFolder(int project_id, string[] uris) => throw new NotImplementedException();
 
         /// <summary>
         /// This method adds a single video to the specified folder. The authenticated user must be the owner of the folder.
@@ -219,7 +219,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was added.
         /// 404 Not Found   Error code 5000: No such user, folder, or video exists.
         /// </returns>
-        public RestResult AddASpecificVideoToAFolder(int project_id, int user_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult AddASpecificVideoToAFolder(int project_id, int user_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method adds a single video to the specified folder. The authenticated user must be the owner of the folder.
@@ -230,7 +230,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was added.
         /// 404 Not Found   Error code 5000: No such user, folder, or video exists.
         /// </returns>
-        public RestResult AddASpecificVideoToAFolder(int project_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult AddASpecificVideoToAFolder(int project_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns all the videos that belong to the specified folder.
@@ -243,7 +243,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null) => throw new NotImplementedException();
+        public virtual RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns all the videos that belong to the specified folder.
@@ -255,7 +255,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null) => throw new NotImplementedException();
+        public virtual RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null) => throw new NotImplementedException();
 
         /// <summary>
         /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
@@ -268,7 +268,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public RestResult RemoveAListOfVideosFromAFolder(int user_id, int project_id, string uris, bool should_delete_clips) => throw new NullReferenceException();
+        public virtual RestResult RemoveAListOfVideosFromAFolder(int user_id, int project_id, string uris, bool should_delete_clips) => throw new NullReferenceException();
 
         /// <summary>
         /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
@@ -282,7 +282,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public RestResult RemoveAListOfVideosFromAFolder(int project_id, string uris, bool should_delete_clips) => throw new NullReferenceException();
+        public virtual RestResult RemoveAListOfVideosFromAFolder(int project_id, string uris, bool should_delete_clips) => throw new NullReferenceException();
 
         /// <summary>
         /// This method removes a single video from the specified folder.
@@ -296,7 +296,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such video exists in the folder.
         /// </returns>
-        public RestResult RemoveASpecificVideoFromAFolder(int project_id, int user_id, int video_id) => throw new NullReferenceException();
+        public virtual RestResult RemoveASpecificVideoFromAFolder(int project_id, int user_id, int video_id) => throw new NullReferenceException();
 
         /// <summary>
         /// This method removes a single video from the specified folder.
@@ -309,7 +309,7 @@ namespace VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such video exists in the folder.
         /// </returns>
-        public RestResult RemoveASpecificVideoFromAFolder(int project_id, int video_id) => throw new NullReferenceException();
+        public virtual RestResult RemoveASpecificVideoFromAFolder(int project_id, int video_id) => throw new NullReferenceException();
 
         #endregion
 

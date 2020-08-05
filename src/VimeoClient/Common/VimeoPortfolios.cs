@@ -86,14 +86,14 @@ namespace VimeoClient.Common
         /// <param name="portfolio_id">The ID of the portfolio.</param>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id, int user_id) => throw new NotImplementedException();
+        public virtual RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id, int user_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns a single portfolio belonging to the authenticated user.
         /// </summary>
         /// <param name="portfolio_id">The ID of the portfolio.</param>
         /// <returns></returns>
-        public RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id) => throw new NotImplementedException();
+        public virtual RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns every portfolio belonging to the authenticated user.
@@ -105,7 +105,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        public RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(int user_id,
+        public virtual RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(int user_id,
             PortfolioDirection? direction = null,
             int? page = null,
             int? per_page = null,
@@ -121,7 +121,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        public RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
+        public virtual RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
             int? page = null,
             int? per_page = null,
             string query = null,
@@ -140,7 +140,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was added.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public RestResult AddAVideoToAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult AddAVideoToAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method adds a video to the specified portfolio belonging to the authenticated user.
@@ -151,7 +151,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was added.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public RestResult AddAVideoToAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult AddAVideoToAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns a single video from the specified portfolio belonging to the authenticated user.
@@ -162,7 +162,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// The video was returned.
         /// </returns>
-        public RestResult<Video> GetASpecificVideoInAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult<Video> GetASpecificVideoInAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns a single video from the specified portfolio belonging to the authenticated user.
@@ -172,7 +172,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// The video was returned.
         /// </returns>
-        public RestResult<Video> GetASpecificVideoInAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult<Video> GetASpecificVideoInAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method returns every video from the specified portfolio belonging to the authenticated user.
@@ -187,7 +187,7 @@ namespace VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns>The videos were returned.</returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int user_id, int portfolio_id,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int user_id, int portfolio_id,
             string containing_uri,
             VideoFilter? filter = null,
             bool filter_embeddable = false,
@@ -208,7 +208,7 @@ namespace VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns>The videos were returned.</returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id,
            string containing_uri,
            VideoFilter? filter = null,
            bool filter_embeddable = false,
@@ -217,7 +217,7 @@ namespace VimeoClient.Common
            VideoSort? sort = null
            ) => throw new NotImplementedException();
 
-        public RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id) => throw new NotImplementedException();
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method removes a video from the specified portfolio belonging to the authenticated user.
@@ -229,7 +229,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was removed.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public RestResult RemoveAVideoFromPortfoli(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult RemoveAVideoFromPortfoli(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
 
         /// <summary>
         /// This method removes a video from the specified portfolio belonging to the authenticated user.
@@ -240,7 +240,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was removed.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public RestResult RemoveAVideoFromPortfoli(int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult RemoveAVideoFromPortfoli(int portfolio_id, int video_id) => throw new NotImplementedException();
 
         #endregion
     }

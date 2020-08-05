@@ -84,7 +84,7 @@ namespace VimeoClient
         /// <param name="command"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public RestResult<string> FieldFiltering(string command, string[] fields) => RootAuthorization()
+        public virtual RestResult<string> FieldFiltering(string command, string[] fields) => RootAuthorization()
              .Command(command)
              .Parameter("fields", string.Join(",", fields))
              .Get();
@@ -98,7 +98,7 @@ namespace VimeoClient
         /// <param name="command"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public RestResult<T> FieldFiltering<T>(string command, string[] fields) where T : new() => RootAuthorization()
+        public virtual RestResult<T> FieldFiltering<T>(string command, string[] fields) where T : new() => RootAuthorization()
              .Command(command)
              .Parameter("fields", string.Join(",", fields))
              .Get<T>();

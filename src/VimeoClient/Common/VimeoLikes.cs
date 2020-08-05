@@ -86,7 +86,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was unliked.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public RestResult CauseAUserToUnlikeAVideo(int user_id, int video_id) => RootAuthorization()
+        public virtual RestResult CauseAUserToUnlikeAVideo(int user_id, int video_id) => RootAuthorization()
             .Command($"/users/{user_id}/likes/{video_id}")
             .Delete();
 
@@ -98,7 +98,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was unliked.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public RestResult CauseAUserToUnlikeAVideo(int video_id) => RootAuthorization()
+        public virtual RestResult CauseAUserToUnlikeAVideo(int video_id) => RootAuthorization()
             .Command($"/me/likes/{video_id}")
             .Delete();
 
@@ -112,7 +112,7 @@ namespace VimeoClient.Common
         /// 400 Bad Request The authenticated user owns the video and can't like it.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public RestResult CauseAUserToLikeAVideo(int user_id, int video_id) => RootAuthorization()
+        public virtual RestResult CauseAUserToLikeAVideo(int user_id, int video_id) => RootAuthorization()
             .Command($"/users/{user_id}/likes/{video_id}")
             .Put();
 
@@ -125,7 +125,7 @@ namespace VimeoClient.Common
         /// 400 Bad Request The authenticated user owns the video and can't like it.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public RestResult CauseAUserToLikeAVideo(int video_id) => RootAuthorization()
+        public virtual RestResult CauseAUserToLikeAVideo(int video_id) => RootAuthorization()
             .Command($"/me/likes/{video_id}")
             .Put();
 
@@ -138,7 +138,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The user has liked the video.
         /// 404 Not Found   The user hasn't liked the video.
         /// </returns>
-        public RestResult CheckIfTheUserHasLikedAVide(int user_id, int video_id) => RootAuthorization()
+        public virtual RestResult CheckIfTheUserHasLikedAVide(int user_id, int video_id) => RootAuthorization()
             .Command($"/users/{user_id}/likes/{video_id}")
             .Get();
 
@@ -150,7 +150,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The user has liked the video.
         /// 404 Not Found   The user hasn't liked the video.
         /// </returns>
-        public RestResult CheckIfTheUserHasLikedAVide(int video_id) => RootAuthorization()
+        public virtual RestResult CheckIfTheUserHasLikedAVide(int video_id) => RootAuthorization()
             .Command($"/me/likes/{video_id}")
             .Get();
 
@@ -167,7 +167,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
-        public RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideo(int video_id, UserDirection? direction = null,
+        public virtual RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideo(int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
             string query = null,
@@ -228,7 +228,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
-        public RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideo(int channel_id, int video_id, UserDirection? direction = null,
+        public virtual RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideo(int channel_id, int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
             string query = null,
@@ -287,7 +287,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
-        public RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideoOnAnOnDemandPage(int ondemand_id, UserDirection? direction = null,
+        public virtual RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideoOnAnOnDemandPage(int ondemand_id, UserDirection? direction = null,
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
@@ -348,7 +348,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosThatAUserHasLiked(int user_id,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosThatAUserHasLiked(int user_id,
            VideoFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,
@@ -414,7 +414,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosThatAUserHasLiked(
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosThatAUserHasLiked(
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,

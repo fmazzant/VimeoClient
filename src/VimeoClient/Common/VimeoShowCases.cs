@@ -93,7 +93,7 @@ namespace VimeoClient.Common
         /// <param name="sort">The default sort order of the videos as they appear in the showcase</param>
         /// <param name="theme">The color theme of the showcase</param>
         /// <returns></returns>
-        public RestResult<Album> CreateAShowcase(int user_id,
+        public virtual RestResult<Album> CreateAShowcase(int user_id,
             string name,
             string brand_color = null,
             string description = null,
@@ -127,7 +127,7 @@ namespace VimeoClient.Common
         /// <param name="sort">The default sort order of the videos as they appear in the showcase</param>
         /// <param name="theme">The color theme of the showcase</param>
         /// <returns></returns>
-        public RestResult<Album> CreateAShowcase(string name,
+        public virtual RestResult<Album> CreateAShowcase(string name,
            string brand_color = null,
            string description = null,
            bool hide_nav = false,

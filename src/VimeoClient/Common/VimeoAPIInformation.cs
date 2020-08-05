@@ -78,7 +78,7 @@ namespace VimeoClient.Common
         /// This method returns the full OpenAPI specification for the Vimeo API.
         /// </summary>
         /// <returns></returns>
-        public Task<RestResult<APIApp>> GetTheAPISpecificationAsync() => RootAuthorization()
+        public virtual Task<RestResult<APIApp>> GetTheAPISpecificationAsync() => RootAuthorization()
             .GetAsync<APIApp>();
 
         /// <summary>
@@ -87,6 +87,6 @@ namespace VimeoClient.Common
         /// <returns>
         /// <list type="200">200 OK	Standard request.</list>
         /// </returns>
-        public RestResult<APIApp> GetTheAPISpecification() => GetTheAPISpecificationAsync().Result;
+        public virtual RestResult<APIApp> GetTheAPISpecification() => GetTheAPISpecificationAsync().Result;
     }
 }

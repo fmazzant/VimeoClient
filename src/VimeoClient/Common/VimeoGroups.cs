@@ -90,7 +90,7 @@ namespace VimeoClient.Common
         /// 400 Bad Request A parameter is invalid.
         /// 403 Forbidden The authenticated user can't create groups.
         /// </returns>
-        public RestResult<Group> CreateAGroup(string name, string description) => RootAuthorization()
+        public virtual RestResult<Group> CreateAGroup(string name, string description) => RootAuthorization()
             .Command("/groups")
             .FormUrlEncoded(true, (p) =>
             {
@@ -107,7 +107,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The group was deleted.
         /// 403 Forbidden The authenticated user can't delete the group.
         /// </returns>
-        public RestResult DeleteAGroup(int group_id) => RootAuthorization()
+        public virtual RestResult DeleteAGroup(int group_id) => RootAuthorization()
             .Command($"/groups/{group_id}")
             .Delete();
 
@@ -118,7 +118,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The group was returned.
         /// </returns>
-        public RestResult<Group> GetASpecificGroup(int group_id) => RootAuthorization()
+        public virtual RestResult<Group> GetASpecificGroup(int group_id) => RootAuthorization()
             .Command($"/groups/{group_id}")
             .Get<Group>();
 
@@ -134,7 +134,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The groups were returned.
         /// </returns>
-        public RestResult<Pagination<Group>> GetAllTheVideosThatHaveASpecificEmbedPreset(GroupDirection? direction = null,
+        public virtual RestResult<Pagination<Group>> GetAllTheVideosThatHaveASpecificEmbedPreset(GroupDirection? direction = null,
             string filter = null,
             int? page = null,
             int? per_page = null,
@@ -200,7 +200,7 @@ namespace VimeoClient.Common
         /// 403 Forbidden   The authenticated user can't join the group. 
         ///     Possible reasons are that the group isn't public or that its privacy setting is members.
         /// </returns>
-        public RestResult AddTheUserToAGroup(int user_id, int group_id) => RootAuthorization()
+        public virtual RestResult AddTheUserToAGroup(int user_id, int group_id) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
             .Put();
 
@@ -213,7 +213,7 @@ namespace VimeoClient.Common
         /// 403 Forbidden   The authenticated user can't join the group. 
         ///     Possible reasons are that the group isn't public or that its privacy setting is members.
         /// </returns>
-        public RestResult AddTheUserToAGroup(int group_id) => RootAuthorization()
+        public virtual RestResult AddTheUserToAGroup(int group_id) => RootAuthorization()
             .Command($"/me/groups/{group_id}")
             .Put();
 
@@ -227,7 +227,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The user was removed from the group.
         /// 403 Forbidden	The authenticated user can't leave the group.
         /// </returns>
-        public RestResult RemoveTheUserFromAGroup(int user_id, int group_id) => RootAuthorization()
+        public virtual RestResult RemoveTheUserFromAGroup(int user_id, int group_id) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
             .Delete();
 
@@ -240,7 +240,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The user was removed from the group.
         /// 403 Forbidden	The authenticated user can't leave the group.
         /// </returns>
-        public RestResult RemoveTheUserFromAGroup(int group_id) => RootAuthorization()
+        public virtual RestResult RemoveTheUserFromAGroup(int group_id) => RootAuthorization()
             .Command($"/me/groups/{group_id}")
             .Delete();
 
@@ -258,7 +258,7 @@ namespace VimeoClient.Common
         /// 404 Not Found	No such group exists.
         ///                 The authenticated user isn't a member of the group.
         /// </returns>
-        public RestResult CheckIfAUserHasJoinedAGroup(int user_id, int group_id) => RootAuthorization()
+        public virtual RestResult CheckIfAUserHasJoinedAGroup(int user_id, int group_id) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
             .Get();
 
@@ -271,7 +271,7 @@ namespace VimeoClient.Common
         /// 404 Not Found	No such group exists.
         ///                 The authenticated user isn't a member of the group.
         /// </returns>
-        public RestResult CheckIfAUserHasJoinedAGroup(int group_id) => RootAuthorization()
+        public virtual RestResult CheckIfAUserHasJoinedAGroup(int group_id) => RootAuthorization()
            .Command($"/me/groups/{group_id}")
            .Get();
 
@@ -288,7 +288,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The groups were returned
         /// </returns>
-        public RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(int user_id, GroupDirection? direction = null,
+        public virtual RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(int user_id, GroupDirection? direction = null,
             string filter = null,
             int? page = null,
             int? per_page = null,
@@ -352,7 +352,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The groups were returned
         /// </returns>
-        public RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(GroupDirection? direction = null,
+        public virtual RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(GroupDirection? direction = null,
             GroupFilter? filter = null,
             int? page = null,
             int? per_page = null,
@@ -418,7 +418,7 @@ namespace VimeoClient.Common
         /// 200 OK	The members were returned.
         /// 404 Not Found   No such group exists.
         /// </returns>
-        public RestResult<Pagination<User>> GetAllTheMembersOfAGroup(int group_id, UserDirection? direction = null,
+        public virtual RestResult<Pagination<User>> GetAllTheMembersOfAGroup(int group_id, UserDirection? direction = null,
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
@@ -487,7 +487,7 @@ namespace VimeoClient.Common
         ///     The video is already in the group.
         ///     The authenticated user can't add videos to the group.
         /// </returns>
-        public RestResult<Video> AddAVideoToAGroup(int group_id, int video_id) => RootAuthorization()
+        public virtual RestResult<Video> AddAVideoToAGroup(int group_id, int video_id) => RootAuthorization()
             .Command($"/groups/{group_id}/videos/{video_id}")
             .Put<Video>();
 
@@ -501,7 +501,7 @@ namespace VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found	No such video or group exists.
         /// </returns>
-        public RestResult<Video> GetASpecificVideoInAGroup(int group_id, int video_id) => RootAuthorization()
+        public virtual RestResult<Video> GetASpecificVideoInAGroup(int group_id, int video_id) => RootAuthorization()
            .Command($"/groups/{group_id}/videos/{video_id}")
            .Get<Video>();
 
@@ -518,7 +518,7 @@ namespace VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosInAGroup(int group_id, VideoDirection? direction = null,
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInAGroup(int group_id, VideoDirection? direction = null,
            VideoFilter? filter = null,
            bool? filter_embeddable = null,
            int? page = null,
@@ -581,7 +581,7 @@ namespace VimeoClient.Common
         /// <param name="group_id">The ID of the group.</param>
         /// <param name="video_id">The ID of the video.</param>
         /// <returns></returns>
-        public RestResult RemoveAVideoFromAGroup(int group_id, int video_id) => RootAuthorization()
+        public virtual RestResult RemoveAVideoFromAGroup(int group_id, int video_id) => RootAuthorization()
             .Command($"/groups/{group_id}/videos/{video_id}")
             .Delete();
         #endregion

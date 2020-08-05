@@ -81,7 +81,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The tag was returned.
         /// </returns>
-        public RestResult<Tag> GetATag(string word) => RootAuthorization()
+        public virtual RestResult<Tag> GetATag(string word) => RootAuthorization()
             .Command($"/tags/{word}")
             .Get<Tag>();
         #endregion

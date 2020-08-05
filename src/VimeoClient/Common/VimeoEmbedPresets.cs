@@ -85,7 +85,7 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="disable">What to do with the outro: true disable outro</param>
         /// <returns></returns>
-        public RestResult<Presets> EditAnEmbedPreset(int preset_id, int user_id, bool disable = false) => RootAuthorization()
+        public virtual RestResult<Presets> EditAnEmbedPreset(int preset_id, int user_id, bool disable = false) => RootAuthorization()
             .Command($"/users/{user_id}/presets/{preset_id}")
             .FormUrlEncoded(true, (p) =>
             {
@@ -102,7 +102,7 @@ namespace VimeoClient.Common
         /// <param name="preset_id">The ID of the preset.</param>
         /// <param name="disable">What to do with the outro: true disable outro</param>
         /// <returns></returns>
-        public RestResult<Presets> EditAnEmbedPreset(int preset_id, bool disable = false) => RootAuthorization()
+        public virtual RestResult<Presets> EditAnEmbedPreset(int preset_id, bool disable = false) => RootAuthorization()
             .Command($"/me/presets/{preset_id}")
             .FormUrlEncoded(true, (p) =>
             {
@@ -119,7 +119,7 @@ namespace VimeoClient.Common
         /// <param name="preset_id">The ID of the preset.</param>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<Presets> GetASpecificEmbedPreset(int preset_id, int user_id) => RootAuthorization()
+        public virtual RestResult<Presets> GetASpecificEmbedPreset(int preset_id, int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/presets/{preset_id}")
             .Get<Presets>();
 
@@ -128,7 +128,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="preset_id">The ID of the preset.</param>
         /// <returns></returns>
-        public RestResult<Presets> GetASpecificEmbedPreset(int preset_id) => RootAuthorization()
+        public virtual RestResult<Presets> GetASpecificEmbedPreset(int preset_id) => RootAuthorization()
             .Command($"/me/presets/{preset_id}")
             .Get<Presets>();
 
@@ -139,7 +139,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int user_id, int? page = null, int? per_page = null)
+        public virtual RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int user_id, int? page = null, int? per_page = null)
         {
             var root = RootAuthorization()
                 .Command($"/users/{user_id}/presets")
@@ -176,7 +176,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int? page = null, int? per_page = null)
+        public virtual RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int? page = null, int? per_page = null)
         {
             var root = RootAuthorization()
                 .Command($"/me/presets")
@@ -220,7 +220,7 @@ namespace VimeoClient.Common
         /// 201 Created	The custom logo was added.
         /// 403 Forbidden The authenticated user can't add the custom logo.
         /// </returns>
-        public RestResult<Picture> AddACustomLogoForTheUser(int user_id) => RootAuthorization()
+        public virtual RestResult<Picture> AddACustomLogoForTheUser(int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/customlogos")
             .Post<Picture>();
 
@@ -232,7 +232,7 @@ namespace VimeoClient.Common
         /// 201 Created	The custom logo was added.
         /// 403 Forbidden The authenticated user can't add the custom logo.
         /// </returns>
-        public RestResult<Picture> AddACustomLogoForTheUser() => RootAuthorization()
+        public virtual RestResult<Picture> AddACustomLogoForTheUser() => RootAuthorization()
             .Command($"/me/customlogos")
             .Post<Picture>();
 
@@ -242,7 +242,7 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="logo_id">The ID of the custom logo.</param>
         /// <returns></returns>
-        public RestResult<Picture> GetASpecificCustomLogoForThwUser(int user_id, int logo_id) => RootAuthorization()
+        public virtual RestResult<Picture> GetASpecificCustomLogoForThwUser(int user_id, int logo_id) => RootAuthorization()
             .Command($"/users/{user_id}/customlogos/{logo_id}")
             .Get<Picture>();
 
@@ -251,7 +251,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="logo_id">The ID of the custom logo.</param>
         /// <returns></returns>
-        public RestResult<Picture> GetASpecificCustomLogoForThwUser(int logo_id) => RootAuthorization()
+        public virtual RestResult<Picture> GetASpecificCustomLogoForThwUser(int logo_id) => RootAuthorization()
            .Command($"/me/customlogos/{logo_id}")
            .Get<Picture>();
 
@@ -260,7 +260,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <returns></returns>
-        public RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser(int user_id) => RootAuthorization()
+        public virtual RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser(int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/customlogos")
             .Get<VimeoList<Picture>>();
 
@@ -268,7 +268,7 @@ namespace VimeoClient.Common
         /// This method returns every custom logo that belongs to the authenticated user or team owner.
         /// </summary>
         /// <returns></returns>
-        public RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser() => RootAuthorization()
+        public virtual RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser() => RootAuthorization()
             .Command($"/me/customlogos")
             .Get<VimeoList<Picture>>();
 
@@ -285,7 +285,7 @@ namespace VimeoClient.Common
         /// 403 Forbidden The authenticated user can't add a timeline event thumbnail to the video.
         /// 404 Not Found   No such video exists.
         /// </returns>
-        public RestResult<Picture> AddTimelineEventThumbnailToAVideo(int video_id) => RootAuthorization()
+        public virtual RestResult<Picture> AddTimelineEventThumbnailToAVideo(int video_id) => RootAuthorization()
             .Command($"/videos/{video_id}/timelinethumbnails")
             .Post<Picture>();
 
@@ -298,7 +298,7 @@ namespace VimeoClient.Common
         /// 200 OK	The timeline event thumbnail was returned.
         /// 403 Forbidden The authenticated user can't access the timeline event thumbnail.
         /// </returns>
-        public RestResult<Picture> GetTimelineEventThumnail(int video_id, int thumbnail_id) => RootAuthorization()
+        public virtual RestResult<Picture> GetTimelineEventThumnail(int video_id, int thumbnail_id) => RootAuthorization()
             .Command($"/videos/{video_id}/timelinethumbnails/{thumbnail_id}")
             .Get<Picture>();
 
@@ -314,7 +314,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 204 No Content	The embed preset was added to the video.
         /// </returns>
-        public RestResult AddEmbedPresetToAVideo(int video_id, int preset_id) => RootAuthorization()
+        public virtual RestResult AddEmbedPresetToAVideo(int video_id, int preset_id) => RootAuthorization()
             .Command($"/videos/{video_id}/presets/{preset_id}")
             .Put();
 
@@ -327,7 +327,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The embed preset has been added to the video.
         /// 404 Not Found   No such video or embed preset exists.
         /// </returns>
-        public RestResult CheckIfAnEmbedPresetHasBeenAddedToAVideo(int video_id, int preset_id) => RootAuthorization()
+        public virtual RestResult CheckIfAnEmbedPresetHasBeenAddedToAVideo(int video_id, int preset_id) => RootAuthorization()
             .Command($"/videos/{video_id}/presets/{preset_id}")
             .Get();
 
@@ -341,7 +341,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int user_id, int preset_id, int? page = null, int? per_page = null)
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int user_id, int preset_id, int? page = null, int? per_page = null)
         {
             var root = RootAuthorization()
                 .Command($"/users/{user_id}/presets/{preset_id}/videos")
@@ -381,7 +381,7 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
-        public RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int preset_id, int? page = null, int? per_page = null)
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int preset_id, int? page = null, int? per_page = null)
         {
             var root = RootAuthorization()
                 .Command($"/me/presets/{preset_id}/videos")
@@ -421,7 +421,7 @@ namespace VimeoClient.Common
         /// 204 No Content	The embed preset was removed.
         /// 404 Not Found   No such video or embed preset exists.
         /// </returns>
-        public RestResult RemoveAnEmbedPresetFromVideo(int video_id, int preset_id) => RootAuthorization()
+        public virtual RestResult RemoveAnEmbedPresetFromVideo(int video_id, int preset_id) => RootAuthorization()
             .Command($"/videos/{video_id}/presets/{preset_id}")
             .Delete();
 

@@ -76,7 +76,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="code">The code corresponding to the desired team. This value appears under TeamUser > code.</param>
         /// <returns></returns>
-        public RestResult GetMembershipInformationAboutATeam(string code) => RootAuthorization()
+        public virtual RestResult GetMembershipInformationAboutATeam(string code) => RootAuthorization()
             .Command($"/teammembers/{code}")
             .Get();
         #endregion
