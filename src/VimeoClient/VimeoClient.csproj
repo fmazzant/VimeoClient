@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Mafe.VimeoClient</PackageId>
-    <Version>3.1.0-alpha1</Version>
+    <Version>3.2.0-alpha1</Version>
     <Authors>Federico Mazzanti</Authors>
     <Company>Federico Mazzanti</Company>
     <Description>VimeoClient library provides a simple connector to Vimeo REST services.</Description>
