@@ -31,9 +31,13 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using VimeoClient.Body;
     using VimeoClient.Filter.User;
     using VimeoClient.Model;
+    using VimeoClient.Response;
 
     /// <summary>
     // These are the most common methods for working with myself user.
@@ -89,7 +93,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="body"></param>
         /// <returns></returns>
-        public virtual RestResult<string> EditTheUser(UserEditParameters body) => RootMeAuthorization()
+        public virtual RestResult<User> EditTheUser(UserEditParameters body) => RootMeAuthorization()
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
@@ -134,9 +138,9 @@ namespace VimeoClient.Common
         /// GET https://api.vimeo.com/me/feed
         /// </summary>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheVideosInTheUserFeed() => RootMeAuthorization()
+        public virtual RestResult<VimeoList<Activity>> GetAllTheVideosInTheUserFeed() => RootMeAuthorization()
             .Command("/feed")
-            .Get();
+            .Get<VimeoList<Activity>>();
 
         /// <summary>
         /// This method returns every video in the authenticated user's feed.
@@ -146,12 +150,12 @@ namespace VimeoClient.Common
         /// <param name="page"></param>
         /// <param name="per_page"></param>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheVideosInTheUserFeedWithPaging(string offset, string page, string per_page) => RootMeAuthorization()
+        public virtual RestResult<VimeoList<Activity>> GetAllTheVideosInTheUserFeedWithPaging(string offset, string page, string per_page) => RootMeAuthorization()
             .Command("/me/feed")
             .Parameter("offset", offset)
             .Parameter("page", page)
             .Parameter("per_page", per_page)
-            .Get();
+            .Get<VimeoList<Activity>>();
 
         #endregion
 
@@ -163,7 +167,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="follow_user_id">The ID of the user to follow.</param>
         /// <returns></returns>
-        public RestResult<string> CheckIfTheUserIsFollowingAnotherUser(int follow_user_id) => RootMeAuthorization()
+        public RestResult CheckIfTheUserIsFollowingAnotherUser(int follow_user_id) => RootMeAuthorization()
             .Command("/following")
             .Command(follow_user_id)
             .Get();
@@ -174,8 +178,11 @@ namespace VimeoClient.Common
         /// where user01_id, user02_id, user03_id, and so on, are the user IDs of the users in question:
         /// </summary>
         /// <returns></returns>
-        public virtual RestResult<string> FollowAListOfUsers() => RootMeAuthorization()
+        public virtual RestResult FollowAListOfUsers(IList<User> users) => RootMeAuthorization()
             .Command("/following")
+            .FormUrlEncoded(true, (p) => {
+                p.Add("users", "");
+            })
             .Post();
 
         /// <summary>
@@ -185,7 +192,7 @@ namespace VimeoClient.Common
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> FollowASpecificUser(int follow_user_id) => RootMeAuthorization()
+        public virtual RestResult FollowASpecificUser(int follow_user_id) => RootMeAuthorization()
             .Command("/following")
             .Command(follow_user_id)
             .Put();
