@@ -95,7 +95,7 @@ namespace VimeoClient
         /// Vimeo End Point root
         /// </summary>
         /// <returns></returns>
-        protected RestBuilder Root() => Rest
+        protected virtual RestBuilder Root() => Rest
             .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
             .CertificateValidation((sender, cert, chain, errors) =>
             {
@@ -119,23 +119,7 @@ namespace VimeoClient
         /// Vimeo End Point root with Bearer authentication
         /// </summary>
         /// <returns></returns>
-        public RestBuilder RootAuthorization() => Root()
-            .OnStart((e) =>
-            {
-                Console.WriteLine($"{e.Url} starting...");
-            })
-            .OnPreviewContentRequestAsString((json) =>
-            {
-
-            })
-            .OnPreviewContentResponseAsString((json) =>
-            {
-
-            })
-            .OnCompleted((e) =>
-            {
-                Console.WriteLine($"completed.");
-            })
+        public virtual RestBuilder RootAuthorization() => Root()
             .EnableGZipCompression() //gzip
             .Authentication(() =>
             {
@@ -153,7 +137,7 @@ namespace VimeoClient
         /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
         /// <returns></returns>
-        public RestResult<AccessTokenResponse> GetAccessToken(string clientId, string clientSecret) => Root()
+        public virtual RestResult<AccessTokenResponse> GetAccessToken(string clientId, string clientSecret) => Root()
             .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}"))))
             .Command("/oauth/authorize/client")
             .Payload(new AccessTokenPayload
@@ -172,7 +156,7 @@ namespace VimeoClient
         /// <param name="state"></param>
         /// <param name="scope"></param>
         /// <returns></returns>
-        public RestResult<string> GetAccessToken(string response_type, string client_id, string redirect_uri, string state, string[] scopes) => Root()
+        public virtual RestResult<string> GetAccessToken(string response_type, string client_id, string redirect_uri, string state, string[] scopes) => Root()
             .Command("/oauth/authorize")
             .Parameter("response_type", response_type)
             .Parameter("client_id", client_id)
@@ -188,7 +172,7 @@ namespace VimeoClient
         /// <param name="authenticationCode"></param>
         /// <param name="requestUri"></param>
         /// <returns></returns>
-        public RestResult<AccessTokenResponse> PostAccessToken(string authenticationCode, string requestUri) => Root()
+        public virtual RestResult<AccessTokenResponse> PostAccessToken(string authenticationCode, string requestUri) => Root()
             .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Properties.ClientId}:{Properties.ClientSecret}"))))
             .Command("/oauth/access_token")
             .Payload(new PostAccessTokenBody
@@ -202,29 +186,29 @@ namespace VimeoClient
         /// Tutotial is Public scope
         /// </summary>
         /// <returns></returns>
-        public RestResult<Tutorial> Tutorial() => RootAuthorization()
+        public virtual RestResult<Tutorial> Tutorial() => RootAuthorization()
           .Command("/tutorial")
           .Get<Tutorial>();
 
         /// <summary>
         /// Me Information
         /// </summary>
-        public VimeoMe Me => new VimeoMe(this);
+        public virtual VimeoMe Me => new VimeoMe(this);
 
         /// <summary>
         /// Users Information
         /// </summary>
-        public VimeoUsers Users => new VimeoUsers(this);
+        public virtual VimeoUsers Users => new VimeoUsers(this);
 
         /// <summary>
         /// API Information
         /// </summary>
-        public VimeoAPIInformation APIInformation => new VimeoAPIInformation(this);
+        public virtual VimeoAPIInformation APIInformation => new VimeoAPIInformation(this);
 
         /// <summary>
         /// Authentication Extras
         /// </summary>
-        public VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(this);
+        public virtual VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(this);
 
         /// <summary>
         /// Categories on Vimeo are sets of videos for particular genres (like comedy) or other characteristics (like being experimental). 
@@ -232,7 +216,7 @@ namespace VimeoClient
         /// by recommending them for up to two main categories and one subcategory. 
         /// See our Help Center for more details.
         /// </summary>
-        public VimeoCategories Categories => new VimeoCategories(this);
+        public virtual VimeoCategories Categories => new VimeoCategories(this);
 
         /// <summary>
         /// Use channels to organize videos by theme or some other grouping. 
@@ -240,79 +224,79 @@ namespace VimeoClient
         /// Vimeo Basic subscribers get one channel, while paid Vimeo members can have an unlimited number. 
         /// See our Help Center for more details.
         /// </summary>
-        public VimeoChannels Channels => new VimeoChannels(this);
+        public virtual VimeoChannels Channels => new VimeoChannels(this);
 
         /// <summary>
         /// An embed preset is a reusable collection of settings for customizing the appearance and behavior of the embeddable Vimeo player. 
         /// This feature is available to Vimeo Pro, Business, and Premium members. 
         /// For more information, see our Help Center.
         /// </summary>
-        public VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(this);
+        public virtual VimeoEmbedPresets EmbedPresets => new VimeoEmbedPresets(this);
 
         /// <summary>
         /// Folders
         /// </summary>
-        public VimeoFolders Folders => new VimeoFolders(this);
+        public virtual VimeoFolders Folders => new VimeoFolders(this);
 
         /// <summary>
         /// A group is a community within Vimeo for collaborating, sharing, and engaging with videos. Groups can be public, where anyone can join, or they can be private, where membership is by invitation only. 
         /// For more information, see our Help Center.
         /// </summary>
-        public VimeoGroups Groups => new VimeoGroups(this);
+        public virtual VimeoGroups Groups => new VimeoGroups(this);
 
         /// <summary>
         /// A like is a video interaction where a Vimeo member indicates that they liked a video.
         /// </summary>
-        public VimeoLikes Likes => new VimeoLikes(this);
+        public virtual VimeoLikes Likes => new VimeoLikes(this);
 
         /// <summary>
         /// Please note that Vimeo's live API is available only to Vimeo Enterprise customers. Learn more about Vimeo Enterprise.
         /// </summary>
-        public VimeoLive Live => new VimeoLive(this);
+        public virtual VimeoLive Live => new VimeoLive(this);
 
         /// <summary>
         /// On Demand
         /// </summary>
-        public VimeoOnDemand OnDemand => new VimeoOnDemand(this);
+        public virtual VimeoOnDemand OnDemand => new VimeoOnDemand(this);
 
         /// <summary>
         /// Portfolios are customizable websites for showcasing videos. 
         /// Vimeo Pro, Business, and Premium subscribers have access to this feature. For more information, see our Help Center.
         /// </summary>
-        public VimeoPortfolios Portfolios => new VimeoPortfolios(this);
+        public virtual VimeoPortfolios Portfolios => new VimeoPortfolios(this);
 
         /// <summary>
         /// A showcase (previously album) is a collection of videos for public or private sharing. 
         /// When developing for this feature, keep in mind that our endpoint syntax uses the original album nomenclature, although this is subject to change in the future. 
         /// For more information about showcases, see our Help Center.
         /// </summary>
-        public VimeoShowCases ShowCases => new VimeoShowCases(this);
+        public virtual VimeoShowCases ShowCases => new VimeoShowCases(this);
 
         /// <summary>
         /// Tags are pieces of metadata for categorizing or labeling videos.
         /// </summary>
-        public VimeoTags Tags => new VimeoTags(this);
+        public virtual VimeoTags Tags => new VimeoTags(this);
 
         /// <summary>
         /// Team Members
         /// </summary>
-        public VimeoTeamMembers TeamMembers => new VimeoTeamMembers(this);
+        public virtual VimeoTeamMembers TeamMembers => new VimeoTeamMembers(this);
 
         /// <summary>
         /// Videos
         /// </summary>
-        public VimeoVideos Videos => new VimeoVideos(this);
+        public virtual VimeoVideos Videos => new VimeoVideos(this);
 
         /// <summary>
         /// The Watch Later queue contains all the videos that a Vimeo member has flagged to watch later.
         /// </summary>
-        public VimeoWatchLaterQueue WatchLaterQueue => new VimeoWatchLaterQueue(this);
+        public virtual VimeoWatchLaterQueue WatchLaterQueue => new VimeoWatchLaterQueue(this);
 
         /// <summary>
         /// As you work with the Vimeo API, some common themes begin to emerge, with some common strategies for optimizing your success. 
         /// We've collected these here for your easy reference.
         /// </summary>
-        public VimeoCommonFormatsParameters CommonFormatsParameters => new VimeoCommonFormatsParameters(this);
+        public virtual VimeoCommonFormatsParameters CommonFormatsParameters => new VimeoCommonFormatsParameters(this);
 
         /// <summary>
         /// Invoke generic Get
@@ -320,7 +304,7 @@ namespace VimeoClient
         /// <typeparam name="T">Response's type</typeparam>
         /// <param name="uri">Uri to call</param>
         /// <returns></returns>
-        public RestResult<T> Get<T>(string uri) where T : new()
+        public virtual RestResult<T> Get<T>(string uri) where T : new()
             => RootAuthorization().Command(uri).Get<T>();
     }
 }
