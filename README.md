@@ -21,3 +21,4 @@ var user = client.Me.GetTheUser(); //myself
 var user = client.Users.GetTheUser(userId); //other users
 ```
 
+The library is working in progress.
