@@ -175,12 +175,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Group>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Group>>();
             }
 
             return result;
@@ -329,12 +333,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Group>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Group>>();
             }
 
             return result;
@@ -393,12 +401,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Group>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Group>>();
             }
 
             return result;
@@ -459,12 +471,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<User>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<User>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<User>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<User>>();
             }
 
             return result;
@@ -564,12 +580,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Video>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Video>>();
             }
 
             return result;

@@ -422,12 +422,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Category>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Category>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Category>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Category>>();
             }
 
             return result;
@@ -517,12 +521,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Video>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Video>>();
             }
 
             return result;

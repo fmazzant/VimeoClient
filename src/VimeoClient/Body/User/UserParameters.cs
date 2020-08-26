@@ -33,7 +33,7 @@ namespace VimeoClient.Body
     /// <summary>
     /// User Edit Parameters
     /// </summary>
-    public class UserEditParameters : IEditParameters
+    public class UserEditParameters
     {
         public string AvailableForHire { get; set; }
         public string Bio { get; set; }
@@ -57,39 +57,5 @@ namespace VimeoClient.Body
         public string Unlisted { get; set; }
         public string Users { get; set; }
         public string VideosPrivacyDownload { get; internal set; }
-
-        /// <summary>
-        /// Convert object to key value pair enumerable 
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
-        {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-
-            dict.Add("available_for_hire", this.AvailableForHire);
-            dict.Add("bio", this.Bio);
-            dict.Add("content_filter", this.ContentFilter);
-            dict.Add("gender", this.Gender);
-            dict.Add("link", this.Link);
-            dict.Add("name", this.Name);
-            dict.Add("password", this.Password);
-            dict.Add("grid", this.Grid);
-            dict.Add("masonry", this.Masonry);
-            dict.Add("profile_preferences", this.ProfilePreferences);
-            dict.Add("videos_privacy_add", this.VideosPrivacyAdd);
-            dict.Add("videos_privacy_comments", this.VideosPrivacyComments);
-            dict.Add("anybody", this.Anybody);
-            dict.Add("contacts", this.Contacts);
-            dict.Add("nobody", this.Nobody);
-            dict.Add("videos_privacy_embed", this.VideosPrivacyEmbed);
-            dict.Add("whitelist", this.Whitelist);
-            dict.Add("videos_privacy_view", this.VideosPrivacyView);
-            dict.Add("disable", this.Disable);
-            dict.Add("unlisted", this.Unlisted);
-            dict.Add("users", this.Users);
-            dict.Add("videos_privacy_download", this.VideosPrivacyDownload);
-
-            return dict;
-        }
     }
 }

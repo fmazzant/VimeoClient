@@ -159,12 +159,16 @@ namespace VimeoClient.Common
 
             if (result.Content.Paging?.Next != null)
             {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Presets>>();
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<Presets>>();
             }
 
             if (result.Content.Paging?.Previous != null)
             {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Presets>>();
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<Presets>>();
             }
 
             return result;
