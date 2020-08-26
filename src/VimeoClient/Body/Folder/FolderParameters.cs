@@ -61,13 +61,31 @@ namespace VimeoClient.Body.Folder
     /// </summary>
     public class FolderEditParameters : IEditParameters
     {
+        /// <summary>
+        /// Name
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Incoming webhooksid
+        /// </summary>
         public int IncomingWebhooksId { get; set; }
+
+        /// <summary>
+        /// Language preferences
+        /// </summary>
         public FolderLanguagePreference LanguagePreferences { get; set; } = FolderLanguagePreference.en;
 
+        /// <summary>
+        /// User preferences
+        /// </summary>
         public List<FolderUserPreference> UserPreferences { get; set; }
             = new List<FolderUserPreference>();
 
+        /// <summary>
+        /// Convert object to key value pair enumerable 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();

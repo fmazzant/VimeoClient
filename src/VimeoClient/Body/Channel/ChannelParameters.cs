@@ -58,23 +58,42 @@ namespace VimeoClient.Body.Channel
 
 
     /// <summary>
-    /// 
+    /// The channeò edit object.
     /// </summary>
     public class ChannelEditParameters : IEditParameters
     {
-        public string name { get; set; }
-        public ChannelVimeoPrivacy privacy { get; set; }
-        public string description { get; set; }
-        public string link { get; set; }
+        /// <summary>
+        /// Name of channel
+        /// </summary>
+        public string Name { get; set; }
 
+        /// <summary>
+        /// Privacy
+        /// </summary>
+        public ChannelVimeoPrivacy Privacy { get; set; }
+
+        /// <summary>
+        /// Description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Link
+        /// </summary>
+        public string Link { get; set; }
+
+        /// <summary>
+        /// Convert object to key value pair enumerable 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
         {
             Dictionary<string, string> dict = new Dictionary<string, string>();
 
-            dict.Add("name", this.name);
-            dict.Add("privacy", this.privacy.ToString());
-            dict.Add("description", this.description);
-            dict.Add("link", this.link);
+            dict.Add("name", this.Name);
+            dict.Add("privacy", this.Privacy.ToString());
+            dict.Add("description", this.Description);
+            dict.Add("link", this.Link);
 
             return dict;
         }

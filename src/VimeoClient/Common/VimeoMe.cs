@@ -97,28 +97,28 @@ namespace VimeoClient.Common
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
-                pars.Add("available_for_hire", body.available_for_hire);
-                pars.Add("bio", body.bio);
-                pars.Add("content_filter", body.content_filter);
-                pars.Add("gender", body.gender);
-                pars.Add("link", body.link);
-                pars.Add("name", body.name);
-                pars.Add("password", body.password);
-                pars.Add("grid", body.grid);
-                pars.Add("masonry", body.masonry);
-                pars.Add("profile_preferences", body.profile_preferences);
-                pars.Add("videos.privacy.add", body.videos_privacy_add);
-                pars.Add("videos.privacy.comments", body.videos_privacy_comments);
-                pars.Add("anybody", body.anybody);
-                pars.Add("contacts", body.contacts);
-                pars.Add("nobody", body.nobody);
-                pars.Add("videos.privacy.download", body.videos_privacy_download);
-                pars.Add("videos.privacy.embed", body.videos_privacy_embed);
-                pars.Add("whitelist", body.whitelist);
-                pars.Add("videos.privacy.view", body.videos_privacy_view);
-                pars.Add("disable", body.disable);
-                pars.Add("unlisted", body.unlisted);
-                pars.Add("users", body.users);
+                pars.Add("available_for_hire", body.AvailableForHire);
+                pars.Add("bio", body.Bio);
+                pars.Add("content_filter", body.ContentFilter);
+                pars.Add("gender", body.Gender);
+                pars.Add("link", body.Link);
+                pars.Add("name", body.Name);
+                pars.Add("password", body.Password);
+                pars.Add("grid", body.Grid);
+                pars.Add("masonry", body.Masonry);
+                pars.Add("profile_preferences", body.ProfilePreferences);
+                pars.Add("videos.privacy.add", body.VideosPrivacyAdd);
+                pars.Add("videos.privacy.comments", body.VideosPrivacyComments);
+                pars.Add("anybody", body.Anybody);
+                pars.Add("contacts", body.Contacts);
+                pars.Add("nobody", body.Nobody);
+                pars.Add("videos.privacy.download", body.VideosPrivacyDownload);
+                pars.Add("videos.privacy.embed", body.VideosPrivacyEmbed);
+                pars.Add("whitelist", body.Whitelist);
+                pars.Add("videos.privacy.view", body.VideosPrivacyView);
+                pars.Add("disable", body.Disable);
+                pars.Add("unlisted", body.Unlisted);
+                pars.Add("users", body.Users);
             })
             .Patch<User>();
 

@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿
+using System.Collections.Generic;
+/// <summary>
 /// 
 /// The MIT License (MIT)
 /// 
@@ -26,35 +28,68 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-
 namespace VimeoClient.Body
 {
     /// <summary>
     /// User Edit Parameters
     /// </summary>
-    public class UserEditParameters
+    public class UserEditParameters : IEditParameters
     {
-        public string available_for_hire { get; set; }
-        public string bio { get; set; }
-        public string content_filter { get; set; }
-        public string gender { get; set; }
-        public string link { get; set; }
-        public string name { get; set; }
-        public string password { get; set; }
-        public string grid { get; set; }
-        public string masonry { get; set; }
-        public string profile_preferences { get; set; }
-        public string videos_privacy_add { get; set; }
-        public string videos_privacy_comments { get; set; }
-        public string anybody { get; set; }
-        public string contacts { get; set; }
-        public string nobody { get; set; }
-        public string videos_privacy_embed { get; set; }
-        public string whitelist { get; set; }
-        public string videos_privacy_view { get; set; }
-        public string disable { get; set; }
-        public string unlisted { get; set; }
-        public string users { get; set; }
-        public string videos_privacy_download { get; internal set; }
+        public string AvailableForHire { get; set; }
+        public string Bio { get; set; }
+        public string ContentFilter { get; set; }
+        public string Gender { get; set; }
+        public string Link { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public string Grid { get; set; }
+        public string Masonry { get; set; }
+        public string ProfilePreferences { get; set; }
+        public string VideosPrivacyAdd { get; set; }
+        public string VideosPrivacyComments { get; set; }
+        public string Anybody { get; set; }
+        public string Contacts { get; set; }
+        public string Nobody { get; set; }
+        public string VideosPrivacyEmbed { get; set; }
+        public string Whitelist { get; set; }
+        public string VideosPrivacyView { get; set; }
+        public string Disable { get; set; }
+        public string Unlisted { get; set; }
+        public string Users { get; set; }
+        public string VideosPrivacyDownload { get; internal set; }
+
+        /// <summary>
+        /// Convert object to key value pair enumerable 
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+
+            dict.Add("available_for_hire", this.AvailableForHire);
+            dict.Add("bio", this.Bio);
+            dict.Add("content_filter", this.ContentFilter);
+            dict.Add("gender", this.Gender);
+            dict.Add("link", this.Link);
+            dict.Add("name", this.Name);
+            dict.Add("password", this.Password);
+            dict.Add("grid", this.Grid);
+            dict.Add("masonry", this.Masonry);
+            dict.Add("profile_preferences", this.ProfilePreferences);
+            dict.Add("videos_privacy_add", this.VideosPrivacyAdd);
+            dict.Add("videos_privacy_comments", this.VideosPrivacyComments);
+            dict.Add("anybody", this.Anybody);
+            dict.Add("contacts", this.Contacts);
+            dict.Add("nobody", this.Nobody);
+            dict.Add("videos_privacy_embed", this.VideosPrivacyEmbed);
+            dict.Add("whitelist", this.Whitelist);
+            dict.Add("videos_privacy_view", this.VideosPrivacyView);
+            dict.Add("disable", this.Disable);
+            dict.Add("unlisted", this.Unlisted);
+            dict.Add("users", this.Users);
+            dict.Add("videos_privacy_download", this.VideosPrivacyDownload);
+
+            return dict;
+        }
     }
 }
