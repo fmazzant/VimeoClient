@@ -90,6 +90,5 @@ namespace VimeoClient.Filter.Video
         /// Sort the results by number of plays.
         /// </summary>
         plays
-
     }
 }
