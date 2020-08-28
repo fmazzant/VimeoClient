@@ -21,4 +21,4 @@ var user = client.Me.GetTheUser(); //myself
 var user = client.Users.GetTheUser(userId); //other users
 ```
 
-The library is working in progress.
+The library in temporary status and it is working in progress.
