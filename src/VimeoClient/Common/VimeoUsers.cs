@@ -34,6 +34,7 @@ namespace VimeoClient.Common
     using VimeoClient.Body;
     using VimeoClient.Filter.User;
     using VimeoClient.Model;
+    using VimeoClient.Response;
 
     /// <summary>
     /// These are the most common methods for working with users.
@@ -90,7 +91,7 @@ namespace VimeoClient.Common
         /// <param name="user_id"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public virtual RestResult<string> EditTheUser(int user_id, UserEditParameters body) => RootUserAuthorization()
+        public virtual RestResult<User> EditTheUser(int user_id, UserEditParameters body) => RootUserAuthorization()
             .Command(user_id)
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -118,7 +119,7 @@ namespace VimeoClient.Common
                 pars.Add("unlisted", body.Unlisted);
                 pars.Add("users", body.Users);
             })
-            .Patch();
+            .Patch<User>();
 
         /// <summary>
         /// This method returns the authenticated user.
@@ -139,9 +140,9 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheVideosInTheUserFeed(int user_id) => RootUserAuthorization()
+        public virtual RestResult<Activity> GetAllTheVideosInTheUserFeed(int user_id) => RootUserAuthorization()
             .Command($"/{user_id}/feed")
-            .Get();
+            .Get<Activity>();
 
         /// <summary>
         /// This method returns every video in the authenticated user's feed.
@@ -152,12 +153,12 @@ namespace VimeoClient.Common
         /// <param name="page"></param>
         /// <param name="per_page"></param>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheVideosInTheUserFeed(int user_id, string offset, string page, string per_page) => RootUserAuthorization()
+        public virtual RestResult<Activity> GetAllTheVideosInTheUserFeed(int user_id, string offset, string page, string per_page) => RootUserAuthorization()
             .Command($"/{user_id}/feed")
             .Parameter("offset", offset)
             .Parameter("page", page)
             .Parameter("per_page", per_page)
-            .Get();
+            .Get<Activity>();
         #endregion
 
         #region[ FOLLOERS ]
@@ -169,7 +170,7 @@ namespace VimeoClient.Common
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> CheckIfTheUserIsFollowingAnotherUser(int follow_user_id, int user_id) => RootUserAuthorization()
+        public virtual RestResult CheckIfTheUserIsFollowingAnotherUser(int follow_user_id, int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Command(follow_user_id)
@@ -181,7 +182,7 @@ namespace VimeoClient.Common
         /// where user01_id, user02_id, user03_id, and so on, are the user IDs of the users in question:
         /// </summary>
         /// <returns></returns>
-        public virtual RestResult<string> FollowAListOfUsers(int user_id) => RootUserAuthorization()
+        public virtual RestResult FollowAListOfUsers(int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Post();
@@ -193,7 +194,7 @@ namespace VimeoClient.Common
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> FollowASpecificUser(int follow_user_id, int user_id) => RootUserAuthorization()
+        public virtual RestResult FollowASpecificUser(int follow_user_id, int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Command(follow_user_id)
@@ -204,10 +205,10 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheFollowersOfTheUser(int user_id) => RootUserAuthorization()
+        public virtual RestResult<User> GetAllTheFollowersOfTheUser(int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/followers")
-            .Get();
+            .Get<User>();
 
         /// <summary>
         /// This method returns every follower of the authenticated user.
@@ -230,7 +231,7 @@ namespace VimeoClient.Common
         ///     date
         /// </param>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheFollowersOfTheUserWithPaging(int user_id,
+        public virtual RestResult<Pagination<User>> GetAllTheFollowersOfTheUserWithPaging(int user_id,
             UserDirection? direction,
             int? page,
             int? per_page,
@@ -266,7 +267,23 @@ namespace VimeoClient.Common
                 builder = builder.Parameter("sort", sort);
             }
 
-            return builder.Get();
+            var result = builder.Get<Pagination<User>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<User>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<User>>();
+            }
+
+            return result;
         }
 
 
@@ -275,10 +292,10 @@ namespace VimeoClient.Common
         /// GET https://api.vimeo.com/users/{user_id}/following
         /// </summary>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheUsersThatTheUserIsFollowing(int user_id) => RootUserAuthorization()
+        public virtual RestResult<Pagination<User>> GetAllTheUsersThatTheUserIsFollowing(int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
-            .Get();
+            .Get<Pagination<User>>();
 
         /// <summary>
         /// This method returns every follower of the authenticated user.
@@ -306,7 +323,7 @@ namespace VimeoClient.Common
         ///     date
         /// </param>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllTheUsersThatTheUserIsFollowing(int user_id,
+        public virtual RestResult<Pagination<User>> GetAllTheUsersThatTheUserIsFollowing(int user_id,
             UserDirection? direction,
             string filter,
             int? page,
@@ -348,7 +365,23 @@ namespace VimeoClient.Common
                 builder = builder.Parameter("sort", sort);
             }
 
-            return builder.Get();
+            var result = builder.Get<Pagination<User>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<User>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<User>>();
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -358,7 +391,7 @@ namespace VimeoClient.Common
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> UnfollowAUser(int follow_user_id, int user_id) => RootUserAuthorization()
+        public virtual RestResult UnfollowAUser(int follow_user_id, int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Command(follow_user_id)
@@ -375,19 +408,18 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
-        public virtual RestResult<string> AddPictureToTheUserAccount(int user_id, byte[] image) => RootUserAuthorization()
+        public virtual RestResult<Picture> AddPictureToTheUserAccount(int user_id, byte[] image) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Payload(image)
-            .Post();
-
+            .Post<Picture>();
 
         /// <summary>
         /// This method removes the specified portrait image from the authenticated user's Vimeo account.
         /// </summary>
         /// <param name="portraitset_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> DeletePictureFromTheUserAccount(int user_id, int portraitset_id) => RootUserAuthorization()
+        public virtual RestResult DeletePictureFromTheUserAccount(int user_id, int portraitset_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Command(portraitset_id)
@@ -399,32 +431,32 @@ namespace VimeoClient.Common
         /// <param name="portraitset_id"></param>
         /// <param name="active"></param>
         /// <returns></returns>
-        public virtual RestResult<string> EditPictureInTheUserAaccount(int user_id, int portraitset_id, bool active) => RootUserAuthorization()
+        public virtual RestResult<Picture> EditPictureInTheUserAaccount(int user_id, int portraitset_id, bool active) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Command(portraitset_id)
             .Parameter("active", active)
-            .Patch();
+            .Patch<Picture>();
 
         /// <summary>
         /// This method returns a single portrait image belonging to the authenticated user.
         /// </summary>
         /// <param name="portraitset_id"></param>
         /// <returns></returns>
-        public virtual RestResult<string> GetSpecificPictureThatBelongsToTheUser(int user_id, int portraitset_id) => RootUserAuthorization()
+        public virtual RestResult<Picture> GetSpecificPictureThatBelongsToTheUser(int user_id, int portraitset_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Command(portraitset_id)
-            .Get();
+            .Get<Picture>();
 
         /// <summary>
         /// This method returns every portrait image belonging to the authenticated user.
         /// </summary>
         /// <returns></returns>
-        public virtual RestResult<string> GetAllThePicturesThatBelongToTheUser(int user_id) => RootUserAuthorization()
+        public virtual RestResult<Pagination<Picture>> GetAllThePicturesThatBelongToTheUser(int user_id) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
-            .Get();
+            .Get<Pagination<Picture>>();
 
         #endregion
 
@@ -439,7 +471,7 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public virtual RestResult<string> SearchForUsers(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null)
+        public virtual RestResult<Pagination<User>> SearchForUsers(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null)
         {
             var root = RootUserAuthorization();
 
@@ -465,7 +497,23 @@ namespace VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            return root.Get();
+            var result = root.Get<Pagination<User>>();
+
+            if (result.Content.Paging?.Next != null)
+            {
+                result.Content.NextAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Next)
+                    .Get<Pagination<User>>();
+            }
+
+            if (result.Content.Paging?.Previous != null)
+            {
+                result.Content.PreviousAction = () => RootAuthorization()
+                    .Command(result.Content.Paging.Previous)
+                    .Get<Pagination<User>>();
+            }
+
+            return result;
         }
 
         #endregion
