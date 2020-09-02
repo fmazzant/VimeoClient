@@ -29,67 +29,24 @@
 
 namespace VimeoClient.Response
 {
-    using RestClient.Generic;
-    using System;
-    using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
     /// <summary>
-    /// Represents a pagination list of entities.
+    /// Represents a vimeo list of entities
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Pagination<T>
+    public class VimeoList<T>
     {
         /// <summary>
-        /// total elements
+        /// total of entities
         /// </summary>
         [JsonPropertyName("total")]
         public int Total { get; set; }
 
         /// <summary>
-        /// current page
-        /// </summary>
-        [JsonPropertyName("page")]
-        public int Page { get; set; }
-
-        /// <summary>
-        /// Element per page
-        /// </summary>
-        [JsonPropertyName("per_page")]
-        public int PerPage { get; set; }
-
-        /// <summary>
-        /// Paging
-        /// </summary>
-        [JsonPropertyName("paging")]
-        public Paging Paging { get; set; }
-
-        /// <summary>
-        /// Data
+        /// data
         /// </summary>
         [JsonPropertyName("data")]
-        public List<T> Data { get; set; }
-
-        /// <summary>
-        /// Next Action
-        /// </summary>
-        internal Func<RestResult<Pagination<T>>> NextAction { get; set; } = new Func<RestResult<Pagination<T>>>(() => { return null; });
-
-        /// <summary>
-        /// Go to Next page if it is exists
-        /// </summary>
-        /// <returns></returns>
-        public RestResult<Pagination<T>> Next() => NextAction();
-
-        /// <summary>
-        /// Previous Action
-        /// </summary>
-        internal Func<RestResult<Pagination<T>>> PreviousAction { get; set; } = new Func<RestResult<Pagination<T>>>(() => { return null; });
-
-        /// <summary>
-        /// Go to previuous oage if it is existes
-        /// </summary>
-        /// <returns></returns>
-        public RestResult<Pagination<T>> Previous() => PreviousAction();
+        public T[] Data { get; set; }
     }
 }
