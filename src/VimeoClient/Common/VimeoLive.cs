@@ -74,6 +74,15 @@ namespace VimeoClient.Common
 
         #region [ Essentials ]
         //Create a live event
+        public RestResult CreateALiveEvent(int user_id) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events")
+            .Post();
+
+        public RestResult CreateALiveEvent() => RootAuthorization()
+           .Command($"/me/live_events")
+           .Post();
+
+
         //Delete a list of live events
         //Delete a specific live event
         //Get a specific live event
