@@ -1,6 +1,6 @@
 # VimeoClient
 
-VimeoClient is a extendible .NET wrapper for Vimeo API v3.1.
+VimeoClient is a extendible .NET wrapper for Vimeo API v3.2.
 
 By Mafe.RestClient library it can be possible to develop a vimeo webapi call.
 
