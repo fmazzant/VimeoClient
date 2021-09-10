@@ -30,6 +30,8 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using RestClient.Generic;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Videos
@@ -73,9 +75,27 @@ namespace VimeoClient.Common
 
         #region [ Essentials ]
         //Check if the user owns a video
-        //Delete a video
+
+        /// <summary>
+        /// This method deletes the specified video. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public virtual RestResult DeleteVideo(int video_id) => RootAuthorization()
+           .Command($"/videos/{video_id}")
+           .Delete();
+
         //Edit a video
-        //Get a specific video
+
+        /// <summary>
+        /// This method returns a single video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>The video was returned.</returns>
+        public virtual RestResult<Video> GetSpecificVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}")
+            .Get<Video>();
+
         //Get all the videos in which the user appears
         //Get all the videos that the user has uploaded
         //Search for videos
