@@ -14,9 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="VimeoKeys.Customer.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="VimeoKeys.Test.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
