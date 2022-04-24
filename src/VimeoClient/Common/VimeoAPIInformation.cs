@@ -87,6 +87,6 @@ namespace VimeoClient.Common
         /// <returns>
         /// <list type="200">200 OK	Standard request.</list>
         /// </returns>
-        public virtual RestResult<APIApp> GetTheAPISpecification() => GetTheAPISpecificationAsync().Result;
+        public virtual RestResult<APIApp> GetTheAPISpecification() => GetTheAPISpecificationAsync().GetAwaiter().GetResult();
     }
 }
