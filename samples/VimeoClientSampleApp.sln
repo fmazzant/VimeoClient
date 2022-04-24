@@ -2,8 +2,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VimeoClientSampleApp", "VimeoClientSampleApp\VimeoClientSampleApp.csproj", "{4F35692D-6FC2-4378-B49C-8CBD096469A4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VimeoClient", "..\src\VimeoClient\VimeoClient.csproj", "{A67FF0C9-44D5-44E7-A101-184C4BC8EED5}"
 EndProject
 Global
@@ -12,10 +10,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4F35692D-6FC2-4378-B49C-8CBD096469A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F35692D-6FC2-4378-B49C-8CBD096469A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F35692D-6FC2-4378-B49C-8CBD096469A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F35692D-6FC2-4378-B49C-8CBD096469A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A67FF0C9-44D5-44E7-A101-184C4BC8EED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A67FF0C9-44D5-44E7-A101-184C4BC8EED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A67FF0C9-44D5-44E7-A101-184C4BC8EED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
