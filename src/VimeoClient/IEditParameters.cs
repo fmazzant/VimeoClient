@@ -32,7 +32,7 @@ namespace VimeoClient
     using System.Collections.Generic;
 
     /// <summary>
-    /// 
+    /// The Edit Parameters interface
     /// </summary>
     public interface IEditParameters
     {

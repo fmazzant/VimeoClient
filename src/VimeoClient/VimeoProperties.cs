@@ -40,7 +40,7 @@ namespace VimeoClient
         /// 
         /// </summary>
         public string ClientId { get; set; }
-         = string.Empty;
+            = string.Empty;
 
         /// <summary>
         /// 
@@ -64,7 +64,7 @@ namespace VimeoClient
         /// https://api.vimeo.com
         /// </summary>
         public string EndPoint { get; set; }
-         = "https://api.vimeo.com";
+            = "https://api.vimeo.com";
 
         /// <summary>
         /// If debug mode the debug is true

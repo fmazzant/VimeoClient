@@ -34,15 +34,54 @@ namespace VimeoClient
     /// </summary>
     public static class VimeoScope
     {
-        public const string PUBLIC = "public";//* Access public member data.
-        public const string PRIVATE = "private";//†	Access private member data.
-        public const string PURCHASED = "purchased";//   Access a member's Vimeo On Demand purchase history.
-        public const string CREATE = "create";// Create new Vimeo resources like showcases, groups, channels, and portfolios.To create new videos, you need the upload scope.
-        public const string EDIT = "edit";// Edit existing Vimeo resources, including videos.
-        public const string DELETE = "delete";//  Delete existing Vimeo resources, including videos.
-        public const string INTERACT = "interact";// Interact with Vimeo resources, such as liking a video or following a member.
-        public const string PUBUPLOAD = "upload";// Upload videos.
-        public const string PROMO_CODES = "promo_codes";// Add, remove, and review Vimeo On Demand promotions.
-        public const string VIDEO_FILES = "video_files";// Access video files belonging to members with Vimeo Pro membership or higher.
+        /// <summary>
+        /// Access public member data.
+        /// </summary>
+        public const string PUBLIC = "public";
+
+        /// <summary>
+        /// Access private member data.
+        /// </summary>
+        public const string PRIVATE = "private";
+
+        /// <summary>
+        /// Access a member's Vimeo On Demand purchase history.
+        /// </summary>
+        public const string PURCHASED = "purchased";
+
+        /// <summary>
+        /// Create new Vimeo resources like showcases, groups, channels, and portfolios.To create new videos, you need the upload scope.
+        /// </summary>
+        public const string CREATE = "create";
+
+        /// <summary>
+        /// Edit existing Vimeo resources, including videos.
+        /// </summary>
+        public const string EDIT = "edit";
+
+        /// <summary>
+        /// Delete existing Vimeo resources, including videos.
+        /// </summary>
+        public const string DELETE = "delete";
+
+        /// <summary>
+        /// Interact with Vimeo resources, such as liking a video or following a member.
+        /// </summary>
+        public const string INTERACT = "interact";
+
+        /// <summary>
+        /// Upload videos.
+        /// </summary>
+        public const string PUBUPLOAD = "upload";
+
+        /// <summary>
+        /// Add, remove, and review Vimeo On Demand promotions.
+        /// </summary>
+        public const string PROMO_CODES = "promo_codes";
+
+        /// <summary>
+        /// Access video files belonging to members with Vimeo Pro membership or higher.
+        /// </summary>
+        public const string VIDEO_FILES = "video_files";// 
     }
 }

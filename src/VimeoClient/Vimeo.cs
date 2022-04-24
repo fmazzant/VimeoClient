@@ -52,7 +52,6 @@ namespace VimeoClient
         /// Properites
         /// </summary>
         public VimeoProperties Properties { get; private set; }
-            = new VimeoProperties { };
 
         /// <summary>
         /// Creates an instance
