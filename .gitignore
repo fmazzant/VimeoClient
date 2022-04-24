@@ -20,3 +20,6 @@
 /samples/VimeoClientSampleApp/obj
 /samples/.vs/VimeoClientSampleApp
 /samples/VimeoClientSampleApp/bin/Debug/net5.0
+/samples/VimeoClientSampleAppKeys/obj
+/samples/VimeoClientSampleApp/VimeoKeys.Customer.csv
+/samples/VimeoClientSampleApp/VimeoKeys.Test.csv
