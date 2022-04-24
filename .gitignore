@@ -17,3 +17,6 @@
 /src/VimeoClient/obj
 /src/VimeoClientConsole
 /src/.vs
+/samples/VimeoClientSampleApp/obj
+/samples/.vs/VimeoClientSampleApp
+/samples/VimeoClientSampleApp/bin/Debug/net5.0
