@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿
+using System.Text.Json.Serialization;
+/// <summary>
 /// 
 /// The MIT License (MIT)
 /// 
@@ -26,9 +28,7 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-
 namespace VimeoClient.Model
 {
     public class LiveEventRecurring { }
-
 }

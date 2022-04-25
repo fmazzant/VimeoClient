@@ -30,7 +30,9 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using RestClient.Generic;
     using VimeoClient.Body.Live;
+    using VimeoClient.Model;
 
     /// <summary>
     /// Please note that Vimeo's live API is available only to Vimeo Enterprise customers. 
@@ -75,40 +77,15 @@ namespace VimeoClient.Common
 
         #region [ Essentials ]
         //Create a live event
-        public RestResult CreateALiveEvent(int user_id, LiveParameters parameters) => RootAuthorization()
+        public RestResult<LiveEventRecurring> CreateALiveEvent(int user_id, LiveParameters parameters) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
-            .EnableFormUrlEncoded(true)
-            .FormUrlEncoded((pars) =>
-            {
-                if (parameters != null)
-                {
-                    foreach (var item in parameters.ToEnumerable())
-                    {
-                        if (item.Value != null)
-                        {
-                            pars.Add(item.Key, item.Value);
-                        }
-                    }
-                }
-            })
-            .Post();
-        public RestResult CreateALiveEvent(LiveParameters parameters) => RootAuthorization()
+            .Payload(parameters)
+            .Post<LiveEventRecurring>();
+        
+        public RestResult<LiveEventRecurring> CreateALiveEvent(LiveParameters parameters) => RootAuthorization()
            .Command($"/me/live_events")
-            .EnableFormUrlEncoded(true)
-            .FormUrlEncoded((pars) =>
-            {
-                if (parameters != null)
-                {
-                    foreach (var item in parameters.ToEnumerable())
-                    {
-                        if (item.Value != null)
-                        {
-                            pars.Add(item.Key, item.Value);
-                        }
-                    }
-                }
-            })
-           .Post();
+           .Payload(parameters)
+           .Post<LiveEventRecurring>();
 
         //Delete a list of live events
         //Delete a specific live event
