@@ -30,6 +30,7 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using VimeoClient.Body.Live;
 
     /// <summary>
     /// Please note that Vimeo's live API is available only to Vimeo Enterprise customers. 
@@ -74,12 +75,40 @@ namespace VimeoClient.Common
 
         #region [ Essentials ]
         //Create a live event
-        public RestResult CreateALiveEvent(int user_id) => RootAuthorization()
+        public RestResult CreateALiveEvent(int user_id, LiveParameters parameters) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((pars) =>
+            {
+                if (parameters != null)
+                {
+                    foreach (var item in parameters.ToEnumerable())
+                    {
+                        if (item.Value != null)
+                        {
+                            pars.Add(item.Key, item.Value);
+                        }
+                    }
+                }
+            })
             .Post();
 
-        public RestResult CreateALiveEvent() => RootAuthorization()
+        public RestResult CreateALiveEvent(LiveParameters parameters) => RootAuthorization()
            .Command($"/me/live_events")
+            .EnableFormUrlEncoded(true)
+            .FormUrlEncoded((pars) =>
+            {
+                if (parameters != null)
+                {
+                    foreach (var item in parameters.ToEnumerable())
+                    {
+                        if (item.Value != null)
+                        {
+                            pars.Add(item.Key, item.Value);
+                        }
+                    }
+                }
+            })
            .Post();
 
         //Delete a list of live events
