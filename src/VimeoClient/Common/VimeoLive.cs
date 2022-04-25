@@ -92,7 +92,6 @@ namespace VimeoClient.Common
                 }
             })
             .Post();
-
         public RestResult CreateALiveEvent(LiveParameters parameters) => RootAuthorization()
            .Command($"/me/live_events")
             .EnableFormUrlEncoded(true)
