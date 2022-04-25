@@ -82,7 +82,6 @@ namespace VimeoClient.Common
            .Command($"/me/live_events")
            .Post();
 
-
         //Delete a list of live events
         //Delete a specific live event
         //Get a specific live event
