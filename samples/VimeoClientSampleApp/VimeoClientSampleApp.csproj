@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mafe.TinyCsv" Version="1.0.0-preview1" />
+    <PackageReference Include="Mafe.TinyCsv" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
