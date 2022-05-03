@@ -134,7 +134,6 @@ namespace VimeoClient.Body.Live
         public Schedule Schedule { get; set; }
 
 
-
         /// <summary>
         /// Convert object to key value pair enumerable 
         /// </summary>
