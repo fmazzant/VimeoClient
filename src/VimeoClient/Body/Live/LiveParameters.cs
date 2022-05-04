@@ -88,7 +88,9 @@ namespace VimeoClient.Body.Live
         plays,
     }
 
-
+    /// <summary>
+    /// The live edit object.
+    /// </summary>
     public class LiveParameters : IEditParameters
     {
         /// <summary>

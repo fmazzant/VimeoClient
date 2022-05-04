@@ -58,7 +58,7 @@ namespace VimeoClient.Body.Channel
 
 
     /// <summary>
-    /// The channeò edit object.
+    /// The channel edit object.
     /// </summary>
     public class ChannelEditParameters : IEditParameters
     {

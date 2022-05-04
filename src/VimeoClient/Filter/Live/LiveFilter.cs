@@ -55,4 +55,41 @@ namespace VimeoClient.Filter.Live
         /// </summary>
         not_in_folder
     }
+
+    /// <summary>
+    /// The way to sort the results
+    /// </summary>
+    public enum LiveSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by creation date.
+        /// </summary>
+        date
+    }
+
+    /// <summary>
+    /// The type of event to return.
+    /// </summary>
+    public enum LiveType
+    {
+        /// <summary>
+        /// Return all events.
+        /// </summary>
+        all,
+
+        /// <summary>
+        /// Return one-time events only.
+        /// </summary>
+        one_time,
+
+        /// <summary>
+        /// Return recurring events only.
+        /// </summary>
+        recurring
+    }
 }
