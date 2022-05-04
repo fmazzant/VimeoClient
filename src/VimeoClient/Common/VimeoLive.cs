@@ -33,6 +33,7 @@ namespace VimeoClient.Common
     using RestClient.Generic;
     using System.Threading.Tasks;
     using VimeoClient.Body.Live;
+    using VimeoClient.Filter.Live;
     using VimeoClient.Model;
 
     /// <summary>
@@ -77,75 +78,180 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
-        //Create a live event
+
+        /// <summary>
+        /// This method creates a new live event for the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> CreateALiveEvent(int user_id, LiveParameters parameters) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
             .Payload(parameters)
             .PostAsync<LiveEventRecurring>();
 
+        /// <summary>
+        /// This method creates a new live event for the authenticated user.
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> CreateALiveEvent(LiveParameters parameters) => RootAuthorization()
            .Command($"/me/live_events")
            .Payload(parameters)
            .PostAsync<LiveEventRecurring>();
 
-        //Delete a list of live events
+        /// <summary>
+        /// This method deletes multiple live events belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
         public Task<RestResult<string>> DeleteListOfLiveEvents(int user_id) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
             .DeleteAsync();
 
+        /// <summary>
+        /// This method deletes multiple live events belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
         public Task<RestResult<string>> DeleteListOfLiveEvents() => RootAuthorization()
            .Command($"/live_events")
            .DeleteAsync();
 
+        /// <summary>
+        /// This method deletes multiple live events belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
         public Task<RestResult<string>> DeleteMeListOfLiveEvents() => RootAuthorization()
            .Command($"/me/live_events")
            .DeleteAsync();
 
-        //Delete a specific live event
+        /// <summary>
+        /// This method deletes a single live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<string>> DeleteSpecificLiveEvent(int user_id, int live_event_id) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}")
             .DeleteAsync();
 
+        /// <summary>
+        /// This method deletes a single live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<string>> DeleteSpecificLiveEvent(int live_event_id) => RootAuthorization()
             .Command($"/users/live_events/{live_event_id}")
             .DeleteAsync();
 
+        /// <summary>
+        /// This method deletes a single live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<string>> DeleteMeSpecificLiveEvent(int live_event_id) => RootAuthorization()
            .Command($"/me/users/live_events/{live_event_id}")
            .DeleteAsync();
 
-        //Get a specific live event
+        /// <summary>
+        /// This method returns a single live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStream(int user_id, int live_event_id) => RootAuthorization()
             .Command($"/{user_id}/live_events/{live_event_id}")
             .GetAsync<LiveEventRecurring>();
 
+        /// <summary>
+        /// This method returns a single live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStream(int live_event_id) => RootAuthorization()
             .Command($"/live_events/{live_event_id}")
             .GetAsync<LiveEventRecurring>();
 
+        /// <summary>
+        /// This method returns a single live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> GetMeSpecificLiveStream(int live_event_id) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
             .GetAsync<LiveEventRecurring>();
 
 
-        //Get all the live events that belong to the user
-        public Task<RestResult<LiveEventRecurring>> GetAllTheLiveEvents(int user_id) => RootAuthorization()
+        /// <summary>
+        /// The method returns every live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<LiveEventRecurring>> GetAllTheLiveEvents(int user_id,
+            LiveDirection? direction = null,
+            object filter = null,
+            object page = null,
+            object per_page = null,
+            object query = null,
+            object sort = null,
+            object type = null) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
             .GetAsync<LiveEventRecurring>();
-        public Task<RestResult<LiveEventRecurring>> GetAllTheLiveEvents() => RootAuthorization()
-            .Command($"/users/live_events")
+
+        /// <summary>
+        /// The method returns every live event belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public Task<RestResult<LiveEventRecurring>> GetAllTheLiveEvents(
+            LiveDirection? direction = null,
+            object filter = null,
+            object page = null,
+            object per_page = null,
+            object query = null,
+            object sort = null,
+            object type = null) => RootAuthorization()
+            .Command($"/live_events")
             .GetAsync<LiveEventRecurring>();
-        public Task<RestResult<LiveEventRecurring>> GetMeAllTheLiveEvents() => RootAuthorization()
+
+        /// <summary>
+        /// The method returns every live event belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public Task<RestResult<LiveEventRecurring>> GetMeAllTheLiveEvents(
+            LiveDirection? direction = null,
+            object filter = null,
+            object page = null,
+            object per_page = null,
+            object query = null,
+            object sort = null,
+            object type = null) => RootAuthorization()
             .Command($"/me/live_events")
             .GetAsync<LiveEventRecurring>();
 
-        //Update a live event
+        /// <summary>
+        /// This method updates a live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStream(int user_id, int live_event_id) => RootAuthorization()
            .Command($"/{user_id}/live_events/{live_event_id}")
            .PatchAsync<LiveEventRecurring>();
+
+        /// <summary>
+        /// This method updates a live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStream(int live_event_id) => RootAuthorization()
            .Command($"/live_events/{live_event_id}")
            .PatchAsync<LiveEventRecurring>();
+
+        /// <summary>
+        /// This method updates a live event belonging to the authenticated user.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStream(int live_event_id) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
             .PatchAsync<LiveEventRecurring>();
