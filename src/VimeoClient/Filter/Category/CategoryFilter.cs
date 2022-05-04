@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.Live
+namespace VimeoClient.Filter.Category
 {
     /// <summary>
     /// Description direction String  The sort direction of the results.Option descriptions:
@@ -185,7 +185,7 @@ namespace VimeoClient.Filter.Live
     /// <summary>
     /// The attribute by which to filter the results
     /// </summary>
-    public enum LiveFilter
+    public enum CategoryFilter
     {
         /// <summary>
         /// Return featured videos

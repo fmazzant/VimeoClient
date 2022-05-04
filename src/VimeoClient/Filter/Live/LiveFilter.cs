@@ -44,4 +44,15 @@ namespace VimeoClient.Filter.Live
         /// </summary>
         desc
     }
+
+    /// <summary>
+    /// The attribute by which to filter the results.
+    /// </summary>
+    public enum LiveFilter
+    {
+        /// <summary>
+        /// Show only events without any folder.
+        /// </summary>
+        not_in_folder
+    }
 }

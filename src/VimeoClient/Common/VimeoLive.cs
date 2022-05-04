@@ -219,7 +219,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> GetMeAllTheLiveEvents(
             LiveDirection? direction = null,
-            object filter = null,
+            LiveFilter? filter = null,
             object page = null,
             object per_page = null,
             object query = null,
