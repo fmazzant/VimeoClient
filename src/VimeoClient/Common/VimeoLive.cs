@@ -187,46 +187,46 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> GetAllTheLiveEvents(int user_id,
-            LiveDirection? direction = null,
-            object filter = null,
-            object page = null,
-            object per_page = null,
-            object query = null,
-            object sort = null,
-            object type = null) => RootAuthorization()
-            .Command($"/users/{user_id}/live_events")
-            .GetAsync<LiveEventRecurring>();
-
-        /// <summary>
-        /// The method returns every live event belonging to the authenticated user.
-        /// </summary>
-        /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> GetAllTheLiveEvents(
-            LiveDirection? direction = null,
-            object filter = null,
-            object page = null,
-            object per_page = null,
-            object query = null,
-            object sort = null,
-            object type = null) => RootAuthorization()
-            .Command($"/live_events")
-            .GetAsync<LiveEventRecurring>();
-
-        /// <summary>
-        /// The method returns every live event belonging to the authenticated user.
-        /// </summary>
-        /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> GetMeAllTheLiveEvents(
+        public Task<RestResult<LiveEvent>> GetAllTheLiveEvents(int user_id,
             LiveDirection? direction = null,
             LiveFilter? filter = null,
-            object page = null,
-            object per_page = null,
-            object query = null,
-            object sort = null,
-            object type = null) => RootAuthorization()
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            LiveSort? sort = null,
+            LiveType? type = null) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events")
+            .GetAsync<LiveEvent>();
+
+        /// <summary>
+        /// The method returns every live event belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public Task<RestResult<LiveEvent>> GetAllTheLiveEvents(
+            LiveDirection? direction = null,
+            LiveFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            LiveSort? sort = null,
+            LiveType? type = null) => RootAuthorization()
+            .Command($"/live_events")
+            .GetAsync<LiveEvent>();
+
+        /// <summary>
+        /// The method returns every live event belonging to the authenticated user.
+        /// </summary>
+        /// <returns></returns>
+        public Task<RestResult<LiveEvent>> GetMeAllTheLiveEvents(
+            LiveDirection? direction = null,
+            LiveFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            LiveSort? sort = null,
+            LiveType? type = null) => RootAuthorization()
             .Command($"/me/live_events")
-            .GetAsync<LiveEventRecurring>();
+            .GetAsync<LiveEvent>();
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
