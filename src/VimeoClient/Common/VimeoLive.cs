@@ -260,6 +260,16 @@ namespace VimeoClient.Common
 
         #region [ Embed privacy ]
         //Embed a recurring live event on one or more domains
+        // https://api.vimeo.com/users/{user_id}/live_events/{live_event_id}/privacy/domains
+        // https://api.vimeo.com/live_events/{live_event_id}/privacy/domains
+        // https://api.vimeo.com/me/live_events/{live_event_id}/privacy/domains
+
+        //public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id) => RootAuthorization()
+        //   .Command($"/{user_id}/live_events/{live_event_id}/privacy/domains")
+        //   .PutAsync<string>();
+
+
+
         //Get all the domains on which a recurring live event can be embedded
         #endregion
 
