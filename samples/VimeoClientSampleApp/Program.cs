@@ -34,6 +34,7 @@ namespace VimeoClientSampleApp
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using VimeoClient;
 
     public class CustomVimeoClient : VimeoClient.Vimeo
@@ -67,7 +68,7 @@ namespace VimeoClientSampleApp
 
     internal static class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             /// Load keys from csv file with Mafe.TinyCsv
             var csv = new TinyCsv.TinyCsv<VimeoKey>(options =>
@@ -80,7 +81,7 @@ namespace VimeoClientSampleApp
                 options.Columns.AddColumn(x => x.UserToken);
                 options.Columns.AddColumn(x => x.Cert);
             });
-            var vimeoKeys = csv.Load("../../../../../../VimeoClient.Keys.csv");
+            var vimeoKeys = await csv.LoadAsync("../../../../../../VimeoClient.Keys.csv");
 
             /// Get first key and create a vimeoClient instance
             var vimeoKey = vimeoKeys.FirstOrDefault();
