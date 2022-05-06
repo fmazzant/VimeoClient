@@ -259,16 +259,13 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Embed privacy ]
-        //Embed a recurring live event on one or more domains
-        // https://api.vimeo.com/users/{user_id}/live_events/{live_event_id}/privacy/domains
-        // https://api.vimeo.com/live_events/{live_event_id}/privacy/domains
-        // https://api.vimeo.com/me/live_events/{live_event_id}/privacy/domains
-
+     
         /// <summary>
         /// Embed a recurring live event on one or more domains
         /// </summary>
-        /// <param name="user_id"></param>
-        /// <param name="live_event_id"></param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <returns></returns>
         public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id, string[] domains = null) => RootAuthorization()
            .Command($"/{user_id}/live_events/{live_event_id}/privacy/domains")
@@ -277,7 +274,8 @@ namespace VimeoClient.Common
         /// <summary>
         /// Embed a recurring live event on one or more domains
         /// </summary>
-        /// <param name="live_event_id"></param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <returns></returns>
         public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/privacy/domains")
@@ -286,7 +284,8 @@ namespace VimeoClient.Common
         /// <summary>
         /// Embed a recurring live event on one or more domains
         /// </summary>
-        /// <param name="live_event_id"></param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <returns></returns>
         public Task<RestResult<string>> PutMeEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/privacy/domains")
