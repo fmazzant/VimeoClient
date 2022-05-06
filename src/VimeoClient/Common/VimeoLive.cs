@@ -252,7 +252,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="live_event_id"></param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStream(int live_event_id) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
             .PatchAsync<LiveEventRecurring>();
 
