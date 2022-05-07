@@ -355,7 +355,8 @@ namespace VimeoClient.Common
         #region [ Event M3U8 playback ]
 
         /// <summary>
-        /// Get an M3U8 playback URL for a recurring live event
+        /// This method returns an M3U8 playback URL for the specificed live event stream. You should use this endpoint only in conjunction with our recommended procedure for playing live events via HLS. 
+        /// For more information, see our HLS guide.
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
@@ -377,6 +378,11 @@ namespace VimeoClient.Common
 
         #region [ Get the ingest status of a one-time live event ]
 
+        /// <summary>
+        /// This method returns the ingest status of the specified one-time live event.
+        /// </summary>
+        /// <param name="video_id"></param>
+        /// <returns></returns>
         public Task<RestResult<LiveEventSessionStatus>> GetTheIngestStatusOfAOneTimeLiveEventAsync(int video_id) => RootAuthorization()
            .Command($"/videos/{video_id}/sessions/status")
            .GetAsync<LiveEventSessionStatus>();
@@ -385,9 +391,100 @@ namespace VimeoClient.Common
 
 
         #region [ Event thumbnails ]
-        //Create a live event thumbnail
-        //Delete a live event thumbnail
-        //Edit a live event thumbnail
+
+        /// <summary>
+        /// This method creates a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id">The ID of the live even</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> CreateALiveEventThumbnailAsync(int user_id, int live_event_id) => RootAuthorization()
+           .Command($"/users/{user_id}/live_events/{live_event_id}/pictures")
+           .PostAsync<Picture>();
+
+        /// <summary>
+        /// This method creates a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> CreateALiveEventThumbnailAsync(int live_event_id) => RootAuthorization()
+           .Command($"/live_events/{live_event_id}/pictures")
+           .PostAsync<Picture>();
+
+        /// <summary>
+        /// This method creates a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live even</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> MeCreateALiveEventThumbnailAsync(int live_event_id) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/pictures")
+            .PostAsync<Picture>();
+
+        /// <summary>
+        /// This method deletes a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live even</param>
+        /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> DeleteALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
+            .DeleteAsync();
+
+        /// <summary>
+        /// This method deletes a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live even</param>
+        /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> DeleteALiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+           .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
+           .DeleteAsync();
+
+        /// <summary>
+        /// This method deletes a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live even</param>
+        /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> MeDeleteALiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
+            .DeleteAsync();
+
+        /// <summary>
+        /// This method edits a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <param name="active">Whether the thumbnail is the live event's active thumbnail.</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
+            .PatchAsync<Picture>();
+
+        /// <summary>
+        /// This method edits a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <param name="active">Whether the thumbnail is the live event's active thumbnail.</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
+           .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
+           .PatchAsync<Picture>();
+
+        /// <summary>
+        /// This method edits a thumbnail image for the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <param name="active">Whether the thumbnail is the live event's active thumbnail.</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> MeEditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
+           .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
+           .PatchAsync<Picture>();
+
         //Get a specific live event thumbnail
         //Get all the thumbnails of a live event
         #endregion
