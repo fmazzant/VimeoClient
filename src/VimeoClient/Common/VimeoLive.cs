@@ -259,7 +259,7 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Embed privacy ]
-     
+
         /// <summary>
         /// Embed a recurring live event on one or more domains
         /// </summary>
@@ -291,17 +291,98 @@ namespace VimeoClient.Common
            .Command($"/me/live_events/{live_event_id}/privacy/domains")
            .PutAsync();
 
+        /// <summary>
+        /// Get all the domains on which a recurring live event can be embedded
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<Domain>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int user_id, int live_event_id) => RootAuthorization()
+          .Command($"/{user_id}/live_events/{live_event_id}/privacy/domains")
+          .GetAsync<Domain>();
 
-        //Get all the domains on which a recurring live event can be embedded
+        /// <summary>
+        /// Get all the domains on which a recurring live event can be embedded
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<Domain>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+          .Command($"/live_events/{live_event_id}/privacy/domains")
+          .GetAsync<Domain>();
+
+        /// <summary>
+        /// Get all the domains on which a recurring live event can be embedded
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<Domain>> GetMeAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+         .Command($"/me/live_events/{live_event_id}/privacy/domains")
+         .GetAsync<Domain>();
+
         #endregion
 
         #region [ Event activation ]
-        //Activate a live event
+        /// <summary>
+        /// Activate a live event
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<string>> ActivateALiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/activate")
+            .PostAsync();
+
+        /// <summary>
+        /// Activate a live event
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<string>> ActivateALiveEventAsync(int live_event_id) => RootAuthorization()
+            .Command($"/live_events/{live_event_id}/activate/live_events/{live_event_id}/activate")
+            .PostAsync();
+
+        /// <summary>
+        /// Activate a live event
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<string>> MeActivateALiveEventAsync(int live_event_id) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/activate")
+            .PostAsync();
+
         #endregion
 
         #region [ Event M3U8 playback ]
-        //Get an M3U8 playback URL for a recurring live event
+
+        /// <summary>
+        /// Get an M3U8 playback URL for a recurring live event
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<string>> GetAnM3U8PlaybackURLForARecurringLiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/m3u8_playback")
+            .GetAsync();
+
+        /// <summary>
+        /// Get an M3U8 playback URL for a recurring live event
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns></returns>
+        public Task<RestResult<string>> GetMeAnM3U8PlaybackURLForARecurringLiveEventAsync(int live_event_id) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/m3u8_playback")
+            .GetAsync();
+
         #endregion
+
+        #region [ Get the ingest status of a one-time live event ]
+
+        public Task<RestResult<LiveEventSessionStatus>> GetTheIngestStatusOfAOneTimeLiveEventAsync(int video_id) => RootAuthorization()
+           .Command($"/videos/{video_id}/sessions/status")
+           .GetAsync<LiveEventSessionStatus>();
+
+        #endregion
+
 
         #region [ Event thumbnails ]
         //Create a live event thumbnail
