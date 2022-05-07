@@ -31,6 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using VimeoClient.Body.Live;
     using VimeoClient.Filter.Live;
@@ -485,8 +486,65 @@ namespace VimeoClient.Common
            .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
            .PatchAsync<Picture>();
 
-        //Get a specific live event thumbnail
-        //Get all the thumbnails of a live event
+        /// <summary>
+        /// This method returns a single thumbnail image of the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="thumbnail_id">The ID of the thumbnail.</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> GetASpecificLiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
+            .GetAsync<Picture>();
+
+        /// <summary>
+        /// This method returns a single thumbnail image of the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="thumbnail_id">The ID of the thumbnail.</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> GetASpecificLiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+            .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
+            .GetAsync<Picture>();
+
+        /// <summary>
+        /// This method returns a single thumbnail image of the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="thumbnail_id">The ID of the thumbnail.</param>
+        /// <returns></returns>
+        public Task<RestResult<Picture>> MeGetASpecificLiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+          .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
+          .GetAsync<Picture>();
+
+        /// <summary>
+        /// This method returns every thumbnail image of the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <returns></returns>
+        public Task<RestResult<List<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+           .Command($"/users/{user_id}/live_events/{live_event_id}/pictures")
+           .GetAsync<List<Picture>>();
+
+        /// <summary>
+        /// This method returns every thumbnail image of the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <returns></returns>
+        public Task<RestResult<List<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
+            .Command($"/live_events/{live_event_id}/pictures")
+            .GetAsync<List<Picture>>();
+
+        /// <summary>
+        /// This method returns every thumbnail image of the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <returns></returns>
+        public Task<RestResult<List<Picture>>> MeGetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/pictures")
+            .GetAsync<List<Picture>>();
+
         #endregion
 
         #region [ Event videos ]
