@@ -547,10 +547,109 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Event videos ]
-        //Add a list of videos to a live event
-        //Get a specific video in a live event
+
+        /// <summary>
+        /// This method adds multiple videos to the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="videos">An array of video objects.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> AddAListOfVideosToALiveEventAsync(int user_id, int live_event_id, Video[] videos) => RootAuthorization()
+          .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
+          .PostAsync();
+
+        /// <summary>
+        /// This method adds multiple videos to the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="videos">An array of video objects.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> AddAListOfVideosToALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+          .Command($"/live_events/{live_event_id}/videos")
+          .PostAsync();
+
+        /// <summary>
+        /// This method adds multiple videos to the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="videos">An array of video objects.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> MeAddAListOfVideosToALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+          .Command($"/me/live_events/{live_event_id}/videos")
+          .PostAsync();
+
+        /// <summary>
+        /// This method returns a single video in the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public Task<RestResult<Video>> GetASpecificVideoInALiveEventAsync(int user_id, int live_event_id, int video_id) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/videos/{video_id}")
+            .GetAsync<Video>();
+
+        /// <summary>
+        /// This method returns a single video in the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public Task<RestResult<Video>> GetASpecificVideoInALiveEventAsync(int live_event_id, int video_id) => RootAuthorization()
+            .Command($"/live_events/{live_event_id}/videos/{video_id}")
+            .GetAsync<Video>();
+
+        /// <summary>
+        /// This method returns a single video in the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns></returns>
+        public Task<RestResult<Video>> MeGetASpecificVideoInALiveEventAsync(int live_event_id, int video_id) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/videos/{video_id}")
+            .GetAsync<Video>();
+
         //Get all the videos in a live event
-        //Remove a list of videos from a live event
+        //https://api.vimeo.com/users/{user_id}/live_events/{live_event_id}/videos
+        //https://api.vimeo.com/live_events/{live_event_id}/videos
+        //https://api.vimeo.com/me/live_events/{live_event_id}/videos
+
+
+
+
+
+        /// <summary>
+        /// This method removes multiple videos from the specified live event.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="videos">An array of video objects.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> RemoveAListOfVideosFromALiveEventAsync(int user_id, int live_event_id, Video[] videos) => RootAuthorization()
+            .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
+            .DeleteAsync();
+
+        /// <summary>
+        /// This method removes multiple videos from the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="videos">An array of video objects.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> RemoveAListOfVideosFromALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+            .Command($"/live_events/{live_event_id}/videos")
+            .DeleteAsync();
+
+        /// <summary>
+        /// This method removes multiple videos from the specified live event.
+        /// </summary>
+        /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="videos">An array of video objects.</param>
+        /// <returns></returns>
+        public Task<RestResult<string>> MeRemoveAListOfVideosFromALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+            .Command($"/me/live_events/{live_event_id}/videos")
+            .DeleteAsync();
+
         #endregion
     }
 }
