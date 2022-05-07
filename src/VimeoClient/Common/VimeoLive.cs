@@ -182,7 +182,6 @@ namespace VimeoClient.Common
             .Command($"/me/live_events/{live_event_id}")
             .GetAsync<LiveEventRecurring>();
 
-
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
         /// </summary>
@@ -307,7 +306,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="live_event_id"></param>
         /// <returns></returns>
-        public Task<RestResult<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/privacy/domains")
           .GetAsync<VimeoList<Domain>>();
 
