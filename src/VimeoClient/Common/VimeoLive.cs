@@ -31,11 +31,11 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using VimeoClient.Body.Live;
     using VimeoClient.Filter.Live;
     using VimeoClient.Model;
+    using VimeoClient.Response;
 
     /// <summary>
     /// Please note that Vimeo's live API is available only to Vimeo Enterprise customers. 
@@ -188,7 +188,7 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <returns></returns>
-        public Task<RestResult<LiveEvent>> GetAllTheLiveEventsAsync(int user_id,
+        public Task<RestResult<VimeoList<LiveEvent>>> GetAllTheLiveEventsAsync(int user_id,
             LiveDirection? direction = null,
             LiveFilter? filter = null,
             int? page = null,
@@ -197,7 +197,7 @@ namespace VimeoClient.Common
             LiveSort? sort = null,
             LiveType? type = null) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
-            .GetAsync<LiveEvent>();
+            .GetAsync<VimeoList<LiveEvent>>();
 
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
@@ -298,27 +298,27 @@ namespace VimeoClient.Common
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
         /// <returns></returns>
-        public Task<RestResult<Domain>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int user_id, int live_event_id) => RootAuthorization()
           .Command($"/{user_id}/live_events/{live_event_id}/privacy/domains")
-          .GetAsync<Domain>();
+          .GetAsync<VimeoList<Domain>>();
 
         /// <summary>
         /// Get all the domains on which a recurring live event can be embedded
         /// </summary>
         /// <param name="live_event_id"></param>
         /// <returns></returns>
-        public Task<RestResult<Domain>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/privacy/domains")
-          .GetAsync<Domain>();
+          .GetAsync<VimeoList<Domain>>();
 
         /// <summary>
         /// Get all the domains on which a recurring live event can be embedded
         /// </summary>
         /// <param name="live_event_id"></param>
         /// <returns></returns>
-        public Task<RestResult<Domain>> GetMeAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Domain>>> GetMeAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
          .Command($"/me/live_events/{live_event_id}/privacy/domains")
-         .GetAsync<Domain>();
+         .GetAsync<VimeoList<Domain>>();
 
         #endregion
 
@@ -523,27 +523,27 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <returns></returns>
-        public Task<RestResult<List<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/pictures")
-           .GetAsync<List<Picture>>();
+           .GetAsync<VimeoList<Picture>>();
 
         /// <summary>
         /// This method returns every thumbnail image of the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <returns></returns>
-        public Task<RestResult<List<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/pictures")
-            .GetAsync<List<Picture>>();
+            .GetAsync<VimeoList<Picture>>();
 
         /// <summary>
         /// This method returns every thumbnail image of the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <returns></returns>
-        public Task<RestResult<List<Picture>>> MeGetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Picture>>> MeGetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/pictures")
-            .GetAsync<List<Picture>>();
+            .GetAsync<VimeoList<Picture>>();
 
         #endregion
 
