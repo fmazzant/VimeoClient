@@ -81,7 +81,7 @@ namespace VimeoClientSampleApp
                 options.Columns.AddColumn(x => x.UserToken);
                 options.Columns.AddColumn(x => x.Cert);
             });
-            var vimeoKeys = await csv.LoadAsync("../../../../../../VimeoClient.Keys.csv");
+            var vimeoKeys = await csv.LoadFromFileAsync("../../../../../../VimeoClient.Keys.csv");
 
             /// Get first key and create a vimeoClient instance
             var vimeoKey = vimeoKeys.FirstOrDefault();
