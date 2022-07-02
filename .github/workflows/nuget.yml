@@ -1,4 +1,4 @@
-name: Publish NuGet Localization
+name: Publish on NuGet
  
 on:
   push:
