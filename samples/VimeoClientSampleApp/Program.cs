@@ -35,6 +35,7 @@ namespace VimeoClientSampleApp
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using TinyCsv.Extensions;
     using VimeoClient;
 
     public class CustomVimeoClient : VimeoClient.Vimeo
@@ -81,7 +82,7 @@ namespace VimeoClientSampleApp
                 options.Columns.AddColumn(x => x.UserToken);
                 options.Columns.AddColumn(x => x.Cert);
             });
-            var vimeoKeys = await csv.LoadFromFileAsync("../../../../../../VimeoClient.Keys.csv");
+            var vimeoKeys = await csv.LoadFromFileAsync("../../../../../../VimeoClient.Keys.csv").ToListAsync();
 
             /// Get first key and create a vimeoClient instance
             var vimeoKey = vimeoKeys.FirstOrDefault();

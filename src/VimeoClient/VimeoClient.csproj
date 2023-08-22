@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net47;net471;net472;net48;netstandard2.1;netstandard2.0;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net47;net471;net472;net48;netstandard2.1;netstandard2.0;net6.0;net7.0</TargetFrameworks>
     <PackageId>Mafe.VimeoClient</PackageId>
-    <Version>3.2.0-alpha5</Version>
+    <Version>3.2.0-alpha6</Version>
     <Authors>Federico Mazzanti</Authors>
     <Company>Federico Mazzanti</Company>
     <Description>VimeoClient library provides a simple connector to Vimeo REST services.</Description>
@@ -30,6 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mafe.RestClient" Version="1.9.2" />
+    <PackageReference Include="Mafe.RestClient" Version="1.9.3" />
   </ItemGroup>
 </Project>
