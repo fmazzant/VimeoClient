@@ -610,14 +610,33 @@ namespace VimeoClient.Common
             .Command($"/me/live_events/{live_event_id}/videos/{video_id}")
             .GetAsync<Video>();
 
-        //Get all the videos in a live event
-        //https://api.vimeo.com/users/{user_id}/live_events/{live_event_id}/videos
-        //https://api.vimeo.com/live_events/{live_event_id}/videos
-        //https://api.vimeo.com/me/live_events/{live_event_id}/videos
+        /// <summary>
+        /// This method returns every video in the specified event.
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <param name="live_event_id"></param>
+        /// <returns>The video representation consists of the following fields.</returns>
+        public Task<RestResult<Video>> GetAllTheVideosInALiveEvent(int user_id, int live_event_id) => RootAuthorization()
+           .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
+           .GetAsync<Video>();
 
+        /// <summary>
+        /// This method returns every video in the specified event.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns>The video representation consists of the following fields.</returns>
+        public Task<RestResult<Video>> GetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
+             .Command($"/live_events/{live_event_id}/videos")
+             .GetAsync<Video>();
 
-
-
+        /// <summary>
+        /// This method returns every video in the specified event.
+        /// </summary>
+        /// <param name="live_event_id"></param>
+        /// <returns>The video representation consists of the following fields.</returns>
+        public Task<RestResult<Video>> MeGetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
+           .Command($"/me/live_events/{live_event_id}/videos")
+           .GetAsync<Video>();
 
         /// <summary>
         /// This method removes multiple videos from the specified live event.
