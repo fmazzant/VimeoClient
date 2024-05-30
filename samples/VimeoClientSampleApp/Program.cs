@@ -35,6 +35,7 @@ namespace VimeoClientSampleApp
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using TinyCsv.Extensions;
     using VimeoClient;
 
     public class CustomVimeoClient : VimeoClient.Vimeo
