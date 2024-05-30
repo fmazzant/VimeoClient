@@ -69,7 +69,7 @@ namespace VimeoClientSampleApp
 
     internal static class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             /// Load keys from csv file with Mafe.TinyCsv
             var csv = new TinyCsv.TinyCsv<VimeoKey>(options =>
@@ -82,7 +82,7 @@ namespace VimeoClientSampleApp
                 options.Columns.AddColumn(x => x.UserToken);
                 options.Columns.AddColumn(x => x.Cert);
             });
-            var vimeoKeys = await csv.LoadFromFileAsync("../../../../../../VimeoClient.Keys.csv").ToListAsync();
+            var vimeoKeys = csv.LoadFromFile("../../../../../../VimeoClient.Keys.csv");
 
             /// Get first key and create a vimeoClient instance
             var vimeoKey = vimeoKeys.FirstOrDefault();
