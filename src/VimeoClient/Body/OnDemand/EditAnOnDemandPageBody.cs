@@ -29,8 +29,13 @@
 
 namespace VimeoClient.Body.OnDemand
 {
-    public class EditAnOnDemandPageBody
-    {
+    using System.Collections.Generic;
 
+    public class EditAnOnDemandPageBody : IEditParameters
+    {
+        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
