@@ -30,9 +30,16 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using RestClient.Generic;
+    using System;
+    using VimeoClient.Model;
+    using VimeoClient.Body.OnDemand;
+    using VimeoClient.Filter.OnDemand;
+    using VimeoClient.Response;
 
     /// <summary>
-    /// On Demand
+    /// Vimeo On Demand is a marketplace for films, series, and other member-produced videos. For more information, see our Help Center FAQs for On Demand purchases or On Demand sales.
+    /// https://developer.vimeo.com/api/reference/on-demand
     /// </summary>
     public class VimeoOnDemand
     {
@@ -71,11 +78,81 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
-        //Create an On Demand page
-        //Delete an On Demand page
-        //Edit an On Demand page
-        //Get a specific On Demand page
-        //Get all the On Demand pages of the user
+
+        /// <summary>
+        /// This method creates a new On Demand page for the specified user. To publish the page, use the edit method.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="body"></param>
+        /// <returns>The on demand page representation consists of the following fields.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<OnDemandPage> CreateAnOnDemandPage(int user_id, CreateAnOnDemandPageBody body) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method creates a new On Demand page for the specified user. To publish the page, use the edit method.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns>The on demand page representation consists of the following fields.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<OnDemandPage> MeCreateAnOnDemandPage(CreateAnOnDemandPageBody body) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method deletes the specified On Demand page.
+        /// </summary>
+        /// <param name="ondemand_id">The ID of the On Demand page.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult DeleteAnOnDemandPage(int ondemand_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method edits the specified On Demand page. Use this method to enable preorders on the page or to publish the page.
+        /// </summary>
+        /// <param name="ondemand_id">The ID of the On Demand page.</param>
+        /// <param name="body"></param>
+        /// <returns>The on demand page representation consists of the following fields.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<OnDemandPage> EditAnOnDemandPage(int ondemand_id, EditAnOnDemandPageBody body) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns the specified On Demand page.
+        /// </summary>
+        /// <param name="ondemand_id">The ID of the On Demand page.</param>
+        /// <returns>The on demand page representation consists of the following fields.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<OnDemandPage> GetASpecificOnDemandPage(int ondemand_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every On Demand page belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="filter">The type of the page to return.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns>The on demand page representation consists of the following fields.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<Pagination<OnDemandPage>> GetAllTheOnDemandPagesOfTheUser(int user_id, OnDemandDirection? direction,
+            OnDemandFilter? filter,
+            int? page = null,
+            int? per_page = null,
+           OnDemandSortGetAllChannel? sort = null) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method returns every On Demand page belonging to the authenticated user.
+        /// </summary>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="filter">The type of the page to return.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns>The on demand page representation consists of the following fields.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<Pagination<OnDemandPage>> MeGetAllTheOnDemandPagesOfTheUser(OnDemandDirection? direction,
+            OnDemandFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            OnDemandSortGetAllChannel? sort = null) => throw new NotImplementedException();
         #endregion
 
         #region [ Backgrounds ]
