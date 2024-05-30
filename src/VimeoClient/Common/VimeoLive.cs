@@ -613,8 +613,8 @@ namespace VimeoClient.Common
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
-        /// <param name="user_id"></param>
-        /// <param name="live_event_id"></param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="live_event_id">The ID of the event.</param>
         /// <returns>The video representation consists of the following fields.</returns>
         public Task<RestResult<Video>> GetAllTheVideosInALiveEvent(int user_id, int live_event_id) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
@@ -623,7 +623,7 @@ namespace VimeoClient.Common
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
-        /// <param name="live_event_id"></param>
+        /// <param name="live_event_id">The ID of the event.</param>
         /// <returns>The video representation consists of the following fields.</returns>
         public Task<RestResult<Video>> GetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
              .Command($"/live_events/{live_event_id}/videos")
@@ -632,7 +632,7 @@ namespace VimeoClient.Common
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
-        /// <param name="live_event_id"></param>
+        /// <param name="live_event_id">The ID of the event.</param>
         /// <returns>The video representation consists of the following fields.</returns>
         public Task<RestResult<Video>> MeGetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/videos")
