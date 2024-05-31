@@ -55,8 +55,6 @@ namespace VimeoClient.Body.Channel
         user
     }
 
-
-
     /// <summary>
     /// The channel edit object.
     /// </summary>

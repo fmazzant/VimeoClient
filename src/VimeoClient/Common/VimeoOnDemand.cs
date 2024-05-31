@@ -38,7 +38,8 @@ namespace VimeoClient.Common
     using VimeoClient.Response;
 
     /// <summary>
-    /// Vimeo On Demand is a marketplace for films, series, and other member-produced videos. For more information, see our Help Center FAQs for On Demand purchases or On Demand sales.
+    /// Vimeo On Demand is a marketplace for films, series, and other member-produced videos. 
+    /// For more information, see our Help Center FAQs for On Demand purchases or On Demand sales.
     /// https://developer.vimeo.com/api/reference/on-demand
     /// </summary>
     public class VimeoOnDemand
@@ -156,9 +157,33 @@ namespace VimeoClient.Common
         #endregion
 
         #region [ Backgrounds ]
-        //Add a background to an On Demand page
-        //Delete a background on an On Demand page
-        //Edit a background on an On Demand page
+        /// <summary>
+        /// This method adds a background image to the specified On Demand page. The authenticated user must be the owner of the page.
+        /// </summary>
+        /// <param name="ondemand_id">The ID of the On Demand page.</param>
+        /// <returns>The picture representation consists of the following fields</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<Picture> AddABackgroundToAnOnDemandPage(int ondemand_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method deletes the specified background image on an On Demand page. The authenticated user must be the owner of the page.
+        /// </summary>
+        /// <param name="background_id">The ID of the background image.</param>
+        /// <param name="ondemand_id">The ID of the On Demand page.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult DeleteABackgroundOnAnDemandPage(int background_id, int ondemand_id) => throw new NotImplementedException();
+
+        /// <summary>
+        /// This method edits the specified background image on an On Demand page. The authenticated user must be the owner of the page.
+        /// </summary>
+        /// <param name="background_id">The ID of the background image.</param>
+        /// <param name="ondemand_id">The ID of the On Demand page.</param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual RestResult<Picture> EditABackgroundToAnOnDemandPage(int background_id, int ondemand_id, EditABackgroundToAnOnDemandPageBody body) => throw new NotImplementedException();
+
         //Get a specific background on an On Demand page
         //Get all the backgrounds on an On Demand page
         #endregion
