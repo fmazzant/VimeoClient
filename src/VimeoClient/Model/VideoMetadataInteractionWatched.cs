@@ -39,7 +39,7 @@ namespace VimeoClient.Model
         /// <summary>
         /// Whether the user has watched the video.
         /// </summary>
-        [JsonPropertyName("options")]
+        [JsonPropertyName("added")]
         public bool Added { get; set; }
 
         /// <summary>

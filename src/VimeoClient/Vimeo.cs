@@ -44,7 +44,8 @@ namespace VimeoClient
     /// <summary>
     /// Provides a set of methods for connecting to Vimeo REST webapi.
     /// Build something great. Vimeo's API supports flexible, high-quality video integration with your custom apps.
-    /// Version Vimeo API: 3.2
+    /// Version Vimeo API: 3.4
+    /// https://developer.vimeo.com/api/guides/start#versioning
     /// </summary>
     public class Vimeo
     {
@@ -96,6 +97,12 @@ namespace VimeoClient
         /// <returns></returns>
         protected virtual RestBuilder Root() => Rest
             .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
+            .Header((headers) =>
+            {
+                // Vimeo selects the API version by the Accept header
+                headers.Remove("Accept");
+                headers.TryAddWithoutValidation("Accept", Properties.AcceptHeader);
+            })
             .CertificateValidation((sender, cert, chain, errors) =>
             {
                 if (Properties.Debug)
@@ -103,13 +110,15 @@ namespace VimeoClient
                     return true;
                 }
 
-                if (Properties.ValidCertificates == null)
+                var noErrors = errors == SslPolicyErrors.None;
+
+                // Without pinned certificates the standard validation is used
+                if (Properties.ValidCertificates == null || Properties.ValidCertificates.Count == 0)
                 {
-                    return false;
+                    return noErrors;
                 }
 
                 var certificate = cert.GetCertHashString();
-                var noErrors = errors == SslPolicyErrors.None;
                 var contains = Properties.ValidCertificates.Contains(certificate);
                 return noErrors && contains;
             });

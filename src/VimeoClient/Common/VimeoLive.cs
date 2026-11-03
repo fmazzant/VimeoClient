@@ -31,6 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using RestClient.Generic;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using VimeoClient.Body.Live;
     using VimeoClient.Filter.Live;
@@ -88,7 +89,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(int user_id, LiveParameters parameters) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
-            .Payload(parameters)
+            .OptionalPayload(parameters)
             .PostAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(LiveParameters parameters) => RootAuthorization()
            .Command($"/me/live_events")
-           .Payload(parameters)
+           .OptionalPayload(parameters)
            .PostAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace VimeoClient.Common
         /// <param name="live_event_id"></param>
         /// <returns></returns>
         public Task<RestResult<string>> DeleteSpecificLiveEventAsync(int live_event_id) => RootAuthorization()
-            .Command($"/users/live_events/{live_event_id}")
+            .Command($"/live_events/{live_event_id}")
             .DeleteAsync();
 
         /// <summary>
@@ -151,7 +152,7 @@ namespace VimeoClient.Common
         /// <param name="live_event_id"></param>
         /// <returns></returns>
         public Task<RestResult<string>> DeleteMeSpecificLiveEvent(int live_event_id) => RootAuthorization()
-           .Command($"/me/users/live_events/{live_event_id}")
+           .Command($"/me/live_events/{live_event_id}")
            .DeleteAsync();
 
         /// <summary>
@@ -161,7 +162,7 @@ namespace VimeoClient.Common
         /// <param name="live_event_id"></param>
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStreamAsync(int user_id, int live_event_id) => RootAuthorization()
-            .Command($"/{user_id}/live_events/{live_event_id}")
+            .Command($"/users/{user_id}/live_events/{live_event_id}")
             .GetAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -196,13 +197,15 @@ namespace VimeoClient.Common
             LiveSort? sort = null,
             LiveType? type = null) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
+            .ListParameters(direction, filter, page, per_page, query, sort)
+            .OptionalParameter("type", type)
             .GetAsync<VimeoList<LiveEvent>>();
 
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
         /// </summary>
         /// <returns></returns>
-        public Task<RestResult<LiveEvent>> GetAllTheLiveEventsAsync(
+        public Task<RestResult<VimeoList<LiveEvent>>> GetAllTheLiveEventsAsync(
             LiveDirection? direction = null,
             LiveFilter? filter = null,
             int? page = null,
@@ -211,13 +214,15 @@ namespace VimeoClient.Common
             LiveSort? sort = null,
             LiveType? type = null) => RootAuthorization()
             .Command($"/live_events")
-            .GetAsync<LiveEvent>();
+            .ListParameters(direction, filter, page, per_page, query, sort)
+            .OptionalParameter("type", type)
+            .GetAsync<VimeoList<LiveEvent>>();
 
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
         /// </summary>
         /// <returns></returns>
-        public Task<RestResult<LiveEvent>> GetMeAllTheLiveEventsAsync(
+        public Task<RestResult<VimeoList<LiveEvent>>> GetMeAllTheLiveEventsAsync(
             LiveDirection? direction = null,
             LiveFilter? filter = null,
             int? page = null,
@@ -226,34 +231,42 @@ namespace VimeoClient.Common
             LiveSort? sort = null,
             LiveType? type = null) => RootAuthorization()
             .Command($"/me/live_events")
-            .GetAsync<LiveEvent>();
+            .ListParameters(direction, filter, page, per_page, query, sort)
+            .OptionalParameter("type", type)
+            .GetAsync<VimeoList<LiveEvent>>();
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
+        /// <param name="parameters">The fields to update</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id) => RootAuthorization()
-           .Command($"/{user_id}/live_events/{live_event_id}")
+        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id, LiveParameters parameters = null) => RootAuthorization()
+           .Command($"/users/{user_id}/live_events/{live_event_id}")
+           .OptionalPayload(parameters)
            .PatchAsync<LiveEventRecurring>();
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="parameters">The fields to update</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null) => RootAuthorization()
            .Command($"/live_events/{live_event_id}")
+           .OptionalPayload(parameters)
            .PatchAsync<LiveEventRecurring>();
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="parameters">The fields to update</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
+            .OptionalPayload(parameters)
             .PatchAsync<LiveEventRecurring>();
 
         #endregion
@@ -268,7 +281,7 @@ namespace VimeoClient.Common
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <returns></returns>
         public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id, string[] domains = null) => RootAuthorization()
-           .Command($"/{user_id}/live_events/{live_event_id}/privacy/domains")
+           .Command($"/users/{user_id}/live_events/{live_event_id}/privacy/domains")
            .PutAsync();
 
         /// <summary>
@@ -298,7 +311,7 @@ namespace VimeoClient.Common
         /// <param name="live_event_id"></param>
         /// <returns></returns>
         public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int user_id, int live_event_id) => RootAuthorization()
-          .Command($"/{user_id}/live_events/{live_event_id}/privacy/domains")
+          .Command($"/users/{user_id}/live_events/{live_event_id}/privacy/domains")
           .GetAsync<VimeoList<Domain>>();
 
         /// <summary>
@@ -338,7 +351,7 @@ namespace VimeoClient.Common
         /// <param name="live_event_id"></param>
         /// <returns></returns>
         public Task<RestResult<string>> ActivateALiveEventAsync(int live_event_id) => RootAuthorization()
-            .Command($"/live_events/{live_event_id}/activate/live_events/{live_event_id}/activate")
+            .Command($"/live_events/{live_event_id}/activate")
             .PostAsync();
 
         /// <summary>
@@ -461,6 +474,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
+            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
             .PatchAsync<Picture>();
 
         /// <summary>
@@ -472,6 +486,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
            .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
+           .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
            .PatchAsync<Picture>();
 
         /// <summary>
@@ -483,6 +498,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<Picture>> MeEditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
+           .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
            .PatchAsync<Picture>();
 
         /// <summary>
@@ -616,27 +632,27 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <returns>The video representation consists of the following fields.</returns>
-        public Task<RestResult<Video>> GetAllTheVideosInALiveEvent(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Video>>> GetAllTheVideosInALiveEvent(int user_id, int live_event_id) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
-           .GetAsync<Video>();
+           .GetAsync<VimeoList<Video>>();
 
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <returns>The video representation consists of the following fields.</returns>
-        public Task<RestResult<Video>> GetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Video>>> GetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
              .Command($"/live_events/{live_event_id}/videos")
-             .GetAsync<Video>();
+             .GetAsync<VimeoList<Video>>();
 
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <returns>The video representation consists of the following fields.</returns>
-        public Task<RestResult<Video>> MeGetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Video>>> MeGetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/videos")
-           .GetAsync<Video>();
+           .GetAsync<VimeoList<Video>>();
 
         /// <summary>
         /// This method removes multiple videos from the specified live event.
