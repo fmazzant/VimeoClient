@@ -1114,6 +1114,389 @@ namespace VimeoClient.Common
 
         #endregion
 
+        #region [ Chapters ]
+
+        /// <summary>
+        /// This method returns every chapter of the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The chapters were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Chapter>> GetAllTheChaptersOfAVideo(int video_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Chapter>(RootAuthorization);
+
+        /// <summary>
+        /// This method adds a chapter to the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="parameters">The chapter: title and timecode.</param>
+        /// <returns>
+        /// 201 Created	The chapter was added.
+        /// </returns>
+        public virtual RestResult<Chapter> AddAChapterToAVideo(int video_id, ChapterParameters parameters) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters")
+            .JsonPayload(parameters)
+            .Post<Chapter>();
+
+        /// <summary>
+        /// This method returns a single chapter of the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <returns>
+        /// 200 OK	The chapter was returned.
+        /// </returns>
+        public virtual RestResult<Chapter> GetASpecificChapter(int video_id, int chapter_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}")
+            .Get<Chapter>();
+
+        /// <summary>
+        /// This method edits the specified chapter of a video. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <param name="parameters">The fields to edit: title, timecode, active thumbnail.</param>
+        /// <returns>
+        /// 200 OK	The chapter was edited.
+        /// </returns>
+        public virtual RestResult<Chapter> EditAChapter(int video_id, int chapter_id, ChapterParameters parameters) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}")
+            .JsonPayload(parameters)
+            .Patch<Chapter>();
+
+        /// <summary>
+        /// This method deletes the specified chapter from a video. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <returns>
+        /// 204 No Content	The chapter was deleted.
+        /// </returns>
+        public virtual RestResult DeleteAChapter(int video_id, int chapter_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method generates either an upload link (without timecode) or a timecode-based thumbnail for an unsaved video chapter.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="timecode">The timecode in seconds of the frame to use, or null to get an upload link.</param>
+        /// <returns>
+        /// 200 OK	The upload link or chapter thumbnail was generated.
+        /// </returns>
+        public virtual RestResult<Picture> GenerateAThumbnailForAnUnsavedVideoChapter(int video_id, double? timecode = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/temporary/pictures")
+            .JsonPayload(new VimeoPayload().Set("timecode", timecode))
+            .Post<Picture>();
+
+        /// <summary>
+        /// This method returns the specified thumbnail associated with an unsaved video chapter.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="uid">The ID of the thumbnail.</param>
+        /// <returns>
+        /// 200 OK	The chapter thumbnail was returned.
+        /// </returns>
+        public virtual RestResult<Picture> GetAThumbnailOfAnUnsavedVideoChapter(int video_id, string uid) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/temporary/pictures/{uid}")
+            .Get<Picture>();
+
+        /// <summary>
+        /// This method returns every thumbnail associated with the specified saved video chapter.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <returns>
+        /// 200 OK	The chapter thumbnails were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAVideoChapter(int video_id, int chapter_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}/pictures")
+            .GetPagination<Picture>(RootAuthorization);
+
+        /// <summary>
+        /// This method generates either an upload link (without timecode) or a timecode-based thumbnail for the specified saved video chapter.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <param name="timecode">The timecode in seconds of the frame to use, or null to get an upload link.</param>
+        /// <returns>
+        /// 200 OK	The chapter thumbnail or upload link was generated.
+        /// </returns>
+        public virtual RestResult<Picture> GenerateAThumbnailForAVideoChapter(int video_id, int chapter_id, double? timecode = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}/pictures")
+            .JsonPayload(new VimeoPayload().Set("timecode", timecode))
+            .Post<Picture>();
+
+        /// <summary>
+        /// This method returns the specified thumbnail associated with a saved video chapter.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <param name="uid">The ID of the thumbnail.</param>
+        /// <returns>
+        /// 200 OK	The chapter thumbnail was returned.
+        /// </returns>
+        public virtual RestResult<Picture> GetAThumbnailOfAVideoChapter(int video_id, int chapter_id, string uid) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}/pictures/{uid}")
+            .Get<Picture>();
+
+        /// <summary>
+        /// This method sets the specified chapter thumbnail as active.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <param name="uid">The ID of the thumbnail.</param>
+        /// <param name="active">Whether to set the chapter thumbnail as active.</param>
+        /// <returns>
+        /// 200 OK	The chapter thumbnail was set as active.
+        /// </returns>
+        public virtual RestResult<Picture> SetAChapterThumbnailAsActive(int video_id, int chapter_id, string uid, bool active = true) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}/pictures/{uid}")
+            .JsonPayload(new VimeoPayload().Set("active", active))
+            .Patch<Picture>();
+
+        /// <summary>
+        /// This method deletes the specified chapter thumbnail from a video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="chapter_id">The ID of the chapter.</param>
+        /// <param name="uid">The ID of the thumbnail.</param>
+        /// <returns>
+        /// 204 No Content	The chapter thumbnail was deleted.
+        /// </returns>
+        public virtual RestResult DeleteAChapterThumbnail(int video_id, int chapter_id, string uid) => RootAuthorization()
+            .Command($"/videos/{video_id}/chapters/{chapter_id}/pictures/{uid}")
+            .Delete();
+
+        #endregion
+
+        #region [ Animated thumbnails ]
+
+        /// <summary>
+        /// This method returns all the sets of animated thumbnails associated with the specified video.
+        /// The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The sets of animated thumbnails were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<AnimatedThumbset>> GetAllTheAnimatedThumbnailsOfAVideo(int video_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/animated_thumbsets")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<AnimatedThumbset>(RootAuthorization);
+
+        /// <summary>
+        /// This method creates a set of animated thumbnails for the specified video. A video can have up to four sets.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="duration">The duration of the animation in seconds. The maximum value is 6.</param>
+        /// <param name="start_time">The time in seconds corresponding to the start of the animation.</param>
+        /// <returns>
+        /// 200 OK	The set of animated thumbnails was created.
+        /// </returns>
+        public virtual RestResult<AnimatedThumbset> CreateASetOfAnimatedThumbnailsForAVideo(int video_id, double duration, double? start_time = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/animated_thumbsets")
+            .JsonPayload(new VimeoPayload().Set("duration", duration).Set("start_time", start_time))
+            .Post<AnimatedThumbset>();
+
+        /// <summary>
+        /// This method returns a particular set of animated thumbnails associated with the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="picture_id">The ID of the set of animated thumbnails.</param>
+        /// <returns>
+        /// 200 OK	The set of animated thumbnails was returned.
+        /// </returns>
+        public virtual RestResult<AnimatedThumbset> GetASpecificSetOfAnimatedThumbnails(int video_id, string picture_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/animated_thumbsets/{picture_id}")
+            .Get<AnimatedThumbset>();
+
+        /// <summary>
+        /// This method returns the status of a particular set of animated thumbnails: whether the thumbnails are ready.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="picture_id">The ID of the set of animated thumbnails.</param>
+        /// <returns>
+        /// 200 OK	The status of the set of animated thumbnails was returned.
+        /// </returns>
+        public virtual RestResult<AnimatedThumbset> GetTheStatusOfASetOfAnimatedThumbnails(int video_id, string picture_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/animated_thumbsets/{picture_id}/status")
+            .Get<AnimatedThumbset>();
+
+        /// <summary>
+        /// This method deletes a set of animated thumbnails for the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="picture_id">The ID of the set of animated thumbnails.</param>
+        /// <returns>
+        /// 204 No Content	The set of animated thumbnails was deleted.
+        /// </returns>
+        public virtual RestResult DeleteASetOfAnimatedThumbnailsForAVideo(int video_id, string picture_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/animated_thumbsets/{picture_id}")
+            .Delete();
+
+        #endregion
+
+        #region [ AI ]
+
+        /// <summary>
+        /// This method returns the list of supported languages for AI features.
+        /// </summary>
+        /// <param name="type">The AI feature: dubbing, subtitling, transcription.</param>
+        /// <param name="dubbing_api_version">The dubbing backend (dubbing only).</param>
+        /// <returns>
+        /// 200 OK	The list of supported languages.
+        /// </returns>
+        public virtual RestResult<List<AiLanguage>> GetSupportedLanguagesForAIFeatures(AiLanguageType? type = null, AiDubbingApiVersion? dubbing_api_version = null) => RootAuthorization()
+            .Command($"/videos/ai/languages")
+            .OptionalParameter("type", type)
+            .OptionalParameter("dubbing_api_version", dubbing_api_version)
+            .Get<List<AiLanguage>>();
+
+        /// <summary>
+        /// This method returns pre-generated questions and answers about a video.
+        /// A 202 status code means that the video is still being prepared: retry after a few seconds.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="language">The language of the questions and answers.</param>
+        /// <returns>
+        /// 200 OK	The suggested questions and answers.
+        /// </returns>
+        public virtual RestResult<AiResponse<AiQuestion[]>> GetSuggestedQuestionsForAVideo(int video_id, string language = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/ask")
+            .OptionalParameter("language", language)
+            .Get<AiResponse<AiQuestion[]>>();
+
+        /// <summary>
+        /// This method asks a question about a video and returns an AI-generated answer with relevant quotes.
+        /// A 202 status code means that the video is still being prepared: retry after a few seconds.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="question">The question about the video content. Maximum 500 characters.</param>
+        /// <param name="language">The language of the answer.</param>
+        /// <returns>
+        /// 200 OK	The AI-generated answer.
+        /// </returns>
+        public virtual RestResult<AiResponse<AiQuestion>> AskAQuestionAboutAVideo(int video_id, string question, string language = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/ask")
+            .JsonPayload(new VimeoPayload().Set("question", question).Set("language", language))
+            .Post<AiResponse<AiQuestion>>();
+
+        /// <summary>
+        /// This method returns AI-generated metadata for the specified video: title, description and tags.
+        /// A 202 status code means that the video is still being prepared: retry after a few seconds.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 200 OK	The AI-generated metadata.
+        /// </returns>
+        public virtual RestResult<AiResponse<AiMetadata>> GetAIGeneratedVideoMetadata(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/metadata")
+            .Get<AiResponse<AiMetadata>>();
+
+        /// <summary>
+        /// This method edits transcript segments on the specified text track and regenerates the dependent translations.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="texttrack_id">The ID of the text track.</param>
+        /// <param name="segments">The segments to edit.</param>
+        /// <returns>
+        /// 200 OK	The result of the edit.
+        /// </returns>
+        public virtual RestResult<AiTextTrackEdit> EditTextTrackSegments(int video_id, int texttrack_id, IEnumerable<AiTextTrackSegment> segments) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/texttracks/{texttrack_id}")
+            .JsonPayload(new VimeoPayload().Set("segments", segments.Select(VimeoPayload.FromObject).ToArray()))
+            .Patch<AiTextTrackEdit>();
+
+        /// <summary>
+        /// This method returns the current AI transcription status for a video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 200 OK	The transcription status was returned.
+        /// </returns>
+        public virtual RestResult<AiStatus> GetAITranscriptionStatusForAVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/transcribe")
+            .Get<AiStatus>();
+
+        /// <summary>
+        /// This method generates a transcript from the video's audio using AI speech-to-text.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="language">The BCP 47 language code; when omitted, the language is auto-detected.</param>
+        /// <returns>
+        /// 202 Accepted	The transcription job was queued.
+        /// </returns>
+        public virtual RestResult<AiStatus> StartAITranscriptionForAVideo(int video_id, string language = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/transcribe")
+            .JsonPayload(new VimeoPayload().Set("language", language))
+            .Post<AiStatus>();
+
+        /// <summary>
+        /// This method returns the audio dubbing jobs of a video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="language">The language of the job to return.</param>
+        /// <returns>
+        /// 200 OK	The dubbing status was returned.
+        /// </returns>
+        public virtual RestResult<AiResponse<AiTranslationJob[]>> GetAIDubbingStatusForAVideo(int video_id, string language = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/translate/dubbing")
+            .OptionalParameter("language", language)
+            .Get<AiResponse<AiTranslationJob[]>>();
+
+        /// <summary>
+        /// This method starts an AI audio dubbing job for a video.
+        /// By calling this endpoint you confirm that you have the rights to dub the content.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="language">The target language (see GetSupportedLanguagesForAIFeatures with dubbing).</param>
+        /// <param name="accent">The accent of the dubbed audio.</param>
+        /// <param name="dubbing_api_version">The dubbing backend: v1 (default) or v2.</param>
+        /// <returns>
+        /// 202 Accepted	The dubbing job was queued.
+        /// </returns>
+        public virtual RestResult<AiStatus> StartAIAudioDubbingForAVideo(int video_id, string language, string accent = null, AiDubbingApiVersion? dubbing_api_version = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/translate/dubbing")
+            .JsonPayload(new VimeoPayload().Set("language", language).Set("accent", accent).Set("dubbing_api_version", dubbing_api_version))
+            .Post<AiStatus>();
+
+        /// <summary>
+        /// This method returns the subtitle translation jobs of a video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="language">The language of the job to return.</param>
+        /// <returns>
+        /// 200 OK	The subtitle translation status was returned.
+        /// </returns>
+        public virtual RestResult<AiResponse<AiTranslationJob[]>> GetAISubtitleTranslationStatusForAVideo(int video_id, string language = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/translate/subtitles")
+            .OptionalParameter("language", language)
+            .Get<AiResponse<AiTranslationJob[]>>();
+
+        /// <summary>
+        /// This method starts an AI subtitle translation job for a video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="language">The target language (see GetSupportedLanguagesForAIFeatures with subtitling).</param>
+        /// <param name="texttrack_id">The ID of the source text track; when omitted, the default transcript is used.</param>
+        /// <returns>
+        /// 202 Accepted	The subtitle translation job was queued.
+        /// </returns>
+        public virtual RestResult<AiStatus> StartAISubtitleTranslationForAVideo(int video_id, string language, int? texttrack_id = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ai/translate/subtitles")
+            .JsonPayload(new VimeoPayload().Set("language", language).Set("texttrack_id", texttrack_id))
+            .Post<AiStatus>();
+
+        #endregion
+
         #region [ Moderation ]
 
         /// <summary>
