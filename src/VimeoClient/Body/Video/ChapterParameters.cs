@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Body.Video
+namespace Mafesoft.VimeoClient.Body.Video
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;

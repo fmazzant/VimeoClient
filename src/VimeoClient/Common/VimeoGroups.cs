@@ -27,15 +27,15 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System;
-    using VimeoClient.Filter.Group;
-    using VimeoClient.Filter.User;
-    using VimeoClient.Filter.Video;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Filter.Group;
+    using Mafesoft.VimeoClient.Filter.User;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// A group is a community within Vimeo for collaborating, sharing, and engaging with videos. 

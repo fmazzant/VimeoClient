@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     /// <summary>
     /// The activity 3.1 representation consists of the following fields.

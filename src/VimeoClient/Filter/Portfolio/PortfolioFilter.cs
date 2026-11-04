@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.Portfolio
+namespace Mafesoft.VimeoClient.Filter.Portfolio
 {
     using System;
     using System.Collections.Generic;

@@ -1,11 +1,11 @@
-namespace VimeoClient.Tests
+namespace Mafesoft.VimeoClient.Tests
 {
     using System.Linq;
     using System.Net.Http;
     using System.Text.Json;
-    using VimeoClient.Body.Video;
-    using VimeoClient.Filter.Video;
-    using VimeoClient.Tests.Infrastructure;
+    using Mafesoft.VimeoClient.Body.Video;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Tests.Infrastructure;
 
     public class VideosTests
     {

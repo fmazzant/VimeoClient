@@ -28,7 +28,7 @@
 /// </summary>
 ///
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using RestClient;
     using System;
@@ -36,9 +36,9 @@ namespace VimeoClient
     using System.Net.Http.Headers;
     using System.Net.Security;
     using System.Text;
-    using VimeoClient.Body;
-    using VimeoClient.Common;
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Body;
+    using Mafesoft.VimeoClient.Common;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// Provides a set of methods for connecting to Vimeo REST webapi.

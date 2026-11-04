@@ -6,6 +6,8 @@
     <IsTestProject>true</IsTestProject>
     <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
+    <RootNamespace>Mafesoft.VimeoClient.Tests</RootNamespace>
+    <AssemblyName>Mafesoft.VimeoClient.Tests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

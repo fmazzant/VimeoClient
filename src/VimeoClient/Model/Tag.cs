@@ -24,7 +24,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 

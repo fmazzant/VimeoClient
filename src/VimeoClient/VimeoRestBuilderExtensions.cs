@@ -27,12 +27,12 @@
 ///
 /// </summary>
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using RestClient;
     using System;
     using System.Collections.Generic;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Fluent helpers shared by every Vimeo section.

@@ -1,7 +1,7 @@
-namespace VimeoClient.Tests
+namespace Mafesoft.VimeoClient.Tests
 {
     using System.Linq;
-    using VimeoClient.Tests.Infrastructure;
+    using Mafesoft.VimeoClient.Tests.Infrastructure;
 
     public class PaginationTests
     {

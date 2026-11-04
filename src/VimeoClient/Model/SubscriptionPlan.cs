@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     using System.Collections.Generic;
     using System.Text.Json;

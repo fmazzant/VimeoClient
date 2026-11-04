@@ -27,16 +27,16 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System.Collections.Generic;
     using System.Text.Json;
     using System.Threading.Tasks;
-    using VimeoClient.Body.Live;
-    using VimeoClient.Filter.Live;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.Live;
+    using Mafesoft.VimeoClient.Filter.Live;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Please note that Vimeo's live API is available only to Vimeo Enterprise customers. 

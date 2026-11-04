@@ -37,9 +37,9 @@ namespace VimeoClientSampleApp
     using System.Threading.Tasks;
     using TinyCsv;
     using TinyCsv.Extensions;
-    using VimeoClient;
+    using Mafesoft.VimeoClient;
 
-    public class CustomVimeoClient : VimeoClient.Vimeo
+    public class CustomVimeoClient : Mafesoft.VimeoClient.Vimeo
     {
         public CustomVimeoClient(VimeoProperties properties)
             : base(properties)

@@ -27,11 +27,11 @@
 /// 
 /// </summary>
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using RestClient;
     using System.Collections.Generic;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Field filtering is a technique where you request only specific fields of a JSON representation instead of the entire representation. 

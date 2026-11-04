@@ -27,18 +27,18 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using VimeoClient.Body.Channel;
-    using VimeoClient.Body.Video;
-    using VimeoClient.Filter.Channel;
-    using VimeoClient.Filter.Video;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.Channel;
+    using Mafesoft.VimeoClient.Body.Video;
+    using Mafesoft.VimeoClient.Filter.Channel;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Use channels to organize videos by theme or some other grouping. 

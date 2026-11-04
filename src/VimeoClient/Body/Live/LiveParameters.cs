@@ -26,11 +26,11 @@
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-namespace VimeoClient.Body.Live
+namespace Mafesoft.VimeoClient.Body.Live
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// The order in which the videos of the live event appear within the event's playlist.

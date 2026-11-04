@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.ShowCase
+namespace Mafesoft.VimeoClient.Filter.ShowCase
 {
     /// <summary>
     /// The type of layout for presenting the showcase

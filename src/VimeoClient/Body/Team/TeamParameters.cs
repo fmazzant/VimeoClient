@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Body.Team
+namespace Mafesoft.VimeoClient.Body.Team
 {
     using System.Text.Json.Serialization;
 

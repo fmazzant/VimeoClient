@@ -1,4 +1,4 @@
-namespace VimeoClient.Tests.Infrastructure
+namespace Mafesoft.VimeoClient.Tests.Infrastructure
 {
     using RestClient;
     using System;

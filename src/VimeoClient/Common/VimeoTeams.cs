@@ -27,15 +27,15 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.Json;
-    using VimeoClient.Body.Team;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.Team;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Teams: team roles, team memberships and the custom metadata fields of a team.

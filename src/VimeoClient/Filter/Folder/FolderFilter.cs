@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.Folder
+namespace Mafesoft.VimeoClient.Filter.Folder
 {
     /// <summary>
     /// The sort direction of the results.Option descriptions:

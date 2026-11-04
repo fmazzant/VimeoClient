@@ -27,13 +27,13 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using VimeoClient.Body.OnDemand;
-    using VimeoClient.Filter.OnDemand;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.OnDemand;
+    using Mafesoft.VimeoClient.Filter.OnDemand;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Vimeo On Demand is a marketplace for films, series, and other member-produced videos.

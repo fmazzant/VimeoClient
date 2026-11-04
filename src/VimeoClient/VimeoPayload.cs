@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using System;
     using System.Collections;

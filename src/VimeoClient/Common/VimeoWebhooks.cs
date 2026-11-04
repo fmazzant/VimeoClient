@@ -27,11 +27,11 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// API app webhooks: notifications sent by Vimeo to your URL when an event occurs (video created, transcode complete, live event started...).

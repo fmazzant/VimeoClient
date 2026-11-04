@@ -27,14 +27,14 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System;
     using System.Globalization;
-    using VimeoClient.Filter.Analytics;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Filter.Analytics;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Analytics: the metrics (views, impressions, finishes, time watched...) of the user's content.

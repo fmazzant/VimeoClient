@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Filter.Analytics
+namespace Mafesoft.VimeoClient.Filter.Analytics
 {
     /// <summary>
     /// The data dimension by which to group the analytics results.

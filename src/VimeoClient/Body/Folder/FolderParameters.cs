@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Body.Folder
+namespace Mafesoft.VimeoClient.Body.Folder
 {
     using System.Collections.Generic;
 

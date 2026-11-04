@@ -27,12 +27,12 @@
 /// 
 /// </summary>
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using RestClient;
-    using VimeoClient.Filter.Video;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// The Watch Later queue contains all the videos that a Vimeo member has flagged to watch later.

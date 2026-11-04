@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     /// <summary>
     /// The recurring live event representation: same fields as <see cref="LiveEvent"/>.

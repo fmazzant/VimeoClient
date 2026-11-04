@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Filter.OnDemand
+namespace Mafesoft.VimeoClient.Filter.OnDemand
 {
     /// <summary>
     /// The sort direction of the results.

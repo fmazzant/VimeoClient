@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.Category
+namespace Mafesoft.VimeoClient.Filter.Category
 {
     /// <summary>
     /// Description direction String  The sort direction of the results.Option descriptions:

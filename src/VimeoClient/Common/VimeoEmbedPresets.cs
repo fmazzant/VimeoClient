@@ -27,13 +27,13 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System;
-    using VimeoClient.Body.EmbedPreset;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.EmbedPreset;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// An embed preset is a reusable collection of settings for customizing the appearance and behavior of the embeddable Vimeo player. 

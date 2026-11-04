@@ -27,10 +27,10 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// Files: hosted files viewed by their public ID.

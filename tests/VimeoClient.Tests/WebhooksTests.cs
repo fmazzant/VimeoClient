@@ -1,8 +1,8 @@
-namespace VimeoClient.Tests
+namespace Mafesoft.VimeoClient.Tests
 {
     using System.Net.Http;
     using System.Text.Json;
-    using VimeoClient.Tests.Infrastructure;
+    using Mafesoft.VimeoClient.Tests.Infrastructure;
 
     public class WebhooksTests
     {

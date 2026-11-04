@@ -27,13 +27,13 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using VimeoClient.Body.Folder;
-    using VimeoClient.Filter.Folder;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.Folder;
+    using Mafesoft.VimeoClient.Filter.Folder;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// VimeoFolders

@@ -28,7 +28,7 @@
 /// </summary>
 ///
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using System.Linq;
     using System.Text.Json.Serialization;

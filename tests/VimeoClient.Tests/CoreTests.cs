@@ -1,11 +1,11 @@
-namespace VimeoClient.Tests
+namespace Mafesoft.VimeoClient.Tests
 {
     using System.Collections.Generic;
     using System.Globalization;
     using System.Text.Json.Serialization;
     using System.Threading;
-    using VimeoClient.Filter.Analytics;
-    using VimeoClient.Body.OnDemand;
+    using Mafesoft.VimeoClient.Filter.Analytics;
+    using Mafesoft.VimeoClient.Body.OnDemand;
 
     public class ToVimeoValueTests
     {

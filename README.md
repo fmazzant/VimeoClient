@@ -1,6 +1,6 @@
 # VimeoClient
 
-[![NuGet](https://img.shields.io/nuget/v/Mafe.VimeoClient.svg)](https://www.nuget.org/packages/Mafe.VimeoClient)
+[![NuGet](https://img.shields.io/nuget/v/Mafesoft.VimeoClient.svg)](https://www.nuget.org/packages/Mafesoft.VimeoClient)
 [![Build and test](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml/badge.svg)](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml)
 
 VimeoClient is a extendible .NET wrapper for Vimeo API v3.4.
@@ -9,14 +9,20 @@ By Mafe.RestClient library it can be possible to develop a vimeo webapi call.
 
 ## Installation
 
-The library is published on NuGet: [Mafe.VimeoClient](https://www.nuget.org/packages/Mafe.VimeoClient).
+The library is published on NuGet: [Mafesoft.VimeoClient](https://www.nuget.org/packages/Mafesoft.VimeoClient).
 
 ```
-dotnet add package Mafe.VimeoClient
+dotnet add package Mafesoft.VimeoClient
 ```
+
+> **Migrating from `Mafe.VimeoClient`**: since version 3.4.0 the package is `Mafesoft.VimeoClient`
+> and the namespaces start with `Mafesoft.VimeoClient` (for example `Mafesoft.VimeoClient.Model`).
+> Replace the package reference and change `using VimeoClient...` into `using Mafesoft.VimeoClient...`.
 
 ```c#
-VimeoClient.Vimeo client = new VimeoClient.Vimeo(new VimeoProperties
+using Mafesoft.VimeoClient;
+
+var client = new Vimeo(new VimeoProperties
 {
     AccessToken = "MyAccessToken",
     ClientSecret = "MyClientSecret",
@@ -38,7 +44,7 @@ Every request sends the header `Accept: application/vnd.vimeo.*+json;version=3.4
 You can request another version by `VimeoProperties.ApiVersion`:
 
 ```c#
-var client = new VimeoClient.Vimeo(new VimeoProperties
+var client = new Vimeo(new VimeoProperties
 {
     AccessToken = "MyAccessToken",
     ApiVersion = "3.4" // default
@@ -47,7 +53,7 @@ var client = new VimeoClient.Vimeo(new VimeoProperties
 
 ## Package version
 
-The version of the `Mafe.VimeoClient` package has three numbers, for example `3.4.0`:
+The version of the `Mafesoft.VimeoClient` package has three numbers, for example `3.4.0`:
 
 - the first two numbers (`3.4`) identify the Vimeo API version supported by the library;
 - the last number (`0`) is for the fixes of the library released for that Vimeo API version: `3.4.0` is the first release for the Vimeo API 3.4, `3.4.1` the next one, and so on.

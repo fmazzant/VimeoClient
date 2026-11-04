@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Body.Channel
+namespace Mafesoft.VimeoClient.Body.Channel
 {
     using System.Collections.Generic;
 

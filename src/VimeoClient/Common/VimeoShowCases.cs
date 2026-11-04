@@ -27,14 +27,14 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
     using System.Collections.Generic;
-    using VimeoClient.Body.ShowCase;
-    using VimeoClient.Filter.ShowCase;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body.ShowCase;
+    using Mafesoft.VimeoClient.Filter.ShowCase;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// A showcase (previously album) is a collection of videos for public or private sharing.

@@ -1,8 +1,8 @@
-namespace VimeoClient.Tests
+namespace Mafesoft.VimeoClient.Tests
 {
     using System;
     using System.Net.Http;
-    using VimeoClient.Tests.Infrastructure;
+    using Mafesoft.VimeoClient.Tests.Infrastructure;
 
     public class ClientTests
     {
@@ -88,7 +88,7 @@ namespace VimeoClient.Tests
         {
             var client = new FakeVimeo();
 
-            client.Get<VimeoClient.Model.User>("/users/123");
+            client.Get<Mafesoft.VimeoClient.Model.User>("/users/123");
 
             Assert.Equal("/users/123", client.Handler.Last.Path);
         }

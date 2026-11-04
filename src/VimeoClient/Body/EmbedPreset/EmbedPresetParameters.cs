@@ -27,11 +27,11 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Body.EmbedPreset
+namespace Mafesoft.VimeoClient.Body.EmbedPreset
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// The body to create an embed preset.

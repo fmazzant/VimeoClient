@@ -27,10 +27,10 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Body.ShowCase
+namespace Mafesoft.VimeoClient.Body.ShowCase
 {
     using System.Collections.Generic;
-    using VimeoClient.Filter.ShowCase;
+    using Mafesoft.VimeoClient.Filter.ShowCase;
 
     /// <summary>
     /// The showcase edit object. Used to create or edit a showcase.

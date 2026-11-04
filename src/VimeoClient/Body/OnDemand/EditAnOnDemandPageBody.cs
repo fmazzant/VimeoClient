@@ -27,7 +27,7 @@
 ///
 /// </summary>
 
-namespace VimeoClient.Body.OnDemand
+namespace Mafesoft.VimeoClient.Body.OnDemand
 {
     using System.Collections.Generic;
 
