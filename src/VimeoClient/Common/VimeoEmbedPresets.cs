@@ -30,7 +30,7 @@
 namespace VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
+    using System;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -139,40 +139,10 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public virtual RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int user_id, int? page = null, int? per_page = null)
-        {
-            var root = RootAuthorization()
-                .Command($"/users/{user_id}/presets")
-                .Parameter((p) =>
-                {
-                    if (page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "page", Value = page });
-                    }
-                    if (per_page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                    }
-                });
-
-            var result = root.Get<Pagination<Presets>>();
-
-            if (result.Content.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Presets>>();
-            }
-
-            if (result.Content.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Presets>>();
-            }
-
-            return result;
-        }
+        public virtual RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreated(int user_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/users/{user_id}/presets")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Presets>(RootAuthorization);
 
         /// <summary>
         /// This method returns every embed preset that belongs to the authenticated user.
@@ -180,36 +150,25 @@ namespace VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
+        public virtual RestResult<Pagination<Presets>> MeGetAllTheEmbedPresetsThatAUserHasCreated(int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/me/presets")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Presets>(RootAuthorization);
+
+        /// <summary>
+        /// Obsolete: use GetAllTheEmbedPresetsThatAUserHasCreated.
+        /// </summary>
+        [Obsolete("Use GetAllTheEmbedPresetsThatAUserHasCreated(user_id, page, per_page)")]
+        public virtual RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int user_id, int? page = null, int? per_page = null)
+            => GetAllTheEmbedPresetsThatAUserHasCreated(user_id, page, per_page);
+
+        /// <summary>
+        /// Obsolete: use MeGetAllTheEmbedPresetsThatAUserHasCreated.
+        /// Calling it with a single integer selects the user_id overload.
+        /// </summary>
+        [Obsolete("Use MeGetAllTheEmbedPresetsThatAUserHasCreated(page, per_page)")]
         public virtual RestResult<Pagination<Presets>> GetAllTheEmbedPresetsThatAUserHasCreadted(int? page = null, int? per_page = null)
-        {
-            var root = RootAuthorization()
-                .Command($"/me/presets")
-                .Parameter((p) =>
-                {
-                    if (page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "page", Value = page });
-                    }
-                    if (per_page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                    }
-                });
-
-            var result = root.Get<Pagination<Presets>>();
-
-            if (result.Content.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Presets>>();
-            }
-
-            if (result.Content.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Presets>>();
-            }
-
-            return result;
-        }
+            => MeGetAllTheEmbedPresetsThatAUserHasCreated(page, per_page);
 
         #endregion
 
@@ -244,7 +203,7 @@ namespace VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="logo_id">The ID of the custom logo.</param>
         /// <returns></returns>
-        public virtual RestResult<Picture> GetASpecificCustomLogoForThwUser(int user_id, int logo_id) => RootAuthorization()
+        public virtual RestResult<Picture> GetASpecificCustomLogoForTheUser(int user_id, int logo_id) => RootAuthorization()
             .Command($"/users/{user_id}/customlogos/{logo_id}")
             .Get<Picture>();
 
@@ -253,9 +212,21 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="logo_id">The ID of the custom logo.</param>
         /// <returns></returns>
-        public virtual RestResult<Picture> GetASpecificCustomLogoForThwUser(int logo_id) => RootAuthorization()
+        public virtual RestResult<Picture> MeGetASpecificCustomLogoForTheUser(int logo_id) => RootAuthorization()
            .Command($"/me/customlogos/{logo_id}")
            .Get<Picture>();
+
+        /// <summary>
+        /// Obsolete: use GetASpecificCustomLogoForTheUser.
+        /// </summary>
+        [Obsolete("Use GetASpecificCustomLogoForTheUser(user_id, logo_id)")]
+        public virtual RestResult<Picture> GetASpecificCustomLogoForThwUser(int user_id, int logo_id) => GetASpecificCustomLogoForTheUser(user_id, logo_id);
+
+        /// <summary>
+        /// Obsolete: use MeGetASpecificCustomLogoForTheUser.
+        /// </summary>
+        [Obsolete("Use MeGetASpecificCustomLogoForTheUser(logo_id)")]
+        public virtual RestResult<Picture> GetASpecificCustomLogoForThwUser(int logo_id) => MeGetASpecificCustomLogoForTheUser(logo_id);
 
         /// <summary>
         /// This method returns every custom logo that belongs to the authenticated user or team owner.
@@ -300,9 +271,15 @@ namespace VimeoClient.Common
         /// 200 OK	The timeline event thumbnail was returned.
         /// 403 Forbidden The authenticated user can't access the timeline event thumbnail.
         /// </returns>
-        public virtual RestResult<Picture> GetTimelineEventThumnail(int video_id, int thumbnail_id) => RootAuthorization()
+        public virtual RestResult<Picture> GetTimelineEventThumbnail(int video_id, int thumbnail_id) => RootAuthorization()
             .Command($"/videos/{video_id}/timelinethumbnails/{thumbnail_id}")
             .Get<Picture>();
+
+        /// <summary>
+        /// Obsolete: use GetTimelineEventThumbnail.
+        /// </summary>
+        [Obsolete("Use GetTimelineEventThumbnail(video_id, thumbnail_id)")]
+        public virtual RestResult<Picture> GetTimelineEventThumnail(int video_id, int thumbnail_id) => GetTimelineEventThumbnail(video_id, thumbnail_id);
 
         #endregion
 
@@ -343,36 +320,10 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
-        public virtual RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int user_id, int preset_id, int? page = null, int? per_page = null)
-        {
-            var root = RootAuthorization()
-                .Command($"/users/{user_id}/presets/{preset_id}/videos")
-                .Parameter((p) =>
-                {
-                    if (page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "page", Value = page });
-                    }
-                    if (per_page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                    }
-                });
-
-            var result = root.Get<Pagination<Video>>();
-
-            if (result.Content.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
-            }
-
-            if (result.Content.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
-            }
-
-            return result;
-        }
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int user_id, int preset_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/users/{user_id}/presets/{preset_id}/videos")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Video>(RootAuthorization);
 
         /// <summary>
         /// This method returns every video to which the specified embed preset has been added. The authenticated user must be the owner of videos.
@@ -383,36 +334,18 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
+        public virtual RestResult<Pagination<Video>> MeGetAllTheVideosThatHaveASpecificEmbedPreset(int preset_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/me/presets/{preset_id}/videos")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Video>(RootAuthorization);
+
+        /// <summary>
+        /// Obsolete: use MeGetAllTheVideosThatHaveASpecificEmbedPreset.
+        /// Calling it with two integers selects the user_id overload.
+        /// </summary>
+        [Obsolete("Use MeGetAllTheVideosThatHaveASpecificEmbedPreset(preset_id, page, per_page)")]
         public virtual RestResult<Pagination<Video>> GetAllTheVideosThatHaveASpecificEmbedPreset(int preset_id, int? page = null, int? per_page = null)
-        {
-            var root = RootAuthorization()
-                .Command($"/me/presets/{preset_id}/videos")
-                .Parameter((p) =>
-                {
-                    if (page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "page", Value = page });
-                    }
-                    if (per_page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                    }
-                });
-
-            var result = root.Get<Pagination<Video>>();
-
-            if (result.Content.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
-            }
-
-            if (result.Content.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
-            }
-
-            return result;
-        }
+            => MeGetAllTheVideosThatHaveASpecificEmbedPreset(preset_id, page, per_page);
 
         /// <summary>
         /// This method removes the specified embed preset from a video. The authenticated user must be the owner of the video.

@@ -30,7 +30,7 @@
 namespace VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
+    using System;
     using VimeoClient.Filter.Group;
     using VimeoClient.Filter.User;
     using VimeoClient.Filter.Video;
@@ -134,61 +134,26 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The groups were returned.
         /// </returns>
+        public virtual RestResult<Pagination<Group>> GetAllGroups(GroupDirection? direction = null,
+            string filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            GroupSort? sort = null) => RootAuthorization()
+            .Command($"/groups")
+            .ListParameters(direction, filter, page, per_page, query, sort)
+            .GetPagination<Group>(RootAuthorization);
+
+        /// <summary>
+        /// Obsolete: the name was wrong, use GetAllGroups.
+        /// </summary>
+        [Obsolete("Use GetAllGroups(direction, filter, page, per_page, query, sort)")]
         public virtual RestResult<Pagination<Group>> GetAllTheVideosThatHaveASpecificEmbedPreset(GroupDirection? direction = null,
             string filter = null,
             int? page = null,
             int? per_page = null,
             string query = null,
-            GroupSort? sort = null)
-        {
-            var root = RootAuthorization()
-                .Command($"/groups")
-                .Parameter((p) =>
-                {
-                    if (direction.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "direction", Value = direction });
-                    }
-                    if (filter != null)
-                    {
-                        p.Add(new RestParameter { Key = "filter", Value = filter });
-                    }
-                    if (page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "page", Value = page });
-                    }
-                    if (per_page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                    }
-                    if (query != null)
-                    {
-                        p.Add(new RestParameter { Key = "query", Value = query });
-                    }
-                    if (sort.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "sort", Value = sort });
-                    }
-                });
-
-            var result = root.Get<Pagination<Group>>();
-
-            if (result.Content.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Group>>();
-            }
-
-            if (result.Content.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Group>>();
-            }
-
-            return result;
-        }
+            GroupSort? sort = null) => GetAllGroups(direction, filter, page, per_page, query, sort);
 
         #endregion
 

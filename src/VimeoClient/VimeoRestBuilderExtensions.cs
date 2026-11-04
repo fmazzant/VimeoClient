@@ -30,7 +30,6 @@
 namespace VimeoClient
 {
     using RestClient;
-    using RestClient.Generic;
     using System;
     using System.Collections.Generic;
     using VimeoClient.Response;
