@@ -640,7 +640,7 @@ namespace VimeoClient.Common
         /// 200 OK	The thumbnail was created.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        public virtual RestResult<Picture> CreateAThumbnailForAShowcaseFromAShowcaseVideo(int album_id, int video_id, double? time_code = null) => RootAuthorization()
+        public virtual RestResult<Picture> MeCreateAThumbnailForAShowcaseFromAShowcaseVideo(int album_id, int video_id, double? time_code = null) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos/{video_id}/set_album_thumbnail")
             .FormUrlEncoded(new KeyValuePair<string, object>("time_code", time_code))
             .Post<Picture>();

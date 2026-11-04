@@ -31,6 +31,8 @@ namespace VimeoClient
 {
     using RestClient;
     using RestClient.Generic;
+    using System.Collections.Generic;
+    using VimeoClient.Response;
 
     /// <summary>
     /// Field filtering is a technique where you request only specific fields of a JSON representation instead of the entire representation. 
@@ -105,27 +107,96 @@ namespace VimeoClient
         #endregion
 
         #region [ Using the sort and direction parameters ]
-        //GET https://api.vimeo.com/me/videos?sort=date&direction=asc
+
+        /// <summary>
+        /// Sorts the results of a list endpoint.
+        /// -> GET https://api.vimeo.com/me/videos?sort=date&amp;direction=asc
+        /// this.SortAndDirection&lt;Pagination&lt;Video&gt;&gt;("/me/videos", "date", "asc");
+        /// </summary>
+        /// <typeparam name="T">The response's type</typeparam>
+        /// <param name="command">The endpoint, for instance /me/videos</param>
+        /// <param name="sort">The way to sort the results (an enum value or a string)</param>
+        /// <param name="direction">The sort direction of the results: asc or desc</param>
+        /// <returns></returns>
+        public virtual RestResult<T> SortAndDirection<T>(string command, object sort, object direction = null) where T : new() => RootAuthorization()
+            .Command(command)
+            .OptionalParameter("sort", sort)
+            .OptionalParameter("direction", direction)
+            .Get<T>();
+
         #endregion
 
         #region [ Using the filter parameter ]
-        //GET https://api.vimeo.com/channels?filter=featured
+
+        /// <summary>
+        /// Filters the results of a list endpoint.
+        /// -> GET https://api.vimeo.com/channels?filter=featured
+        /// this.Filter&lt;Pagination&lt;Channel&gt;&gt;("/channels", "featured");
+        /// </summary>
+        /// <typeparam name="T">The response's type</typeparam>
+        /// <param name="command">The endpoint, for instance /channels</param>
+        /// <param name="filter">The attribute by which to filter the results (an enum value or a string)</param>
+        /// <returns></returns>
+        public virtual RestResult<T> Filter<T>(string command, object filter) where T : new() => RootAuthorization()
+            .Command(command)
+            .OptionalParameter("filter", filter)
+            .Get<T>();
+
         #endregion
 
         #region [ Using the page and per_page parameters ]
-        //GET https://api.vimeo.com/videos/174560759/pictures?page=3
+
+        /// <summary>
+        /// Returns a page of a list endpoint with Next() and Previous() navigation.
+        /// -> GET https://api.vimeo.com/videos/174560759/pictures?page=3
+        /// this.Page&lt;Picture&gt;("/videos/174560759/pictures", 3);
+        /// </summary>
+        /// <typeparam name="T">The item's type</typeparam>
+        /// <param name="command">The endpoint, for instance /videos/174560759/pictures</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns></returns>
+        public virtual RestResult<Pagination<T>> Page<T>(string command, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command(command)
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<T>(RootAuthorization);
+
         #endregion
 
         #region [ Using the sizes parameter ]
-        //GET https://api.vimeo.com/videos/174560759?sizes=640x480,100x100
+
+        /// <summary>
+        /// Requests only specific picture sizes.
+        /// -> GET https://api.vimeo.com/videos/174560759?sizes=640x480,100x100
+        /// this.Sizes&lt;Video&gt;("/videos/174560759", "640x480", "100x100");
+        /// </summary>
+        /// <typeparam name="T">The response's type</typeparam>
+        /// <param name="command">The endpoint, for instance /videos/174560759</param>
+        /// <param name="sizes">The sizes in the format WIDTHxHEIGHT</param>
+        /// <returns></returns>
+        public virtual RestResult<T> Sizes<T>(string command, params string[] sizes) where T : new() => RootAuthorization()
+            .Command(command)
+            .OptionalParameter("sizes", sizes)
+            .Get<T>();
+
         #endregion
 
         #region [ Working with batch requests ]
-        //PUT https://api.vimeo.com/videos/174560759/categories
-        //[
-        //  { "category": "animation" },
-        //  { "category": "talks" }
-        //]
+
+        /// <summary>
+        /// Sends a batch request: a JSON array of objects in a single PUT.
+        /// -> PUT https://api.vimeo.com/videos/174560759/categories
+        /// [ { "category": "animation" }, { "category": "talks" } ]
+        /// this.Batch("/videos/174560759/categories", new VimeoPayload().Set("category", "animation"), new VimeoPayload().Set("category", "talks"));
+        /// </summary>
+        /// <param name="command">The endpoint, for instance /videos/174560759/categories</param>
+        /// <param name="items">The objects of the batch</param>
+        /// <returns></returns>
+        public virtual RestResult<string> Batch(string command, params VimeoPayload[] items) => RootAuthorization()
+            .Command(command)
+            .Payload<Dictionary<string, object>[]>(items)
+            .Put();
+
         #endregion
     }
 }

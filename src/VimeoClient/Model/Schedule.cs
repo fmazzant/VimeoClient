@@ -33,6 +33,7 @@ namespace VimeoClient.Model
     /// <summary>
     /// The event is live on a weekly basis.
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ScheduleType
     {
         /// <summary>

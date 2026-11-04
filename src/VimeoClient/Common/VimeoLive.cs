@@ -89,7 +89,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(int user_id, LiveParameters parameters) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
-            .OptionalPayload(parameters)
+            .JsonPayload(parameters)
             .PostAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(LiveParameters parameters) => RootAuthorization()
            .Command($"/me/live_events")
-           .OptionalPayload(parameters)
+           .JsonPayload(parameters)
            .PostAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id, LiveParameters parameters = null) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}")
-           .OptionalPayload(parameters)
+           .JsonPayload(parameters)
            .PatchAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null) => RootAuthorization()
            .Command($"/live_events/{live_event_id}")
-           .OptionalPayload(parameters)
+           .JsonPayload(parameters)
            .PatchAsync<LiveEventRecurring>();
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
-            .OptionalPayload(parameters)
+            .JsonPayload(parameters)
             .PatchAsync<LiveEventRecurring>();
 
         #endregion

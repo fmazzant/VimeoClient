@@ -187,42 +187,12 @@ namespace VimeoClient.Body.Video
                 dict.Add(key, vimeoValue);
             }
         }
-
-        /// <summary>
-        /// Adds the value to the JSON payload only when it is set.
-        /// A dotted key (privacy.view) becomes a nested object.
-        /// </summary>
-        public static void AddIfSet(this Dictionary<string, object> payload, string key, object value)
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            if (value is System.Enum)
-            {
-                value = VimeoRestBuilderExtensions.ToVimeoValue(value);
-            }
-
-            var keys = key.Split('.');
-            var current = payload;
-            for (int i = 0; i < keys.Length - 1; i++)
-            {
-                if (!current.TryGetValue(keys[i], out var child) || !(child is Dictionary<string, object>))
-                {
-                    child = new Dictionary<string, object>();
-                    current[keys[i]] = child;
-                }
-                current = (Dictionary<string, object>)child;
-            }
-            current[keys[keys.Length - 1]] = value;
-        }
     }
 
     /// <summary>
     /// The video edit object.
     /// </summary>
-    public class VideoEditParameters : IEditParameters
+    public class VideoEditParameters : IEditParameters, IPayloadParameters
     {
         /// <summary>
         /// The title of the video.
@@ -312,22 +282,22 @@ namespace VimeoClient.Body.Video
         /// Convert object to the JSON payload expected by Vimeo
         /// </summary>
         /// <returns></returns>
-        public Dictionary<string, object> ToPayload()
+        public VimeoPayload ToPayload()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
+            var payload = new VimeoPayload();
 
-            payload.AddIfSet("name", Name);
-            payload.AddIfSet("description", Description);
-            payload.AddIfSet("license", License);
-            payload.AddIfSet("locale", Locale);
-            payload.AddIfSet("password", Password);
-            payload.AddIfSet("content_rating", ContentRating);
-            payload.AddIfSet("privacy.view", PrivacyView);
-            payload.AddIfSet("privacy.embed", PrivacyEmbed);
-            payload.AddIfSet("privacy.comments", PrivacyComments);
-            payload.AddIfSet("privacy.add", PrivacyAdd);
-            payload.AddIfSet("privacy.download", PrivacyDownload);
-            payload.AddIfSet("review_page.active", ReviewPageActive);
+            payload.Set("name", Name);
+            payload.Set("description", Description);
+            payload.Set("license", License);
+            payload.Set("locale", Locale);
+            payload.Set("password", Password);
+            payload.Set("content_rating", ContentRating);
+            payload.Set("privacy.view", PrivacyView);
+            payload.Set("privacy.embed", PrivacyEmbed);
+            payload.Set("privacy.comments", PrivacyComments);
+            payload.Set("privacy.add", PrivacyAdd);
+            payload.Set("privacy.download", PrivacyDownload);
+            payload.Set("review_page.active", ReviewPageActive);
 
             return payload;
         }
@@ -336,7 +306,7 @@ namespace VimeoClient.Body.Video
     /// <summary>
     /// The video upload object.
     /// </summary>
-    public class VideoUploadParameters : IEditParameters
+    public class VideoUploadParameters : IEditParameters, IPayloadParameters
     {
         /// <summary>
         /// The upload approach.
@@ -402,18 +372,18 @@ namespace VimeoClient.Body.Video
         /// Convert object to the JSON payload expected by Vimeo
         /// </summary>
         /// <returns></returns>
-        public Dictionary<string, object> ToPayload()
+        public VimeoPayload ToPayload()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
+            var payload = new VimeoPayload();
 
-            payload.AddIfSet("upload.approach", Approach);
-            payload.AddIfSet("upload.size", Size);
-            payload.AddIfSet("upload.link", Link);
-            payload.AddIfSet("upload.redirect_url", RedirectUrl);
-            payload.AddIfSet("name", Name);
-            payload.AddIfSet("description", Description);
-            payload.AddIfSet("privacy.view", PrivacyView);
-            payload.AddIfSet("folder_uri", FolderUri);
+            payload.Set("upload.approach", Approach);
+            payload.Set("upload.size", Size);
+            payload.Set("upload.link", Link);
+            payload.Set("upload.redirect_url", RedirectUrl);
+            payload.Set("name", Name);
+            payload.Set("description", Description);
+            payload.Set("privacy.view", PrivacyView);
+            payload.Set("folder_uri", FolderUri);
 
             return payload;
         }
@@ -422,7 +392,7 @@ namespace VimeoClient.Body.Video
     /// <summary>
     /// The video version object.
     /// </summary>
-    public class VideoVersionParameters : IEditParameters
+    public class VideoVersionParameters : IEditParameters, IPayloadParameters
     {
         /// <summary>
         /// The name of the file to upload.
@@ -470,15 +440,15 @@ namespace VimeoClient.Body.Video
         /// Convert object to the JSON payload expected by Vimeo
         /// </summary>
         /// <returns></returns>
-        public Dictionary<string, object> ToPayload()
+        public VimeoPayload ToPayload()
         {
-            Dictionary<string, object> payload = new Dictionary<string, object>();
+            var payload = new VimeoPayload();
 
-            payload.AddIfSet("file_name", FileName);
-            payload.AddIfSet("upload.approach", Approach);
-            payload.AddIfSet("upload.size", Size);
-            payload.AddIfSet("upload.link", Link);
-            payload.AddIfSet("active", Active);
+            payload.Set("file_name", FileName);
+            payload.Set("upload.approach", Approach);
+            payload.Set("upload.size", Size);
+            payload.Set("upload.link", Link);
+            payload.Set("active", Active);
 
             return payload;
         }

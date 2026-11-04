@@ -33,6 +33,8 @@ namespace VimeoClient
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// The parameters sent as JSON body
@@ -105,6 +107,62 @@ namespace VimeoClient
                 Set($"{path}.{price.Key}", price.Value);
             }
             return this;
+        }
+
+        /// <summary>
+        /// Builds a payload from an object: the names come from [JsonPropertyName] (or the property name),
+        /// the null values are skipped, enums become Vimeo values and nested objects become nested payloads.
+        /// </summary>
+        /// <param name="source">The object</param>
+        /// <returns></returns>
+        public static VimeoPayload FromObject(object source)
+        {
+            var payload = new VimeoPayload();
+            if (source == null)
+            {
+                return payload;
+            }
+
+            foreach (var property in source.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (!property.CanRead || property.GetIndexParameters().Length > 0
+                    || property.GetCustomAttribute<JsonIgnoreAttribute>() != null
+                    || property.GetCustomAttribute<JsonExtensionDataAttribute>() != null)
+                {
+                    continue;
+                }
+
+                var name = property.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name ?? property.Name;
+                var value = ToPayloadValue(property.GetValue(source));
+                if (value != null)
+                {
+                    payload[name] = value;
+                }
+            }
+
+            return payload;
+        }
+
+        private static object ToPayloadValue(object value)
+        {
+            switch (value)
+            {
+                case null:
+                    return null;
+                case string _:
+                case bool _:
+                case IConvertible _ when !(value is Enum):
+                    return value;
+                case Enum e:
+                    return VimeoRestBuilderExtensions.ToVimeoValue(e);
+                case VimeoPayload p:
+                    return p;
+                case IEnumerable items:
+                    return items.Cast<object>().Select(ToPayloadValue).ToArray();
+                default:
+                    var nested = FromObject(value);
+                    return nested.Count == 0 ? null : nested;
+            }
         }
 
         /// <summary>

@@ -131,7 +131,7 @@ namespace VimeoClient.Common
         /// </returns>
         public virtual RestResult<Video> EditAVideo(int video_id, VideoEditParameters parameters) => RootAuthorization()
             .Command($"/videos/{video_id}")
-            .Payload(parameters.ToPayload())
+            .JsonPayload(parameters)
             .Patch<Video>();
 
         /// <summary>
@@ -863,7 +863,7 @@ namespace VimeoClient.Common
         /// </returns>
         public virtual RestResult<Video> UploadAVideo(int user_id, VideoUploadParameters parameters) => RootAuthorization()
             .Command($"/users/{user_id}/videos")
-            .Payload(parameters.ToPayload())
+            .JsonPayload(parameters)
             .Post<Video>();
 
         /// <summary>
@@ -878,7 +878,7 @@ namespace VimeoClient.Common
         /// </returns>
         public virtual RestResult<Video> UploadAVideo(VideoUploadParameters parameters) => RootAuthorization()
             .Command($"/me/videos")
-            .Payload(parameters.ToPayload())
+            .JsonPayload(parameters)
             .Post<Video>();
 
         #endregion
@@ -893,7 +893,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public virtual RestResult<VideoVersions> AddAVersionToAVideo(int video_id, VideoVersionParameters parameters) => RootAuthorization()
             .Command($"/videos/{video_id}/versions")
-            .Payload(parameters.ToPayload())
+            .JsonPayload(parameters)
             .Post<VideoVersions>();
 
         /// <summary>
@@ -917,7 +917,7 @@ namespace VimeoClient.Common
         /// <returns></returns>
         public virtual RestResult<VideoVersions> EditAVideoVersion(int video_id, int version_id, VideoVersionParameters parameters) => RootAuthorization()
             .Command($"/videos/{video_id}/versions/{version_id}")
-            .Payload(parameters.ToPayload())
+            .JsonPayload(parameters)
             .Patch<VideoVersions>();
 
         /// <summary>

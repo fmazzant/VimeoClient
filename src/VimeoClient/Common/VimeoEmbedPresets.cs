@@ -215,7 +215,6 @@ namespace VimeoClient.Common
 
         #region [ Custom logos ]
 
-        //Add a custom logo for the user
         /// <summary>
         /// This method adds a custom logo representing the authenticated user for display in the embedded player.
         /// </summary>
@@ -228,7 +227,6 @@ namespace VimeoClient.Common
             .Command($"/users/{user_id}/customlogos")
             .Post<Picture>();
 
-        //Add a custom logo for the user
         /// <summary>
         /// This method adds a custom logo representing the authenticated user for display in the embedded player.
         /// </summary>

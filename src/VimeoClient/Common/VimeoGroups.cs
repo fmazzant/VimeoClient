@@ -507,7 +507,6 @@ namespace VimeoClient.Common
             .Command($"/groups/{group_id}/videos/{video_id}")
             .Put<Video>();
 
-        //Get a specific video in a group
         /// <summary>
         /// This method returns a single video from the specified group. You can use this method to determine whether the video belongs to the group.
         /// </summary>
