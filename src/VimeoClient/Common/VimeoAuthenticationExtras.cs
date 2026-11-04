@@ -27,11 +27,10 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// Vimeo Authentication Extras

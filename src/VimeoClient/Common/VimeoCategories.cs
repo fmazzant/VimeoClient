@@ -27,13 +27,13 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
-    using VimeoClient.Filter.Category;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using System.Globalization;
+    using Mafesoft.VimeoClient.Filter.Category;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Categories on Vimeo are sets of videos for particular genres (like comedy) or other characteristics (like being experimental). 
@@ -116,7 +116,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
             if (page.HasValue)
@@ -179,7 +179,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
             if (page.HasValue)
@@ -193,12 +193,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Channel>>();
             }
@@ -240,7 +240,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
             if (page.HasValue)
@@ -254,12 +254,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Group>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
             }
@@ -375,12 +375,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Category>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Category>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Category>>();
             }
@@ -406,7 +406,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
             if (page.HasValue)
@@ -420,14 +420,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Category>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Category>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -498,7 +498,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
             if (filter.HasValue)
@@ -519,14 +519,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -559,6 +559,22 @@ namespace VimeoClient.Common
                 }
             })
             .Put<Category>();
+
+        #endregion
+
+        #region [ Overloads with int video_id ]
+
+        /// <inheritdoc cref="GetASpecificVideoInACategory(string, string)"/>
+        public virtual RestResult<Video> GetASpecificVideoInACategory(string category, int video_id)
+            => GetASpecificVideoInACategory(category, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetAllTheCategoriesToWhichAVideoBelongs(string)"/>
+        public virtual RestResult<VimeoList<Category>> GetAllTheCategoriesToWhichAVideoBelongs(int video_id)
+            => GetAllTheCategoriesToWhichAVideoBelongs(video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="SuggestCategoriesForAVideo(string, string[])"/>
+        public virtual RestResult<Category> SuggestCategoriesForAVideo(int video_id, string[] categories)
+            => SuggestCategoriesForAVideo(video_id.ToString(CultureInfo.InvariantCulture), categories);
 
         #endregion
     }

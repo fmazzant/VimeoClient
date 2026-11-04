@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using System.Collections.Generic;
 
@@ -67,8 +67,26 @@ namespace VimeoClient
             = "https://api.vimeo.com";
 
         /// <summary>
-        /// If debug mode the debug is true
+        /// The default Vimeo API version supported by this library
         /// </summary>
-        public bool Debug => true;
+        public const string DefaultApiVersion = "3.4";
+
+        /// <summary>
+        /// The Vimeo API version requested by the Accept header.
+        /// https://developer.vimeo.com/api/guides/start#versioning
+        /// </summary>
+        public string ApiVersion { get; set; }
+            = DefaultApiVersion;
+
+        /// <summary>
+        /// The Accept header sent on each request: application/vnd.vimeo.*+json;version={ApiVersion}
+        /// </summary>
+        public string AcceptHeader => $"application/vnd.vimeo.*+json;version={ApiVersion}";
+
+        /// <summary>
+        /// If debug is true the certificate validation is skipped. Use it only in development.
+        /// </summary>
+        public bool Debug { get; set; }
+            = false;
     }
 }

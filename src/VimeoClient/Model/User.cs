@@ -28,7 +28,7 @@ using System.Text.Json.Serialization;
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     /// <summary>
     /// The user representation consists of the following fields.

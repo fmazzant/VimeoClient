@@ -28,23 +28,23 @@
 /// </summary>
 ///
 
-namespace VimeoClient
+namespace Mafesoft.VimeoClient
 {
     using RestClient;
-    using RestClient.Generic;
     using System;
     using System.Collections.Generic;
     using System.Net.Http.Headers;
     using System.Net.Security;
     using System.Text;
-    using VimeoClient.Body;
-    using VimeoClient.Common;
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Body;
+    using Mafesoft.VimeoClient.Common;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// Provides a set of methods for connecting to Vimeo REST webapi.
     /// Build something great. Vimeo's API supports flexible, high-quality video integration with your custom apps.
-    /// Version Vimeo API: 3.2
+    /// Version Vimeo API: 3.4
+    /// https://developer.vimeo.com/api/guides/start#versioning
     /// </summary>
     public class Vimeo
     {
@@ -96,6 +96,12 @@ namespace VimeoClient
         /// <returns></returns>
         protected virtual RestBuilder Root() => Rest
             .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
+            .Header((headers) =>
+            {
+                // Vimeo selects the API version by the Accept header
+                headers.Remove("Accept");
+                headers.TryAddWithoutValidation("Accept", Properties.AcceptHeader);
+            })
             .CertificateValidation((sender, cert, chain, errors) =>
             {
                 if (Properties.Debug)
@@ -103,13 +109,15 @@ namespace VimeoClient
                     return true;
                 }
 
-                if (Properties.ValidCertificates == null)
+                var noErrors = errors == SslPolicyErrors.None;
+
+                // Without pinned certificates the standard validation is used
+                if (Properties.ValidCertificates == null || Properties.ValidCertificates.Count == 0)
                 {
-                    return false;
+                    return noErrors;
                 }
 
                 var certificate = cert.GetCertHashString();
-                var noErrors = errors == SslPolicyErrors.None;
                 var contains = Properties.ValidCertificates.Contains(certificate);
                 return noErrors && contains;
             });
@@ -203,6 +211,36 @@ namespace VimeoClient
         /// API Information
         /// </summary>
         public virtual VimeoAPIInformation APIInformation => new VimeoAPIInformation(this);
+
+        /// <summary>
+        /// Analytics (Enterprise plan)
+        /// </summary>
+        public virtual VimeoAnalytics Analytics => new VimeoAnalytics(this);
+
+        /// <summary>
+        /// API app webhooks
+        /// </summary>
+        public virtual VimeoWebhooks Webhooks => new VimeoWebhooks(this);
+
+        /// <summary>
+        /// Hosted files
+        /// </summary>
+        public virtual VimeoFiles Files => new VimeoFiles(this);
+
+        /// <summary>
+        /// Payment methods, subscriptions and subscription plans
+        /// </summary>
+        public virtual VimeoPayments Payments => new VimeoPayments(this);
+
+        /// <summary>
+        /// Federated search
+        /// </summary>
+        public virtual VimeoSearch Search => new VimeoSearch(this);
+
+        /// <summary>
+        /// Teams: roles, memberships and custom metadata fields
+        /// </summary>
+        public virtual VimeoTeams Teams => new VimeoTeams(this);
 
         /// <summary>
         /// Authentication Extras

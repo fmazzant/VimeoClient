@@ -28,7 +28,7 @@ using System.Collections.Generic;
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-namespace VimeoClient.Body
+namespace Mafesoft.VimeoClient.Body
 {
     /// <summary>
     /// User Edit Parameters

@@ -1,9 +1,9 @@
 ﻿/// <summary>
-/// 
+///
 /// The MIT License (MIT)
-/// 
+///
 /// Copyright (c) 2020 Federico Mazzanti
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person
 /// obtaining a copy of this software and associated documentation
 /// files (the "Software"), to deal in the Software without
@@ -12,10 +12,10 @@
 /// copies of the Software, and to permit persons to whom the
 /// Software is furnished to do so, subject to the following
 /// conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be
 /// included in all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 /// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 /// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,11 +24,79 @@
 /// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 /// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 /// OTHER DEALINGS IN THE SOFTWARE.
-/// 
+///
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
-    public class Comment { }
+    using System.Text.Json.Serialization;
 
+    /// <summary>
+    /// The comment representation consists of the following fields.
+    /// </summary>
+    public class Comment : VimeoIdentity
+    {
+        /// <summary>
+        /// The time in ISO 8601 format when the comment was posted.
+        /// </summary>
+        [JsonPropertyName("created_on")]
+        public string CreatedOn { get; set; }
+
+        /// <summary>
+        /// The URL to access the comment in a browser.
+        /// </summary>
+        [JsonPropertyName("link")]
+        public string Link { get; set; }
+
+        /// <summary>
+        /// Metadata about the comment.
+        /// </summary>
+        [JsonPropertyName("metadata")]
+        public CommentMetadata Metadata { get; set; }
+
+        /// <summary>
+        /// The content of the comment.
+        /// </summary>
+        [JsonPropertyName("text")]
+        public string Text { get; set; }
+
+        /// <summary>
+        /// The Vimeo content to which the comment relates.
+        ///     video - The comment is about a video.
+        ///     channel - The comment is about a channel.
+        ///     group - The comment is about a group.
+        /// </summary>
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// The user who posted the comment.
+        /// </summary>
+        [JsonPropertyName("user")]
+        public User User { get; set; }
+    }
+
+    /// <summary>
+    /// Metadata about the comment.
+    /// </summary>
+    public class CommentMetadata
+    {
+        /// <summary>
+        /// A list of resource URIs related to the comment.
+        /// </summary>
+        [JsonPropertyName("connections")]
+        public CommentMetadataConnections Connections { get; set; }
+    }
+
+    /// <summary>
+    /// A list of resource URIs related to the comment.
+    /// </summary>
+    public class CommentMetadataConnections
+    {
+        /// <summary>
+        /// Information about the replies to this comment.
+        /// </summary>
+        [JsonPropertyName("replies")]
+        public GenericRelatedEntity Replies { get; set; }
+    }
 }

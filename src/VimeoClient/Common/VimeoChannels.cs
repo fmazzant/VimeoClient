@@ -27,14 +27,18 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
-    using VimeoClient.Body.Channel;
-    using VimeoClient.Filter.Channel;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using Mafesoft.VimeoClient.Body.Channel;
+    using Mafesoft.VimeoClient.Body.Video;
+    using Mafesoft.VimeoClient.Filter.Channel;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Use channels to organize videos by theme or some other grouping. 
@@ -204,12 +208,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Channel>>();
             }
@@ -253,7 +257,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
             if (page.HasValue)
             {
@@ -266,14 +270,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -317,7 +321,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
             if (page.HasValue)
             {
@@ -330,14 +334,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -949,12 +953,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
             }
@@ -990,6 +994,237 @@ namespace VimeoClient.Common
         public virtual RestResult RemoveASpecificVideoFromAChannel(string channel_id, string video_id) => RootAuthorization()
            .Command($"/channels/{channel_id}/videos/{video_id}")
            .Delete();
+
+        #endregion
+
+        #region [ Channel videos: comments, credits, thumbnails, privacy, text tracks ]
+
+        /// <summary>
+        /// This method returns every comment on the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The comments were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Comment>> GetAllTheCommentsOnAChannelVideo(string channel_id, string video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/comments")
+            .ListParameters(direction, null, page, per_page)
+            .GetPagination<Comment>(RootAuthorization);
+
+        /// <summary>
+        /// This method adds a comment to the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="text">The text of the comment.</param>
+        /// <returns>
+        /// 201 Created	The comment was added.
+        /// 401 Unauthorized	The authenticated user can't comment on the video.
+        /// 403 Forbidden	Comments are disabled for the video.
+        /// </returns>
+        public virtual RestResult<Comment> AddACommentToAChannelVideo(string channel_id, string video_id, string text) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/comments")
+            .FormUrlEncoded(new KeyValuePair<string, object>("text", text))
+            .Post<Comment>();
+
+        /// <summary>
+        /// This method returns every credited user in the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns>
+        /// 200 OK	The credits were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, string video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            VideoCreditSort? sort = null) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/credits")
+            .ListParameters(direction, null, page, per_page, query, sort)
+            .GetPagination<Credit>(RootAuthorization);
+
+        /// <summary>
+        /// This method adds a credit for a user in the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="parameters">Body: email, name, role and user_uri.</param>
+        /// <returns>
+        /// 201 Created	The credit was added.
+        /// 400 Bad Request	A parameter is invalid.
+        /// 403 Forbidden	The authenticated user can't add credits to the video.
+        /// </returns>
+        public virtual RestResult<Credit> CreditAUserInAChannelVideo(string channel_id, string video_id, CreditParameters parameters) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/credits")
+            .FormUrlEncoded(parameters)
+            .Post<Credit>();
+
+        /// <summary>
+        /// This method returns every thumbnail image of the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The thumbnails were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAChannelVideo(string channel_id, string video_id,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/pictures")
+            .ListParameters(null, null, page, per_page)
+            .GetPagination<Picture>(RootAuthorization);
+
+        /// <summary>
+        /// This method adds a thumbnail image to the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="parameters">Body: active and time.</param>
+        /// <returns>
+        /// 201 Created	The thumbnail was added.
+        /// </returns>
+        public virtual RestResult<Picture> AddAThumbnailToAChannelVideo(string channel_id, string video_id, ThumbnailParameters parameters) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/pictures")
+            .FormUrlEncoded(parameters)
+            .Post<Picture>();
+
+        /// <summary>
+        /// This method returns every user who can view the specified private video in a channel. The video's privacy.view must be users.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The users were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateChannelVideo(string channel_id, string video_id,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/privacy/users")
+            .ListParameters(null, null, page, per_page)
+            .GetPagination<User>(RootAuthorization);
+
+        /// <summary>
+        /// This method gives multiple users permission to view the specified private video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="user_uris">The URIs of the users to permit.</param>
+        /// <returns>
+        /// 200 OK	The users were permitted.
+        /// </returns>
+        public virtual RestResult<VimeoList<User>> PermitAListOfUsersToViewAPrivateChannelVideo(string channel_id, string video_id, string[] user_uris) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/privacy/users")
+            .Payload(user_uris.Select(uri => new Dictionary<string, string> { { "uri", uri } }).ToArray())
+            .Put<VimeoList<User>>();
+
+        /// <summary>
+        /// This method returns every text track of the specified video in a channel.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The text tracks were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAChannelVideo(string channel_id, string video_id,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/texttracks")
+            .ListParameters(null, null, page, per_page)
+            .GetPagination<TextTrack>(RootAuthorization);
+
+        /// <summary>
+        /// This method adds a text track to the specified video in a channel. Upload the file to the returned link afterwards.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="parameters">Body: active, language, name and type.</param>
+        /// <returns>
+        /// 201 Created	The text track was added.
+        /// </returns>
+        public virtual RestResult<TextTrack> AddATextTrackToAChannelVideo(string channel_id, string video_id, TextTrackParameters parameters) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/texttracks")
+            .FormUrlEncoded(parameters)
+            .Post<TextTrack>();
+
+        #endregion
+
+        #region [ Overloads with int video_id ]
+
+        /// <inheritdoc cref="AddASpecificVideoToAChannel(string, string)"/>
+        public virtual RestResult AddASpecificVideoToAChannel(string channel_id, int video_id)
+            => AddASpecificVideoToAChannel(channel_id, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetASpecificVideoInAChannel(string, string)"/>
+        public virtual RestResult<Video> GetASpecificVideoInAChannel(string channel_id, int video_id)
+            => GetASpecificVideoInAChannel(channel_id, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(string)"/>
+        public virtual RestResult<VimeoList<Channel>> GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id)
+            => GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="RemoveASpecificVideoFromAChannel(string, string)"/>
+        public virtual RestResult RemoveASpecificVideoFromAChannel(string channel_id, int video_id)
+            => RemoveASpecificVideoFromAChannel(channel_id, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetAllTheCommentsOnAChannelVideo(string, string, VideoDirection?, int?, int?)"/>
+        public virtual RestResult<Pagination<Comment>> GetAllTheCommentsOnAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null)
+            => GetAllTheCommentsOnAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), direction, page, per_page);
+
+        /// <inheritdoc cref="AddACommentToAChannelVideo(string, string, string)"/>
+        public virtual RestResult<Comment> AddACommentToAChannelVideo(string channel_id, int video_id, string text)
+            => AddACommentToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), text);
+
+        /// <inheritdoc cref="GetAllTheCreditedUsersInAChannelVideo(string, string, VideoDirection?, int?, int?, string, VideoCreditSort?)"/>
+        public virtual RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string query = null, VideoCreditSort? sort = null)
+            => GetAllTheCreditedUsersInAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), direction, page, per_page, query, sort);
+
+        /// <inheritdoc cref="CreditAUserInAChannelVideo(string, string, CreditParameters)"/>
+        public virtual RestResult<Credit> CreditAUserInAChannelVideo(string channel_id, int video_id, CreditParameters parameters)
+            => CreditAUserInAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), parameters);
+
+        /// <inheritdoc cref="GetAllTheThumbnailsOfAChannelVideo(string, string, int?, int?)"/>
+        public virtual RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAChannelVideo(string channel_id, int video_id, int? page = null, int? per_page = null)
+            => GetAllTheThumbnailsOfAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), page, per_page);
+
+        /// <inheritdoc cref="AddAThumbnailToAChannelVideo(string, string, ThumbnailParameters)"/>
+        public virtual RestResult<Picture> AddAThumbnailToAChannelVideo(string channel_id, int video_id, ThumbnailParameters parameters)
+            => AddAThumbnailToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), parameters);
+
+        /// <inheritdoc cref="GetAllTheUsersWhoCanViewAPrivateChannelVideo(string, string, int?, int?)"/>
+        public virtual RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateChannelVideo(string channel_id, int video_id, int? page = null, int? per_page = null)
+            => GetAllTheUsersWhoCanViewAPrivateChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), page, per_page);
+
+        /// <inheritdoc cref="PermitAListOfUsersToViewAPrivateChannelVideo(string, string, string[])"/>
+        public virtual RestResult<VimeoList<User>> PermitAListOfUsersToViewAPrivateChannelVideo(string channel_id, int video_id, string[] user_uris)
+            => PermitAListOfUsersToViewAPrivateChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), user_uris);
+
+        /// <inheritdoc cref="GetAllTheTextTracksOfAChannelVideo(string, string, int?, int?)"/>
+        public virtual RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAChannelVideo(string channel_id, int video_id, int? page = null, int? per_page = null)
+            => GetAllTheTextTracksOfAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), page, per_page);
+
+        /// <inheritdoc cref="AddATextTrackToAChannelVideo(string, string, TextTrackParameters)"/>
+        public virtual RestResult<TextTrack> AddATextTrackToAChannelVideo(string channel_id, int video_id, TextTrackParameters parameters)
+            => AddATextTrackToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), parameters);
 
         #endregion
     }

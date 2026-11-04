@@ -1,9 +1,9 @@
 ﻿/// <summary>
-/// 
+///
 /// The MIT License (MIT)
-/// 
+///
 /// Copyright (c) 2020 Federico Mazzanti
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person
 /// obtaining a copy of this software and associated documentation
 /// files (the "Software"), to deal in the Software without
@@ -12,10 +12,10 @@
 /// copies of the Software, and to permit persons to whom the
 /// Software is furnished to do so, subject to the following
 /// conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be
 /// included in all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 /// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 /// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,11 +24,40 @@
 /// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 /// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 /// OTHER DEALINGS IN THE SOFTWARE.
-/// 
+///
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
-    public class OnDemandPromotionCode { }
+    using System.Text.Json.Serialization;
 
+    /// <summary>
+    /// The On Demand promotion code representation consists of the following fields.
+    /// </summary>
+    public class OnDemandPromotionCode
+    {
+        /// <summary>
+        /// The promotion code.
+        /// </summary>
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+
+        /// <summary>
+        /// The URL to redeem the promotion code.
+        /// </summary>
+        [JsonPropertyName("link")]
+        public string Link { get; set; }
+
+        /// <summary>
+        /// The number of times that the code has been used.
+        /// </summary>
+        [JsonPropertyName("uses")]
+        public int Uses { get; set; }
+
+        /// <summary>
+        /// The maximum number of times that the code can be used.
+        /// </summary>
+        [JsonPropertyName("max_uses")]
+        public int MaxUses { get; set; }
+    }
 }

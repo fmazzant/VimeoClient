@@ -27,15 +27,15 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
-    using VimeoClient.Filter.Group;
-    using VimeoClient.Filter.User;
-    using VimeoClient.Filter.Video;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using System;
+    using Mafesoft.VimeoClient.Filter.Group;
+    using Mafesoft.VimeoClient.Filter.User;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// A group is a community within Vimeo for collaborating, sharing, and engaging with videos. 
@@ -134,61 +134,26 @@ namespace VimeoClient.Common
         /// <returns>
         /// 200 OK	The groups were returned.
         /// </returns>
+        public virtual RestResult<Pagination<Group>> GetAllGroups(GroupDirection? direction = null,
+            string filter = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            GroupSort? sort = null) => RootAuthorization()
+            .Command($"/groups")
+            .ListParameters(direction, filter, page, per_page, query, sort)
+            .GetPagination<Group>(RootAuthorization);
+
+        /// <summary>
+        /// Obsolete: the name was wrong, use GetAllGroups.
+        /// </summary>
+        [Obsolete("Use GetAllGroups(direction, filter, page, per_page, query, sort)")]
         public virtual RestResult<Pagination<Group>> GetAllTheVideosThatHaveASpecificEmbedPreset(GroupDirection? direction = null,
             string filter = null,
             int? page = null,
             int? per_page = null,
             string query = null,
-            GroupSort? sort = null)
-        {
-            var root = RootAuthorization()
-                .Command($"/groups")
-                .Parameter((p) =>
-                {
-                    if (direction.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "direction", Value = direction });
-                    }
-                    if (filter != null)
-                    {
-                        p.Add(new RestParameter { Key = "filter", Value = filter });
-                    }
-                    if (page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "page", Value = page });
-                    }
-                    if (per_page.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "per_page", Value = per_page });
-                    }
-                    if (query != null)
-                    {
-                        p.Add(new RestParameter { Key = "query", Value = query });
-                    }
-                    if (sort.HasValue)
-                    {
-                        p.Add(new RestParameter { Key = "sort", Value = sort });
-                    }
-                });
-
-            var result = root.Get<Pagination<Group>>();
-
-            if (result.Content.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Group>>();
-            }
-
-            if (result.Content.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Group>>();
-            }
-
-            return result;
-        }
+            GroupSort? sort = null) => GetAllGroups(direction, filter, page, per_page, query, sort);
 
         #endregion
 
@@ -331,14 +296,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Group>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Group>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -399,14 +364,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Group>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Group>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -469,14 +434,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<User>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<User>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -507,7 +472,20 @@ namespace VimeoClient.Common
             .Command($"/groups/{group_id}/videos/{video_id}")
             .Put<Video>();
 
-        //Get a specific video in a group
+        /// <summary>
+        /// This method returns every group to which the authenticated user can add or remove the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The groups were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Group>> GetAllTheGroupsToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/available_groups")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Group>(RootAuthorization);
+
         /// <summary>
         /// This method returns a single video from the specified group. You can use this method to determine whether the video belongs to the group.
         /// </summary>
@@ -578,14 +556,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)

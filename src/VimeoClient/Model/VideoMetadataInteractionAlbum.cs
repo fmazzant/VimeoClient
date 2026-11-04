@@ -28,7 +28,7 @@ using System.Text.Json.Serialization;
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     /// <summary>
     /// When a video is referenced by an album URI, if the user is a moderator of the album, 

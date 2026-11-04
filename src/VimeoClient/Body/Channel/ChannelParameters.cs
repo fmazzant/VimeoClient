@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Body.Channel
+namespace Mafesoft.VimeoClient.Body.Channel
 {
     using System.Collections.Generic;
 
@@ -54,8 +54,6 @@ namespace VimeoClient.Body.Channel
         /// </summary>
         user
     }
-
-
 
     /// <summary>
     /// The channel edit object.

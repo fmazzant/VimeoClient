@@ -27,9 +27,9 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Body
+namespace Mafesoft.VimeoClient.Body
 {
-    using VimeoClient.Model;
+    using Mafesoft.VimeoClient.Model;
 
     /// <summary>
     /// Access Token Payload

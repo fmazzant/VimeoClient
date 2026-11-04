@@ -27,14 +27,13 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
-    using VimeoClient.Body;
-    using VimeoClient.Filter.User;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body;
+    using Mafesoft.VimeoClient.Filter.User;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// These are the most common methods for working with users.
@@ -269,14 +268,14 @@ namespace VimeoClient.Common
 
             var result = builder.Get<Pagination<User>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<User>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -367,14 +366,14 @@ namespace VimeoClient.Common
 
             var result = builder.Get<Pagination<User>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<User>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -460,6 +459,39 @@ namespace VimeoClient.Common
 
         #endregion
 
+        #region [ LMS ]
+
+        /// <summary>
+        /// This method creates and returns a zipped proxy package of the course associated with the specified video,
+        /// suitable for direct upload to a learning management system.
+        /// GET https://api.vimeo.com/users/{user_id}/lms/download/{video_id}
+        /// </summary>
+        /// <param name="user_id">The ID of the team owner.</param>
+        /// <param name="video_id">The ID of the course video.</param>
+        /// <param name="standard">The LMS standard used to create the package: aicc, cmi5, scorm12, scorm2004_3rd, tincan.</param>
+        /// <param name="course_title">The title of the course.</param>
+        /// <param name="scoring_algorithm">The scoring algorithm for the course: passfail, percentage, quiz.</param>
+        /// <param name="passing_score">The passing score for the course.</param>
+        /// <param name="completion_threshold">The completion threshold for the course.</param>
+        /// <returns>
+        /// 200 OK	The zipped proxy package was created and returned (raw bytes of the zip file).
+        /// </returns>
+        public virtual RestResult<byte[]> DownloadAnLmsPackageForAVideo(int user_id, int video_id,
+            string standard = null,
+            string course_title = null,
+            string scoring_algorithm = null,
+            double? passing_score = null,
+            double? completion_threshold = null) => RootAuthorization()
+            .Command($"/users/{user_id}/lms/download/{video_id}")
+            .OptionalParameter("standard", standard)
+            .OptionalParameter("course_title", course_title)
+            .OptionalParameter("scoring_algorithm", scoring_algorithm)
+            .OptionalParameter("passing_score", passing_score)
+            .OptionalParameter("completion_threshold", completion_threshold)
+            .Get<byte[]>();
+
+        #endregion
+
         #region [ SEARCH ]
 
         /// <summary>
@@ -485,7 +517,7 @@ namespace VimeoClient.Common
             }
             if (sort != null)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
 
             if (page > 0)
@@ -499,14 +531,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<User>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<User>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)

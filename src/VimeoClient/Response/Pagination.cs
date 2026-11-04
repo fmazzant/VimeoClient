@@ -27,9 +27,9 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Response
+namespace Mafesoft.VimeoClient.Response
 {
-    using RestClient.Generic;
+    using RestClient;
     using System;
     using System.Collections.Generic;
     using System.Text.Json.Serialization;

@@ -1,9 +1,9 @@
 ﻿/// <summary>
-/// 
+///
 /// The MIT License (MIT)
-/// 
+///
 /// Copyright (c) 2020 Federico Mazzanti
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person
 /// obtaining a copy of this software and associated documentation
 /// files (the "Software"), to deal in the Software without
@@ -12,10 +12,10 @@
 /// copies of the Software, and to permit persons to whom the
 /// Software is furnished to do so, subject to the following
 /// conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be
 /// included in all copies or substantial portions of the Software.
-/// 
+///
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 /// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
 /// OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,18 +24,17 @@
 /// WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 /// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 /// OTHER DEALINGS IN THE SOFTWARE.
-/// 
+///
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
     using System;
-    using VimeoClient.Filter.Portfolio;
-    using VimeoClient.Filter.Video;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Filter.Portfolio;
+    using Mafesoft.VimeoClient.Filter.Video;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     /// Portfolios are customizable websites for showcasing videos.
@@ -60,7 +59,7 @@ namespace VimeoClient.Common
         public RestBuilder RootAuthorization() => Vimeo.RootAuthorization();
 
         /// <summary>
-        /// Create a new instance of VimeoCategories class
+        /// Create a new instance of VimeoPortfolios class
         /// </summary>
         /// <param name="properties"></param>
         public VimeoPortfolios(VimeoProperties properties)
@@ -85,15 +84,25 @@ namespace VimeoClient.Common
         /// </summary>
         /// <param name="portfolio_id">The ID of the portfolio.</param>
         /// <param name="user_id">The ID of the user.</param>
-        /// <returns></returns>
-        public virtual RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id, int user_id) => throw new NotImplementedException();
+        /// <returns>
+        /// 200 OK	The portfolio was returned.
+        /// 404 Not Found   No such portfolio exists.
+        /// </returns>
+        public virtual RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id, int user_id) => RootAuthorization()
+            .Command($"/users/{user_id}/portfolios/{portfolio_id}")
+            .Get<Portfolio>();
 
         /// <summary>
         /// This method returns a single portfolio belonging to the authenticated user.
         /// </summary>
         /// <param name="portfolio_id">The ID of the portfolio.</param>
-        /// <returns></returns>
-        public virtual RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id) => throw new NotImplementedException();
+        /// <returns>
+        /// 200 OK	The portfolio was returned.
+        /// 404 Not Found   No such portfolio exists.
+        /// </returns>
+        public virtual RestResult<Portfolio> GetASpecificPortfolio(int portfolio_id) => RootAuthorization()
+            .Command($"/me/portfolios/{portfolio_id}")
+            .Get<Portfolio>();
 
         /// <summary>
         /// This method returns every portfolio belonging to the authenticated user.
@@ -104,13 +113,16 @@ namespace VimeoClient.Common
         /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
-        /// <returns></returns>
+        /// <returns>200 OK	The portfolios were returned.</returns>
         public virtual RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(int user_id,
             PortfolioDirection? direction = null,
             int? page = null,
             int? per_page = null,
             string query = null,
-            PortfolioSort? sort = null) => throw new NotImplementedException();
+            PortfolioSort? sort = null) => RootAuthorization()
+            .Command($"/users/{user_id}/portfolios")
+            .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
+            .GetPagination<Portfolio>(RootAuthorization);
 
         /// <summary>
         /// This method returns every portfolio belonging to the authenticated user.
@@ -120,12 +132,15 @@ namespace VimeoClient.Common
         /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
-        /// <returns></returns>
+        /// <returns>200 OK	The portfolios were returned.</returns>
         public virtual RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
             int? page = null,
             int? per_page = null,
             string query = null,
-            PortfolioSort? sort = null) => throw new NotImplementedException();
+            PortfolioSort? sort = null) => RootAuthorization()
+            .Command($"/me/portfolios")
+            .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
+            .GetPagination<Portfolio>(RootAuthorization);
 
         #endregion
 
@@ -140,7 +155,9 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was added.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public virtual RestResult AddAVideoToAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult AddAVideoToAPortfolio(int user_id, int portfolio_id, int video_id) => RootAuthorization()
+            .Command($"/users/{user_id}/portfolios/{portfolio_id}/videos/{video_id}")
+            .Put();
 
         /// <summary>
         /// This method adds a video to the specified portfolio belonging to the authenticated user.
@@ -151,7 +168,9 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was added.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public virtual RestResult AddAVideoToAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult AddAVideoToAPortfolio(int portfolio_id, int video_id) => RootAuthorization()
+            .Command($"/me/portfolios/{portfolio_id}/videos/{video_id}")
+            .Put();
 
         /// <summary>
         /// This method returns a single video from the specified portfolio belonging to the authenticated user.
@@ -162,7 +181,9 @@ namespace VimeoClient.Common
         /// <returns>
         /// The video was returned.
         /// </returns>
-        public virtual RestResult<Video> GetASpecificVideoInAPortfolio(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult<Video> GetASpecificVideoInAPortfolio(int user_id, int portfolio_id, int video_id) => RootAuthorization()
+            .Command($"/users/{user_id}/portfolios/{portfolio_id}/videos/{video_id}")
+            .Get<Video>();
 
         /// <summary>
         /// This method returns a single video from the specified portfolio belonging to the authenticated user.
@@ -172,7 +193,9 @@ namespace VimeoClient.Common
         /// <returns>
         /// The video was returned.
         /// </returns>
-        public virtual RestResult<Video> GetASpecificVideoInAPortfolio(int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult<Video> GetASpecificVideoInAPortfolio(int portfolio_id, int video_id) => RootAuthorization()
+            .Command($"/me/portfolios/{portfolio_id}/videos/{video_id}")
+            .Get<Video>();
 
         /// <summary>
         /// This method returns every video from the specified portfolio belonging to the authenticated user.
@@ -181,7 +204,7 @@ namespace VimeoClient.Common
         /// <param name="portfolio_id">The ID of the portfolio.</param>
         /// <param name="containing_uri">The page that contains the video URI.</param>
         /// <param name="filter">The attribute by which to filter the results</param>
-        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). 
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false).
         /// This parameter is required only when filter is embeddable.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
@@ -194,7 +217,12 @@ namespace VimeoClient.Common
             int? page = null,
             int? per_page = null,
             VideoSort? sort = null
-            ) => throw new NotImplementedException();
+            ) => RootAuthorization()
+            .Command($"/users/{user_id}/portfolios/{portfolio_id}/videos")
+            .OptionalParameter("containing_uri", containing_uri)
+            .OptionalParameter("filter_embeddable", filter == VideoFilter.embeddable ? (bool?)filter_embeddable : null)
+            .ListParameters(filter: filter, page: page, per_page: per_page, sort: sort)
+            .GetPagination<Video>(RootAuthorization);
 
         /// <summary>
         /// This method returns every video from the specified portfolio belonging to the authenticated user.
@@ -202,7 +230,7 @@ namespace VimeoClient.Common
         /// <param name="portfolio_id">The ID of the portfolio.</param>
         /// <param name="containing_uri">The page that contains the video URI.</param>
         /// <param name="filter">The attribute by which to filter the results</param>
-        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). 
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false).
         /// This parameter is required only when filter is embeddable.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
@@ -215,9 +243,20 @@ namespace VimeoClient.Common
            int? page = null,
            int? per_page = null,
            VideoSort? sort = null
-           ) => throw new NotImplementedException();
+           ) => RootAuthorization()
+            .Command($"/me/portfolios/{portfolio_id}/videos")
+            .OptionalParameter("containing_uri", containing_uri)
+            .OptionalParameter("filter_embeddable", filter == VideoFilter.embeddable ? (bool?)filter_embeddable : null)
+            .ListParameters(filter: filter, page: page, per_page: per_page, sort: sort)
+            .GetPagination<Video>(RootAuthorization);
 
-        public virtual RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id) => throw new NotImplementedException();
+        /// <summary>
+        /// This method returns every video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        /// <param name="portfolio_id">The ID of the portfolio.</param>
+        /// <returns>The videos were returned.</returns>
+        public virtual RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id)
+            => GetAllTheVideosInAPortfolio(portfolio_id, null);
 
         /// <summary>
         /// This method removes a video from the specified portfolio belonging to the authenticated user.
@@ -229,7 +268,9 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was removed.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public virtual RestResult RemoveAVideoFromPortfoli(int user_id, int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult RemoveAVideoFromAPortfolio(int user_id, int portfolio_id, int video_id) => RootAuthorization()
+            .Command($"/users/{user_id}/portfolios/{portfolio_id}/videos/{video_id}")
+            .Delete();
 
         /// <summary>
         /// This method removes a video from the specified portfolio belonging to the authenticated user.
@@ -240,7 +281,23 @@ namespace VimeoClient.Common
         /// 204 No Content	The video was removed.
         /// 404 Not Found   No such portfolio or video exists.
         /// </returns>
-        public virtual RestResult RemoveAVideoFromPortfoli(int portfolio_id, int video_id) => throw new NotImplementedException();
+        public virtual RestResult RemoveAVideoFromAPortfolio(int portfolio_id, int video_id) => RootAuthorization()
+            .Command($"/me/portfolios/{portfolio_id}/videos/{video_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method removes a video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        [Obsolete("Use RemoveAVideoFromAPortfolio")]
+        public virtual RestResult RemoveAVideoFromPortfoli(int user_id, int portfolio_id, int video_id)
+            => RemoveAVideoFromAPortfolio(user_id, portfolio_id, video_id);
+
+        /// <summary>
+        /// This method removes a video from the specified portfolio belonging to the authenticated user.
+        /// </summary>
+        [Obsolete("Use RemoveAVideoFromAPortfolio")]
+        public virtual RestResult RemoveAVideoFromPortfoli(int portfolio_id, int video_id)
+            => RemoveAVideoFromAPortfolio(portfolio_id, video_id);
 
         #endregion
     }

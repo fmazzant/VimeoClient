@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
@@ -39,7 +39,7 @@ namespace VimeoClient.Model
         /// <summary>
         /// Whether the user has watched the video.
         /// </summary>
-        [JsonPropertyName("options")]
+        [JsonPropertyName("added")]
         public bool Added { get; set; }
 
         /// <summary>

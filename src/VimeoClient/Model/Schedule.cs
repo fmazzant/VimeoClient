@@ -28,11 +28,12 @@ using System.Text.Json.Serialization;
 /// OTHER DEALINGS IN THE SOFTWARE.
 /// 
 /// </summary>
-namespace VimeoClient.Model
+namespace Mafesoft.VimeoClient.Model
 {
     /// <summary>
     /// The event is live on a weekly basis.
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ScheduleType
     {
         /// <summary>

@@ -27,17 +27,16 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Common
+namespace Mafesoft.VimeoClient.Common
 {
     using RestClient;
-    using RestClient.Generic;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using VimeoClient.Body;
-    using VimeoClient.Filter.User;
-    using VimeoClient.Model;
-    using VimeoClient.Response;
+    using Mafesoft.VimeoClient.Body;
+    using Mafesoft.VimeoClient.Filter.User;
+    using Mafesoft.VimeoClient.Model;
+    using Mafesoft.VimeoClient.Response;
 
     /// <summary>
     // These are the most common methods for working with myself user.
@@ -151,7 +150,7 @@ namespace VimeoClient.Common
         /// <param name="per_page"></param>
         /// <returns></returns>
         public virtual RestResult<VimeoList<Activity>> GetAllTheVideosInTheUserFeedWithPaging(string offset, string page, string per_page) => RootMeAuthorization()
-            .Command("/me/feed")
+            .Command("/feed")
             .Parameter("offset", offset)
             .Parameter("page", page)
             .Parameter("per_page", per_page)

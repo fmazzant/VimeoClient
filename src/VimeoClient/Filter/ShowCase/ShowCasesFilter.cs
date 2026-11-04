@@ -27,7 +27,7 @@
 /// 
 /// </summary>
 
-namespace VimeoClient.Filter.ShowCase
+namespace Mafesoft.VimeoClient.Filter.ShowCase
 {
     /// <summary>
     /// The type of layout for presenting the showcase
@@ -73,7 +73,12 @@ namespace VimeoClient.Filter.ShowCase
         /// <summary>
         /// Only members of the authenticated user's team can access the showcase.
         /// </summary>
-        team
+        team,
+
+        /// <summary>
+        /// Anyone with the showcase's link can access the showcase.
+        /// </summary>
+        unlisted
     }
 
 
@@ -142,5 +147,111 @@ namespace VimeoClient.Filter.ShowCase
         /// The showcase uses the standard theme.
         /// </summary>
         standard
+    }
+
+    /// <summary>
+    /// The sort direction of the results.
+    /// 	asc - Sort the results in ascending order.
+    /// 	desc - Sort the results in descending order.
+    /// </summary>
+    public enum ShowCasesDirection
+    {
+        /// <summary>
+        /// Sort the results in ascending order.
+        /// </summary>
+        asc,
+
+        /// <summary>
+        /// Sort the results in descending order.
+        /// </summary>
+        desc
+    }
+
+    /// <summary>
+    /// The way to sort the showcases.
+    /// </summary>
+    public enum ShowCasesGetAllSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically.
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by date.
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Sort the results by duration.
+        /// </summary>
+        duration,
+
+        /// <summary>
+        /// Sort the results by number of videos.
+        /// </summary>
+        videos
+    }
+
+    /// <summary>
+    /// The way to sort the videos of a showcase.
+    /// </summary>
+    public enum ShowCasesVideosSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically.
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by number of comments.
+        /// </summary>
+        comments,
+
+        /// <summary>
+        /// Sort the results by date.
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Sort the results by the default sort order of the showcase.
+        /// </summary>
+        @default,
+
+        /// <summary>
+        /// Sort the results by duration.
+        /// </summary>
+        duration,
+
+        /// <summary>
+        /// Sort the results by number of likes.
+        /// </summary>
+        likes,
+
+        /// <summary>
+        /// Sort the results by the manual order of the showcase.
+        /// </summary>
+        manual,
+
+        /// <summary>
+        /// Sort the results by time of modification.
+        /// </summary>
+        modified_time,
+
+        /// <summary>
+        /// Sort the results by number of plays.
+        /// </summary>
+        plays
+    }
+
+    /// <summary>
+    /// The attribute by which to filter the videos of a showcase.
+    /// </summary>
+    public enum ShowCasesVideosFilter
+    {
+        /// <summary>
+        /// Return embeddable videos.
+        /// </summary>
+        embeddable
     }
 }
