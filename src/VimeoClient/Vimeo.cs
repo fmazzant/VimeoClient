@@ -213,6 +213,11 @@ namespace VimeoClient
         public virtual VimeoAPIInformation APIInformation => new VimeoAPIInformation(this);
 
         /// <summary>
+        /// Analytics (Enterprise plan)
+        /// </summary>
+        public virtual VimeoAnalytics Analytics => new VimeoAnalytics(this);
+
+        /// <summary>
         /// Authentication Extras
         /// </summary>
         public virtual VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(this);

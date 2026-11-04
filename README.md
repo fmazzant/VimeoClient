@@ -57,6 +57,15 @@ var page = client.OnDemand.MeCreateAnOnDemandPage(new CreateAnOnDemandPageBody
 var videos = client.OnDemand.GetAllTheVideosOnAnOnDemandPage(ondemandId, per_page: 25);
 var next = videos.Content.Next();
 
+// Analytics (Enterprise plan, enabled for the API app by Vimeo support)
+var stats = client.Analytics.GetAnalyticsForTheAuthenticatedUser(
+    AnalyticsDimension.country,
+    from: new DateTime(2026, 1, 1),
+    to: new DateTime(2026, 1, 31),
+    time_interval: AnalyticsTimeInterval.week,
+    sort: AnalyticsSort.views,
+    direction: AnalyticsDirection.desc);
+
 // Folders, Portfolios, Showcases, Videos, Live, Channels, Categories, Groups...
 var folders = client.Folders.GetAllTheFoldersThatBelongToTheUser();
 var showcases = client.ShowCases.GetAllTheShowcasesThatBelongToTheUser();
