@@ -82,7 +82,8 @@ namespace VimeoClientSampleApp
                 options.Columns.AddColumn(x => x.UserToken);
                 options.Columns.AddColumn(x => x.Cert);
             });
-            var vimeoKeys = csv.LoadFromFile("../../../../../../VimeoClient.Keys.csv");
+            var vimeoKeys = csv.LoadFromFile("../../../../../../VimeoClient.Keys.csv")
+                .ToArray();
 
             /// Get first key and create a vimeoClient instance
             var vimeoKey = vimeoKeys.FirstOrDefault();
@@ -91,7 +92,9 @@ namespace VimeoClientSampleApp
                 AccessToken = vimeoKey.AccessToken,
                 ClientSecret = vimeoKey.ClientSecret,
                 ClientId = vimeoKey.ClientID,
-                ValidCertificates = new List<string>() { vimeoKey.Cert }
+                ValidCertificates = new List<string>() { vimeoKey.Cert },
+                Debug = true
+
             });
 
             /// VimeoClient examples invoking
