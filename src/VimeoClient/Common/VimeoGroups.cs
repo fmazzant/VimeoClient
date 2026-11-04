@@ -296,14 +296,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Group>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Group>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -364,14 +364,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Group>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Group>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -434,14 +434,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<User>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<User>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -471,6 +471,20 @@ namespace VimeoClient.Common
         public virtual RestResult<Video> AddAVideoToAGroup(int group_id, int video_id) => RootAuthorization()
             .Command($"/groups/{group_id}/videos/{video_id}")
             .Put<Video>();
+
+        /// <summary>
+        /// This method returns every group to which the authenticated user can add or remove the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The groups were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<Group>> GetAllTheGroupsToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id, int? page = null, int? per_page = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/available_groups")
+            .ListParameters(page: page, per_page: per_page)
+            .GetPagination<Group>(RootAuthorization);
 
         /// <summary>
         /// This method returns a single video from the specified group. You can use this method to determine whether the video belongs to the group.
@@ -542,14 +556,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)

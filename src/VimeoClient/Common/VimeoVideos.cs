@@ -282,6 +282,80 @@ namespace VimeoClient.Common
             .OptionalParameter("uris", uris)
             .GetPagination<Video>(RootAuthorization);
 
+        /// <summary>
+        /// This method deletes one or more videos belonging to the specified user.
+        /// The authenticated user must have permission to delete the videos.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="uris">The URIs of the videos to delete.</param>
+        /// <param name="send_to_recently_deleted">When true, deleted videos use the Recently Deleted bucket (30-day retention).</param>
+        /// <returns>
+        /// 204 No Content	The videos were deleted.
+        /// </returns>
+        public virtual RestResult DeleteAUserVideos(int user_id, string[] uris, bool? send_to_recently_deleted = null) => RootAuthorization()
+            .Command($"/users/{user_id}/videos")
+            .OptionalParameter("uris", uris)
+            .JsonPayload(new VimeoPayload().Set("send_to_recently_deleted", send_to_recently_deleted))
+            .Delete();
+
+        /// <summary>
+        /// This method deletes one or more videos belonging to the authenticated user.
+        /// </summary>
+        /// <param name="uris">The URIs of the videos to delete.</param>
+        /// <param name="send_to_recently_deleted">When true, deleted videos use the Recently Deleted bucket (30-day retention).</param>
+        /// <returns>
+        /// 204 No Content	The videos were deleted.
+        /// </returns>
+        public virtual RestResult MeDeleteAUserVideos(string[] uris, bool? send_to_recently_deleted = null) => RootAuthorization()
+            .Command($"/me/videos")
+            .OptionalParameter("uris", uris)
+            .JsonPayload(new VimeoPayload().Set("send_to_recently_deleted", send_to_recently_deleted))
+            .Delete();
+
+        /// <summary>
+        /// This method creates a copy of the specified video. Only the source's metadata and files are copied.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="name">The copied video name, up to 128 characters. By default, the source video name.</param>
+        /// <returns>
+        /// 201 Created	The copied video was created.
+        /// </returns>
+        public virtual RestResult<Video> CopyAVideo(int user_id, int video_id, string name = null) => RootAuthorization()
+            .Command($"/users/{user_id}/videos/{video_id}/copy")
+            .JsonPayload(new VimeoPayload().Set("name", name))
+            .Post<Video>();
+
+        /// <summary>
+        /// This method creates a copy of the specified video of the authenticated user.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="name">The copied video name, up to 128 characters. By default, the source video name.</param>
+        /// <returns>
+        /// 201 Created	The copied video was created.
+        /// </returns>
+        public virtual RestResult<Video> MeCopyAVideo(int video_id, string name = null) => RootAuthorization()
+            .Command($"/me/videos/{video_id}/copy")
+            .JsonPayload(new VimeoPayload().Set("name", name))
+            .Post<Video>();
+
+        /// <summary>
+        /// This method sets, updates, or clears custom metadata values on a single video.
+        /// A null value clears the field.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="fields">The values by field ID (see GET /teams/{user_id}/custom_metadata).</param>
+        /// <returns>
+        /// 200 OK	The updated custom metadata for the video.
+        /// </returns>
+        public virtual RestResult<List<CustomMetadataValue>> SetCustomMetadataValuesForAVideo(int video_id, IDictionary<long, string> fields) => RootAuthorization()
+            .Command($"/videos/{video_id}/custom_metadata")
+            .Payload(new Dictionary<string, object>
+            {
+                ["fields"] = fields.Select(f => new Dictionary<string, object> { ["field_id"] = f.Key, ["field_value"] = f.Value }).ToArray()
+            })
+            .Put<List<CustomMetadataValue>>();
+
         #endregion
 
         #region [ Content ratings ]
@@ -563,7 +637,7 @@ namespace VimeoClient.Common
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <returns></returns>
         public virtual RestResult AddOrRemoveAVideoFromAListOfShowcases(int video_id, string[] add_to = null, string[] remove_from = null) => RootAuthorization()
-            .Command($"/me/videos/{video_id}/albums")
+            .Command($"/videos/{video_id}/albums")
             .Payload(new Dictionary<string, string[]>
             {
                 { "add_to", add_to ?? new string[0] },
@@ -1037,6 +1111,32 @@ namespace VimeoClient.Common
             .Command($"/videos/{video_id}/comments")
             .ListParameters(direction, null, page, per_page)
             .GetPagination<Comment>(RootAuthorization);
+
+        #endregion
+
+        #region [ Moderation ]
+
+        /// <summary>
+        /// This method returns the reasons that content of the specified type can be reported for on Vimeo.
+        /// </summary>
+        /// <param name="content_type">The type of content: comment, file, user, video.</param>
+        /// <returns>
+        /// 200 OK	The list of reasons was returned.
+        /// </returns>
+        public virtual RestResult<ReportReasons> GetTheReasonsThatContentCanBeReported(ReportContentType content_type) => RootAuthorization()
+            .Command($"/report/reasons")
+            .OptionalParameter("content_type", content_type)
+            .Get<ReportReasons>();
+
+        /// <summary>
+        /// This method returns a list of valid reasons for reporting inappropriate videos on Vimeo.
+        /// </summary>
+        /// <returns>
+        /// 200 OK	The list of reasons was returned.
+        /// </returns>
+        public virtual RestResult<ReportReasons> GetTheReasonsThatVideosCanBeReported() => RootAuthorization()
+            .Command($"/report/video_report_reasons")
+            .Get<ReportReasons>();
 
         #endregion
     }

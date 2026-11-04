@@ -31,6 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using System;
+    using VimeoClient.Body.EmbedPreset;
     using VimeoClient.Model;
     using VimeoClient.Response;
 
@@ -77,6 +78,81 @@ namespace VimeoClient.Common
         }
 
         #region [ Essentials ]
+
+        /// <summary>
+        /// This method creates an embed preset.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="parameters">The embed preset.</param>
+        /// <returns>
+        /// 200 OK	The embed preset was created.
+        /// </returns>
+        public virtual RestResult<Presets> CreateAnEmbedPreset(int user_id, EmbedPresetParameters parameters) => RootAuthorization()
+            .Command($"/users/{user_id}/presets")
+            .JsonPayload(parameters)
+            .Post<Presets>();
+
+        /// <summary>
+        /// This method creates an embed preset for the authenticated user.
+        /// </summary>
+        /// <param name="parameters">The embed preset.</param>
+        /// <returns>
+        /// 200 OK	The embed preset was created.
+        /// </returns>
+        public virtual RestResult<Presets> MeCreateAnEmbedPreset(EmbedPresetParameters parameters) => RootAuthorization()
+            .Command($"/me/presets")
+            .JsonPayload(parameters)
+            .Post<Presets>();
+
+        /// <summary>
+        /// This method deletes the specified embed preset. The authenticated user must be the owner of the preset.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <returns>
+        /// 204 No Content	The embed preset was deleted.
+        /// </returns>
+        public virtual RestResult DeleteAnEmbedPreset(int user_id, int preset_id) => RootAuthorization()
+            .Command($"/users/{user_id}/presets/{preset_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method deletes the specified embed preset of the authenticated user.
+        /// </summary>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <returns>
+        /// 204 No Content	The embed preset was deleted.
+        /// </returns>
+        public virtual RestResult MeDeleteAnEmbedPreset(int preset_id) => RootAuthorization()
+            .Command($"/me/presets/{preset_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method edits the specified embed preset (name and embed settings). The authenticated user must be the owner of the preset.
+        /// </summary>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="parameters">The fields to edit: only the values that are set are sent.</param>
+        /// <returns>
+        /// 200 OK	The embed preset was edited.
+        /// </returns>
+        public virtual RestResult<Presets> EditAnEmbedPreset(int preset_id, int user_id, EmbedPresetParameters parameters) => RootAuthorization()
+            .Command($"/users/{user_id}/presets/{preset_id}")
+            .JsonPayload(parameters)
+            .Patch<Presets>();
+
+        /// <summary>
+        /// This method edits the specified embed preset (name and embed settings) of the authenticated user.
+        /// </summary>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <param name="parameters">The fields to edit: only the values that are set are sent.</param>
+        /// <returns>
+        /// 200 OK	The embed preset was edited.
+        /// </returns>
+        public virtual RestResult<Presets> MeEditAnEmbedPreset(int preset_id, EmbedPresetParameters parameters) => RootAuthorization()
+            .Command($"/me/presets/{preset_id}")
+            .JsonPayload(parameters)
+            .Patch<Presets>();
 
         /// <summary>
         /// This method edits the specified embed preset. The authenticated user must be the owner of the preset.
@@ -244,6 +320,47 @@ namespace VimeoClient.Common
         public virtual RestResult<VimeoList<Picture>> GetAllTheCustomLogosThatBelongToTheUser() => RootAuthorization()
             .Command($"/me/customlogos")
             .Get<VimeoList<Picture>>();
+
+        /// <summary>
+        /// This method deletes the specified custom logo belonging to the authenticated user.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="logo_id">The ID of the custom logo.</param>
+        /// <returns>
+        /// 204 No Content	The custom logo was deleted.
+        /// </returns>
+        public virtual RestResult DeleteACustomUserLogo(int user_id, int logo_id) => RootAuthorization()
+            .Command($"/users/{user_id}/customlogos/{logo_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method deletes the specified custom logo belonging to the authenticated user.
+        /// </summary>
+        /// <param name="logo_id">The ID of the custom logo.</param>
+        /// <returns>
+        /// 204 No Content	The custom logo was deleted.
+        /// </returns>
+        public virtual RestResult MeDeleteACustomUserLogo(int logo_id) => RootAuthorization()
+            .Command($"/me/customlogos/{logo_id}")
+            .Delete();
+
+        #endregion
+
+        #region [ Folders ]
+
+        /// <summary>
+        /// This method removes the specified embed preset from a folder.
+        /// The authenticated user must be either the owner of the folder or a team user with the contributor role or higher.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="project_id">The ID of the folder.</param>
+        /// <param name="preset_id">The ID of the embed preset.</param>
+        /// <returns>
+        /// 204 No Content	The embed preset was removed.
+        /// </returns>
+        public virtual RestResult RemoveAnEmbedPresetFromAFolder(int user_id, int project_id, int preset_id) => RootAuthorization()
+            .Command($"/users/{user_id}/projects/{project_id}/presets/{preset_id}")
+            .Delete();
 
         #endregion
 

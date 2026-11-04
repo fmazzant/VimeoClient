@@ -150,7 +150,7 @@ namespace VimeoClient.Common
         /// <param name="per_page"></param>
         /// <returns></returns>
         public virtual RestResult<VimeoList<Activity>> GetAllTheVideosInTheUserFeedWithPaging(string offset, string page, string per_page) => RootMeAuthorization()
-            .Command("/me/feed")
+            .Command("/feed")
             .Parameter("offset", offset)
             .Parameter("page", page)
             .Parameter("per_page", per_page)

@@ -203,12 +203,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Channel>>();
             }
@@ -252,7 +252,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
             if (page.HasValue)
             {
@@ -265,14 +265,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -316,7 +316,7 @@ namespace VimeoClient.Common
             }
             if (sort.HasValue)
             {
-                root = root.Parameter("sort", direction);
+                root = root.Parameter("sort", sort);
             }
             if (page.HasValue)
             {
@@ -329,14 +329,14 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Channel>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Channel>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -948,12 +948,12 @@ namespace VimeoClient.Common
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
             }

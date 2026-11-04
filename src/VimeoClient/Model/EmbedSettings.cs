@@ -38,16 +38,88 @@ namespace VimeoClient.Model
     public class EmbedSettings
     {
         /// <summary>
+        /// Whether AirPlay is enabled in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("airplay")]
+        public bool? Airplay { get; set; }
+
+        /// <summary>
+        /// Whether multiple audio tracks can appear in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("audio_tracks")]
+        public bool? AudioTracks { get; set; }
+
+        /// <summary>
         /// A collection of information about the buttons that appear on the interface of the embeddable player.
         /// </summary>
         [JsonPropertyName("buttons")]
         public EmbedButtons Buttons { get; set; }
 
         /// <summary>
+        /// Whether clicking the closed-captions button reveals the caption-language menu.
+        /// </summary>
+        [JsonPropertyName("cc_track_menu")]
+        public bool? CcTrackMenu { get; set; }
+
+        /// <summary>
+        /// Whether chapters are enabled in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("chapters")]
+        public bool? Chapters { get; set; }
+
+        /// <summary>
+        /// Whether the Chromecast button appears in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("chromecast")]
+        public bool? Chromecast { get; set; }
+
+        /// <summary>
+        /// Whether closed captions are enabled in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("closed_captions")]
+        public bool? ClosedCaptions { get; set; }
+
+        /// <summary>
         /// The primary player color, which controls the color of the progress bar, buttons, and more.
         /// </summary>
         [JsonPropertyName("color")]
         public string Color { get; set; }
+
+        /// <summary>
+        /// The four player colors.
+        /// </summary>
+        [JsonPropertyName("colors")]
+        public EmbedColors Colors { get; set; }
+
+        /// <summary>
+        /// The end screen of the embeddable player.
+        /// </summary>
+        [JsonPropertyName("end_screen")]
+        public EmbedEndScreen EndScreen { get; set; }
+
+        /// <summary>
+        /// The play button's settings.
+        /// </summary>
+        [JsonPropertyName("play_button")]
+        public EmbedPlayButton PlayButton { get; set; }
+
+        /// <summary>
+        /// Whether to show the quality selector in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("quality_selector")]
+        public bool? QualitySelector { get; set; }
+
+        /// <summary>
+        /// Whether users can skip forward in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("skipping_forward")]
+        public bool? SkippingForward { get; set; }
+
+        /// <summary>
+        /// Whether the transcript controls appear in the embeddable player.
+        /// </summary>
+        [JsonPropertyName("transcript")]
+        public bool? Transcript { get; set; }
 
         /// <summary>
         /// A collection of information about the logo in the corner of the embeddable player.
@@ -180,6 +252,60 @@ namespace VimeoClient.Model
         /// </summary>
         [JsonPropertyName("url")]
         public string Url { get; set; }
+    }
+
+    /// <summary>
+    /// The four player colors.
+    /// </summary>
+    public class EmbedColors
+    {
+        /// <summary>
+        /// The first player color: progress bar and buttons.
+        /// </summary>
+        [JsonPropertyName("color_one")]
+        public string ColorOne { get; set; }
+
+        /// <summary>
+        /// The second player color: player accent.
+        /// </summary>
+        [JsonPropertyName("color_two")]
+        public string ColorTwo { get; set; }
+
+        /// <summary>
+        /// The third player color: text and icons.
+        /// </summary>
+        [JsonPropertyName("color_three")]
+        public string ColorThree { get; set; }
+
+        /// <summary>
+        /// The fourth player color: player background.
+        /// </summary>
+        [JsonPropertyName("color_four")]
+        public string ColorFour { get; set; }
+    }
+
+    /// <summary>
+    /// The end screen of the embeddable player.
+    /// </summary>
+    public class EmbedEndScreen
+    {
+        /// <summary>
+        /// The end screen type: beginning, custom, email, empty, image, link, loop, nothing, share, text, threevideos, thumbnail, videos.
+        /// </summary>
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+    }
+
+    /// <summary>
+    /// The play button of the embeddable player.
+    /// </summary>
+    public class EmbedPlayButton
+    {
+        /// <summary>
+        /// The position of the play button: auto, bottom, center.
+        /// </summary>
+        [JsonPropertyName("position")]
+        public string Position { get; set; }
     }
 
     /// <summary>

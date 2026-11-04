@@ -125,6 +125,29 @@ namespace VimeoClient
            .Get<Video>();
 
         /// <summary>
+        /// This method removes the specified video from the authenticated user's Watch Later queue.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// </returns>
+        public virtual RestResult RemoveAVideoFromTheUserWatchLaterQueue(int user_id, int video_id) => RootAuthorization()
+            .Command($"/users/{user_id}/watchlater/{video_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method removes the specified video from the authenticated user's Watch Later queue.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The video was removed.
+        /// </returns>
+        public virtual RestResult MeRemoveAVideoFromTheUserWatchLaterQueue(int video_id) => RootAuthorization()
+            .Command($"/me/watchlater/{video_id}")
+            .Delete();
+
+        /// <summary>
         /// The Watch Later queue contains all the videos that a Vimeo member has flagged to watch later.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
@@ -186,14 +209,14 @@ namespace VimeoClient
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Next)
                     .Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization()
                     .Command(result.Content.Paging.Previous)
@@ -263,12 +286,12 @@ namespace VimeoClient
 
             var result = root.Get<Pagination<Video>>();
 
-            if (result.Content.Paging?.Next != null)
+            if (result.Content?.Paging?.Next != null)
             {
                 result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Video>>();
             }
 
-            if (result.Content.Paging?.Previous != null)
+            if (result.Content?.Paging?.Previous != null)
             {
                 result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Video>>();
             }

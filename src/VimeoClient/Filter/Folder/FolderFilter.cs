@@ -91,4 +91,61 @@ namespace VimeoClient.Filter.Folder
         /// </summary>
         last_user_action_event_date,
     }
+
+    /// <summary>
+    /// The type of item to return from a folder.
+    /// </summary>
+    public enum FolderItemFilter
+    {
+        /// <summary>
+        /// Return only files.
+        /// </summary>
+        file,
+
+        /// <summary>
+        /// Return only folders.
+        /// </summary>
+        folder,
+
+        /// <summary>
+        /// Return only live events.
+        /// </summary>
+        live_event,
+
+        /// <summary>
+        /// Return only videos.
+        /// </summary>
+        video,
+    }
+
+    /// <summary>
+    /// The way to sort the items of a folder.
+    /// </summary>
+    public enum FolderItemSort
+    {
+        /// <summary>
+        /// Sort the results alphabetically.
+        /// </summary>
+        alphabetical,
+
+        /// <summary>
+        /// Sort the results by date.
+        /// </summary>
+        date,
+
+        /// <summary>
+        /// Sort the results by the default order.
+        /// </summary>
+        @default,
+
+        /// <summary>
+        /// Sort the results by duration.
+        /// </summary>
+        duration,
+
+        /// <summary>
+        /// Sort the results by the date of the last user action.
+        /// </summary>
+        last_user_action_event_date,
+    }
 }

@@ -294,6 +294,64 @@ namespace VimeoClient.Common
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
             .GetPagination<Album>(RootAuthorization);
 
+        /// <summary>
+        /// This method adds videos and events to the specified showcases.
+        /// The authenticated user must either be the owner of the showcase or have team permissions.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="album_uris">The URIs of the showcases.</param>
+        /// <param name="album_item_uris">The URIs of the videos and events to add.</param>
+        /// <returns>
+        /// 204 No Content	The videos and events were added to the showcases.
+        /// </returns>
+        public virtual RestResult AddVideosAndEventsToShowcases(int user_id, string[] album_uris, string[] album_item_uris) => RootAuthorization()
+            .Command($"/users/{user_id}/albums")
+            .OptionalParameter("album_uris", album_uris)
+            .OptionalParameter("album_item_uris", album_item_uris)
+            .Patch();
+
+        /// <summary>
+        /// This method adds all videos and events from a specified folder to showcases.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="folder_id">The ID of the folder.</param>
+        /// <param name="album_uris">The URIs of the showcases.</param>
+        /// <returns>
+        /// 202 Accepted	The folder contents were added to the showcases.
+        /// </returns>
+        public virtual RestResult AddFolderContentsToShowcases(int user_id, int folder_id, string[] album_uris) => RootAuthorization()
+            .Command($"/users/{user_id}/albums/from_folder")
+            .OptionalParameter("folder_id", folder_id)
+            .OptionalParameter("album_uris", album_uris)
+            .Patch();
+
+        /// <summary>
+        /// This method creates a copy of the specified showcase.
+        /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="album_id">The ID of the showcase.</param>
+        /// <param name="name">The copied showcase name, up to 255 characters. By default, the source showcase name.</param>
+        /// <returns>
+        /// 201 Created	The copied showcase was created.
+        /// </returns>
+        public virtual RestResult<Album> CopyAShowcase(int user_id, int album_id, string name = null) => RootAuthorization()
+            .Command($"/users/{user_id}/albums/{album_id}/copy")
+            .JsonPayload(new VimeoPayload().Set("name", name))
+            .Post<Album>();
+
+        /// <summary>
+        /// This method creates a copy of the specified showcase of the authenticated user.
+        /// </summary>
+        /// <param name="album_id">The ID of the showcase.</param>
+        /// <param name="name">The copied showcase name, up to 255 characters. By default, the source showcase name.</param>
+        /// <returns>
+        /// 201 Created	The copied showcase was created.
+        /// </returns>
+        public virtual RestResult<Album> MeCopyAShowcase(int album_id, string name = null) => RootAuthorization()
+            .Command($"/me/albums/{album_id}/copy")
+            .JsonPayload(new VimeoPayload().Set("name", name))
+            .Post<Album>();
+
         #endregion
 
         #region [ Custom showcase logos ]
@@ -769,7 +827,7 @@ namespace VimeoClient.Common
             int? per_page = null,
             string query = null,
             ShowCasesVideosSort? sort = null) => RootAuthorization()
-            .Command($"/me/albums/{album_id}/available_videos")
+            .Command($"/albums/{album_id}/available_videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
             .GetPagination<Video>(RootAuthorization);
 
@@ -925,7 +983,7 @@ namespace VimeoClient.Common
         /// </returns>
         public virtual RestResult<Video> SetTheFeaturedVideoOfAShowcase(int user_id, int album_id, int video_id) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos/{video_id}/set_featured_video")
-            .Post<Video>();
+            .Patch<Video>();
 
         /// <summary>
         /// This method sets the specified video as the featured video of the showcase.
@@ -939,7 +997,7 @@ namespace VimeoClient.Common
         /// </returns>
         public virtual RestResult<Video> SetTheFeaturedVideoOfAShowcase(int album_id, int video_id) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos/{video_id}/set_featured_video")
-            .Post<Video>();
+            .Patch<Video>();
 
         #endregion
 
