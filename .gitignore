@@ -25,3 +25,6 @@
 /samples/VimeoClientSampleApp/VimeoKeys.Test.csv
 /samples/.vs/ProjectEvaluation
 /samples/VimeoClientSampleApp/bin/Debug/net8.0
+/tests/VimeoClient.Tests/bin/Debug/net10.0
+/tests/VimeoClient.Tests/obj
+/tests/VimeoClient.Tests/bin
