@@ -218,6 +218,31 @@ namespace VimeoClient
         public virtual VimeoAnalytics Analytics => new VimeoAnalytics(this);
 
         /// <summary>
+        /// API app webhooks
+        /// </summary>
+        public virtual VimeoWebhooks Webhooks => new VimeoWebhooks(this);
+
+        /// <summary>
+        /// Hosted files
+        /// </summary>
+        public virtual VimeoFiles Files => new VimeoFiles(this);
+
+        /// <summary>
+        /// Payment methods, subscriptions and subscription plans
+        /// </summary>
+        public virtual VimeoPayments Payments => new VimeoPayments(this);
+
+        /// <summary>
+        /// Federated search
+        /// </summary>
+        public virtual VimeoSearch Search => new VimeoSearch(this);
+
+        /// <summary>
+        /// Teams: roles, memberships and custom metadata fields
+        /// </summary>
+        public virtual VimeoTeams Teams => new VimeoTeams(this);
+
+        /// <summary>
         /// Authentication Extras
         /// </summary>
         public virtual VimeoAuthenticationExtras AuthenticationExtras => new VimeoAuthenticationExtras(this);

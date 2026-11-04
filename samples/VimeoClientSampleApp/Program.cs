@@ -35,6 +35,7 @@ namespace VimeoClientSampleApp
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using TinyCsv;
     using TinyCsv.Extensions;
     using VimeoClient;
 
@@ -67,12 +68,30 @@ namespace VimeoClientSampleApp
         }
     }
 
+    public sealed class VimeoKeyMap : CsvClassMap<VimeoKey>
+    {
+        public VimeoKeyMap()
+        {
+            Options(o =>
+            {
+                o.HasHeaderRecord = true;
+                o.Delimiter = ";";
+                o.DetectDelimiter = true; // the files to read may use another delimiter
+            });
+            Map(m => m.AccessToken);
+            Map(m => m.ClientID);
+            Map(m => m.ClientSecret);
+            Map(m => m.UserToken);
+            Map(m => m.Cert);
+        }
+    }
+
     internal static class Program
     {
         static void Main(string[] args)
         {
             /// Load keys from csv file with Mafe.TinyCsv
-            var csv = new TinyCsv.TinyCsv<VimeoKey>(options =>
+            var csv_ = new TinyCsv.TinyCsv<VimeoKey>(options =>
             {
                 options.HasHeaderRecord = true;
                 options.Delimiter = ";";
@@ -82,6 +101,7 @@ namespace VimeoClientSampleApp
                 options.Columns.AddColumn(x => x.UserToken);
                 options.Columns.AddColumn(x => x.Cert);
             });
+            var csv = new TinyCsv<VimeoKey>(new VimeoKeyMap());
             var vimeoKeys = csv.LoadFromFile("../../../../../../VimeoClient.Keys.csv")
                 .ToArray();
 

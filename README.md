@@ -66,6 +66,14 @@ var stats = client.Analytics.GetAnalyticsForTheAuthenticatedUser(
     sort: AnalyticsSort.views,
     direction: AnalyticsDirection.desc);
 
+// App webhooks
+var webhook = client.Webhooks.AddAWebhookForAnApp(appId, "video-transcode-complete", "https://example.com/hook", is_enabled: true);
+
+// Subscription plans, payment methods, federated search, teams, hosted files
+var plan = client.Payments.GetASubscriptionPlan("pro");
+var items = client.Search.SearchTheItemsOfAUser(userId, query: "demo");
+var fields = client.Teams.GetTheCustomMetadataFieldsOfATeam(teamOwnerId);
+
 // Folders, Portfolios, Showcases, Videos, Live, Channels, Categories, Groups...
 var folders = client.Folders.GetAllTheFoldersThatBelongToTheUser();
 var showcases = client.ShowCases.GetAllTheShowcasesThatBelongToTheUser();

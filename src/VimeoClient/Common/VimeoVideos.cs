@@ -32,6 +32,7 @@ namespace VimeoClient.Common
     using RestClient;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.Json;
     using VimeoClient.Body.Video;
     using VimeoClient.Filter.Video;
     using VimeoClient.Model;
@@ -1494,6 +1495,301 @@ namespace VimeoClient.Common
             .Command($"/videos/{video_id}/ai/translate/subtitles")
             .JsonPayload(new VimeoPayload().Set("language", language).Set("texttrack_id", texttrack_id))
             .Post<AiStatus>();
+
+        #endregion
+
+        #region [ Version details: audio tracks, downloads, thumbnail, text tracks ]
+
+        /// <summary>
+        /// This method returns every version of the specified video in a channel. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="channel_id">The ID of the channel.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The versions were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<VideoVersions>> GetAllTheVersionsOfAChannelVideo(string channel_id, int video_id,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/channels/{channel_id}/videos/{video_id}/versions")
+            .ListParameters(null, null, page, per_page)
+            .GetPagination<VideoVersions>(RootAuthorization);
+
+        /// <summary>
+        /// This method returns all audio tracks that are associated with the specified video version.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <returns>
+        /// 200 OK	The audio tracks were returned.
+        /// </returns>
+        public virtual RestResult<VimeoList<AudioTrack>> GetAllTheAudioTracksOfAVideoVersion(int video_id, int version_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/audiotracks")
+            .Get<VimeoList<AudioTrack>>();
+
+        /// <summary>
+        /// This method creates a new audio track for a video version. Upload the audio file to the returned upload link afterwards.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <param name="upload_approach">The upload approach: post, pull or tus.</param>
+        /// <param name="upload_size">The size of the audio file in bytes (tus approach).</param>
+        /// <param name="upload_link">The URL of the audio file (pull approach).</param>
+        /// <param name="upload_redirect_url">The redirect URL (post approach).</param>
+        /// <param name="language_code">The language of the audio track, for example en-US.</param>
+        /// <param name="type">The type of audio track: commentary, descriptive or main.</param>
+        /// <param name="provenance">The origin of the audio track: ai_generated, user_uploaded or user_uploaded_and_ai_generated.</param>
+        /// <param name="active">Whether the audio track is enabled.</param>
+        /// <returns>
+        /// 200 OK	The audio track was created.
+        /// </returns>
+        public virtual RestResult<AudioTrack> CreateAnAudioTrackForAVideoVersion(int video_id, int version_id,
+            string upload_approach,
+            long? upload_size = null,
+            string upload_link = null,
+            string upload_redirect_url = null,
+            string language_code = null,
+            string type = null,
+            string provenance = null,
+            bool? active = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/audiotracks")
+            .JsonPayload(new VimeoPayload()
+                .Set("upload.approach", upload_approach)
+                .Set("upload.size", upload_size?.ToString(System.Globalization.CultureInfo.InvariantCulture))
+                .Set("upload.link", upload_link)
+                .Set("upload.redirect_url", upload_redirect_url)
+                .Set("language_code", language_code)
+                .Set("type", type)
+                .Set("provenance", provenance)
+                .Set("active", active))
+            .Post<AudioTrack>();
+
+        /// <summary>
+        /// This method returns the specified audio track that is associated with a video version.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <param name="audiotrack_id">The ID of the audio track.</param>
+        /// <returns>
+        /// 200 OK	The audio track was returned.
+        /// </returns>
+        public virtual RestResult<AudioTrack> GetAnAudioTrackOfAVideoVersion(int video_id, int version_id, string audiotrack_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/audiotracks/{audiotrack_id}")
+            .Get<AudioTrack>();
+
+        /// <summary>
+        /// This method edits the metadata for the specified audio track.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <param name="audiotrack_id">The ID of the audio track.</param>
+        /// <param name="language_code">The language of the audio track, for example en-US.</param>
+        /// <param name="type">The type of audio track: commentary, descriptive or main.</param>
+        /// <param name="provenance">The origin of the audio track: ai_generated, user_uploaded or user_uploaded_and_ai_generated.</param>
+        /// <param name="active">Whether the audio track is enabled.</param>
+        /// <returns>
+        /// 200 OK	The audio track was edited.
+        /// </returns>
+        public virtual RestResult<AudioTrack> EditAnAudioTrackOfAVideoVersion(int video_id, int version_id, string audiotrack_id,
+            string language_code = null,
+            string type = null,
+            string provenance = null,
+            bool? active = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/audiotracks/{audiotrack_id}")
+            .JsonPayload(new VimeoPayload()
+                .Set("language_code", language_code)
+                .Set("type", type)
+                .Set("provenance", provenance)
+                .Set("active", active))
+            .Patch<AudioTrack>();
+
+        /// <summary>
+        /// This method deletes an audio track from the specified video version.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <param name="audiotrack_id">The ID of the audio track.</param>
+        /// <returns>
+        /// 204 No Content	The audio track was deleted.
+        /// </returns>
+        public virtual RestResult DeleteAnAudioTrackFromAVideoVersion(int video_id, int version_id, string audiotrack_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/audiotracks/{audiotrack_id}")
+            .Delete();
+
+        /// <summary>
+        /// This method returns a list of downloadable file links for a version of a video that contains an alternate audio track.
+        /// The response is not documented by the specification: it is returned as raw JSON.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <returns>
+        /// 200 OK	The list of downloadable file links was returned.
+        /// </returns>
+        public virtual RestResult<JsonElement> GetTheDownloadLinksOfAVideoVersion(int video_id, int version_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/downloads")
+            .Get<JsonElement>();
+
+        /// <summary>
+        /// This method returns the thumbnail associated with the specified version of a video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the version.</param>
+        /// <returns>
+        /// 200 OK	The version thumbnail was returned.
+        /// </returns>
+        public virtual RestResult<Picture> GetTheThumbnailOfAVideoVersion(int video_id, int version_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/picture")
+            .Get<Picture>();
+
+        /// <summary>
+        /// This method returns every text track of the specified video version. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="version_id">The ID of the video version.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The text tracks were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAVideoVersion(int video_id, int version_id,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/versions/{version_id}/texttracks")
+            .ListParameters(null, null, page, per_page)
+            .GetPagination<TextTrack>(RootAuthorization);
+
+        /// <summary>
+        /// This method returns every text track of the specified video in a showcase. The authenticated user must be the owner of the video.
+        /// </summary>
+        /// <param name="album_id">The ID of the showcase.</param>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <returns>
+        /// 200 OK	The text tracks were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAShowcaseVideo(int album_id, int video_id,
+            int? page = null,
+            int? per_page = null) => RootAuthorization()
+            .Command($"/albums/{album_id}/videos/{video_id}/texttracks")
+            .ListParameters(null, null, page, per_page)
+            .GetPagination<TextTrack>(RootAuthorization);
+
+        #endregion
+
+        #region [ Transcripts ]
+
+        /// <summary>
+        /// This method returns the transcript segments of the specified text track.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="texttrack_id">The ID of the text track.</param>
+        /// <returns>
+        /// 200 OK	The transcript segments were returned.
+        /// </returns>
+        public virtual RestResult<VimeoList<TranscriptSegment>> GetTheTranscriptSegmentsOfATextTrack(int video_id, int texttrack_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/transcripts/{texttrack_id}")
+            .Get<VimeoList<TranscriptSegment>>();
+
+        /// <summary>
+        /// This method returns the transcript metadata of the specified text track.
+        /// </summary>
+        /// <param name="container_uuid">The UUID of the video container.</param>
+        /// <param name="texttrack_id">The ID of the text track.</param>
+        /// <returns>
+        /// 200 OK	The transcript metadata of the text track was returned.
+        /// </returns>
+        public virtual RestResult<TranscriptMetadata> GetTheTranscriptMetadataOfATextTrack(string container_uuid, int texttrack_id) => RootAuthorization()
+            .Command($"/videos/{container_uuid}/transcript/{texttrack_id}/metadata")
+            .Get<TranscriptMetadata>();
+
+        #endregion
+
+        #region [ Fragments ]
+
+        /// <summary>
+        /// This method returns all of the fragments associated with the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 200 OK	The fragments were returned.
+        /// </returns>
+        public virtual RestResult<VideoFragments> GetAllTheFragmentsOfAVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/fragments")
+            .Get<VideoFragments>();
+
+        /// <summary>
+        /// This method updates the specified video with new fragments.
+        /// The specification does not document the request body: pass the fields in <paramref name="body"/>.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="body">The fragments to set.</param>
+        /// <returns>
+        /// 204 No Content	The fragments were updated.
+        /// </returns>
+        public virtual RestResult UpdateTheFragmentsOfAVideo(int video_id, VimeoPayload body) => RootAuthorization()
+            .Command($"/videos/{video_id}/fragments")
+            .JsonPayload(body)
+            .Put();
+
+        /// <summary>
+        /// This method deletes all fragments for the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 204 No Content	The fragments were deleted.
+        /// </returns>
+        public virtual RestResult DeleteTheFragmentsOfAVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/fragments")
+            .Delete();
+
+        #endregion
+
+        #region [ Nondestructive trimming ]
+
+        /// <summary>
+        /// This method starts a trim operation for the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="trim_start">The start position in seconds of the trim in the video.</param>
+        /// <param name="trim_end">The end position in seconds of the trim in the video.</param>
+        /// <returns>
+        /// 200 OK	The trim operation was started.
+        /// </returns>
+        public virtual RestResult<TrimmedVideo> StartATrimOperationForAVideo(int video_id, double? trim_start = null, double? trim_end = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/trim")
+            .JsonPayload(new VimeoPayload()
+                .Set("trim_start", trim_start?.ToString(System.Globalization.CultureInfo.InvariantCulture))
+                .Set("trim_end", trim_end?.ToString(System.Globalization.CultureInfo.InvariantCulture)))
+            .Post<TrimmedVideo>();
+
+        #endregion
+
+        #region [ Credits: available users ]
+
+        /// <summary>
+        /// This method returns the users who can be credited on the specified video.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results: alphabetical or date.</param>
+        /// <returns>
+        /// 200 OK	The users who can be credited were returned.
+        /// </returns>
+        public virtual RestResult<Pagination<User>> GetTheUsersWhoCanBeCreditedOnAVideo(int video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string query = null,
+            string sort = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/credits/available_users")
+            .ListParameters(direction, null, page, per_page, query, sort)
+            .GetPagination<User>(RootAuthorization);
 
         #endregion
 
