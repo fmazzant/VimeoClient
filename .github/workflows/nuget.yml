@@ -1,31 +1,37 @@
 name: Publish on NuGet
- 
+
 on:
   push:
     branches: [ master ]
     paths: [ 'src/**' ]
   workflow_dispatch:
-  
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
-        
+        dotnet-version: |
+          8.0.x
+          10.0.x
+
     - name: Restore dependencies
-      run: dotnet restore src/VimeoClient/VimeoClient.csproj 
-      
+      run: dotnet restore src/VimeoClient.sln
+
     - name: Build
-      run: dotnet build --no-restore src/VimeoClient/VimeoClient.csproj 
-        
+      run: dotnet build --no-restore -c Release src/VimeoClient.sln
+
+    # The package is published only when all the tests pass
+    - name: Test
+      run: dotnet test --no-build -c Release src/VimeoClient.sln
+
     - name: Package
-      run: dotnet pack -c Release -o . src/VimeoClient/VimeoClient.csproj 
-      
+      run: dotnet pack --no-build -c Release -o . src/VimeoClient/VimeoClient.csproj
+
     - name: Publish on NuGet
       run: dotnet nuget push ./*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

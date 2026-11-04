@@ -1,0 +1,40 @@
+name: Build and test
+
+on:
+  push:
+    branches: [ "**" ]
+    paths: [ 'src/**', 'tests/**', '.github/workflows/**' ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          8.0.x
+          10.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore src/VimeoClient.sln
+
+    - name: Build
+      run: dotnet build --no-restore -c Release src/VimeoClient.sln
+
+    # The job fails when at least one test fails
+    - name: Test
+      run: dotnet test --no-build -c Release src/VimeoClient.sln --logger "trx;LogFilePrefix=test-results" --results-directory TestResults
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: TestResults/**/*.trx

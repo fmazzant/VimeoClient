@@ -1,8 +1,19 @@
 # VimeoClient
 
+[![NuGet](https://img.shields.io/nuget/v/Mafe.VimeoClient.svg)](https://www.nuget.org/packages/Mafe.VimeoClient)
+[![Build and test](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml/badge.svg)](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml)
+
 VimeoClient is a extendible .NET wrapper for Vimeo API v3.4.
 
 By Mafe.RestClient library it can be possible to develop a vimeo webapi call.
+
+## Installation
+
+The library is published on NuGet: [Mafe.VimeoClient](https://www.nuget.org/packages/Mafe.VimeoClient).
+
+```
+dotnet add package Mafe.VimeoClient
+```
 
 ```c#
 VimeoClient.Vimeo client = new VimeoClient.Vimeo(new VimeoProperties
@@ -233,5 +244,17 @@ var folders = client.Folders.GetAllTheFoldersThatBelongToTheUser();
 var showcases = client.ShowCases.GetAllTheShowcasesThatBelongToTheUser();
 var video = client.Videos.GetSpecificVideo(videoId);
 ```
+
+## Tests
+
+The xUnit tests are in `tests/VimeoClient.Tests`. They don't call Vimeo: every request is sent to a fake HTTP handler,
+which checks the method, the path, the query string and the body, and returns canned responses.
+
+```
+dotnet test src/VimeoClient.sln
+```
+
+The GitHub Actions pipelines run the tests on every push and pull request (`ci.yml`),
+and the package is published on NuGet only when all the tests pass (`nuget.yml`).
 
 The library is in temporary status and it is working in progress.
