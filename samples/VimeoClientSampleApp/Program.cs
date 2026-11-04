@@ -91,16 +91,6 @@ namespace VimeoClientSampleApp
         static void Main(string[] args)
         {
             /// Load keys from csv file with Mafe.TinyCsv
-            var csv_ = new TinyCsv.TinyCsv<VimeoKey>(options =>
-            {
-                options.HasHeaderRecord = true;
-                options.Delimiter = ";";
-                options.Columns.AddColumn(x => x.AccessToken);
-                options.Columns.AddColumn(x => x.ClientID);
-                options.Columns.AddColumn(x => x.ClientSecret);
-                options.Columns.AddColumn(x => x.UserToken);
-                options.Columns.AddColumn(x => x.Cert);
-            });
             var csv = new TinyCsv<VimeoKey>(new VimeoKeyMap());
             var vimeoKeys = csv.LoadFromFile("../../../../../../VimeoClient.Keys.csv")
                 .ToArray();
