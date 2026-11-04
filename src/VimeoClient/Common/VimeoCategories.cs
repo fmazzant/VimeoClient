@@ -30,6 +30,7 @@
 namespace VimeoClient.Common
 {
     using RestClient;
+    using System.Globalization;
     using VimeoClient.Filter.Category;
     using VimeoClient.Model;
     using VimeoClient.Response;
@@ -558,6 +559,22 @@ namespace VimeoClient.Common
                 }
             })
             .Put<Category>();
+
+        #endregion
+
+        #region [ Overloads with int video_id ]
+
+        /// <inheritdoc cref="GetASpecificVideoInACategory(string, string)"/>
+        public virtual RestResult<Video> GetASpecificVideoInACategory(string category, int video_id)
+            => GetASpecificVideoInACategory(category, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetAllTheCategoriesToWhichAVideoBelongs(string)"/>
+        public virtual RestResult<VimeoList<Category>> GetAllTheCategoriesToWhichAVideoBelongs(int video_id)
+            => GetAllTheCategoriesToWhichAVideoBelongs(video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="SuggestCategoriesForAVideo(string, string[])"/>
+        public virtual RestResult<Category> SuggestCategoriesForAVideo(int video_id, string[] categories)
+            => SuggestCategoriesForAVideo(video_id.ToString(CultureInfo.InvariantCulture), categories);
 
         #endregion
     }

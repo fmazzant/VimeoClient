@@ -31,6 +31,7 @@ namespace VimeoClient.Common
 {
     using RestClient;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using VimeoClient.Body.Channel;
     using VimeoClient.Body.Video;
@@ -1164,6 +1165,66 @@ namespace VimeoClient.Common
             .Command($"/channels/{channel_id}/videos/{video_id}/texttracks")
             .FormUrlEncoded(parameters)
             .Post<TextTrack>();
+
+        #endregion
+
+        #region [ Overloads with int video_id ]
+
+        /// <inheritdoc cref="AddASpecificVideoToAChannel(string, string)"/>
+        public virtual RestResult AddASpecificVideoToAChannel(string channel_id, int video_id)
+            => AddASpecificVideoToAChannel(channel_id, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetASpecificVideoInAChannel(string, string)"/>
+        public virtual RestResult<Video> GetASpecificVideoInAChannel(string channel_id, int video_id)
+            => GetASpecificVideoInAChannel(channel_id, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(string)"/>
+        public virtual RestResult<VimeoList<Channel>> GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id)
+            => GetAllTheChannelsToWhichTheUserCanAddOrRemoveASpecificVideo(video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="RemoveASpecificVideoFromAChannel(string, string)"/>
+        public virtual RestResult RemoveASpecificVideoFromAChannel(string channel_id, int video_id)
+            => RemoveASpecificVideoFromAChannel(channel_id, video_id.ToString(CultureInfo.InvariantCulture));
+
+        /// <inheritdoc cref="GetAllTheCommentsOnAChannelVideo(string, string, VideoDirection?, int?, int?)"/>
+        public virtual RestResult<Pagination<Comment>> GetAllTheCommentsOnAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null)
+            => GetAllTheCommentsOnAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), direction, page, per_page);
+
+        /// <inheritdoc cref="AddACommentToAChannelVideo(string, string, string)"/>
+        public virtual RestResult<Comment> AddACommentToAChannelVideo(string channel_id, int video_id, string text)
+            => AddACommentToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), text);
+
+        /// <inheritdoc cref="GetAllTheCreditedUsersInAChannelVideo(string, string, VideoDirection?, int?, int?, string, VideoCreditSort?)"/>
+        public virtual RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string query = null, VideoCreditSort? sort = null)
+            => GetAllTheCreditedUsersInAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), direction, page, per_page, query, sort);
+
+        /// <inheritdoc cref="CreditAUserInAChannelVideo(string, string, CreditParameters)"/>
+        public virtual RestResult<Credit> CreditAUserInAChannelVideo(string channel_id, int video_id, CreditParameters parameters)
+            => CreditAUserInAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), parameters);
+
+        /// <inheritdoc cref="GetAllTheThumbnailsOfAChannelVideo(string, string, int?, int?)"/>
+        public virtual RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAChannelVideo(string channel_id, int video_id, int? page = null, int? per_page = null)
+            => GetAllTheThumbnailsOfAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), page, per_page);
+
+        /// <inheritdoc cref="AddAThumbnailToAChannelVideo(string, string, ThumbnailParameters)"/>
+        public virtual RestResult<Picture> AddAThumbnailToAChannelVideo(string channel_id, int video_id, ThumbnailParameters parameters)
+            => AddAThumbnailToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), parameters);
+
+        /// <inheritdoc cref="GetAllTheUsersWhoCanViewAPrivateChannelVideo(string, string, int?, int?)"/>
+        public virtual RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateChannelVideo(string channel_id, int video_id, int? page = null, int? per_page = null)
+            => GetAllTheUsersWhoCanViewAPrivateChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), page, per_page);
+
+        /// <inheritdoc cref="PermitAListOfUsersToViewAPrivateChannelVideo(string, string, string[])"/>
+        public virtual RestResult<VimeoList<User>> PermitAListOfUsersToViewAPrivateChannelVideo(string channel_id, int video_id, string[] user_uris)
+            => PermitAListOfUsersToViewAPrivateChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), user_uris);
+
+        /// <inheritdoc cref="GetAllTheTextTracksOfAChannelVideo(string, string, int?, int?)"/>
+        public virtual RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAChannelVideo(string channel_id, int video_id, int? page = null, int? per_page = null)
+            => GetAllTheTextTracksOfAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), page, per_page);
+
+        /// <inheritdoc cref="AddATextTrackToAChannelVideo(string, string, TextTrackParameters)"/>
+        public virtual RestResult<TextTrack> AddATextTrackToAChannelVideo(string channel_id, int video_id, TextTrackParameters parameters)
+            => AddATextTrackToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), parameters);
 
         #endregion
     }

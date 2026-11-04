@@ -125,12 +125,13 @@ var candidates = client.Videos.GetTheUsersWhoCanBeCreditedOnAVideo(videoId, quer
 
 ### Channel videos
 
-The `Channels` section takes the IDs as strings.
+The channel ID is a string (it can be a numeric ID or a name, for example `staffpicks`);
+the video ID can be an `int` or a `string`.
 
 ```c#
-var comments = client.Channels.GetAllTheCommentsOnAChannelVideo(channelId, videoId.ToString());
-client.Channels.AddACommentToAChannelVideo(channelId, videoId.ToString(), "Great video!");
-var tracks = client.Channels.GetAllTheTextTracksOfAChannelVideo(channelId, videoId.ToString());
+var comments = client.Channels.GetAllTheCommentsOnAChannelVideo(channelId, videoId);
+client.Channels.AddACommentToAChannelVideo(channelId, videoId, "Great video!");
+var tracks = client.Channels.GetAllTheTextTracksOfAChannelVideo("staffpicks", videoId);
 ```
 
 ### Live: destinations, graphics, scenes
