@@ -260,7 +260,9 @@ which checks the method, the path, the query string and the body, and returns ca
 dotnet test src/VimeoClient.sln
 ```
 
-The GitHub Actions pipelines run the tests on every push and pull request (`ci.yml`),
-and the package is published on NuGet only when all the tests pass (`nuget.yml`).
+The tests run on `net462`, `net472`, `net481`, `net8.0` and `net10.0`: the .NET Framework targets run only on Windows.
+
+The GitHub Actions pipelines run the tests on every push and pull request (`ci.yml`: .NET 8 and 10 on Linux,
+every target on Windows), and the package is published on NuGet only when all the tests pass on every target (`nuget.yml`).
 
 The library is in temporary status and it is working in progress.

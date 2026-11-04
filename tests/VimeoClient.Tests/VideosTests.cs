@@ -53,7 +53,7 @@ namespace Mafesoft.VimeoClient.Tests
             var client = new FakeVimeo();
 
             client.Videos.EditAnAudioTrackOfAVideoVersion(1, 2, "abc", active: false);
-            Assert.Equal(HttpMethod.Patch, client.Handler.Last.Method);
+            Assert.Equal(new HttpMethod("PATCH"), client.Handler.Last.Method);
             Assert.False(client.Handler.Last.Json.GetProperty("active").GetBoolean());
 
             client.Videos.DeleteAnAudioTrackFromAVideoVersion(1, 2, "abc");

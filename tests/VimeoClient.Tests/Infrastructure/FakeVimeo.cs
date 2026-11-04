@@ -16,20 +16,20 @@ namespace Mafesoft.VimeoClient.Tests.Infrastructure
     /// </summary>
     public sealed class CapturedRequest
     {
-        public HttpMethod Method { get; init; }
-        public Uri Uri { get; init; }
-        public string Body { get; init; }
-        public string ContentType { get; init; }
-        public string Authorization { get; init; }
-        public string Accept { get; init; }
+        public HttpMethod Method { get; set; }
+        public Uri Uri { get; set; }
+        public string Body { get; set; }
+        public string ContentType { get; set; }
+        public string Authorization { get; set; }
+        public string Accept { get; set; }
 
         /// <summary>The path of the request, without the query string.</summary>
         public string Path => Uri.AbsolutePath;
 
         /// <summary>The query string parameters, decoded.</summary>
         public Dictionary<string, string> Query => Uri.Query.TrimStart('?')
-            .Split('&', StringSplitOptions.RemoveEmptyEntries)
-            .Select(p => p.Split('=', 2))
+            .Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(p => p.Split(new[] { '=' }, 2))
             .ToDictionary(
                 p => Uri.UnescapeDataString(p[0]),
                 p => p.Length > 1 ? Uri.UnescapeDataString(p[1].Replace('+', ' ')) : string.Empty);
@@ -68,8 +68,10 @@ namespace Mafesoft.VimeoClient.Tests.Infrastructure
             return this;
         }
 
+#if NET5_0_OR_GREATER
         protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
             => Handle(request);
+#endif
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
             => Task.FromResult(Handle(request));

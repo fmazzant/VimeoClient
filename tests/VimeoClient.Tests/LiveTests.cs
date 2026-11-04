@@ -36,7 +36,7 @@ namespace Mafesoft.VimeoClient.Tests
 
             await client.Live.UpdateAnEventDestinationAsync(7, is_enabled: false, service_name: "custom_rtmp", stream_url: "rtmp://example.com/live");
             var update = client.Handler.Last;
-            Assert.Equal(HttpMethod.Patch, update.Method);
+            Assert.Equal(new HttpMethod("PATCH"), update.Method);
             Assert.False(update.Json.GetProperty("is_enabled").GetBoolean());
             Assert.Equal("custom_rtmp", update.Json.GetProperty("service_name").GetString());
             Assert.Equal("rtmp://example.com/live", update.Json.GetProperty("stream_url").GetString());
@@ -91,7 +91,7 @@ namespace Mafesoft.VimeoClient.Tests
             Assert.Equal("live", client.Handler.Last.Json.GetProperty("scene_type").GetString());
 
             await client.Live.UpdateASceneOfAnEventAsync(10, "s1", new VimeoPayload().Set("name", "Main"));
-            Assert.Equal(HttpMethod.Patch, client.Handler.Last.Method);
+            Assert.Equal(new HttpMethod("PATCH"), client.Handler.Last.Method);
             Assert.Equal("/live_events/10/composer/scenes/s1", client.Handler.Last.Path);
 
             await client.Live.AttachAGraphicItemToASceneAsync(10, "s1", new VimeoPayload().Set("type", "video").Set("id", "g1"));

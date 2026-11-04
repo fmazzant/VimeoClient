@@ -9,8 +9,44 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  # .NET 8 and .NET 10 on Linux
+  test-linux:
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          8.0.x
+          10.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore src/VimeoClient.sln
+
+    - name: Build
+      run: dotnet build --no-restore -c Release src/VimeoClient.sln
+
+    # The .NET Framework targets can't run on Linux: only net8.0 and net10.0 are tested here.
+    # The job fails when at least one test fails.
+    - name: Test (net8.0)
+      run: dotnet test --no-build -c Release tests/VimeoClient.Tests/VimeoClient.Tests.csproj -f net8.0 --logger "trx;LogFilePrefix=linux" --results-directory TestResults
+
+    - name: Test (net10.0)
+      run: dotnet test --no-build -c Release tests/VimeoClient.Tests/VimeoClient.Tests.csproj -f net10.0 --logger "trx;LogFilePrefix=linux" --results-directory TestResults
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results-linux
+        path: TestResults/**/*.trx
+
+  # Every target on Windows: net462, net472, net481, net8.0, net10.0
+  test-windows:
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -30,11 +66,11 @@ jobs:
 
     # The job fails when at least one test fails
     - name: Test
-      run: dotnet test --no-build -c Release src/VimeoClient.sln --logger "trx;LogFilePrefix=test-results" --results-directory TestResults
+      run: dotnet test --no-build -c Release src/VimeoClient.sln --logger "trx;LogFilePrefix=windows" --results-directory TestResults
 
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-results
+        name: test-results-windows
         path: TestResults/**/*.trx

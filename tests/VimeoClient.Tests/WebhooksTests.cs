@@ -31,7 +31,7 @@ namespace Mafesoft.VimeoClient.Tests
             client.Webhooks.UpdateAWebhook(42, 7, is_enabled: false);
 
             var request = client.Handler.Last;
-            Assert.Equal(HttpMethod.Patch, request.Method);
+            Assert.Equal(new HttpMethod("PATCH"), request.Method);
             Assert.Equal("/apps/42/webhooks/7", request.Path);
             Assert.False(request.Json.GetProperty("is_enabled").GetBoolean());
             Assert.False(request.Json.TryGetProperty("webhook_url", out _));

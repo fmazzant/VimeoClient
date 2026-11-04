@@ -58,7 +58,7 @@ namespace Mafesoft.VimeoClient.Tests
             });
 
             var request = client.Handler.Last;
-            Assert.Equal(HttpMethod.Patch, request.Method);
+            Assert.Equal(new HttpMethod("PATCH"), request.Method);
             Assert.Equal(42, request.Json.GetProperty("field_id").GetInt64());
             var options = request.Json.GetProperty("options").EnumerateArray().ToArray();
             Assert.Equal("Engineering", options[0].GetProperty("old_value").GetString());
