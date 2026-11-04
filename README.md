@@ -34,6 +34,13 @@ var client = new VimeoClient.Vimeo(new VimeoProperties
 });
 ```
 
+## Package version
+
+The version of the `Mafe.VimeoClient` package has three numbers, for example `3.4.0`:
+
+- the first two numbers (`3.4`) identify the Vimeo API version supported by the library;
+- the last number (`0`) is for the fixes of the library released for that Vimeo API version: `3.4.0` is the first release for the Vimeo API 3.4, `3.4.1` the next one, and so on.
+
 ## Certificates
 
 - `ValidCertificates` empty: the standard TLS validation is used.
