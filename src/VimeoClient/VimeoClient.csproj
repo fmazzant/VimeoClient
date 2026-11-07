@@ -9,6 +9,7 @@
     <Description>VimeoClient library provides a simple connector to Vimeo REST services (Vimeo API 3.4).</Description>
     <Copyright>Copyright (c) 2020 Federico Mazzanti</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/fmazzant/VimeoClient</PackageProjectUrl>
     <RepositoryUrl>https://github.com/fmazzant/VimeoClient</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
@@ -24,6 +25,7 @@
       <PackagePath></PackagePath>
     </None>
     <None Include="..\..\README.md" Link="README.md" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
