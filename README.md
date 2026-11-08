@@ -1,6 +1,7 @@
 # VimeoClient
 
 [![NuGet](https://img.shields.io/nuget/v/Mafesoft.VimeoClient.svg)](https://www.nuget.org/packages/Mafesoft.VimeoClient)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Mafesoft.VimeoClient.svg)](https://www.nuget.org/packages/Mafesoft.VimeoClient)
 [![Build and test](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml/badge.svg)](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml)
 
 VimeoClient is a extendible .NET wrapper for Vimeo API v3.4.
