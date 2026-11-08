@@ -3,21 +3,59 @@
 [![NuGet](https://img.shields.io/nuget/v/Mafesoft.VimeoClient.svg)](https://www.nuget.org/packages/Mafesoft.VimeoClient)
 [![Build and test](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml/badge.svg)](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml)
 
-VimeoClient is a extendible .NET wrapper for Vimeo API v3.4.
+VimeoClient is an extensible .NET wrapper for the [Vimeo API 3.4](https://developer.vimeo.com/api/reference). It is built on [Mafe.RestClient](https://github.com/fmazzant/RestClient) and covers every operation of the Vimeo API 3.4 OpenAPI specification with typed methods, models and parameters.
 
-By Mafe.RestClient library it can be possible to develop a vimeo webapi call.
+## Why VimeoClient
+
+| Feature | Description |
+|---|---|
+| Whole Vimeo API 3.4 | Every operation of the OpenAPI specification, grouped by section as in the Vimeo reference (`client.Videos`, `client.Live`, `client.OnDemand`…). See [Sections](#sections) |
+| Typed models and parameters | Responses mapped to classes, enums for the documented values, body classes for create and update requests. See [On Demand](#on-demand) |
+| Pagination | `Pagination<T>` with `Next()` and `Previous()` to load the other pages. See [Sections](#sections) |
+| Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
+| API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
+| Certificate pinning | Standard TLS validation, or validation plus a list of trusted certificate hashes. See [Certificates](#certificates) |
+| Latest Vimeo features | Chapters, animated thumbnails, AI (questions, metadata, dubbing), audio tracks, transcripts, trimming, live scenes and destinations, analytics, webhooks, team custom metadata. See [Videos: chapters, animated thumbnails, AI](#videos-chapters-animated-thumbnails-ai) |
+| Tested | xUnit tests on every target framework against a fake HTTP handler, run on every push and pull request. See [Tests](#tests) |
+
+### Compared with the other .NET libraries
+
+Vimeo has no official .NET SDK. The other libraries on NuGet cover only a part of the API:
+
+| | VimeoClient | [VimeoDotNet](https://github.com/mfilippov/vimeo-dot-net) | [Skybrud.Social.Vimeo](https://github.com/abjerner/Skybrud.Social.Vimeo) | [Vimeo.Net](https://www.nuget.org/packages/Vimeo.Net) |
+|---|---|---|---|---|
+| Vimeo API sections | All (25 sections, every operation of the 3.4 specification) | Videos, upload, albums, channels, folders, embed presets, tags, text tracks | Me, users, videos, channels | Not documented |
+| Live events, On Demand, webhooks, analytics, teams | ✔ | ✘ | ✘ | Not documented |
+| Chapters, AI, audio tracks, transcripts, trimming | ✔ | ✘ | ✘ | Not documented |
+| Status | Stable | Stable | Stable | Prerelease (`3.4.0-alpha`, 2023) |
+| Targets | .NET 8 and 10, .NET Standard 2.0 and 2.1, .NET Framework 4.6.2+ | .NET Standard 1.3 and 2.0, .NET Framework 4.5 | .NET 8, .NET Standard 2.0 | .NET Standard 2.0 |
+| JSON | `System.Text.Json` | Newtonsoft.Json | Skybrud.Essentials | Newtonsoft.Json, RestSharp |
+| Unmapped fields kept (`AdditionalData`) | ✔ | Not documented | Raw responses | Not documented |
+| Certificate pinning | ✔ | Not documented | Not documented | Not documented |
+
+*Compared in November 2026 on the public repositories and NuGet pages of each library.*
+
+## Requirements
+
+- .NET 8 or 10
+- .NET Standard 2.0 or 2.1
+- .NET Framework 4.6.2, 4.7.2 or 4.8.1
 
 ## Installation
 
 The library is published on NuGet: [Mafesoft.VimeoClient](https://www.nuget.org/packages/Mafesoft.VimeoClient).
 
-```
+```shell
 dotnet add package Mafesoft.VimeoClient
 ```
 
 > **Migrating from `Mafe.VimeoClient`**: since version 3.4.0 the package is `Mafesoft.VimeoClient`
 > and the namespaces start with `Mafesoft.VimeoClient` (for example `Mafesoft.VimeoClient.Model`).
 > Replace the package reference and change `using VimeoClient...` into `using Mafesoft.VimeoClient...`.
+
+## Usage
+
+Create the client with the credentials of your [Vimeo API app](https://developer.vimeo.com/apps):
 
 ```c#
 using Mafesoft.VimeoClient;
@@ -27,15 +65,15 @@ var client = new Vimeo(new VimeoProperties
     AccessToken = "MyAccessToken",
     ClientSecret = "MyClientSecret",
     ClientId = "MyClientId",
-    ValidCertificates = new List<string>() { "Vimeo certs" }
+    ValidCertificates = new List<string>() { "Vimeo certs" } // optional, see Certificates
 });
 ```
 
-Now, you are using client to call a Vimeo rest methods. You can access to user information
+Then call the Vimeo API methods through the client, for example to read the user information:
 
- ```c#
-var user = client.Me.GetTheUser(); //myself
-var user = client.Users.GetTheUser(userId); //other users
+```c#
+var me = client.Me.GetTheUser(); // the authenticated user
+var user = client.Users.GetTheUser(userId); // another user
 ```
 
 ## Vimeo API version
@@ -256,7 +294,7 @@ var video = client.Videos.GetSpecificVideo(videoId);
 The xUnit tests are in `tests/VimeoClient.Tests`. They don't call Vimeo: every request is sent to a fake HTTP handler,
 which checks the method, the path, the query string and the body, and returns canned responses.
 
-```
+```shell
 dotnet test src/VimeoClient.sln
 ```
 
@@ -265,4 +303,6 @@ The tests run on `net462`, `net472`, `net481`, `net8.0` and `net10.0`: the .NET 
 The GitHub Actions pipelines run the tests on every push and pull request (`ci.yml`: .NET 8 and 10 on Linux,
 every target on Windows), and the package is published on NuGet only when all the tests pass on every target (`nuget.yml`).
 
-The library is in temporary status and it is working in progress.
+## License
+
+VimeoClient is released under the [MIT License](LICENSE).
