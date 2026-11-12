@@ -30,14 +30,12 @@
 
 namespace VimeoClientSampleApp
 {
-    using RestClient;
+    using Mafesoft.RestClient;
+    using Mafesoft.TinyCsv;
+    using Mafesoft.VimeoClient;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
-    using TinyCsv;
-    using TinyCsv.Extensions;
-    using Mafesoft.VimeoClient;
 
     public class CustomVimeoClient : Mafesoft.VimeoClient.Vimeo
     {

@@ -9,7 +9,7 @@
 
 [![Mafe.VimeoClient downloads](https://img.shields.io/badge/Mafe.VimeoClient%20downloads-2.1k-lightgrey?style=flat-square)](https://www.nuget.org/packages/Mafe.VimeoClient)
 
-VimeoClient is an extensible .NET wrapper for the [Vimeo API 3.4](https://developer.vimeo.com/api/reference). It is built on [Mafe.RestClient](https://github.com/fmazzant/RestClient) and covers every operation of the Vimeo API 3.4 OpenAPI specification with typed methods, models and parameters.
+VimeoClient is an extensible .NET wrapper for the [Vimeo API 3.4](https://developer.vimeo.com/api/reference). It is built on [Mafesoft.RestClient](https://www.nuget.org/packages/Mafesoft.RestClient) and covers every operation of the Vimeo API 3.4 OpenAPI specification with typed methods, models and parameters.
 
 ## Why VimeoClient
 

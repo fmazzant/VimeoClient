@@ -29,7 +29,7 @@
 
 namespace Mafesoft.VimeoClient.Common
 {
-    using RestClient;
+    using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Body.OnDemand;
     using Mafesoft.VimeoClient.Filter.OnDemand;
     using Mafesoft.VimeoClient.Model;

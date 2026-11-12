@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net462;net472;net481;netstandard2.0;netstandard2.1;net8.0;net10.0</TargetFrameworks>
     <PackageId>Mafesoft.VimeoClient</PackageId>
-    <Version>3.4.0.2</Version>
+    <Version>3.4.0.3</Version>
     <Authors>Federico Mazzanti</Authors>
     <Company>Federico Mazzanti</Company>
     <Description>VimeoClient library provides a simple connector to Vimeo REST services (Vimeo API 3.4).</Description>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mafe.RestClient" Version="2.0.0" />
+    <PackageReference Include="Mafesoft.RestClient" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
