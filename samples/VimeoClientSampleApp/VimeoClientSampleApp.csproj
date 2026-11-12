@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Mafe.TinyCsv" Version="3.5.0" />
+    <PackageReference Include="Mafesoft.TinyCsv" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\VimeoClient\VimeoClient.csproj" />
