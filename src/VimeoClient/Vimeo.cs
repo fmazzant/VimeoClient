@@ -30,7 +30,7 @@
 
 namespace Mafesoft.VimeoClient
 {
-    using RestClient;
+    using Mafesoft.RestClient;
     using System;
     using System.Collections.Generic;
     using System.Net.Http.Headers;
@@ -95,7 +95,8 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <returns></returns>
         protected virtual RestBuilder Root() => Rest
-            .Build((p) => p.EndPoint = new Uri(Properties.EndPoint))
+            .Build()
+            .Url(new Uri(Properties.EndPoint))
             .Header((headers) =>
             {
                 // Vimeo selects the API version by the Accept header
