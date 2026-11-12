@@ -1,21 +1,36 @@
 name: NuGet
 
-# Publishes Mafesoft.VimeoClient when a version tag is pushed (git tag v3.4.0.3 && git push origin v3.4.0.3),
-# or manually from Actions > NuGet > Run workflow. The version is the <Version> in VimeoClient.csproj.
+# Publishes Mafesoft.VimeoClient:
+# - when a version tag is pushed:
+#     git tag v3.4.0.3 && git push origin v3.4.0.3
+#   the tag must match <Version> in src/VimeoClient/VimeoClient.csproj;
+# - manually, from GitHub: Actions > NuGet > Run workflow, on a branch (not on a tag):
+#   - "version" empty: publishes the <Version> of the selected branch;
+#   - "version" filled in (e.g. 3.4.0.3 or 3.5.0-beta.1): publishes that version, overriding <Version>.
+#   CLI: gh workflow run nuget.yml --ref master -f version=3.4.0.3
 # The tests run on every target framework (Windows) before the package is built and published.
+# Merging into master does NOT publish anything.
 #
 # Authentication: NuGet Trusted Publishing (https://learn.microsoft.com/nuget/nuget-org/trusted-publishing),
 # no long-lived API key. The NuGet/login step exchanges the GitHub OIDC token for a temporary API key (valid 1 hour).
 # Requires:
 # - on nuget.org (Account > Trusted Publishing) a policy with repository owner "fmazzant", repository "VimeoClient",
-#   workflow file "nuget.yml" (renaming this file breaks publishing) and environment "production";
-# - the GitHub environment "production" with the secret NUGET_USER: the nuget.org username (not the email)
-#   of the user who created the policy.
+#   workflow file "nuget.yml" (renaming this file breaks publishing) and environment "production"
+#   (it must match the "environment" of the publish job below);
+# - the repository secret NUGET_USER: the nuget.org username (not the email) of the user who created the policy.
+# If the login fails with "No matching trust policy owned by user '***' was found", the policy does not match
+# this run (owner, repository, workflow file or environment) or NUGET_USER is not the policy creator.
 
 on:
   push:
     tags: [ 'v*' ]
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g. 3.4.0.3 or 3.5.0-beta.1). Empty = the <Version> in the csproj.'
+        type: string
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -28,6 +43,10 @@ jobs:
       contents: read
       id-token: write # needed by NuGet/login (Trusted Publishing)
 
+    defaults:
+      run:
+        shell: bash
+
     steps:
     - uses: actions/checkout@v7
     - name: Setup .NET
@@ -37,24 +56,68 @@ jobs:
           8.0.x
           10.0.x
 
+    # The overriding version goes in PACKAGE_VERSION, never in VERSION: MSBuild reads the environment variables
+    # as properties, so a VERSION variable would silently change the package version.
+    - name: Check the project version
+      env:
+        INPUT_VERSION: ${{ inputs.version }}
+      run: |
+        # Tag push: the version comes from the tag (v3.4.0.3 -> 3.4.0.3), the project must match it.
+        # Manual run with the version input: that version overrides <Version> in build and pack.
+        # Manual run without it: the <Version> of the project.
+        INPUT_VERSION="${INPUT_VERSION// /}"
+        INPUT_VERSION="${INPUT_VERSION#v}"
+        PROJECT=src/VimeoClient/VimeoClient.csproj
+        PROJECT_VERSION="$(dotnet msbuild "$PROJECT" -getProperty:Version | tr -d '\r')"
+        if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+          if [ -n "$INPUT_VERSION" ]; then
+            echo "::error::The version input is for manual runs on a branch, this run is on the tag $GITHUB_REF_NAME"
+            exit 1
+          fi
+          if [ "${GITHUB_REF_NAME#v}" != "$PROJECT_VERSION" ]; then
+            echo "::error::$PROJECT has version $PROJECT_VERSION, expected ${GITHUB_REF_NAME#v} (tag $GITHUB_REF_NAME)"
+            exit 1
+          fi
+          VERSION_TO_PUBLISH="$PROJECT_VERSION"
+        elif [ -n "$INPUT_VERSION" ]; then
+          if [[ ! "$INPUT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::'$INPUT_VERSION' is not a valid version (expected 3.4.0.3 or 3.5.0-beta.1)"
+            exit 1
+          fi
+          VERSION_TO_PUBLISH="$INPUT_VERSION"
+          echo "PACKAGE_VERSION=$INPUT_VERSION" >> "$GITHUB_ENV"
+        else
+          VERSION_TO_PUBLISH="$PROJECT_VERSION"
+        fi
+        echo "publishing version $VERSION_TO_PUBLISH"
+        echo "### Version $VERSION_TO_PUBLISH ($GITHUB_REF_TYPE $GITHUB_REF_NAME)" >> "$GITHUB_STEP_SUMMARY"
+
     - name: Restore dependencies
       run: dotnet restore src/VimeoClient.sln
 
     - name: Build
-      run: dotnet build --no-restore -c Release src/VimeoClient.sln
+      run: dotnet build --no-restore -c Release ${PACKAGE_VERSION:+"-p:Version=$PACKAGE_VERSION"} src/VimeoClient.sln
 
     # The package is published only when all the tests pass
     - name: Test
       run: dotnet test --no-build -c Release src/VimeoClient.sln
 
     - name: Package
-      run: dotnet pack --no-build -c Release -o . src/VimeoClient/VimeoClient.csproj
+      run: dotnet pack --no-build -c Release ${PACKAGE_VERSION:+"-p:Version=$PACKAGE_VERSION"} -o artifacts src/VimeoClient/VimeoClient.csproj
 
+    # Right before the push: the temporary API key expires after 1 hour.
     - name: NuGet login (Trusted Publishing)
       id: nuget-login
       uses: NuGet/login@v1
       with:
         user: ${{ secrets.NUGET_USER }}
 
+    # bash expands the glob: on Windows, NuGet's own wildcard handling does not resolve "artifacts/*.nupkg"
+    # (forward slash). The matching .snupkg next to each .nupkg is pushed automatically.
     - name: Publish on NuGet
-      run: dotnet nuget push *.nupkg --api-key ${{ steps.nuget-login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      env:
+        NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+      run: |
+        for pkg in artifacts/*.nupkg; do
+          dotnet nuget push "$pkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        done
