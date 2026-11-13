@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Response;
 
     /// <summary>
-    // These are the most common methods for working with myself user.
+    /// These are the most common methods for working with the authenticated user (/me).
     /// https://developer.vimeo.com/api/reference/users
     /// </summary>
     public class VimeoMe
@@ -188,11 +188,10 @@ namespace Mafesoft.VimeoClient.Common
 
         /// <summary>
         /// This method causes the authenticated user to become the follower of the specified user.
-        /// PUT https://api.vimeo.com/users/{user_id}/following/{follow_user_id}
+        /// PUT https://api.vimeo.com/me/following/{follow_user_id}
         /// </summary>
-        /// <param name="follow_user_id"></param>
-        /// <param name="user_id"></param>
-        /// <returns></returns>
+        /// <param name="follow_user_id">The ID of the user to follow.</param>
+        /// <returns>204 No Content	The user is now following the specified user.</returns>
         public virtual RestResult FollowASpecificUser(int follow_user_id) => RootMeAuthorization()
             .Command("/following")
             .Command(follow_user_id)
@@ -201,8 +200,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method returns every follower of the authenticated user.
         /// </summary>
-        /// <param name="user_id"></param>
-        /// <returns></returns>
+        /// <returns>The followers of the authenticated user.</returns>
         public virtual RestResult<Pagination<User>> GetAllTheFollowersOfTheUser() => RootMeAuthorization()
             .Command("/followers")
             .Get<Pagination<User>>();
@@ -347,9 +345,8 @@ namespace Mafesoft.VimeoClient.Common
         /// This method causes the authenticated user to stop following another user.
         /// DELETE https://api.vimeo.com/me/following/{follow_user_id}
         /// </summary>
-        /// <param name="follow_user_id"></param>
-        /// <param name="user_id"></param>
-        /// <returns></returns>
+        /// <param name="follow_user_id">The ID of the user to unfollow.</param>
+        /// <returns>204 No Content	The user is no longer following the specified user.</returns>
         public virtual RestResult<string> UnfollowAUser(int follow_user_id) => RootMeAuthorization()
             .Command("/following")
             .Command(follow_user_id)

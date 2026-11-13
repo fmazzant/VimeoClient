@@ -186,8 +186,15 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
         /// </summary>
-        /// <param name="user_id"></param>
-        /// <returns></returns>
+        /// <param name="user_id">The ID of the user.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="filter">The attribute by which to filter the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <param name="type">The type of the live events to return.</param>
+        /// <returns>The live events of the user.</returns>
         public Task<RestResult<VimeoList<LiveEvent>>> GetAllTheLiveEventsAsync(int user_id,
             LiveDirection? direction = null,
             LiveFilter? filter = null,

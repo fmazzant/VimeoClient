@@ -342,6 +342,10 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns every category that the authenticated user follows.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns>
         /// 200 OK	The categories were returned.
         /// 403 Forbidden Error code 3200: Only the authenticated user can access this information.
@@ -542,7 +546,7 @@ namespace Mafesoft.VimeoClient.Common
         /// Vimeo makes the final determination about whether the video belongs in these categories.
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
-        /// <param name="category">An array of the names of the desired categories.</param>
+        /// <param name="categories">An array of the names of the desired categories.</param>
         /// <returns>
         /// 201 Created	The categories were suggested.
         /// 403 Forbidden The authenticated user doesn't own this video.

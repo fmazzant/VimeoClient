@@ -212,6 +212,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method returns every follower of the authenticated user.
         /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
         /// <param name="direction">
         /// The sort direction of the results.Option descriptions:
         ///     asc - Sort the results in ascending order.
@@ -299,6 +300,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method returns every follower of the authenticated user.
         /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
         /// <param name="direction">
         /// The sort direction of the results.Option descriptions:
         ///     asc - Sort the results in ascending order.
@@ -405,6 +407,7 @@ namespace Mafesoft.VimeoClient.Common
         /// Send the binary data of the image file to the location that you receivefrom the link field in the response. 
         /// For step-by-step instructions, seeWorking with Thumbnail Uploads.
         /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
         /// <param name="image"></param>
         /// <returns></returns>
         public virtual RestResult<Picture> AddPictureToTheUserAccount(int user_id, byte[] image) => RootUserAuthorization()
@@ -416,6 +419,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method removes the specified portrait image from the authenticated user's Vimeo account.
         /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
         /// <param name="portraitset_id"></param>
         /// <returns></returns>
         public virtual RestResult DeletePictureFromTheUserAccount(int user_id, int portraitset_id) => RootUserAuthorization()
@@ -427,6 +431,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method edits the specified portrait image belonging to the authenticated user.
         /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
         /// <param name="portraitset_id"></param>
         /// <param name="active"></param>
         /// <returns></returns>
@@ -440,6 +445,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method returns a single portrait image belonging to the authenticated user.
         /// </summary>
+        /// <param name="user_id">The ID of the user.</param>
         /// <param name="portraitset_id"></param>
         /// <returns></returns>
         public virtual RestResult<Picture> GetSpecificPictureThatBelongsToTheUser(int user_id, int portraitset_id) => RootUserAuthorization()

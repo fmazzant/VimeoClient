@@ -29,11 +29,18 @@
 
 namespace Mafesoft.VimeoClient.Model
 {
+    /// <summary>
+    /// A size of a picture.
+    /// </summary>
     public class Size
     {
+        /// <summary>The height of the picture, in pixels.</summary>
         public int height { get; set; }
+        /// <summary>The URL of the picture at this size.</summary>
         public string link { get; set; }
+        /// <summary>The URL of the picture at this size, with a play button.</summary>
         public string link_with_play_button { get; set; }
+        /// <summary>The width of the picture, in pixels.</summary>
         public int width { get; set; }
     }
 

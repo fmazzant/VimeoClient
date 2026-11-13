@@ -36,8 +36,9 @@ namespace Mafesoft.VimeoClient.Response
 
     /// <summary>
     /// Represents a pagination list of entities.
+    /// Call <see cref="Next"/> and <see cref="Previous"/> to load the other pages.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">The type of the entities of the list</typeparam>
     public class Pagination<T>
     {
         /// <summary>
@@ -78,7 +79,7 @@ namespace Mafesoft.VimeoClient.Response
         /// <summary>
         /// Go to Next page if it is exists
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The next page, or null when this is the last page.</returns>
         public RestResult<Pagination<T>> Next() => NextAction();
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace Mafesoft.VimeoClient.Response
         /// <summary>
         /// Go to previuous oage if it is existes
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The previous page, or null when this is the first page.</returns>
         public RestResult<Pagination<T>> Previous() => PreviousAction();
     }
 }

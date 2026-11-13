@@ -64,10 +64,10 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Creates an instance with auth information to access private or public information
         /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="clientSecret"></param>
-        /// <param name="accessToken"></param>
-        /// <param name="validCertificates"></param>
+        /// <param name="clientId">The client identifier of the Vimeo API app.</param>
+        /// <param name="clientSecret">The client secret of the Vimeo API app.</param>
+        /// <param name="accessToken">The access token sent as Bearer token on each request.</param>
+        /// <param name="validCertificates">The hashes of the trusted certificates (pinning); empty for the standard TLS validation.</param>
         public Vimeo(string clientId, string clientSecret, string accessToken, List<string> validCertificates)
             : this(new VimeoProperties
             {
@@ -83,7 +83,7 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Creates an instance with Vimeo Properties
         /// </summary>
-        /// <param name="properties"></param>
+        /// <param name="properties">The credentials and the settings of the client.</param>
         public Vimeo(VimeoProperties properties)
 
         {
@@ -93,7 +93,7 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Vimeo End Point root
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The request builder for the Vimeo end point, with the Accept header and the certificate validation.</returns>
         protected virtual RestBuilder Root() => Rest
             .Build()
             .Url(new Uri(Properties.EndPoint))
@@ -126,7 +126,7 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Vimeo End Point root with Bearer authentication
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The request builder for the Vimeo end point, authenticated with the access token.</returns>
         public virtual RestBuilder RootAuthorization() => Root()
             .EnableGZipCompression() //gzip
             .Authentication(() =>
@@ -142,9 +142,9 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Using the client credentials grant. Access only public information.
         /// </summary>
-        /// <param name="clientId"></param>
-        /// <param name="clientSecret"></param>
-        /// <returns></returns>
+        /// <param name="clientId">The client identifier of the Vimeo API app.</param>
+        /// <param name="clientSecret">The client secret of the Vimeo API app.</param>
+        /// <returns>The access token with the public scope.</returns>
         public virtual RestResult<AccessTokenResponse> GetAccessToken(string clientId, string clientSecret) => Root()
             .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}"))))
             .Command("/oauth/authorize/client")
@@ -158,12 +158,12 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Using the authorization code grant - STEP 1. Access public and private information.
         /// </summary>
-        /// <param name="response_type"></param>
-        /// <param name="client_id"></param>
-        /// <param name="redirect_uri"></param>
-        /// <param name="state"></param>
-        /// <param name="scope"></param>
-        /// <returns></returns>
+        /// <param name="response_type">The response type: code.</param>
+        /// <param name="client_id">The client identifier of the Vimeo API app.</param>
+        /// <param name="redirect_uri">The redirect URI of the Vimeo API app.</param>
+        /// <param name="state">A unique value that the redirect URI receives back, to check the request.</param>
+        /// <param name="scopes">The requested scopes (see <see cref="VimeoScope"/>); null requests the public scope.</param>
+        /// <returns>The response of the authorization page.</returns>
         public virtual RestResult<string> GetAccessToken(string response_type, string client_id, string redirect_uri, string state, string[] scopes) => Root()
             .Command("/oauth/authorize")
             .Parameter("response_type", response_type)
@@ -177,9 +177,9 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Using the authorization code grant - STEP 2. Access public and private information.
         /// </summary>
-        /// <param name="authenticationCode"></param>
-        /// <param name="requestUri"></param>
-        /// <returns></returns>
+        /// <param name="authenticationCode">The authorization code received on the redirect URI.</param>
+        /// <param name="requestUri">The redirect URI used in step 1.</param>
+        /// <returns>The access token.</returns>
         public virtual RestResult<AccessTokenResponse> PostAccessToken(string authenticationCode, string requestUri) => Root()
             .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Properties.ClientId}:{Properties.ClientSecret}"))))
             .Command("/oauth/access_token")
@@ -193,7 +193,7 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Tutotial is Public scope
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The tutorial message: it checks that the access token works.</returns>
         public virtual RestResult<Tutorial> Tutorial() => RootAuthorization()
           .Command("/tutorial")
           .Get<Tutorial>();
@@ -341,7 +341,7 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <typeparam name="T">Response's type</typeparam>
         /// <param name="uri">Uri to call</param>
-        /// <returns></returns>
+        /// <returns>The response mapped to <typeparamref name="T"/>.</returns>
         public virtual RestResult<T> Get<T>(string uri) where T : new()
             => RootAuthorization().Command(uri).Get<T>();
     }

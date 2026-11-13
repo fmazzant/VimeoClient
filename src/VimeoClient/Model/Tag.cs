@@ -1,6 +1,9 @@
-﻿/// 
+﻿/// <summary>
+///
+/// The MIT License (MIT)
+///
 /// Copyright (c) 2020 Federico Mazzanti
-/// 
+///
 /// Permission is hereby granted, free of charge, to any person
 /// obtaining a copy of this software and associated documentation
 /// files (the "Software"), to deal in the Software without
@@ -28,6 +31,9 @@ namespace Mafesoft.VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
+    /// <summary>
+    /// A tag: a piece of metadata for categorizing or labeling videos.
+    /// </summary>
     public class Tag : VimeoIdentity
     {
         /// <summary>

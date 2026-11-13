@@ -44,7 +44,7 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Builds the JSON body
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The JSON body</returns>
         VimeoPayload ToPayload();
     }
 
@@ -59,7 +59,7 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <param name="path">The dotted path, for instance buy.price.USD</param>
         /// <param name="value">The value</param>
-        /// <returns></returns>
+        /// <returns>This payload, to chain the calls</returns>
         public VimeoPayload Set(string path, object value)
         {
             if (value == null)
@@ -94,7 +94,7 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <param name="path">The dotted path of the price object</param>
         /// <param name="prices">The prices by currency</param>
-        /// <returns></returns>
+        /// <returns>This payload, to chain the calls</returns>
         public VimeoPayload SetPrices(string path, IDictionary<string, double> prices)
         {
             if (prices == null)
@@ -114,7 +114,7 @@ namespace Mafesoft.VimeoClient
         /// the null values are skipped, enums become Vimeo values and nested objects become nested payloads.
         /// </summary>
         /// <param name="source">The object</param>
-        /// <returns></returns>
+        /// <returns>The payload; empty when <paramref name="source"/> is null</returns>
         public static VimeoPayload FromObject(object source)
         {
             var payload = new VimeoPayload();
@@ -168,7 +168,7 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// Flattens the payload in dotted key/value pairs
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The dotted key/value pairs, for instance buy.price.USD=2.99</returns>
         public IEnumerable<KeyValuePair<string, string>> Flatten() => Flatten(null, this);
 
         private static IEnumerable<KeyValuePair<string, string>> Flatten(string prefix, VimeoPayload payload)

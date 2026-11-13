@@ -20,6 +20,13 @@
     <RootNamespace>Mafesoft.VimeoClient</RootNamespace>
   </PropertyGroup>
 
+  <!-- XML documentation: published with the package, IntelliSense shows it to the users of the package -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- CS1587: the MIT license header at the top of each file is an XML comment not placed on a language element -->
+    <NoWarn>$(NoWarn);CS1587</NoWarn>
+  </PropertyGroup>
+
   <!-- Symbols and SourceLink: the users of the package can step into the library code while debugging -->
   <PropertyGroup>
     <IncludeSymbols>true</IncludeSymbols>

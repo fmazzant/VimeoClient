@@ -30,12 +30,15 @@
 namespace Mafesoft.VimeoClient.Model
 {
     /// <summary>
-    /// 
+    /// The response of the /tutorial end point, used to check that the access token works.
     /// </summary>
     public class Tutorial
     {
+        /// <summary>The tutorial message.</summary>
         public string message { get; set; }
+        /// <summary>The link to the next steps of the tutorial.</summary>
         public string next_steps_link { get; set; }
+        /// <summary>Whether the access token is authenticated.</summary>
         public bool token_is_authenticated { get; set; }
     }
 }

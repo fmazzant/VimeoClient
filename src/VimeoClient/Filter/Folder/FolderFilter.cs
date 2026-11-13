@@ -51,7 +51,7 @@ namespace Mafesoft.VimeoClient.Filter.Folder
     public enum FolderSort
     {
         /// <summary>
-        /// 
+        /// Sort the results by date
         /// </summary>
         date,
 

@@ -158,7 +158,6 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
         /// <param name="direction">The sort direction of the results</param>
-        /// <param name="filter">The attribute by which to filter the results</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
@@ -223,7 +222,6 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="channel_id">The ID of the channel</param>
         /// <param name="video_id">The ID of the video.</param>
         /// <param name="direction">The sort direction of the results</param>
-        /// <param name="filter">The attribute by which to filter the results</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>

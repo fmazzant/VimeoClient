@@ -88,13 +88,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method creates a new channel.
         /// </summary>
-        /// <param name="name">The name of the channel.</param>
-        /// <param name="privacy">
-        /// The privacy level of the channel.
-        /// Option descriptions:
+        /// <param name="obj">
+        /// The channel to create: the name of the channel, its description and the privacy level of the channel.
+        /// Privacy option descriptions:
         ///     anybody - Anyone can access the channel.
         ///     moderators - Only moderators can access the channel.
         ///     user - Only moderators and designated users can access the channel.
+        /// </param>
         /// <returns>
         ///     200 OK	The channel was created.
         ///     400 Bad Request A parameter is invalid.
@@ -473,7 +473,12 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns every moderator of the specified channel.
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
-        /// <returns></returns>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns>The moderators of the channel, one page at a time.</returns>
         public virtual RestResult<Pagination<User>> GetAllTheModeratorsOfAChannel(string channel_id,
             ChannelDirection? direction = null,
             int? page = null,
@@ -842,8 +847,8 @@ namespace Mafesoft.VimeoClient.Common
         /// This method adds multiple videos to the specified channel. The authenticated user must be a moderator of the channel.
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
-        /// <param name="tags">
-        /// A member of an array representing the URIs of the videos to add. 
+        /// <param name="video_uri">
+        /// A member of an array representing the URIs of the videos to add.
         /// For each member in the array, use the format {"video_uri":"x"} where x is a video URI. 
         /// For more information on batch requests like this, 
         /// see Using Common Formats and Parameters.
@@ -902,7 +907,15 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns every video in the specified channel.
         /// </summary>
         /// <param name="channel_id">The ID of the channel.</param>
-        /// <returns></returns>
+        /// <param name="containing_uri">The page containing the video URI.</param>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="filter">The attribute by which to filter the results.</param>
+        /// <param name="filter_embeddable">Whether to filter the results by embeddable videos (true) or non-embeddable videos (false). Required only if filter is embeddable.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <returns>The videos of the channel, one page at a time.</returns>
         public virtual RestResult<Pagination<Video>> GetAllTheVideosInAChannel(string channel_id,
             string containing_uri = null,
             ChannelDirection? direction = null,

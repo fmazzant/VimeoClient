@@ -36,10 +36,14 @@ namespace Mafesoft.VimeoClient.Body.Folder
     /// </summary>
     public enum FolderUserPreference
     {
-        COLLECTION_CHANGE,// - User preferences for collection change notifications.
-        PRIVACY_CHANGE,// - User preferences for privacy change notifications.
-        REVIEW_PAGE,// - User preferences for review page notifications.
-        VIDEO_DETAIL,// - User preferences for video detail notifications.
+        /// <summary>User preferences for collection change notifications.</summary>
+        COLLECTION_CHANGE,
+        /// <summary>User preferences for privacy change notifications.</summary>
+        PRIVACY_CHANGE,
+        /// <summary>User preferences for review page notifications.</summary>
+        REVIEW_PAGE,
+        /// <summary>User preferences for video detail notifications.</summary>
+        VIDEO_DETAIL,
     }
 
     /// <summary>
@@ -47,13 +51,20 @@ namespace Mafesoft.VimeoClient.Body.Folder
     /// </summary>
     public enum FolderLanguagePreference
     {
-        de_DE,// - The language preference is German.
-        en,// - The language preference is English.
-        es,// - The language preference is Spanish.
-        fr_FR,// - The language preference is French.
-        ja_JP,// - The language preference is Japanese.
-        ko_KR,// - The language preference is Korean.
-        pt_BR,// - The language preference is Brazilian Portuguese.
+        /// <summary>The language preference is German.</summary>
+        de_DE,
+        /// <summary>The language preference is English.</summary>
+        en,
+        /// <summary>The language preference is Spanish.</summary>
+        es,
+        /// <summary>The language preference is French.</summary>
+        fr_FR,
+        /// <summary>The language preference is Japanese.</summary>
+        ja_JP,
+        /// <summary>The language preference is Korean.</summary>
+        ko_KR,
+        /// <summary>The language preference is Brazilian Portuguese.</summary>
+        pt_BR,
     }
 
     /// <summary>
