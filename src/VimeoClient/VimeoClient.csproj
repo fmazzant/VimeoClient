@@ -6,7 +6,7 @@
     <Version>3.4.0.3</Version>
     <Authors>Federico Mazzanti</Authors>
     <Company>Federico Mazzanti</Company>
-    <Description>VimeoClient library provides a simple connector to Vimeo REST services (Vimeo API 3.4).</Description>
+    <Description>Extensible .NET wrapper for the Vimeo API 3.4: every operation of the Vimeo API 3.4 OpenAPI specification, with typed methods, models and parameters, and pagination of the lists (Pagination&lt;T&gt;).</Description>
     <Copyright>Copyright (c) 2020 Federico Mazzanti</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageIcon>icon.png</PackageIcon>
@@ -27,10 +27,6 @@
     </None>
     <None Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="\" />
     <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Body\Category\" />
   </ItemGroup>
 
   <ItemGroup>
