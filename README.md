@@ -309,6 +309,22 @@ The tests run on `net462`, `net472`, `net481`, `net8.0` and `net10.0`: the .NET 
 The GitHub Actions pipelines run the tests on every push and pull request (`ci.yml`: .NET 8 and 10 on Linux,
 every target on Windows), and the package is published on NuGet only when all the tests pass on every target (`nuget.yml`).
 
+### Integration tests
+
+The integration tests in `tests/VimeoClient.IntegrationTests` call the real Vimeo API, so they notice when Vimeo changes it.
+They run only when the `VIMEO_ACCESS_TOKEN` environment variable is set, otherwise they are skipped:
+
+- read-only calls (`Tutorial`, `Me`, videos with pagination, folders) need only the access token;
+- the calls that create and delete resources (a folder) run only with `VIMEO_INTEGRATION_WRITE=true`: use a test account.
+
+```shell
+export VIMEO_ACCESS_TOKEN=... # never commit the token
+dotnet test tests/VimeoClient.IntegrationTests/VimeoClient.IntegrationTests.csproj
+```
+
+The `integration.yml` pipeline runs them every Monday and manually, with the `VIMEO_ACCESS_TOKEN` repository secret
+and the `VIMEO_INTEGRATION_WRITE` repository variable.
+
 ## License
 
 VimeoClient is released under the [MIT License](LICENSE).
