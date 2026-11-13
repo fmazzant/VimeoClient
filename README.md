@@ -11,6 +11,8 @@
 
 VimeoClient is an extensible .NET wrapper for the [Vimeo API 3.4](https://developer.vimeo.com/api/reference). It is built on [Mafesoft.RestClient](https://www.nuget.org/packages/Mafesoft.RestClient) and covers every operation of the Vimeo API 3.4 OpenAPI specification with typed methods, models and parameters.
 
+If VimeoClient is useful to you, consider [supporting the project](#support). ☕
+
 ## Why VimeoClient
 
 | Feature | Description |
@@ -338,6 +340,14 @@ dotnet test tests/VimeoClient.IntegrationTests/VimeoClient.IntegrationTests.cspr
 
 The `integration.yml` pipeline runs them every Monday and manually, with the `VIMEO_ACCESS_TOKEN` repository secret
 and the `VIMEO_INTEGRATION_WRITE` repository variable.
+
+## Support
+
+If VimeoClient saves you time, you can say thanks with a small donation. It is never required, but it helps me keep the project maintained and up to date.
+
+[![Donate](https://img.shields.io/badge/donate-PayPal-00457C?style=flat-square&logo=paypal&logoColor=white)](https://paypal.me/fmazzant)
+
+A star on GitHub, a bug report or a pull request help too. Thank you!
 
 ## License
 
