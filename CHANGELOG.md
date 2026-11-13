@@ -26,6 +26,7 @@ No breaking changes.
 - Package description updated, empty `Body\Category` folder removed.
   ([#23](https://github.com/fmazzant/VimeoClient/issues/23))
 - NuGet workflow: version input on manual runs, the tag must match `<Version>`.
+- README: Support section with a PayPal donation link.
 
 [3.4.0.4]: https://github.com/fmazzant/VimeoClient/compare/v3.4.0.3...v3.4.0.4
 
