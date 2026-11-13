@@ -28,4 +28,6 @@
 /tests/VimeoClient.Tests/bin/Debug/net10.0
 /tests/VimeoClient.Tests/obj
 /tests/VimeoClient.Tests/bin
+/tests/VimeoClient.IntegrationTests/bin
+/tests/VimeoClient.IntegrationTests/obj
 /samples/VimeoClientSampleApp/bin/Release

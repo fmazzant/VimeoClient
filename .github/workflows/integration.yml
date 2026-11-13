@@ -1,0 +1,60 @@
+name: Integration tests
+
+# Runs the integration tests (tests/VimeoClient.IntegrationTests) against the real Vimeo API,
+# every Monday and manually (Actions > Integration tests > Run workflow).
+# The xUnit tests of ci.yml use a fake HTTP handler: these tests notice when Vimeo changes the API.
+#
+# Configuration (Settings > Secrets and variables > Actions):
+# - secret VIMEO_ACCESS_TOKEN: the access token of a Vimeo test account. Without it every test is skipped.
+# - variable VIMEO_INTEGRATION_WRITE = true: also runs the tests that create and delete resources (folders)
+#   on the account. Use a test account.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: |
+          8.0.x
+          10.0.x
+
+    - name: Check the configuration
+      env:
+        VIMEO_ACCESS_TOKEN: ${{ secrets.VIMEO_ACCESS_TOKEN }}
+      run: |
+        if [ -z "$VIMEO_ACCESS_TOKEN" ]; then
+          echo "::warning::The VIMEO_ACCESS_TOKEN secret is not set: the integration tests are skipped"
+        fi
+
+    - name: Restore dependencies
+      run: dotnet restore tests/VimeoClient.IntegrationTests/VimeoClient.IntegrationTests.csproj
+
+    - name: Build
+      run: dotnet build --no-restore -c Release tests/VimeoClient.IntegrationTests/VimeoClient.IntegrationTests.csproj
+
+    # One target only: the tests call the real API, running them twice would double the requests
+    - name: Test (net10.0)
+      env:
+        VIMEO_ACCESS_TOKEN: ${{ secrets.VIMEO_ACCESS_TOKEN }}
+        VIMEO_INTEGRATION_WRITE: ${{ vars.VIMEO_INTEGRATION_WRITE }}
+      run: dotnet test --no-build -c Release tests/VimeoClient.IntegrationTests/VimeoClient.IntegrationTests.csproj -f net10.0 --logger "trx;LogFilePrefix=integration" --results-directory TestResults
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v7
+      with:
+        name: test-results-integration
+        path: TestResults/**/*.trx
