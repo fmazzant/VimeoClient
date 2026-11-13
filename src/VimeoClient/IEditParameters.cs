@@ -36,6 +36,11 @@ namespace Mafesoft.VimeoClient
     /// </summary>
     public interface IEditParameters
     {
+        /// <summary>
+        /// Converts the parameters to the key/value pairs sent to Vimeo (form URL encoded).
+        /// Only the values that are set are returned.
+        /// </summary>
+        /// <returns>The key/value pairs</returns>
         IEnumerable<KeyValuePair<string, string>> ToEnumerable();
     }
 }

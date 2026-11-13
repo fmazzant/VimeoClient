@@ -32,36 +32,42 @@ namespace Mafesoft.VimeoClient
     using System.Collections.Generic;
 
     /// <summary>
-    /// 
+    /// The credentials and the settings of a <see cref="Vimeo"/> client: the access token, the credentials of the
+    /// Vimeo API app, the end point, the Vimeo API version and the certificate validation.
     /// </summary>
     public class VimeoProperties
     {
         /// <summary>
-        /// 
+        /// The client identifier of the Vimeo API app (https://developer.vimeo.com/apps).
+        /// Used by the authentication methods (client credentials and authorization code grants).
         /// </summary>
         public string ClientId { get; set; }
             = string.Empty;
 
         /// <summary>
-        /// 
+        /// The client secret of the Vimeo API app (https://developer.vimeo.com/apps).
+        /// Used by the authentication methods (client credentials and authorization code grants).
         /// </summary>
         public string ClientSecret { get; set; }
          = string.Empty;
 
         /// <summary>
-        /// 
+        /// The access token sent as Bearer token on each request.
+        /// When it is empty the authenticated requests are not sent and their result has an <see cref="System.ArgumentNullException"/>.
         /// </summary>
         public string AccessToken { get; set; }
             = string.Empty;
 
         /// <summary>
-        /// 
+        /// The hashes of the trusted certificates (certificate pinning).
+        /// Empty: the standard TLS validation is used.
+        /// Set: the certificate must be valid and its hash must be in the list.
         /// </summary>
         public List<string> ValidCertificates { get; set; }
             = new List<string>();
 
         /// <summary>
-        /// https://api.vimeo.com
+        /// The Vimeo API end point, https://api.vimeo.com by default.
         /// </summary>
         public string EndPoint { get; set; }
             = "https://api.vimeo.com";

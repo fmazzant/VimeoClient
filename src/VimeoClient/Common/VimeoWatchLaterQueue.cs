@@ -114,7 +114,6 @@ namespace Mafesoft.VimeoClient
         /// <summary>
         /// This method checks the authenticated user's Watch Later queue for the specified video.
         /// </summary>
-        /// <param name="user_id">The ID of the user.</param>
         /// <param name="video_id">The ID of the video.</param>
         /// <returns>
         /// 200 OK	The video is in the user's Watch Later queue.

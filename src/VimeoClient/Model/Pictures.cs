@@ -29,6 +29,9 @@
 
 namespace Mafesoft.VimeoClient.Model
 {
+    /// <summary>
+    /// Not used by the library, kept for compatibility: the pictures of the Vimeo resources are mapped by <see cref="Picture"/>.
+    /// </summary>
     public class Pictures { }
 
 }

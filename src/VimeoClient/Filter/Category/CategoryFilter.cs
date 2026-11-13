@@ -120,12 +120,12 @@ namespace Mafesoft.VimeoClient.Filter.Category
     public enum CategorySortAllCategory
     {
         /// <summary>
-        /// 
+        /// Sort the results by the time of the last featured video
         /// </summary>
         last_video_featured_time,
 
         /// <summary>
-        /// 
+        /// Sort the results by name
         /// </summary>
         name
     }

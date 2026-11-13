@@ -31,14 +31,23 @@ namespace Mafesoft.VimeoClient.Model
 {
     using System.Text.Json.Serialization;
 
+    /// <summary>
+    /// An icon (picture) of a Vimeo resource, for instance of a category.
+    /// </summary>
     public class Icon
     {
+        /// <summary>Whether this is the active picture.</summary>
         [JsonPropertyName("active")]
         public bool Active { get; set; }
+        /// <summary>The URL of the picture.</summary>
         public string link { get; set; }
+        /// <summary>The resource key of the picture.</summary>
         public string resource_key { get; set; }
+        /// <summary>The available sizes of the picture.</summary>
         public Size[] sizes { get; set; }
+        /// <summary>The type of the picture.</summary>
         public string type { get; set; }
+        /// <summary>The URI of the picture.</summary>
         public string uri { get; set; }
     }
 }

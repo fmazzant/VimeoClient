@@ -126,7 +126,7 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns every available group.
         /// </summary>
         /// <param name="direction">The sort direction of the results</param>
-        /// <param name="filer">The attribute by which to filter the results</param>
+        /// <param name="filter">The attribute by which to filter the results</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>

@@ -82,9 +82,9 @@ namespace Mafesoft.VimeoClient
         /// -> GET https://api.vimeo.com/me?fields=uri,name,metadata.connections.albums
         /// this.FieldFiltering("/me", new string[]{ "uri", "name", "metadata", "connections", "albums"});
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+        /// <param name="command">The path of the request, for instance /me</param>
+        /// <param name="fields">The fields to return</param>
+        /// <returns>The response as a raw JSON string</returns>
         public virtual RestResult<string> FieldFiltering(string command, string[] fields) => RootAuthorization()
              .Command(command)
              .Parameter("fields", string.Join(",", fields))
@@ -96,9 +96,10 @@ namespace Mafesoft.VimeoClient
         /// -> GET https://api.vimeo.com/me?fields=uri,name,metadata.connections.albums
         /// this.FieldFiltering("/me", new string[]{ "uri", "name", "metadata", "connections", "albums"});
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of the response</typeparam>
+        /// <param name="command">The path of the request, for instance /me</param>
+        /// <param name="fields">The fields to return</param>
+        /// <returns>The response mapped to <typeparamref name="T"/></returns>
         public virtual RestResult<T> FieldFiltering<T>(string command, string[] fields) where T : new() => RootAuthorization()
              .Command(command)
              .Parameter("fields", string.Join(",", fields))
