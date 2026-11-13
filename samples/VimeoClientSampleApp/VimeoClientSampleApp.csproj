@@ -2,19 +2,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <!-- The keys are read with dotnet user-secrets (or environment variables): see Program.cs -->
+    <UserSecretsId>vimeoclient-sample-app</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Mafesoft.TinyCsv" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\VimeoClient\VimeoClient.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="VimeoKeys.Test.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

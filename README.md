@@ -295,6 +295,20 @@ var showcases = client.ShowCases.GetAllTheShowcasesThatBelongToTheUser();
 var video = client.Videos.GetSpecificVideo(videoId);
 ```
 
+## Sample app
+
+`samples/VimeoClientSampleApp` shows the common scenarios: the authenticated user, the list of the videos with pagination,
+the upload of a video (from a local file or a public URL) and the webhooks of an API app.
+The keys are read with `dotnet user-secrets` (or the environment variables `Vimeo__AccessToken`, `Vimeo__ClientId`…):
+
+```shell
+cd samples/VimeoClientSampleApp
+dotnet user-secrets set "Vimeo:AccessToken" "your-access-token"
+dotnet run -- videos
+dotnet run -- upload path/to/video.mp4
+dotnet run -- webhook APP_ID PUBLIC_URL
+```
+
 ## Tests
 
 The xUnit tests are in `tests/VimeoClient.Tests`. They don't call Vimeo: every request is sent to a fake HTTP handler,
