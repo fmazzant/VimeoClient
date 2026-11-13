@@ -105,6 +105,18 @@ jobs:
     - name: Package
       run: dotnet pack --no-build -c Release ${PACKAGE_VERSION:+"-p:Version=$PACKAGE_VERSION"} -o artifacts src/VimeoClient/VimeoClient.csproj
 
+    # The symbol package (.snupkg, IncludeSymbols in the csproj) must sit next to each .nupkg:
+    # it is pushed together with the .nupkg by the publish step below.
+    - name: Check the symbol package
+      run: |
+        ls -l artifacts
+        for pkg in artifacts/*.nupkg; do
+          if [ ! -f "${pkg%.nupkg}.snupkg" ]; then
+            echo "::error::Symbol package ${pkg%.nupkg}.snupkg not found"
+            exit 1
+          fi
+        done
+
     # Right before the push: the temporary API key expires after 1 hour.
     - name: NuGet login (Trusted Publishing)
       id: nuget-login
@@ -113,7 +125,8 @@ jobs:
         user: ${{ secrets.NUGET_USER }}
 
     # bash expands the glob: on Windows, NuGet's own wildcard handling does not resolve "artifacts/*.nupkg"
-    # (forward slash). The matching .snupkg next to each .nupkg is pushed automatically.
+    # (forward slash). dotnet nuget push also pushes the matching .snupkg next to each .nupkg to the
+    # NuGet symbol server (the .snupkg files are not matched by the glob, so they are not pushed twice).
     - name: Publish on NuGet
       env:
         NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
