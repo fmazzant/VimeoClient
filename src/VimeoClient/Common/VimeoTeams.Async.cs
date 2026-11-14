@@ -36,6 +36,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Body.Team;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoTeams.
@@ -48,12 +49,13 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/users/{user_id}/team/role
         /// </summary>
         /// <param name="user_id">The ID of the team owner.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The role information was returned.
         /// </returns>
-        public virtual Task<RestResult<TeamRole>> GetTheRoleOfTheUserOnATeamAsync(string user_id) => RootAuthorization()
+        public virtual Task<RestResult<TeamRole>> GetTheRoleOfTheUserOnATeamAsync(string user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/team/role")
-            .GetAsync<TeamRole>();
+            .GetAsync<TeamRole>(cancellationToken);
 
         /// <summary>
         /// This method returns information about the membership of the specified team user.
@@ -61,12 +63,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the team owner.</param>
         /// <param name="team_user_id">The ID of the team user.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The membership information was returned.
         /// </returns>
-        public virtual Task<RestResult<TeamMembership>> GetTheMembershipOfATeamUserAsync(string user_id, long team_user_id) => RootAuthorization()
+        public virtual Task<RestResult<TeamMembership>> GetTheMembershipOfATeamUserAsync(string user_id, long team_user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/team_users/{team_user_id}")
-            .GetAsync<TeamMembership>();
+            .GetAsync<TeamMembership>(cancellationToken);
 
         #endregion
 
@@ -77,12 +80,13 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/teams/{user_id}/custom_metadata
         /// </summary>
         /// <param name="user_id">The ID of the team owner.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The custom metadata fields were returned.
         /// </returns>
-        public virtual Task<RestResult<VimeoList<CustomMetadataSetting>>> GetTheCustomMetadataFieldsOfATeamAsync(string user_id) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<CustomMetadataSetting>>> GetTheCustomMetadataFieldsOfATeamAsync(string user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata")
-            .GetAsync<VimeoList<CustomMetadataSetting>>();
+            .GetAsync<VimeoList<CustomMetadataSetting>>(cancellationToken);
 
         /// <summary>
         /// This method creates, updates, or deletes custom metadata fields for a team in a single request.
@@ -92,13 +96,14 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the team owner.</param>
         /// <param name="fields">The custom metadata fields to create, update, or delete.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The updated set of custom metadata fields was returned.
         /// </returns>
-        public virtual Task<RestResult<VimeoList<CustomMetadataSetting>>> CreateUpdateOrDeleteTheCustomMetadataFieldsOfATeamAsync(string user_id, IEnumerable<CustomMetadataFieldChange> fields) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<CustomMetadataSetting>>> CreateUpdateOrDeleteTheCustomMetadataFieldsOfATeamAsync(string user_id, IEnumerable<CustomMetadataFieldChange> fields, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata")
             .JsonPayload(new VimeoPayload().Set("fields", fields?.Select(VimeoPayload.FromObject).ToArray()))
-            .PostAsync<VimeoList<CustomMetadataSetting>>();
+            .PostAsync<VimeoList<CustomMetadataSetting>>(cancellationToken);
 
         /// <summary>
         /// This method applies a custom metadata value across every existing video owned by the team.
@@ -110,16 +115,17 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="field_id">The ID of the custom metadata field to populate.</param>
         /// <param name="field_value">The value to assign to the field. Must match the field's data type.</param>
         /// <param name="override_existing">Whether to overwrite values that are already set. The default value is false.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The backfill request was accepted.
         /// </returns>
-        public virtual Task<RestResult<JsonElement>> BackfillACustomMetadataValueAcrossTheVideosOfATeamAsync(string user_id, long field_id, string field_value, bool? override_existing = null) => RootAuthorization()
+        public virtual Task<RestResult<JsonElement>> BackfillACustomMetadataValueAcrossTheVideosOfATeamAsync(string user_id, long field_id, string field_value, bool? override_existing = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata/backfill")
             .JsonPayload(new VimeoPayload()
                 .Set("field_id", field_id)
                 .Set("field_value", field_value)
                 .Set("override_existing", override_existing))
-            .PostAsync<JsonElement>();
+            .PostAsync<JsonElement>(cancellationToken);
 
         /// <summary>
         /// This method returns the team's videos that are missing one or more values for mandatory custom metadata fields.
@@ -130,13 +136,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The order of the results: modified_asc, modified_desc, title_asc (default), title_desc.</param>
         /// <param name="page">The page number of the results to show. Defaults to 1.</param>
         /// <param name="per_page">The number of items to show on each page, up to a maximum of 100. Defaults to 25.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The list of incomplete videos was returned.
         /// </returns>
-        public virtual Task<RestResult<JsonElement>> GetTheVideosMissingMandatoryCustomMetadataAsync(string user_id, string sort = null, int? page = null, int? per_page = null) => RootAuthorization()
+        public virtual Task<RestResult<JsonElement>> GetTheVideosMissingMandatoryCustomMetadataAsync(string user_id, string sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata/incomplete_videos")
             .ListParameters(page: page, per_page: per_page, sort: sort)
-            .GetAsync<JsonElement>();
+            .GetAsync<JsonElement>(cancellationToken);
 
         /// <summary>
         /// This method modifies the allowed values of a select or multi-select custom metadata field:
@@ -146,15 +153,16 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the team owner.</param>
         /// <param name="field_id">The ID of the select or multi-select custom metadata field to modify.</param>
         /// <param name="options">The list of changes to apply to the field's allowed values.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The updated field definition was returned.
         /// </returns>
-        public virtual Task<RestResult<CustomMetadataSetting>> UpdateTheOptionsOfACustomMetadataFieldAsync(string user_id, long field_id, IEnumerable<CustomMetadataOptionChange> options) => RootAuthorization()
+        public virtual Task<RestResult<CustomMetadataSetting>> UpdateTheOptionsOfACustomMetadataFieldAsync(string user_id, long field_id, IEnumerable<CustomMetadataOptionChange> options, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata/options")
             .JsonPayload(new VimeoPayload()
                 .Set("field_id", field_id)
                 .Set("options", options?.Select(VimeoPayload.FromObject).ToArray()))
-            .PatchAsync<CustomMetadataSetting>();
+            .PatchAsync<CustomMetadataSetting>(cancellationToken);
 
         #endregion
     }

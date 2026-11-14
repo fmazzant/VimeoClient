@@ -32,6 +32,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoWebhooks.
@@ -46,13 +47,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="app_id">The ID of the app that the webhook is associated with.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The list of webhooks was returned.
         /// </returns>
-        public virtual Task<RestResult<Pagination<AppWebhook>>> GetAllTheWebhooksOfAnAppAsync(long app_id, int? page = null, int? per_page = null) => RootAuthorization()
+        public virtual Task<RestResult<Pagination<AppWebhook>>> GetAllTheWebhooksOfAnAppAsync(long app_id, int? page = null, int? per_page = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks")
             .ListParameters(page: page, per_page: per_page)
-            .GetPaginationAsync<AppWebhook>(RootAuthorization);
+            .GetPaginationAsync<AppWebhook>(RootAuthorization, cancellationToken);
 
         /// <summary>
         /// This method adds a webhook for the specified app.
@@ -68,18 +70,19 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="webhook_url">The URL to which data is sent.</param>
         /// <param name="is_enabled">Whether the webhook is activated. The default value is false.</param>
         /// <param name="secret">The secret key that is passed on webhook payloads.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The webhook was added.
         /// 400 Bad Request	Error code 3143: the webhook type already exists for the app.
         /// </returns>
-        public virtual Task<RestResult<AppWebhook>> AddAWebhookForAnAppAsync(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string secret = null) => RootAuthorization()
+        public virtual Task<RestResult<AppWebhook>> AddAWebhookForAnAppAsync(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string secret = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks")
             .JsonPayload(new VimeoPayload()
                 .Set("webhook_type", webhook_type)
                 .Set("webhook_url", webhook_url)
                 .Set("is_enabled", is_enabled)
                 .Set("secret", secret))
-            .PostAsync<AppWebhook>();
+            .PostAsync<AppWebhook>(cancellationToken);
 
         /// <summary>
         /// This method returns the specified webhook.
@@ -87,12 +90,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="app_id">The ID of the app that the webhook is associated with.</param>
         /// <param name="webhook_id">The ID of the webhook.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The webhook was returned.
         /// </returns>
-        public virtual Task<RestResult<AppWebhook>> GetAWebhookAsync(long app_id, long webhook_id) => RootAuthorization()
+        public virtual Task<RestResult<AppWebhook>> GetAWebhookAsync(long app_id, long webhook_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks/{webhook_id}")
-            .GetAsync<AppWebhook>();
+            .GetAsync<AppWebhook>(cancellationToken);
 
         /// <summary>
         /// This method updates the specified webhook.
@@ -104,17 +108,18 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="webhook_url">The URL to which data is sent.</param>
         /// <param name="is_enabled">Whether the webhook is activated.</param>
         /// <param name="secret">The secret key that is passed on webhook payloads.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The webhook was updated.
         /// </returns>
-        public virtual Task<RestResult<AppWebhook>> UpdateAWebhookAsync(long app_id, long webhook_id, string webhook_type = null, string webhook_url = null, bool? is_enabled = null, string secret = null) => RootAuthorization()
+        public virtual Task<RestResult<AppWebhook>> UpdateAWebhookAsync(long app_id, long webhook_id, string webhook_type = null, string webhook_url = null, bool? is_enabled = null, string secret = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks/{webhook_id}")
             .JsonPayload(new VimeoPayload()
                 .Set("webhook_type", webhook_type)
                 .Set("webhook_url", webhook_url)
                 .Set("is_enabled", is_enabled)
                 .Set("secret", secret))
-            .PatchAsync<AppWebhook>();
+            .PatchAsync<AppWebhook>(cancellationToken);
 
         /// <summary>
         /// This method deletes the specified webhook.
@@ -122,12 +127,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="app_id">The ID of the app that the webhook is associated with.</param>
         /// <param name="webhook_id">The ID of the webhook.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The webhook was deleted.
         /// </returns>
-        public virtual Task<RestResult<string>> DeleteAWebhookAsync(long app_id, long webhook_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> DeleteAWebhookAsync(long app_id, long webhook_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks/{webhook_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
     }

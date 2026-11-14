@@ -31,6 +31,7 @@ namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Model;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoTags.
@@ -42,12 +43,13 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns the specified tag.
         /// </summary>
         /// <param name="word">The tag to return.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The tag was returned.
         /// </returns>
-        public virtual Task<RestResult<Tag>> GetATagAsync(string word) => RootAuthorization()
+        public virtual Task<RestResult<Tag>> GetATagAsync(string word, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/tags/{word}")
-            .GetAsync<Tag>();
+            .GetAsync<Tag>(cancellationToken);
 
         #endregion
     }

@@ -31,6 +31,7 @@ namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Model;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoAuthenticationExtras.
@@ -41,24 +42,26 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method revokes the access token that the requesting app is currently using. The token must be of the OAuth 2 type.
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	    The token was revoked.
         /// 400 Bad Request     Access can't be revoked for an OAuth 1 token.
         /// </returns>
-        public virtual Task<RestResult<string>> RevokeTheCurrentAccessTokenAsync() => RootAuthorization()
+        public virtual Task<RestResult<string>> RevokeTheCurrentAccessTokenAsync(CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/tokens")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method verifies that an OAuth 2 access token exists.
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	            The token was verified.
         /// 401 Unauthorized    The token isn't a valid OAuth 2 token.
         /// </returns>
-        public virtual Task<RestResult<Auth>> VerifyAnOAuth2AccessTokenAsync() => RootAuthorization()
+        public virtual Task<RestResult<Auth>> VerifyAnOAuth2AccessTokenAsync(CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/oauth/verify")
-            .GetAsync<Auth>();
+            .GetAsync<Auth>(cancellationToken);
 
         #endregion
 
@@ -70,11 +73,12 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="scope">The grant type. The value of this field must be client_credentials.</param>
         /// <param name="grant_type">A space-separated list of the authentication scopes to access. The default is public.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The authorization was successful.
         /// 401 Unauthorized Error code 8001: No such client secret exists.
         /// </returns>
-        public virtual Task<RestResult<Auth>> AuthorizeClientWithOAuthAsync(string scope, string grant_type = "client_credentials") => RootAuthorization()
+        public virtual Task<RestResult<Auth>> AuthorizeClientWithOAuthAsync(string scope, string grant_type = "client_credentials", CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/oauth/authorize/client")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -82,7 +86,7 @@ namespace Mafesoft.VimeoClient.Common
                 pars.Add("scope", scope);
                 pars.Add("grant_type", grant_type);
             })
-            .PostAsync<Auth>();
+            .PostAsync<Auth>(cancellationToken);
 
         #endregion
 
@@ -94,13 +98,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="token">The OAuth 1 token.</param>
         /// <param name="token_secret">The OAuth 1 token secret.</param>
         /// <param name="grant_type">The grant type. The value of this field must be vimeo_oauth1.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The token was converted.
         /// 400 Bad Request
         ///     The token is invalid.
         ///     The token has unauthorized scopes.
         /// </returns>
-        public virtual Task<RestResult<Auth>> ConvertOAuth1AccessTokenToAnOAuth2AccessTokenAsync(string token, string token_secret, string grant_type = "vimeo_oauth1") => RootAuthorization()
+        public virtual Task<RestResult<Auth>> ConvertOAuth1AccessTokenToAnOAuth2AccessTokenAsync(string token, string token_secret, string grant_type = "vimeo_oauth1", CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/oauth/authorize/vimeo_oauth1")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -109,7 +114,7 @@ namespace Mafesoft.VimeoClient.Common
                 pars.Add("token_secret", token_secret);
                 pars.Add("grant_type", grant_type);
             })
-            .PostAsync<Auth>();
+            .PostAsync<Auth>(cancellationToken);
 
         #endregion
 
@@ -121,6 +126,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="code">The authorization code received from the authorization server.</param>
         /// <param name="redirect_uri">The redirect URI. The value of this field must match the URI from /oauth/authorize.</param>
         /// <param name="grant_type">The grant type.The value of this field must be authorization_code.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The authorization code was exchanged.
         /// 400 Bad Request
@@ -128,7 +134,7 @@ namespace Mafesoft.VimeoClient.Common
         ///     The authorization code is invalid.
         ///     The redirect URI doesn't match the URI to create the authorization code.
         /// </returns>
-        public virtual Task<RestResult<Auth>> ExchangeAnAuthorizationCodeForAnAccessTokenAsync(string code, string redirect_uri, string grant_type = "authorization_code") => RootAuthorization()
+        public virtual Task<RestResult<Auth>> ExchangeAnAuthorizationCodeForAnAccessTokenAsync(string code, string redirect_uri, string grant_type = "authorization_code", CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/oauth/access_token")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -137,7 +143,7 @@ namespace Mafesoft.VimeoClient.Common
                 pars.Add("grant_type", grant_type);
                 pars.Add("redirect_uri", redirect_uri);
             })
-            .PostAsync<Auth>();
+            .PostAsync<Auth>(cancellationToken);
 
         #endregion
     }

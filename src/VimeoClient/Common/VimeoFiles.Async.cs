@@ -31,6 +31,7 @@ namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Model;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoFiles.
@@ -44,14 +45,15 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="file_id">The public ID of the file.</param>
         /// <param name="password">The password required to view the file when its privacy is password.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The file was returned.
         /// 400 Bad Request	Error code 2209: the file is password protected and no password was supplied.
         /// </returns>
-        public virtual Task<RestResult<HostedFile>> GetAFileAsync(string file_id, string password = null) => RootAuthorization()
+        public virtual Task<RestResult<HostedFile>> GetAFileAsync(string file_id, string password = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/files/{file_id}")
             .OptionalParameter("password", password)
-            .GetAsync<HostedFile>();
+            .GetAsync<HostedFile>(cancellationToken);
 
         #endregion
     }

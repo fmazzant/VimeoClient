@@ -33,6 +33,7 @@ namespace Mafesoft.VimeoClient
     using Mafesoft.VimeoClient.Filter.Video;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoWatchLaterQueue.
@@ -45,71 +46,77 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <param name="user_id">Number  The ID of the user.</param>
         /// <param name="video_id">Number  The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was added.
         /// </returns>
-        public virtual Task<RestResult<string>> AddAVideoToUserWathLaterQueueAsync(int user_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> AddAVideoToUserWathLaterQueueAsync(int user_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/watchlater/{video_id}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method adds the specified video to the authenticated user's Watch Later queue.
         /// </summary>
         /// <param name="video_id">Number  The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was added.
         /// </returns>
-        public virtual Task<RestResult<string>> AddAVideoToUserWathLaterQueueAsync(int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> AddAVideoToUserWathLaterQueueAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/watchlater/{video_id}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method checks the authenticated user's Watch Later queue for the specified video.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The video is in the user's Watch Later queue.
         /// 404 Not Found   The video isn't in the user's Watch Later queue.
         /// </returns>
-        public virtual Task<RestResult<Video>> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueueAsync(int user_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<Video>> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueueAsync(int user_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/watchlater/{video_id}")
-            .GetAsync<Video>();
+            .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method checks the authenticated user's Watch Later queue for the specified video.
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The video is in the user's Watch Later queue.
         /// 404 Not Found   The video isn't in the user's Watch Later queue.
         /// </returns>
-        public virtual Task<RestResult<Video>> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueueAsync(int video_id) => RootAuthorization()
+        public virtual Task<RestResult<Video>> CheckIfTheUserHasAddedAVideoToTheirWatchLaterQueueAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/watchlater/{video_id}")
-           .GetAsync<Video>();
+           .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method removes the specified video from the authenticated user's Watch Later queue.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was removed.
         /// </returns>
-        public virtual Task<RestResult<string>> RemoveAVideoFromTheUserWatchLaterQueueAsync(int user_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> RemoveAVideoFromTheUserWatchLaterQueueAsync(int user_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/watchlater/{video_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method removes the specified video from the authenticated user's Watch Later queue.
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was removed.
         /// </returns>
-        public virtual Task<RestResult<string>> MeRemoveAVideoFromTheUserWatchLaterQueueAsync(int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> MeRemoveAVideoFromTheUserWatchLaterQueueAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/watchlater/{video_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// The Watch Later queue contains all the videos that a Vimeo member has flagged to watch later.
@@ -123,6 +130,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The videos were returned.
         /// 304 Not Modified
@@ -135,7 +143,7 @@ namespace Mafesoft.VimeoClient
             int? page = null,
             int? per_page = null,
             string query = null,
-            VideoSort? sort = null)
+            VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/users/{user_id}/watchlater")
@@ -171,7 +179,7 @@ namespace Mafesoft.VimeoClient
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<Video>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Video>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -187,6 +195,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The videos were returned.
         /// 304 Not Modified
@@ -198,7 +207,7 @@ namespace Mafesoft.VimeoClient
             int? page = null,
             int? per_page = null,
             string query = null,
-            VideoSort? sort = null)
+            VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/me/watchlater")
@@ -234,7 +243,7 @@ namespace Mafesoft.VimeoClient
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<Video>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Video>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }

@@ -36,6 +36,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Filter.Video;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoGroups.
@@ -48,42 +49,45 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="name">The name of the group.</param>
         /// <param name="description">The description of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The group was created.
         /// 400 Bad Request A parameter is invalid.
         /// 403 Forbidden The authenticated user can't create groups.
         /// </returns>
-        public virtual Task<RestResult<Group>> CreateAGroupAsync(string name, string description) => RootAuthorization()
+        public virtual Task<RestResult<Group>> CreateAGroupAsync(string name, string description, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/groups")
             .FormUrlEncoded(true, (p) =>
             {
                 p.Add("name", name);
                 p.Add("description", description);
             })
-            .PostAsync<Group>();
+            .PostAsync<Group>(cancellationToken);
 
         /// <summary>
         /// This method deletes the specified group. The authenticated user must be the owner of the group.
         /// </summary>
         /// <param name="group_id">group_id</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The group was deleted.
         /// 403 Forbidden The authenticated user can't delete the group.
         /// </returns>
-        public virtual Task<RestResult<string>> DeleteAGroupAsync(int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> DeleteAGroupAsync(int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/groups/{group_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method returns the specified group
         /// </summary>
         /// <param name="group_id">group_id</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The group was returned.
         /// </returns>
-        public virtual Task<RestResult<Group>> GetASpecificGroupAsync(int group_id) => RootAuthorization()
+        public virtual Task<RestResult<Group>> GetASpecificGroupAsync(int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/groups/{group_id}")
-            .GetAsync<Group>();
+            .GetAsync<Group>(cancellationToken);
 
         /// <summary>
         /// This method returns every available group.
@@ -94,6 +98,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The groups were returned.
         /// </returns>
@@ -102,10 +107,10 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            GroupSort? sort = null) => RootAuthorization()
+            GroupSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/groups")
             .ListParameters(direction, filter, page, per_page, query, sort)
-            .GetPaginationAsync<Group>(RootAuthorization);
+            .GetPaginationAsync<Group>(RootAuthorization, cancellationToken);
 
         #endregion
 
@@ -116,27 +121,29 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">Number  The ID of the user.</param>
         /// <param name="group_id">Number  The ID of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user joined the group.
         /// 403 Forbidden   The authenticated user can't join the group. 
         ///     Possible reasons are that the group isn't public or that its privacy setting is members.
         /// </returns>
-        public virtual Task<RestResult<string>> AddTheUserToAGroupAsync(int user_id, int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> AddTheUserToAGroupAsync(int user_id, int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method adds the authenticated user to the specified group.
         /// </summary>
         /// <param name="group_id">Number  The ID of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user joined the group.
         /// 403 Forbidden   The authenticated user can't join the group. 
         ///     Possible reasons are that the group isn't public or that its privacy setting is members.
         /// </returns>
-        public virtual Task<RestResult<string>> AddTheUserToAGroupAsync(int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> AddTheUserToAGroupAsync(int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/groups/{group_id}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method removes the authenticated user from the specified group. 
@@ -144,26 +151,28 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="group_id">The ID of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user was removed from the group.
         /// 403 Forbidden	The authenticated user can't leave the group.
         /// </returns>
-        public virtual Task<RestResult<string>> RemoveTheUserFromAGroupAsync(int user_id, int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> RemoveTheUserFromAGroupAsync(int user_id, int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method removes the authenticated user from the specified group. 
         /// The authenticated user can't be the owner of the group; assign a new owner through a PATCH request first.
         /// </summary>
         /// <param name="group_id">The ID of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user was removed from the group.
         /// 403 Forbidden	The authenticated user can't leave the group.
         /// </returns>
-        public virtual Task<RestResult<string>> RemoveTheUserFromAGroupAsync(int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> RemoveTheUserFromAGroupAsync(int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/groups/{group_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
 
@@ -174,27 +183,29 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="group_id">The ID of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user belongs to the group.
         /// 404 Not Found	No such group exists.
         ///                 The authenticated user isn't a member of the group.
         /// </returns>
-        public virtual Task<RestResult<string>> CheckIfAUserHasJoinedAGroupAsync(int user_id, int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CheckIfAUserHasJoinedAGroupAsync(int user_id, int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/groups/{group_id}")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method determines whether the authenticated user belongs to the specified group.
         /// </summary>
         /// <param name="group_id">The ID of the group.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user belongs to the group.
         /// 404 Not Found	No such group exists.
         ///                 The authenticated user isn't a member of the group.
         /// </returns>
-        public virtual Task<RestResult<string>> CheckIfAUserHasJoinedAGroupAsync(int group_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CheckIfAUserHasJoinedAGroupAsync(int group_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/groups/{group_id}")
-           .GetAsync();
+           .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method returns every group to which the authenticated user belongs.
@@ -206,6 +217,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The groups were returned
         /// </returns>
@@ -214,7 +226,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            GroupSort? sort = null)
+            GroupSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/users/{user_id}/groups")
@@ -246,7 +258,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<Group>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Group>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -260,6 +272,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The groups were returned
         /// </returns>
@@ -268,7 +281,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            GroupSort? sort = null)
+            GroupSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/me/groups")
@@ -300,7 +313,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<Group>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Group>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -315,6 +328,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The members were returned.
         /// 404 Not Found   No such group exists.
@@ -324,7 +338,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            UserSort? sort = null)
+            UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                .Command($"/groups/{group_id}/users")
@@ -356,7 +370,7 @@ namespace Mafesoft.VimeoClient.Common
                    }
                });
 
-            var result = await root.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -370,6 +384,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="group_id">The ID of the group.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// HTTP Status	Explanation
         /// 200 OK The video was added.
@@ -378,9 +393,9 @@ namespace Mafesoft.VimeoClient.Common
         ///     The video is already in the group.
         ///     The authenticated user can't add videos to the group.
         /// </returns>
-        public virtual Task<RestResult<Video>> AddAVideoToAGroupAsync(int group_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<Video>> AddAVideoToAGroupAsync(int group_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/groups/{group_id}/videos/{video_id}")
-            .PutAsync<Video>();
+            .PutAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method returns every group to which the authenticated user can add or remove the specified video.
@@ -388,26 +403,28 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="video_id">The ID of the video.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The groups were returned.
         /// </returns>
-        public virtual Task<RestResult<Pagination<Group>>> GetAllTheGroupsToWhichTheUserCanAddOrRemoveASpecificVideoAsync(int video_id, int? page = null, int? per_page = null) => RootAuthorization()
+        public virtual Task<RestResult<Pagination<Group>>> GetAllTheGroupsToWhichTheUserCanAddOrRemoveASpecificVideoAsync(int video_id, int? page = null, int? per_page = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/available_groups")
             .ListParameters(page: page, per_page: per_page)
-            .GetPaginationAsync<Group>(RootAuthorization);
+            .GetPaginationAsync<Group>(RootAuthorization, cancellationToken);
 
         /// <summary>
         /// This method returns a single video from the specified group. You can use this method to determine whether the video belongs to the group.
         /// </summary>
         /// <param name="group_id">The ID of the group.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The video was returned.
         /// 404 Not Found	No such video or group exists.
         /// </returns>
-        public virtual Task<RestResult<Video>> GetASpecificVideoInAGroupAsync(int group_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<Video>> GetASpecificVideoInAGroupAsync(int group_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/groups/{group_id}/videos/{video_id}")
-           .GetAsync<Video>();
+           .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method returns every video from the specified group.
@@ -421,6 +438,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual async Task<RestResult<Pagination<Video>>> GetAllTheVideosInAGroupAsync(int group_id, VideoDirection? direction = null,
            VideoFilter? filter = null,
@@ -428,7 +446,7 @@ namespace Mafesoft.VimeoClient.Common
            int? page = null,
            int? per_page = null,
            string query = null,
-           VideoSort? sort = null)
+           VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                .Command($"/groups/{group_id}/videos")
@@ -464,7 +482,7 @@ namespace Mafesoft.VimeoClient.Common
                    }
                });
 
-            var result = await root.GetAsync<Pagination<Video>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Video>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -474,10 +492,11 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="group_id">The ID of the group.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> RemoveAVideoFromAGroupAsync(int group_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> RemoveAVideoFromAGroupAsync(int group_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/groups/{group_id}/videos/{video_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
     }

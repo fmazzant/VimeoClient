@@ -38,6 +38,7 @@ namespace Mafesoft.VimeoClient
     using Mafesoft.VimeoClient.Body;
     using Mafesoft.VimeoClient.Common;
     using Mafesoft.VimeoClient.Model;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of Vimeo.
@@ -48,8 +49,9 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <param name="clientId">The client identifier of the Vimeo API app.</param>
         /// <param name="clientSecret">The client secret of the Vimeo API app.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The access token with the public scope.</returns>
-        public virtual Task<RestResult<AccessTokenResponse>> GetAccessTokenAsync(string clientId, string clientSecret) => Root()
+        public virtual Task<RestResult<AccessTokenResponse>> GetAccessTokenAsync(string clientId, string clientSecret, CancellationToken cancellationToken = default) => Root()
             .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{clientId}:{clientSecret}"))))
             .Command("/oauth/authorize/client")
             .Payload(new AccessTokenPayload
@@ -57,7 +59,7 @@ namespace Mafesoft.VimeoClient
                 grant_type = "client_credentials",
                 scope = "public"
             })
-            .PostAsync<AccessTokenResponse>();
+            .PostAsync<AccessTokenResponse>(cancellationToken);
 
         /// <summary>
         /// Using the authorization code grant - STEP 1. Access public and private information.
@@ -67,8 +69,9 @@ namespace Mafesoft.VimeoClient
         /// <param name="redirect_uri">The redirect URI of the Vimeo API app.</param>
         /// <param name="state">A unique value that the redirect URI receives back, to check the request.</param>
         /// <param name="scopes">The requested scopes (see <see cref="VimeoScope"/>); null requests the public scope.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The response of the authorization page.</returns>
-        public virtual Task<RestResult<string>> GetAccessTokenAsync(string response_type, string client_id, string redirect_uri, string state, string[] scopes) => Root()
+        public virtual Task<RestResult<string>> GetAccessTokenAsync(string response_type, string client_id, string redirect_uri, string state, string[] scopes, CancellationToken cancellationToken = default) => Root()
             .Command("/oauth/authorize")
             .Parameter("response_type", response_type)
             .Parameter("client_id", client_id)
@@ -76,15 +79,16 @@ namespace Mafesoft.VimeoClient
             .Parameter("state", state)
             .Parameter("scope", scopes == null ? VimeoScope.PUBLIC : string.Join(" ", scopes))
             .OnStart((e) => Console.WriteLine(e.Url))
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// Using the authorization code grant - STEP 2. Access public and private information.
         /// </summary>
         /// <param name="authenticationCode">The authorization code received on the redirect URI.</param>
         /// <param name="requestUri">The redirect URI used in step 1.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The access token.</returns>
-        public virtual Task<RestResult<AccessTokenResponse>> PostAccessTokenAsync(string authenticationCode, string requestUri) => Root()
+        public virtual Task<RestResult<AccessTokenResponse>> PostAccessTokenAsync(string authenticationCode, string requestUri, CancellationToken cancellationToken = default) => Root()
             .Authentication(() => new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"{Properties.ClientId}:{Properties.ClientSecret}"))))
             .Command("/oauth/access_token")
             .Payload(new PostAccessTokenBody
@@ -92,23 +96,25 @@ namespace Mafesoft.VimeoClient
                 grant_type = "authorization_code",
                 code = authenticationCode,
                 redirect_uri = requestUri
-            }).PostAsync<AccessTokenResponse>();
+            }).PostAsync<AccessTokenResponse>(cancellationToken);
 
         /// <summary>
         /// Tutotial is Public scope
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The tutorial message: it checks that the access token works.</returns>
-        public virtual Task<RestResult<Tutorial>> TutorialAsync() => RootAuthorization()
+        public virtual Task<RestResult<Tutorial>> TutorialAsync(CancellationToken cancellationToken = default) => RootAuthorization()
           .Command("/tutorial")
-          .GetAsync<Tutorial>();
+          .GetAsync<Tutorial>(cancellationToken);
 
         /// <summary>
         /// Invoke generic Get
         /// </summary>
         /// <typeparam name="T">Response's type</typeparam>
         /// <param name="uri">Uri to call</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The response mapped to <typeparamref name="T"/>.</returns>
-        public virtual Task<RestResult<T>> GetAsync<T>(string uri) where T : new()
-            => RootAuthorization().Command(uri).GetAsync<T>();
+        public virtual Task<RestResult<T>> GetAsync<T>(string uri, CancellationToken cancellationToken = default) where T : new()
+            => RootAuthorization().Command(uri).GetAsync<T>(cancellationToken);
     }
 }

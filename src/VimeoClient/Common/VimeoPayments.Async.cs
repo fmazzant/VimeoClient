@@ -32,6 +32,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoPayments.
@@ -47,39 +48,42 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="show_disabled">Whether to return disabled payment methods.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The list of payments service payment methods was returned.
         /// </returns>
-        public virtual Task<RestResult<Pagination<PaymentMethod>>> GetAllThePaymentMethodsAsync(string cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null) => RootAuthorization()
+        public virtual Task<RestResult<Pagination<PaymentMethod>>> GetAllThePaymentMethodsAsync(string cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command("/me/payment_methods")
             .OptionalParameter("cardmember_name", cardmember_name)
             .OptionalParameter("show_disabled", show_disabled)
             .ListParameters(page: page, per_page: per_page)
-            .GetPaginationAsync<PaymentMethod>(RootAuthorization);
+            .GetPaginationAsync<PaymentMethod>(RootAuthorization, cancellationToken);
 
         /// <summary>
         /// This method returns information about the specified Vimeo payments service payment method.
         /// GET https://api.vimeo.com/me/payment_methods/{payment_method_id}
         /// </summary>
         /// <param name="payment_method_id">The ID of the payment method.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The payments service payment method information was returned.
         /// </returns>
-        public virtual Task<RestResult<PaymentMethod>> GetAPaymentMethodAsync(string payment_method_id) => RootAuthorization()
+        public virtual Task<RestResult<PaymentMethod>> GetAPaymentMethodAsync(string payment_method_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/payment_methods/{payment_method_id}")
-            .GetAsync<PaymentMethod>();
+            .GetAsync<PaymentMethod>(cancellationToken);
 
         /// <summary>
         /// This method deletes the specified Vimeo payments service payment method.
         /// DELETE https://api.vimeo.com/me/payment_methods/{payment_method_id}
         /// </summary>
         /// <param name="payment_method_id">The ID of the payment method.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The payments service payment method was deleted.
         /// </returns>
-        public virtual Task<RestResult<string>> DeleteAPaymentMethodAsync(string payment_method_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> DeleteAPaymentMethodAsync(string payment_method_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/payment_methods/{payment_method_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
 
@@ -91,24 +95,26 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="subscription_id">The ID of the subscription.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The subscription information was returned.
         /// </returns>
-        public virtual Task<RestResult<PaymentSubscription>> GetASubscriptionAsync(string user_id, string subscription_id) => RootAuthorization()
+        public virtual Task<RestResult<PaymentSubscription>> GetASubscriptionAsync(string user_id, string subscription_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/subscriptions/{subscription_id}")
-            .GetAsync<PaymentSubscription>();
+            .GetAsync<PaymentSubscription>(cancellationToken);
 
         /// <summary>
         /// This method returns the specified subscription plan.
         /// GET https://api.vimeo.com/subscription_plans/{tier}
         /// </summary>
         /// <param name="tier">The type of subscription plan: advanced, business, free, live_premium, plus, pro, pro_unlimited, standard, starter.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The subscription plan was returned.
         /// </returns>
-        public virtual Task<RestResult<SubscriptionPlan>> GetASubscriptionPlanAsync(string tier) => RootAuthorization()
+        public virtual Task<RestResult<SubscriptionPlan>> GetASubscriptionPlanAsync(string tier, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/subscription_plans/{tier}")
-            .GetAsync<SubscriptionPlan>();
+            .GetAsync<SubscriptionPlan>(cancellationToken);
 
         #endregion
     }

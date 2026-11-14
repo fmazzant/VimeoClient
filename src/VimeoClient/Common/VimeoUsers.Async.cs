@@ -34,6 +34,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Filter.User;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoUsers.
@@ -47,8 +48,9 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="body"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<User>> EditTheUserAsync(int user_id, UserEditParameters body) => RootUserAuthorization()
+        public virtual Task<RestResult<User>> EditTheUserAsync(int user_id, UserEditParameters body, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -76,17 +78,18 @@ namespace Mafesoft.VimeoClient.Common
                 pars.Add("unlisted", body.Unlisted);
                 pars.Add("users", body.Users);
             })
-            .PatchAsync<User>();
+            .PatchAsync<User>(cancellationToken);
 
         /// <summary>
         /// This method returns the authenticated user.
         /// GET https://api.vimeo.com/users/{user_id}
         /// </summary>
         /// <param name="userId"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<User>> GetTheUserAsync(int userId) => RootUserAuthorization()
+        public virtual Task<RestResult<User>> GetTheUserAsync(int userId, CancellationToken cancellationToken = default) => RootUserAuthorization()
           .Command(userId)
-          .GetAsync<User>();
+          .GetAsync<User>(cancellationToken);
 
         #endregion
 
@@ -97,10 +100,11 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/users/{user_id}/feed
         /// </summary>
         /// <param name="user_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<Activity>> GetAllTheVideosInTheUserFeedAsync(int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<Activity>> GetAllTheVideosInTheUserFeedAsync(int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command($"/{user_id}/feed")
-            .GetAsync<Activity>();
+            .GetAsync<Activity>(cancellationToken);
 
         /// <summary>
         /// This method returns every video in the authenticated user's feed.
@@ -110,13 +114,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="offset"></param>
         /// <param name="page"></param>
         /// <param name="per_page"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<Activity>> GetAllTheVideosInTheUserFeedAsync(int user_id, string offset, string page, string per_page) => RootUserAuthorization()
+        public virtual Task<RestResult<Activity>> GetAllTheVideosInTheUserFeedAsync(int user_id, string offset, string page, string per_page, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command($"/{user_id}/feed")
             .Parameter("offset", offset)
             .Parameter("page", page)
             .Parameter("per_page", per_page)
-            .GetAsync<Activity>();
+            .GetAsync<Activity>(cancellationToken);
 
         #endregion
 
@@ -128,12 +133,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> CheckIfTheUserIsFollowingAnotherUserAsync(int follow_user_id, int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<string>> CheckIfTheUserIsFollowingAnotherUserAsync(int follow_user_id, int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Command(follow_user_id)
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to become the follower of multiple users. 
@@ -141,10 +147,10 @@ namespace Mafesoft.VimeoClient.Common
         /// where user01_id, user02_id, user03_id, and so on, are the user IDs of the users in question:
         /// </summary>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> FollowAListOfUsersAsync(int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<string>> FollowAListOfUsersAsync(int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
-            .PostAsync();
+            .PostAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to become the follower of the specified user.
@@ -152,22 +158,24 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> FollowASpecificUserAsync(int follow_user_id, int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<string>> FollowASpecificUserAsync(int follow_user_id, int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Command(follow_user_id)
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method returns every follower of the authenticated user.
         /// </summary>
         /// <param name="user_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<User>> GetAllTheFollowersOfTheUserAsync(int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<User>> GetAllTheFollowersOfTheUserAsync(int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/followers")
-            .GetAsync<User>();
+            .GetAsync<User>(cancellationToken);
 
         /// <summary>
         /// This method returns every follower of the authenticated user.
@@ -190,13 +198,14 @@ namespace Mafesoft.VimeoClient.Common
         ///     alphabetical
         ///     date
         /// </param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual async Task<RestResult<Pagination<User>>> GetAllTheFollowersOfTheUserWithPagingAsync(int user_id,
             UserDirection? direction,
             int? page,
             int? per_page,
             string query,
-            UserSort? sort)
+            UserSort? sort, CancellationToken cancellationToken = default)
         {
             var builder = RootUserAuthorization()
                 .Command(user_id)
@@ -227,7 +236,7 @@ namespace Mafesoft.VimeoClient.Common
                 builder = builder.Parameter("sort", sort);
             }
 
-            var result = await builder.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await builder.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -237,10 +246,10 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/users/{user_id}/following
         /// </summary>
         /// <returns></returns>
-        public virtual Task<RestResult<Pagination<User>>> GetAllTheUsersThatTheUserIsFollowingAsync(int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<Pagination<User>>> GetAllTheUsersThatTheUserIsFollowingAsync(int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
-            .GetAsync<Pagination<User>>();
+            .GetAsync<Pagination<User>>(cancellationToken);
 
         /// <summary>
         /// This method returns every follower of the authenticated user.
@@ -268,6 +277,7 @@ namespace Mafesoft.VimeoClient.Common
         ///     alphabetical
         ///     date
         /// </param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual async Task<RestResult<Pagination<User>>> GetAllTheUsersThatTheUserIsFollowingAsync(int user_id,
             UserDirection? direction,
@@ -275,7 +285,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page,
             int? per_page,
             string query,
-            UserSort? sort)
+            UserSort? sort, CancellationToken cancellationToken = default)
         {
             var builder = RootUserAuthorization()
                 .Command(user_id)
@@ -311,7 +321,7 @@ namespace Mafesoft.VimeoClient.Common
                 builder = builder.Parameter("sort", sort);
             }
 
-            var result = await builder.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await builder.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -322,12 +332,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="follow_user_id"></param>
         /// <param name="user_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> UnfollowAUserAsync(int follow_user_id, int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<string>> UnfollowAUserAsync(int follow_user_id, int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/following")
             .Command(follow_user_id)
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
 
@@ -340,24 +351,26 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="image"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<Picture>> AddPictureToTheUserAccountAsync(int user_id, byte[] image) => RootUserAuthorization()
+        public virtual Task<RestResult<Picture>> AddPictureToTheUserAccountAsync(int user_id, byte[] image, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Payload(image)
-            .PostAsync<Picture>();
+            .PostAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method removes the specified portrait image from the authenticated user's Vimeo account.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="portraitset_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> DeletePictureFromTheUserAccountAsync(int user_id, int portraitset_id) => RootUserAuthorization()
+        public virtual Task<RestResult<string>> DeletePictureFromTheUserAccountAsync(int user_id, int portraitset_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Command(portraitset_id)
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method edits the specified portrait image belonging to the authenticated user.
@@ -365,34 +378,36 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="portraitset_id"></param>
         /// <param name="active"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<Picture>> EditPictureInTheUserAaccountAsync(int user_id, int portraitset_id, bool active) => RootUserAuthorization()
+        public virtual Task<RestResult<Picture>> EditPictureInTheUserAaccountAsync(int user_id, int portraitset_id, bool active, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Command(portraitset_id)
             .Parameter("active", active)
-            .PatchAsync<Picture>();
+            .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method returns a single portrait image belonging to the authenticated user.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="portraitset_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<Picture>> GetSpecificPictureThatBelongsToTheUserAsync(int user_id, int portraitset_id) => RootUserAuthorization()
+        public virtual Task<RestResult<Picture>> GetSpecificPictureThatBelongsToTheUserAsync(int user_id, int portraitset_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
             .Command(portraitset_id)
-            .GetAsync<Picture>();
+            .GetAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method returns every portrait image belonging to the authenticated user.
         /// </summary>
         /// <returns></returns>
-        public virtual Task<RestResult<Pagination<Picture>>> GetAllThePicturesThatBelongToTheUserAsync(int user_id) => RootUserAuthorization()
+        public virtual Task<RestResult<Pagination<Picture>>> GetAllThePicturesThatBelongToTheUserAsync(int user_id, CancellationToken cancellationToken = default) => RootUserAuthorization()
             .Command(user_id)
             .Command("/pictures")
-            .GetAsync<Pagination<Picture>>();
+            .GetAsync<Pagination<Picture>>(cancellationToken);
 
         #endregion
 
@@ -410,6 +425,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="scoring_algorithm">The scoring algorithm for the course: passfail, percentage, quiz.</param>
         /// <param name="passing_score">The passing score for the course.</param>
         /// <param name="completion_threshold">The completion threshold for the course.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The zipped proxy package was created and returned (raw bytes of the zip file).
         /// </returns>
@@ -418,14 +434,14 @@ namespace Mafesoft.VimeoClient.Common
             string course_title = null,
             string scoring_algorithm = null,
             double? passing_score = null,
-            double? completion_threshold = null) => RootAuthorization()
+            double? completion_threshold = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/lms/download/{video_id}")
             .OptionalParameter("standard", standard)
             .OptionalParameter("course_title", course_title)
             .OptionalParameter("scoring_algorithm", scoring_algorithm)
             .OptionalParameter("passing_score", passing_score)
             .OptionalParameter("completion_threshold", completion_threshold)
-            .GetAsync<byte[]>();
+            .GetAsync<byte[]>(cancellationToken);
 
         #endregion
 
@@ -439,8 +455,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual async Task<RestResult<Pagination<User>>> SearchForUsersAsync(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null)
+        public virtual async Task<RestResult<Pagination<User>>> SearchForUsersAsync(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootUserAuthorization();
 
@@ -466,7 +483,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }

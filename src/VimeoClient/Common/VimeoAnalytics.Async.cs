@@ -35,6 +35,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Filter.Analytics;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoAnalytics.
@@ -59,6 +60,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The maximum number of items returned, up to a limit of 1000. The default value is 50.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The analytics were returned.
         /// </returns>
@@ -75,11 +77,11 @@ namespace Mafesoft.VimeoClient.Common
             AnalyticsDirection? direction = null,
             AnalyticsSort? sort = null,
             int? page = null,
-            int? per_page = null) => AnalyticsParameters(RootAuthorization().Command("/me/analytics"),
+            int? per_page = null, CancellationToken cancellationToken = default) => AnalyticsParameters(RootAuthorization().Command("/me/analytics"),
                 dimension, from, to, time_interval,
                 filter_content, filter_countries, filter_device_types, filter_embed_domains, filter_streaming_types,
                 direction, sort, page, per_page)
-            .GetPaginationAsync<Analytics>(RootAuthorization);
+            .GetPaginationAsync<Analytics>(RootAuthorization, cancellationToken);
 
         /// <summary>
         /// This method returns analytic metrics for the specified user.
@@ -99,6 +101,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The maximum number of items returned, up to a limit of 1000. The default value is 50.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The analytics were returned.
         /// </returns>
@@ -116,11 +119,11 @@ namespace Mafesoft.VimeoClient.Common
             AnalyticsDirection? direction = null,
             AnalyticsSort? sort = null,
             int? page = null,
-            int? per_page = null) => AnalyticsParameters(RootAuthorization().Command($"/users/{user_id}/analytics"),
+            int? per_page = null, CancellationToken cancellationToken = default) => AnalyticsParameters(RootAuthorization().Command($"/users/{user_id}/analytics"),
                 dimension, from, to, time_interval,
                 filter_content, filter_countries, filter_device_types, filter_embed_domains, filter_streaming_types,
                 direction, sort, page, per_page)
-            .GetPaginationAsync<Analytics>(RootAuthorization);
+            .GetPaginationAsync<Analytics>(RootAuthorization, cancellationToken);
 
         #endregion
     }
