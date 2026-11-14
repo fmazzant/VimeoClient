@@ -32,6 +32,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.RestClient;
     using System.Collections.Generic;
     using System.Text.Json;
+    using System.Threading;
     using System.Threading.Tasks;
     using Mafesoft.VimeoClient.Body.Live;
     using Mafesoft.VimeoClient.Filter.Live;
@@ -86,102 +87,113 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="parameters"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(int user_id, LiveParameters parameters) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(int user_id, LiveParameters parameters, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
             .JsonPayload(parameters)
-            .PostAsync<LiveEventRecurring>();
+            .PostAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// This method creates a new live event for the authenticated user.
         /// </summary>
         /// <param name="parameters"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(LiveParameters parameters) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> CreateALiveEventAsync(LiveParameters parameters, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events")
            .JsonPayload(parameters)
-           .PostAsync<LiveEventRecurring>();
+           .PostAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// This method deletes multiple live events belonging to the authenticated user.
         /// </summary>
         /// <param name="user_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteListOfLiveEventsAsync(int user_id) => RootAuthorization()
+        public Task<RestResult<string>> DeleteListOfLiveEventsAsync(int user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes multiple live events belonging to the authenticated user.
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteListOfLiveEventsAsync() => RootAuthorization()
+        public Task<RestResult<string>> DeleteListOfLiveEventsAsync(CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events")
-           .DeleteAsync();
+           .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes multiple live events belonging to the authenticated user.
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteMeListOfLiveEventsAsync() => RootAuthorization()
+        public Task<RestResult<string>> DeleteMeListOfLiveEventsAsync(CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events")
-           .DeleteAsync();
+           .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes a single live event belonging to the authenticated user.
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteSpecificLiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> DeleteSpecificLiveEventAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes a single live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteSpecificLiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> DeleteSpecificLiveEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes a single live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteMeSpecificLiveEvent(int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> DeleteMeSpecificLiveEvent(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}")
-           .DeleteAsync();
+           .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method returns a single live event belonging to the authenticated user.
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStreamAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStreamAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}")
-            .GetAsync<LiveEventRecurring>();
+            .GetAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// This method returns a single live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStream(int live_event_id) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> GetSpecificLiveStream(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}")
-            .GetAsync<LiveEventRecurring>();
+            .GetAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// This method returns a single live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> GetMeSpecificLiveStreamAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> GetMeSpecificLiveStreamAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
-            .GetAsync<LiveEventRecurring>();
+            .GetAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
@@ -194,6 +206,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="type">The type of the live events to return.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The live events of the user.</returns>
         public Task<RestResult<VimeoList<LiveEvent>>> GetAllTheLiveEventsAsync(int user_id,
             LiveDirection? direction = null,
@@ -202,15 +215,23 @@ namespace Mafesoft.VimeoClient.Common
             int? per_page = null,
             string query = null,
             LiveSort? sort = null,
-            LiveType? type = null) => RootAuthorization()
+            LiveType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
             .ListParameters(direction, filter, page, per_page, query, sort)
             .OptionalParameter("type", type)
-            .GetAsync<VimeoList<LiveEvent>>();
+            .GetAsync<VimeoList<LiveEvent>>(cancellationToken);
 
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
         /// </summary>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="filter">The attribute by which to filter the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <param name="type">The type of the live events to return.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public Task<RestResult<VimeoList<LiveEvent>>> GetAllTheLiveEventsAsync(
             LiveDirection? direction = null,
@@ -219,15 +240,23 @@ namespace Mafesoft.VimeoClient.Common
             int? per_page = null,
             string query = null,
             LiveSort? sort = null,
-            LiveType? type = null) => RootAuthorization()
+            LiveType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events")
             .ListParameters(direction, filter, page, per_page, query, sort)
             .OptionalParameter("type", type)
-            .GetAsync<VimeoList<LiveEvent>>();
+            .GetAsync<VimeoList<LiveEvent>>(cancellationToken);
 
         /// <summary>
         /// The method returns every live event belonging to the authenticated user.
         /// </summary>
+        /// <param name="direction">The sort direction of the results.</param>
+        /// <param name="filter">The attribute by which to filter the results.</param>
+        /// <param name="page">The page number of the results to show.</param>
+        /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="query">The search query to use to filter the results.</param>
+        /// <param name="sort">The way to sort the results.</param>
+        /// <param name="type">The type of the live events to return.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public Task<RestResult<VimeoList<LiveEvent>>> GetMeAllTheLiveEventsAsync(
             LiveDirection? direction = null,
@@ -236,11 +265,11 @@ namespace Mafesoft.VimeoClient.Common
             int? per_page = null,
             string query = null,
             LiveSort? sort = null,
-            LiveType? type = null) => RootAuthorization()
+            LiveType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events")
             .ListParameters(direction, filter, page, per_page, query, sort)
             .OptionalParameter("type", type)
-            .GetAsync<VimeoList<LiveEvent>>();
+            .GetAsync<VimeoList<LiveEvent>>(cancellationToken);
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
@@ -248,33 +277,36 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
         /// <param name="parameters">The fields to update</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id, LiveParameters parameters = null) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id, LiveParameters parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}")
            .JsonPayload(parameters)
-           .PatchAsync<LiveEventRecurring>();
+           .PatchAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
         /// <param name="parameters">The fields to update</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events/{live_event_id}")
            .JsonPayload(parameters)
-           .PatchAsync<LiveEventRecurring>();
+           .PatchAsync<LiveEventRecurring>(cancellationToken);
 
         /// <summary>
         /// This method updates a live event belonging to the authenticated user.
         /// </summary>
         /// <param name="live_event_id"></param>
         /// <param name="parameters">The fields to update</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
             .JsonPayload(parameters)
-            .PatchAsync<LiveEventRecurring>();
+            .PatchAsync<LiveEventRecurring>(cancellationToken);
 
         #endregion
 
@@ -286,58 +318,64 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id, string[] domains = null) => RootAuthorization()
+        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id, string[] domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/privacy/domains")
-           .PutAsync();
+           .PutAsync(cancellationToken);
 
         /// <summary>
         /// Embed a recurring live event on one or more domains
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null) => RootAuthorization()
+        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/privacy/domains")
-          .PutAsync();
+          .PutAsync(cancellationToken);
 
         /// <summary>
         /// Embed a recurring live event on one or more domains
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> PutMeEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null) => RootAuthorization()
+        public Task<RestResult<string>> PutMeEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/privacy/domains")
-           .PutAsync();
+           .PutAsync(cancellationToken);
 
         /// <summary>
         /// Get all the domains on which a recurring live event can be embedded
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/users/{user_id}/live_events/{live_event_id}/privacy/domains")
-          .GetAsync<VimeoList<Domain>>();
+          .GetAsync<VimeoList<Domain>>(cancellationToken);
 
         /// <summary>
         /// Get all the domains on which a recurring live event can be embedded
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Domain>>> GetAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/privacy/domains")
-          .GetAsync<VimeoList<Domain>>();
+          .GetAsync<VimeoList<Domain>>(cancellationToken);
 
         /// <summary>
         /// Get all the domains on which a recurring live event can be embedded
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<VimeoList<Domain>>> GetMeAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Domain>>> GetMeAllTheDomainsOnWhichARecurringLiveEventCanBeEmbeddedAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
          .Command($"/me/live_events/{live_event_id}/privacy/domains")
-         .GetAsync<VimeoList<Domain>>();
+         .GetAsync<VimeoList<Domain>>(cancellationToken);
 
         #endregion
 
@@ -347,28 +385,31 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> ActivateALiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> ActivateALiveEventAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/activate")
-            .PostAsync();
+            .PostAsync(cancellationToken);
 
         /// <summary>
         /// Activate a live event
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> ActivateALiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> ActivateALiveEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/activate")
-            .PostAsync();
+            .PostAsync(cancellationToken);
 
         /// <summary>
         /// Activate a live event
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> MeActivateALiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> MeActivateALiveEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/activate")
-            .PostAsync();
+            .PostAsync(cancellationToken);
 
         #endregion
 
@@ -380,19 +421,21 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> GetAnM3U8PlaybackURLForARecurringLiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> GetAnM3U8PlaybackURLForARecurringLiveEventAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/m3u8_playback")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// Get an M3U8 playback URL for a recurring live event
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> GetMeAnM3U8PlaybackURLForARecurringLiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<string>> GetMeAnM3U8PlaybackURLForARecurringLiveEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/m3u8_playback")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         #endregion
 
@@ -402,10 +445,11 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns the ingest status of the specified one-time live event.
         /// </summary>
         /// <param name="video_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventSessionStatus>> GetTheIngestStatusOfAOneTimeLiveEventAsync(int video_id) => RootAuthorization()
+        public Task<RestResult<LiveEventSessionStatus>> GetTheIngestStatusOfAOneTimeLiveEventAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/videos/{video_id}/sessions/status")
-           .GetAsync<LiveEventSessionStatus>();
+           .GetAsync<LiveEventSessionStatus>(cancellationToken);
 
         #endregion
 
@@ -417,28 +461,31 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id"></param>
         /// <param name="live_event_id">The ID of the live even</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> CreateALiveEventThumbnailAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<Picture>> CreateALiveEventThumbnailAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/pictures")
-           .PostAsync<Picture>();
+           .PostAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method creates a thumbnail image for the specified live event.
         /// </summary>
         /// <param name="live_event_id"></param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> CreateALiveEventThumbnailAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<Picture>> CreateALiveEventThumbnailAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events/{live_event_id}/pictures")
-           .PostAsync<Picture>();
+           .PostAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method creates a thumbnail image for the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live even</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> MeCreateALiveEventThumbnailAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<Picture>> MeCreateALiveEventThumbnailAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/pictures")
-            .PostAsync<Picture>();
+            .PostAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method deletes a thumbnail image for the specified live event.
@@ -446,30 +493,33 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live even</param>
         /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id) => RootAuthorization()
+        public Task<RestResult<string>> DeleteALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes a thumbnail image for the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live even</param>
         /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> DeleteALiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+        public Task<RestResult<string>> DeleteALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
-           .DeleteAsync();
+           .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method deletes a thumbnail image for the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live even</param>
         /// <param name="thumbnail_id">The ID of the live event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> MeDeleteALiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+        public Task<RestResult<string>> MeDeleteALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method edits a thumbnail image for the specified live event.
@@ -478,11 +528,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="thumbnail_id">The ID of the live event.</param>
         /// <param name="active">Whether the thumbnail is the live event's active thumbnail.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
+        public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, bool active, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
             .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
-            .PatchAsync<Picture>();
+            .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method edits a thumbnail image for the specified live event.
@@ -490,11 +541,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="thumbnail_id">The ID of the live event.</param>
         /// <param name="active">Whether the thumbnail is the live event's active thumbnail.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
+        public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
-           .PatchAsync<Picture>();
+           .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method edits a thumbnail image for the specified live event.
@@ -502,11 +554,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="thumbnail_id">The ID of the live event.</param>
         /// <param name="active">Whether the thumbnail is the live event's active thumbnail.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> MeEditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active) => RootAuthorization()
+        public Task<RestResult<Picture>> MeEditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
-           .PatchAsync<Picture>();
+           .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method returns a single thumbnail image of the specified live event.
@@ -514,58 +567,64 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="thumbnail_id">The ID of the thumbnail.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> GetASpecificLiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id) => RootAuthorization()
+        public Task<RestResult<Picture>> GetASpecificLiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
-            .GetAsync<Picture>();
+            .GetAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method returns a single thumbnail image of the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="thumbnail_id">The ID of the thumbnail.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> GetASpecificLiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+        public Task<RestResult<Picture>> GetASpecificLiveEventThumbnailAsync(int live_event_id, int thumbnail_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
-            .GetAsync<Picture>();
+            .GetAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method returns a single thumbnail image of the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="thumbnail_id">The ID of the thumbnail.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Picture>> MeGetASpecificLiveEventThumbnailAsync(int live_event_id, int thumbnail_id) => RootAuthorization()
+        public Task<RestResult<Picture>> MeGetASpecificLiveEventThumbnailAsync(int live_event_id, int thumbnail_id, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
-          .GetAsync<Picture>();
+          .GetAsync<Picture>(cancellationToken);
 
         /// <summary>
         /// This method returns every thumbnail image of the specified live event.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<VimeoList<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/pictures")
-           .GetAsync<VimeoList<Picture>>();
+           .GetAsync<VimeoList<Picture>>(cancellationToken);
 
         /// <summary>
         /// This method returns every thumbnail image of the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<VimeoList<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Picture>>> GetAllTheThumbnailsOfALiveEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/pictures")
-            .GetAsync<VimeoList<Picture>>();
+            .GetAsync<VimeoList<Picture>>(cancellationToken);
 
         /// <summary>
         /// This method returns every thumbnail image of the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<VimeoList<Picture>>> MeGetAllTheThumbnailsOfALiveEventAsync(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Picture>>> MeGetAllTheThumbnailsOfALiveEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/pictures")
-            .GetAsync<VimeoList<Picture>>();
+            .GetAsync<VimeoList<Picture>>(cancellationToken);
 
         #endregion
 
@@ -577,30 +636,33 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="videos">An array of video objects.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> AddAListOfVideosToALiveEventAsync(int user_id, int live_event_id, Video[] videos) => RootAuthorization()
+        public Task<RestResult<string>> AddAListOfVideosToALiveEventAsync(int user_id, int live_event_id, Video[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
-          .PostAsync();
+          .PostAsync(cancellationToken);
 
         /// <summary>
         /// This method adds multiple videos to the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="videos">An array of video objects.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> AddAListOfVideosToALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+        public Task<RestResult<string>> AddAListOfVideosToALiveEventAsync(int live_event_id, Video[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/videos")
-          .PostAsync();
+          .PostAsync(cancellationToken);
 
         /// <summary>
         /// This method adds multiple videos to the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="videos">An array of video objects.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> MeAddAListOfVideosToALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+        public Task<RestResult<string>> MeAddAListOfVideosToALiveEventAsync(int live_event_id, Video[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/me/live_events/{live_event_id}/videos")
-          .PostAsync();
+          .PostAsync(cancellationToken);
 
         /// <summary>
         /// This method returns a single video in the specified live event.
@@ -608,58 +670,64 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Video>> GetASpecificVideoInALiveEventAsync(int user_id, int live_event_id, int video_id) => RootAuthorization()
+        public Task<RestResult<Video>> GetASpecificVideoInALiveEventAsync(int user_id, int live_event_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/videos/{video_id}")
-            .GetAsync<Video>();
+            .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method returns a single video in the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Video>> GetASpecificVideoInALiveEventAsync(int live_event_id, int video_id) => RootAuthorization()
+        public Task<RestResult<Video>> GetASpecificVideoInALiveEventAsync(int live_event_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/videos/{video_id}")
-            .GetAsync<Video>();
+            .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method returns a single video in the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<Video>> MeGetASpecificVideoInALiveEventAsync(int live_event_id, int video_id) => RootAuthorization()
+        public Task<RestResult<Video>> MeGetASpecificVideoInALiveEventAsync(int live_event_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/videos/{video_id}")
-            .GetAsync<Video>();
+            .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The video representation consists of the following fields.</returns>
-        public Task<RestResult<VimeoList<Video>>> GetAllTheVideosInALiveEvent(int user_id, int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Video>>> GetAllTheVideosInALiveEvent(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
-           .GetAsync<VimeoList<Video>>();
+           .GetAsync<VimeoList<Video>>(cancellationToken);
 
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The video representation consists of the following fields.</returns>
-        public Task<RestResult<VimeoList<Video>>> GetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Video>>> GetAllTheVideosInALiveEvent(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
              .Command($"/live_events/{live_event_id}/videos")
-             .GetAsync<VimeoList<Video>>();
+             .GetAsync<VimeoList<Video>>(cancellationToken);
 
         /// <summary>
         /// This method returns every video in the specified event.
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The video representation consists of the following fields.</returns>
-        public Task<RestResult<VimeoList<Video>>> MeGetAllTheVideosInALiveEvent(int live_event_id) => RootAuthorization()
+        public Task<RestResult<VimeoList<Video>>> MeGetAllTheVideosInALiveEvent(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/videos")
-           .GetAsync<VimeoList<Video>>();
+           .GetAsync<VimeoList<Video>>(cancellationToken);
 
         /// <summary>
         /// This method removes multiple videos from the specified live event.
@@ -667,30 +735,33 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="videos">An array of video objects.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> RemoveAListOfVideosFromALiveEventAsync(int user_id, int live_event_id, Video[] videos) => RootAuthorization()
+        public Task<RestResult<string>> RemoveAListOfVideosFromALiveEventAsync(int user_id, int live_event_id, Video[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/videos")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method removes multiple videos from the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="videos">An array of video objects.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> RemoveAListOfVideosFromALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+        public Task<RestResult<string>> RemoveAListOfVideosFromALiveEventAsync(int live_event_id, Video[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/videos")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method removes multiple videos from the specified live event.
         /// </summary>
         /// <param name="live_event_id">The ID of the live event.</param>
         /// <param name="videos">An array of video objects.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> MeRemoveAListOfVideosFromALiveEventAsync(int live_event_id, Video[] videos) => RootAuthorization()
+        public Task<RestResult<string>> MeRemoveAListOfVideosFromALiveEventAsync(int live_event_id, Video[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}/videos")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
 
@@ -702,13 +773,14 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="clip_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The ingest status was returned.
         /// </returns>
-        public virtual Task<RestResult<LiveEventSessionStatus>> GetTheIngestStatusOfAnEventAsync(int live_event_id, int? clip_id = null) => RootAuthorization()
+        public virtual Task<RestResult<LiveEventSessionStatus>> GetTheIngestStatusOfAnEventAsync(int live_event_id, int? clip_id = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/session_status")
             .OptionalParameter("clip_id", clip_id)
-            .GetAsync<LiveEventSessionStatus>();
+            .GetAsync<LiveEventSessionStatus>(cancellationToken);
 
         #endregion
 
@@ -719,12 +791,13 @@ namespace Mafesoft.VimeoClient.Common
         /// The response is not documented by the specification: it is returned as raw JSON.
         /// GET https://api.vimeo.com/me/destinations
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The event destinations were returned.
         /// </returns>
-        public virtual Task<RestResult<JsonElement>> GetAllTheAvailableEventDestinationsAsync() => RootAuthorization()
+        public virtual Task<RestResult<JsonElement>> GetAllTheAvailableEventDestinationsAsync(CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/destinations")
-            .GetAsync<JsonElement>();
+            .GetAsync<JsonElement>(cancellationToken);
 
         /// <summary>
         /// This method returns every available event destination for the specified team owner to stream to.
@@ -732,24 +805,26 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/users/{user_id}/destinations
         /// </summary>
         /// <param name="user_id">The user ID of the team owner.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The event destinations were returned.
         /// </returns>
-        public virtual Task<RestResult<JsonElement>> GetAllTheAvailableEventDestinationsAsync(int user_id) => RootAuthorization()
+        public virtual Task<RestResult<JsonElement>> GetAllTheAvailableEventDestinationsAsync(int user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/destinations")
-            .GetAsync<JsonElement>();
+            .GetAsync<JsonElement>(cancellationToken);
 
         /// <summary>
         /// This method returns the specified event destination belonging to the authenticated user.
         /// GET https://api.vimeo.com/destination/{destination_id}
         /// </summary>
         /// <param name="destination_id">The ID of the event destination.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The event destination was returned.
         /// </returns>
-        public virtual Task<RestResult<LiveEventDestination>> GetAnEventDestinationAsync(long destination_id) => RootAuthorization()
+        public virtual Task<RestResult<LiveEventDestination>> GetAnEventDestinationAsync(long destination_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/destination/{destination_id}")
-            .GetAsync<LiveEventDestination>();
+            .GetAsync<LiveEventDestination>(cancellationToken);
 
         /// <summary>
         /// This method updates the specified event destination belonging to the authenticated user.
@@ -764,6 +839,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="stream_key">The RTMP stream key.</param>
         /// <param name="stream_url">The RTMP URL for receiving the video stream.</param>
         /// <param name="type">The type of the destination: channel, custom, organization, page, profile.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The event destination was updated.
         /// </returns>
@@ -775,7 +851,7 @@ namespace Mafesoft.VimeoClient.Common
             string service_name = null,
             string stream_key = null,
             string stream_url = null,
-            string type = null) => RootAuthorization()
+            string type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/destination/{destination_id}")
             .JsonPayload(new VimeoPayload()
                 .Set("display_name", display_name)
@@ -786,19 +862,20 @@ namespace Mafesoft.VimeoClient.Common
                 .Set("stream_key", stream_key)
                 .Set("stream_url", stream_url)
                 .Set("type", type))
-            .PatchAsync<LiveEventDestination>();
+            .PatchAsync<LiveEventDestination>(cancellationToken);
 
         /// <summary>
         /// This method deletes the specified event destination belonging to the authenticated user.
         /// DELETE https://api.vimeo.com/destination/{destination_id}
         /// </summary>
         /// <param name="destination_id">The ID of the event destination.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The event destination was deleted.
         /// </returns>
-        public virtual Task<RestResult<string>> DeleteAnEventDestinationAsync(long destination_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> DeleteAnEventDestinationAsync(long destination_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/destination/{destination_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method returns every OTT destination of the specified event. The authenticated user must be the owner of the event.
@@ -806,12 +883,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The OTT destinations were returned.
         /// </returns>
-        public virtual Task<RestResult<VimeoList<OttDestination>>> GetAllTheOttDestinationsOfAnEventAsync(int user_id, int live_event_id) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<OttDestination>>> GetAllTheOttDestinationsOfAnEventAsync(int user_id, int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/ott_destinations")
-            .GetAsync<VimeoList<OttDestination>>();
+            .GetAsync<VimeoList<OttDestination>>(cancellationToken);
 
         /// <summary>
         /// This method creates an OTT channel as the destination of the specified event. The authenticated user must be the owner of the event.
@@ -821,13 +899,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="body">The fields of the OTT destination, for example ott_channel_id.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The new OTT destination was created.
         /// </returns>
-        public virtual Task<RestResult<OttDestination>> CreateAnOttDestinationForAnEventAsync(int user_id, int live_event_id, VimeoPayload body = null) => RootAuthorization()
+        public virtual Task<RestResult<OttDestination>> CreateAnOttDestinationForAnEventAsync(int user_id, int live_event_id, VimeoPayload body = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/ott_destinations")
             .JsonPayload(body)
-            .PostAsync<OttDestination>();
+            .PostAsync<OttDestination>(cancellationToken);
 
         /// <summary>
         /// This method deletes an OTT channel as the destination of the specified event. The authenticated user must be the owner of the event.
@@ -836,12 +915,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="destination_id">The ID of the OTT destination.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The OTT destination was deleted.
         /// </returns>
-        public virtual Task<RestResult<string>> DeleteAnOttDestinationOfAnEventAsync(int user_id, int live_event_id, string destination_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> DeleteAnOttDestinationOfAnEventAsync(int user_id, int live_event_id, string destination_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/ott_destination/{destination_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
 
@@ -852,12 +932,13 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/live_events/{live_event_id}/composer/graphics/videos
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The video graphic items were returned.
         /// </returns>
-        public virtual Task<RestResult<VimeoList<ComposerGraphic>>> GetAllTheVideoGraphicsItemsOfAnEventAsync(int live_event_id) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<ComposerGraphic>>> GetAllTheVideoGraphicsItemsOfAnEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/graphics/videos")
-            .GetAsync<VimeoList<ComposerGraphic>>();
+            .GetAsync<VimeoList<ComposerGraphic>>(cancellationToken);
 
         /// <summary>
         /// This method adds a new video graphics item to the specified event.
@@ -865,13 +946,14 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="video_id">The ID of the associated video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The video graphic item was added.
         /// </returns>
-        public virtual Task<RestResult<ComposerGraphic>> AddAVideoGraphicsItemToAnEventAsync(int live_event_id, long video_id) => RootAuthorization()
+        public virtual Task<RestResult<ComposerGraphic>> AddAVideoGraphicsItemToAnEventAsync(int live_event_id, long video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/graphics/videos")
             .JsonPayload(new VimeoPayload().Set("video_id", video_id))
-            .PostAsync<ComposerGraphic>();
+            .PostAsync<ComposerGraphic>(cancellationToken);
 
         /// <summary>
         /// This method deletes a video graphics item belonging to the specified event.
@@ -879,12 +961,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="video_id">The ID of the associated video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video graphic item was deleted.
         /// </returns>
-        public virtual Task<RestResult<string>> DeleteAVideoGraphicsItemFromAnEventAsync(int live_event_id, long video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> DeleteAVideoGraphicsItemFromAnEventAsync(int live_event_id, long video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/graphics/videos/{video_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         #endregion
 
@@ -895,12 +978,13 @@ namespace Mafesoft.VimeoClient.Common
         /// GET https://api.vimeo.com/live_events/{live_event_id}/composer/scenes
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The scenes were returned.
         /// </returns>
-        public virtual Task<RestResult<VimeoList<ComposerScene>>> GetAllTheScenesOfAnEventAsync(int live_event_id) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<ComposerScene>>> GetAllTheScenesOfAnEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes")
-            .GetAsync<VimeoList<ComposerScene>>();
+            .GetAsync<VimeoList<ComposerScene>>(cancellationToken);
 
         /// <summary>
         /// This method creates a new scene for the specified event.
@@ -908,13 +992,14 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="scene_type">The type of scene to create. Defaults to live.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The scene was created.
         /// </returns>
-        public virtual Task<RestResult<ComposerScene>> CreateASceneForAnEventAsync(int live_event_id, string scene_type = null) => RootAuthorization()
+        public virtual Task<RestResult<ComposerScene>> CreateASceneForAnEventAsync(int live_event_id, string scene_type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes")
             .JsonPayload(new VimeoPayload().Set("scene_type", scene_type))
-            .PostAsync<ComposerScene>();
+            .PostAsync<ComposerScene>(cancellationToken);
 
         /// <summary>
         /// This method updates a scene belonging to the specified event.
@@ -924,13 +1009,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="scene_id">The ID of the scene.</param>
         /// <param name="body">The fields of the scene to update.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The scene was returned.
         /// </returns>
-        public virtual Task<RestResult<ComposerScene>> UpdateASceneOfAnEventAsync(int live_event_id, string scene_id, VimeoPayload body = null) => RootAuthorization()
+        public virtual Task<RestResult<ComposerScene>> UpdateASceneOfAnEventAsync(int live_event_id, string scene_id, VimeoPayload body = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes/{scene_id}")
             .JsonPayload(body)
-            .PatchAsync<ComposerScene>();
+            .PatchAsync<ComposerScene>(cancellationToken);
 
         /// <summary>
         /// This method attaches a graphic item to the specified scene.
@@ -939,25 +1025,27 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="live_event_id">The ID of the event.</param>
         /// <param name="scene_id">The ID of the scene.</param>
         /// <param name="item">The content of the graphic item.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The scene was returned.
         /// </returns>
-        public virtual Task<RestResult<ComposerScene>> AttachAGraphicItemToASceneAsync(int live_event_id, string scene_id, VimeoPayload item) => RootAuthorization()
+        public virtual Task<RestResult<ComposerScene>> AttachAGraphicItemToASceneAsync(int live_event_id, string scene_id, VimeoPayload item, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes/{scene_id}/graphics")
             .JsonPayload(new VimeoPayload().Set("item", item))
-            .PostAsync<ComposerScene>();
+            .PostAsync<ComposerScene>(cancellationToken);
 
         /// <summary>
         /// This method resets the scenes of the specified event by deleting every existing scene and then recreating the default scene.
         /// DELETE https://api.vimeo.com/live_events/{live_event_id}/composer/scenes
         /// </summary>
         /// <param name="live_event_id">The ID of the event.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The scenes were reset.
         /// </returns>
-        public virtual Task<RestResult<VimeoList<ComposerScene>>> ResetTheScenesOfAnEventAsync(int live_event_id) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<ComposerScene>>> ResetTheScenesOfAnEventAsync(int live_event_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes")
-            .DeleteAsync<VimeoList<ComposerScene>>();
+            .DeleteAsync<VimeoList<ComposerScene>>(cancellationToken);
 
         #endregion
     }

@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, 'release/*', 'release-candidate/*' ]
     paths: [ 'src/**', 'tests/**', '.github/workflows/**' ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, 'release/*', 'release-candidate/*' ]
   workflow_dispatch:
 
 jobs:

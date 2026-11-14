@@ -41,7 +41,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Teams: team roles, team memberships and the custom metadata fields of a team.
     /// https://developer.vimeo.com/api/reference/teams
     /// </summary>
-    public class VimeoTeams
+    public partial class VimeoTeams
     {
         /// <summary>
         /// Vimeo Properties

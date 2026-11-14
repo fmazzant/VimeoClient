@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Common
     /// VimeoFolders
     /// https://developer.vimeo.com/api/reference/folders
     /// </summary>
-    public class VimeoFolders
+    public partial class VimeoFolders
     {
         /// <summary>
         /// Vimeo Properties

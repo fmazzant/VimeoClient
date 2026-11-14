@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Common
     /// A like is a video interaction where a Vimeo member indicates that they liked a video.
     /// https://developer.vimeo.com/api/reference/likes
     /// </summary>
-    public class VimeoLikes
+    public partial class VimeoLikes
     {
         /// <summary>
         /// Vimeo Properties
@@ -197,23 +197,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<User>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<User>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<User>>();
-            }
-
-            return result;
+            return root.Get<Pagination<User>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -261,23 +245,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<User>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<User>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<User>>();
-            }
-
-            return result;
+            return root.Get<Pagination<User>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -324,23 +292,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<User>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<User>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<User>>();
-            }
-
-            return result;
+            return root.Get<Pagination<User>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -395,23 +347,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<Video>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Video>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Video>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Video>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -465,23 +401,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<Video>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Video>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Video>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Video>>().WithNavigation(RootAuthorization);
         }
 
     }

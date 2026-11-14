@@ -32,6 +32,8 @@ namespace Mafesoft.VimeoClient
     using Mafesoft.RestClient;
     using System;
     using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Mafesoft.VimeoClient.Response;
 
     /// <summary>
@@ -154,7 +156,18 @@ namespace Mafesoft.VimeoClient
             => root.Get<Pagination<T>>().WithNavigation(rootAuthorization);
 
         /// <summary>
-        /// Wires the Next() and Previous() navigation of a pagination result.
+        /// Executes the GET asynchronously and wires the Next() and Previous() navigation of the returned page.
+        /// </summary>
+        /// <typeparam name="T">The item's type</typeparam>
+        /// <param name="root">The rest builder</param>
+        /// <param name="rootAuthorization">The factory used to build the next and previous calls</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
+        /// <returns></returns>
+        public static async Task<RestResult<Pagination<T>>> GetPaginationAsync<T>(this RestBuilder root, Func<RestBuilder> rootAuthorization, CancellationToken cancellationToken = default)
+            => (await root.GetAsync<Pagination<T>>(cancellationToken).ConfigureAwait(false)).WithNavigation(rootAuthorization);
+
+        /// <summary>
+        /// Wires the Next(), Previous(), NextAsync() and PreviousAsync() navigation of a pagination result.
         /// </summary>
         /// <typeparam name="T">The item's type</typeparam>
         /// <param name="result">The result</param>
@@ -169,6 +182,9 @@ namespace Mafesoft.VimeoClient
                 result.Content.NextAction = () => rootAuthorization()
                     .Command(paging.Next)
                     .GetPagination<T>(rootAuthorization);
+                result.Content.NextAsyncAction = (cancellationToken) => rootAuthorization()
+                    .Command(paging.Next)
+                    .GetPaginationAsync<T>(rootAuthorization, cancellationToken);
             }
 
             if (paging?.Previous != null)
@@ -176,6 +192,9 @@ namespace Mafesoft.VimeoClient
                 result.Content.PreviousAction = () => rootAuthorization()
                     .Command(paging.Previous)
                     .GetPagination<T>(rootAuthorization);
+                result.Content.PreviousAsyncAction = (cancellationToken) => rootAuthorization()
+                    .Command(paging.Previous)
+                    .GetPaginationAsync<T>(rootAuthorization, cancellationToken);
             }
 
             return result;

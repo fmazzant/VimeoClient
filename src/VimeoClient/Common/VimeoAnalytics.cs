@@ -41,7 +41,7 @@ namespace Mafesoft.VimeoClient.Common
     /// The Analytics API requires an Enterprise plan and must be enabled for the API app by Vimeo support.
     /// https://developer.vimeo.com/api/reference/users#analytics
     /// </summary>
-    public class VimeoAnalytics
+    public partial class VimeoAnalytics
     {
         /// <summary>
         /// Vimeo Properties
