@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Common
     /// These are the most common methods for working with users.
     /// https://developer.vimeo.com/api/reference/users
     /// </summary>
-    public class VimeoUsers
+    public partial class VimeoUsers
     {
         /// <summary>
         /// Vimeo Properties

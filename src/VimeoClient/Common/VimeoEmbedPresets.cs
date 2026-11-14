@@ -41,7 +41,7 @@ namespace Mafesoft.VimeoClient.Common
     /// For more information, see our Help Center.
     /// https://developer.vimeo.com/api/reference/embed-presets
     /// </summary>
-    public class VimeoEmbedPresets
+    public partial class VimeoEmbedPresets
     {
         /// <summary>
         /// Vimeo Properties

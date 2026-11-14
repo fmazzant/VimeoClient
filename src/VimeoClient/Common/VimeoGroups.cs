@@ -43,7 +43,7 @@ namespace Mafesoft.VimeoClient.Common
     /// For more information, see our Help Center.
     /// https://developer.vimeo.com/api/reference/groups
     /// </summary>
-    public class VimeoGroups
+    public partial class VimeoGroups
     {
         /// <summary>
         /// Vimeo Properties

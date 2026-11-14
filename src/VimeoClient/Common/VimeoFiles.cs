@@ -36,7 +36,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Files: hosted files viewed by their public ID.
     /// https://developer.vimeo.com/api/reference/files
     /// </summary>
-    public class VimeoFiles
+    public partial class VimeoFiles
     {
         /// <summary>
         /// Vimeo Properties

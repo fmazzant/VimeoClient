@@ -34,7 +34,7 @@ namespace Mafesoft.VimeoClient.Common
     /// <summary>
     /// Team Members
     /// </summary>
-    public class VimeoTeamMembers
+    public partial class VimeoTeamMembers
     {
         /// <summary>
         /// Vimeo Properties

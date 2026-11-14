@@ -36,7 +36,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Vimeo Authentication Extras
     /// https://developer.vimeo.com/api/reference/authentication-extras
     /// </summary>
-    public class VimeoAuthenticationExtras
+    public partial class VimeoAuthenticationExtras
     {
         /// <summary>
         /// Vimeo

@@ -37,7 +37,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Federated search over the videos and folders of a user or a workspace.
     /// https://developer.vimeo.com/api/reference/search
     /// </summary>
-    public class VimeoSearch
+    public partial class VimeoSearch
     {
         /// <summary>
         /// Vimeo Properties
