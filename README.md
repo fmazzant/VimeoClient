@@ -20,7 +20,7 @@ If VimeoClient is useful to you, consider [supporting the project](#support). â˜
 | Whole Vimeo API 3.4 | Every operation of the OpenAPI specification, grouped by section as in the Vimeo reference (`client.Videos`, `client.Live`, `client.OnDemand`â€¦). See [Sections](#sections) |
 | Typed models and parameters | Responses mapped to classes, enums for the documented values, body classes for create and update requests. See [On Demand](#on-demand) |
 | Synchronous and asynchronous | Every method has an asynchronous version (`...Async`) for ASP.NET Core and UI applications. See [Usage](#usage) |
-| Pagination | `Pagination<T>` with `Next()` and `Previous()` to load the other pages. See [Sections](#sections) |
+| Pagination | `Pagination<T>` with `Next()` / `Previous()` (and `NextAsync()` / `PreviousAsync()`) to load the other pages, `GetAllItems()` / `GetAllItemsAsync()` to read the items of all the pages. See [Sections](#sections) |
 | Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
 | API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
 | Certificate pinning | Standard TLS validation, or validation plus a list of trusted certificate hashes. See [Certificates](#certificates) |
@@ -150,11 +150,27 @@ All the operations of the Vimeo API 3.4 OpenAPI specification are implemented.
 | `client.Categories`, `client.Groups`, `client.Likes`, `client.Portfolios`, `client.Tags`, `client.WatchLaterQueue` | The other sections of the reference | |
 | `client.APIInformation`, `client.AuthenticationExtras`, `client.CommonFormatsParameters` | API specification, tokens, field filtering | |
 
-Methods that return a list use `Pagination<T>`: call `Next()` / `Previous()` to load the other pages.
+Methods that return a list use `Pagination<T>`: call `Next()` / `Previous()`, or `NextAsync()` / `PreviousAsync()`, to load the other pages
+(they return null on the last / first page).
 
 ```c#
 var videos = client.OnDemand.GetAllTheVideosOnAnOnDemandPage(ondemandId, per_page: 25);
 var next = videos.Content.Next();
+var nextAsync = await videos.Content.NextAsync(cancellationToken);
+```
+
+To read the items of all the pages, use `GetAllItems()` (all the targets) or `GetAllItemsAsync()` with `await foreach` (.NET Standard 2.1, .NET 8 and later):
+the next pages are loaded one at a time while the items are read.
+
+```c#
+var first = await client.Videos.GetAllTheVideosThatTheUserHasUploadedAsync(per_page: 100);
+
+await foreach (var video in first.Content.GetAllItemsAsync(cancellationToken))
+{
+    Console.WriteLine(video.Name);
+}
+
+foreach (var video in first.Content.GetAllItems()) { /* ... */ }
 ```
 
 When the specification does not document a response, the method returns the raw JSON (`JsonElement`);
