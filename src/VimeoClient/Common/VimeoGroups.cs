@@ -43,7 +43,7 @@ namespace Mafesoft.VimeoClient.Common
     /// For more information, see our Help Center.
     /// https://developer.vimeo.com/api/reference/groups
     /// </summary>
-    public class VimeoGroups
+    public partial class VimeoGroups
     {
         /// <summary>
         /// Vimeo Properties
@@ -294,23 +294,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<Group>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Group>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Group>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Group>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -362,23 +346,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = root.Get<Pagination<Group>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Group>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Group>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Group>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -432,23 +400,7 @@ namespace Mafesoft.VimeoClient.Common
                    }
                });
 
-            var result = root.Get<Pagination<User>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<User>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<User>>();
-            }
-
-            return result;
+            return root.Get<Pagination<User>>().WithNavigation(RootAuthorization);
         }
 
         #endregion
@@ -554,23 +506,7 @@ namespace Mafesoft.VimeoClient.Common
                    }
                });
 
-            var result = root.Get<Pagination<Video>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Video>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Video>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Video>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>

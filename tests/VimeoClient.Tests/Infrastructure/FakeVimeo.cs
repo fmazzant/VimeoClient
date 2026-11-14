@@ -56,6 +56,13 @@ namespace Mafesoft.VimeoClient.Tests.Infrastructure
             return this;
         }
 
+        /// <summary>Returns <paramref name="json"/> for the requests whose path is <paramref name="path"/> and whose query string has the parameter <paramref name="query"/> (for instance page=2).</summary>
+        public FakeHttpHandler Respond(string path, string query, string json, HttpStatusCode status = HttpStatusCode.OK)
+        {
+            responses.Add((r => r.RequestUri.AbsolutePath == path && ("&" + r.RequestUri.Query.TrimStart('?') + "&").Contains("&" + query + "&"), () => Json(json, status)));
+            return this;
+        }
+
         /// <summary>Returns <paramref name="bytes"/> for the requests whose path is <paramref name="path"/>.</summary>
         public FakeHttpHandler RespondBytes(string path, byte[] bytes, string contentType)
         {

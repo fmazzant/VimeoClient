@@ -37,7 +37,7 @@ namespace Mafesoft.VimeoClient.Common
     /// API app webhooks: notifications sent by Vimeo to your URL when an event occurs (video created, transcode complete, live event started...).
     /// https://developer.vimeo.com/api/reference/api-apps
     /// </summary>
-    public class VimeoWebhooks
+    public partial class VimeoWebhooks
     {
         /// <summary>
         /// Vimeo Properties

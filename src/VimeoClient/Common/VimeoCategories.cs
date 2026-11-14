@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Common
     /// See our Help Center for more details.
     /// https://developer.vimeo.com/api/reference/categories
     /// </summary>
-    public class VimeoCategories
+    public partial class VimeoCategories
     {
         /// <summary>
         /// Vimeo Properties
@@ -128,18 +128,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Category>>();
-
-            if (result?.Content?.Paging != null && result?.Content?.Paging.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Category>>();
-            }
-
-            if (result?.Content?.Paging != null && result?.Content?.Paging.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Category>>();
-            }
-            return result;
+            return root.Get<Pagination<Category>>().WithNavigation(RootAuthorization);
         }
 
         #endregion
@@ -191,19 +180,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Channel>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Channel>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Channel>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Channel>>().WithNavigation(RootAuthorization);
         }
 
         #endregion
@@ -252,19 +229,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Group>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Group>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Group>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Group>>().WithNavigation(RootAuthorization);
         }
 
         #endregion
@@ -377,19 +342,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Category>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization().Command(result.Content.Paging.Next).Get<Pagination<Category>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization().Command(result.Content.Paging.Previous).Get<Pagination<Category>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Category>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
@@ -422,23 +375,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Category>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Category>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Category>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Category>>().WithNavigation(RootAuthorization);
         }
         #endregion
 
@@ -521,23 +458,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = root.Get<Pagination<Video>>();
-
-            if (result.Content?.Paging?.Next != null)
-            {
-                result.Content.NextAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Next)
-                    .Get<Pagination<Video>>();
-            }
-
-            if (result.Content?.Paging?.Previous != null)
-            {
-                result.Content.PreviousAction = () => RootAuthorization()
-                    .Command(result.Content.Paging.Previous)
-                    .Get<Pagination<Video>>();
-            }
-
-            return result;
+            return root.Get<Pagination<Video>>().WithNavigation(RootAuthorization);
         }
 
         /// <summary>
