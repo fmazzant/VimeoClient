@@ -36,7 +36,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Tags are pieces of metadata for categorizing or labeling videos.
     /// https://developer.vimeo.com/api/reference/tags
     /// </summary>
-    public class VimeoTags
+    public partial class VimeoTags
     {
         /// <summary>
         /// Vimeo Properties

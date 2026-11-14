@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Common
     /// A like is a video interaction where a Vimeo member indicates that they liked a video.
     /// https://developer.vimeo.com/api/reference/likes
     /// </summary>
-    public class VimeoLikes
+    public partial class VimeoLikes
     {
         /// <summary>
         /// Vimeo Properties
