@@ -32,6 +32,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.RestClient;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoSearch.
@@ -55,6 +56,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results: alphabetical, date, default, duration, folder_path, last_user_action_event_date.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The federated search results were returned.
         /// </returns>
@@ -68,9 +70,9 @@ namespace Mafesoft.VimeoClient.Common
             string direction = null,
             string sort = null,
             int? page = null,
-            int? per_page = null) => SearchParameters(RootAuthorization().Command($"/search/{user_id}/items"),
+            int? per_page = null, CancellationToken cancellationToken = default) => SearchParameters(RootAuthorization().Command($"/search/{user_id}/items"),
                 query, query_fields, filter, filter_privacy, modified_start_date, modified_end_date, direction, sort, page, per_page)
-            .GetPaginationAsync<ProjectItem>(RootAuthorization);
+            .GetPaginationAsync<ProjectItem>(RootAuthorization, cancellationToken);
 
         /// <summary>
         /// This method returns the federated search results of the items of the specified workspace according to a search query.
@@ -88,6 +90,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results: alphabetical, date, default, duration, folder_path, last_user_action_event_date.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The federated search results were returned.
         /// </returns>
@@ -101,9 +104,9 @@ namespace Mafesoft.VimeoClient.Common
             string direction = null,
             string sort = null,
             int? page = null,
-            int? per_page = null) => SearchParameters(RootAuthorization().Command($"/workspaces/search/{workspace_uuid}/items"),
+            int? per_page = null, CancellationToken cancellationToken = default) => SearchParameters(RootAuthorization().Command($"/workspaces/search/{workspace_uuid}/items"),
                 query, query_fields, filter, filter_privacy, modified_start_date, modified_end_date, direction, sort, page, per_page)
-            .GetPaginationAsync<ProjectItem>(RootAuthorization);
+            .GetPaginationAsync<ProjectItem>(RootAuthorization, cancellationToken);
 
         #endregion
     }

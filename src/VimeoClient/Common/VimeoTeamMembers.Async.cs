@@ -30,6 +30,7 @@
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoTeamMembers.
@@ -41,10 +42,11 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns information about the membership of the specified team. Usage is currently limited to the team join forms.
         /// </summary>
         /// <param name="code">The code corresponding to the desired team. This value appears under TeamUser > code.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> GetMembershipInformationAboutATeamAsync(string code) => RootAuthorization()
+        public virtual Task<RestResult<string>> GetMembershipInformationAboutATeamAsync(string code, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teammembers/{code}")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         #endregion
     }

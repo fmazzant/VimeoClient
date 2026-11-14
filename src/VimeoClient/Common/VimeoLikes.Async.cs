@@ -34,6 +34,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Filter.Video;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoLikes.
@@ -46,77 +47,83 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="video_id">The ID of the video</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was unliked.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseAUserToUnlikeAVideoAsync(int user_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseAUserToUnlikeAVideoAsync(int user_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/likes/{video_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to unlike the specified video.
         /// </summary>
         /// <param name="video_id">The ID of the video</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was unliked.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseAUserToUnlikeAVideoAsync(int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseAUserToUnlikeAVideoAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/likes/{video_id}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to like the specified video. The user can't like their own video.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="video_id">The ID of the video</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was liked.
         /// 400 Bad Request The authenticated user owns the video and can't like it.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseAUserToLikeAVideoAsync(int user_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseAUserToLikeAVideoAsync(int user_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/likes/{video_id}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to like the specified video. The user can't like their own video.
         /// </summary>
         /// <param name="video_id">The ID of the video</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The video was liked.
         /// 400 Bad Request The authenticated user owns the video and can't like it.
         /// 403 Forbidden The authenticated user can't like videos.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseAUserToLikeAVideoAsync(int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseAUserToLikeAVideoAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/likes/{video_id}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method checks if the authenticated user has liked the specified video.
         /// </summary>
         /// <param name="user_id">The ID of the user.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user has liked the video.
         /// 404 Not Found   The user hasn't liked the video.
         /// </returns>
-        public virtual Task<RestResult<string>> CheckIfTheUserHasLikedAVideAsync(int user_id, int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CheckIfTheUserHasLikedAVideAsync(int user_id, int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/likes/{video_id}")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method checks if the authenticated user has liked the specified video.
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user has liked the video.
         /// 404 Not Found   The user hasn't liked the video.
         /// </returns>
-        public virtual Task<RestResult<string>> CheckIfTheUserHasLikedAVideAsync(int video_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CheckIfTheUserHasLikedAVideAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/likes/{video_id}")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method returns every user who has liked the specified video.
@@ -127,6 +134,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
@@ -134,7 +142,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            UserSort? sort = null)
+            UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/videos/{video_id}/likes")
@@ -162,7 +170,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -177,6 +185,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
@@ -184,7 +193,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            UserSort? sort = null)
+            UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/channels/{channel_id}/videos/{video_id}/likes")
@@ -212,7 +221,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -226,6 +235,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
@@ -233,7 +243,7 @@ namespace Mafesoft.VimeoClient.Common
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            UserSort? sort = null)
+            UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/ondemand/pages/{ondemand_id}/likes")
@@ -261,7 +271,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<User>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<User>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -277,6 +287,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
@@ -286,7 +297,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            VideoSort? sort = null)
+            VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/users/{user_id}/likes")
@@ -318,7 +329,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<Video>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Video>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -333,6 +344,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The videos were returned.
         /// </returns>
@@ -342,7 +354,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             string query = null,
-            VideoSort? sort = null)
+            VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/me/likes")
@@ -374,7 +386,7 @@ namespace Mafesoft.VimeoClient.Common
                     }
                 });
 
-            var result = await root.GetAsync<Pagination<Video>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Video>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }

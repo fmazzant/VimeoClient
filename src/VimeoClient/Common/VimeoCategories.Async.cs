@@ -34,6 +34,7 @@ namespace Mafesoft.VimeoClient.Common
     using Mafesoft.VimeoClient.Filter.Category;
     using Mafesoft.VimeoClient.Model;
     using Mafesoft.VimeoClient.Response;
+    using System.Threading;
     using System.Threading.Tasks;
 
     // Asynchronous versions of the methods of VimeoCategories.
@@ -45,13 +46,14 @@ namespace Mafesoft.VimeoClient.Common
         /// This method returns the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The category was returned.
         /// 404 Not Found   No such category exists.
         /// </returns>
-        public virtual Task<RestResult<Category>> GetASpecificCategoryAsync(string category) => RootAuthorization()
+        public virtual Task<RestResult<Category>> GetASpecificCategoryAsync(string category, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/categories/{category}")
-            .GetAsync<Category>();
+            .GetAsync<Category>(cancellationToken);
 
         /// <summary>
         /// This method returns every available category.
@@ -63,11 +65,12 @@ namespace Mafesoft.VimeoClient.Common
         ///  </param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual async Task<RestResult<Pagination<Category>>> GetAllCategoriesAsync(CategoryDirection? direction = null,
             CategorySortAllCategory? sort = null,
             int? page = null,
-            int? per_page = null)
+            int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization().Command("/categories");
 
@@ -89,7 +92,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<Category>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Category>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -107,6 +110,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	        The channels were returned.
         /// 404 Not Found   No such category exists.
@@ -116,7 +120,7 @@ namespace Mafesoft.VimeoClient.Common
             string query = null,
             CategorySortAllChannel? sort = null,
             int? page = null,
-            int? per_page = null)
+            int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/categories/{category}/channels");
@@ -143,7 +147,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<Channel>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Channel>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -161,13 +165,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.Option descriptions: VimeoSort static class</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual async Task<RestResult<Pagination<Group>>> GetAllTheGroupsInACategoryAsync(string category,
             CategoryDirection? direction = null,
             string query = null,
             CategorySortAllGroup? sort = null,
             int? page = null,
-            int? per_page = null)
+            int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/categories/{category}/groups");
@@ -194,7 +199,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<Group>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Group>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -208,67 +213,73 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <param name="user_id">The ID of the user.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user is following the category.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseTheUserToFollowASpecificCategoryAsync(int category, string user_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseTheUserToFollowASpecificCategoryAsync(int category, string user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/categories/{category}")
-            .PutAsync();
+            .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to follow the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> CauseTheUserToFollowASpecificCategoryAsync(string category) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseTheUserToFollowASpecificCategoryAsync(string category, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/categories/{category}")
-           .PutAsync();
+           .PutAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to stop following the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <param name="user_id">The ID of the user.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user has stopped following the category.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseTheUserToStopFollowingACategoryAsync(string category, string user_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseTheUserToStopFollowingACategoryAsync(string category, string user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/categories/{category}")
-            .DeleteAsync();
+            .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method causes the authenticated user to stop following the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user has stopped following the category.
         /// </returns>
-        public virtual Task<RestResult<string>> CauseTheUserToStopFollowingACategoryAsync(string category) => RootAuthorization()
+        public virtual Task<RestResult<string>> CauseTheUserToStopFollowingACategoryAsync(string category, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/categories/{category}")
-           .DeleteAsync();
+           .DeleteAsync(cancellationToken);
 
         /// <summary>
         /// This method determines whether the authenticated user follows the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <param name="user_id">The ID of the user.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user is following the category.
         /// </returns>
-        public virtual Task<RestResult<string>> CheckIfTheUserFollowsACategoryAsync(string category, string user_id) => RootAuthorization()
+        public virtual Task<RestResult<string>> CheckIfTheUserFollowsACategoryAsync(string category, string user_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/categories/{category}")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method determines whether the authenticated user follows the specified category.
         /// </summary>
         /// <param name="category">The name of the category.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 204 No Content	The user is following the category.
         /// </returns>
-        public virtual Task<RestResult<string>> CheckIfTheUserFollowsACategoryAsync(string category) => RootAuthorization()
+        public virtual Task<RestResult<string>> CheckIfTheUserFollowsACategoryAsync(string category, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/categories/{category}")
-            .GetAsync();
+            .GetAsync(cancellationToken);
 
         /// <summary>
         /// This method returns every category that the authenticated user follows.
@@ -278,6 +289,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The categories were returned.
         /// 403 Forbidden Error code 3200: Only the authenticated user can access this information.
@@ -286,7 +298,7 @@ namespace Mafesoft.VimeoClient.Common
             CategoryDirection? direction = null,
             CategorySortFollows? sort = null,
             int? page = null,
-            int? per_page = null)
+            int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/users/{user_id}/categories");
@@ -309,7 +321,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<Category>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Category>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -321,7 +333,7 @@ namespace Mafesoft.VimeoClient.Common
         public virtual async Task<RestResult<Pagination<Category>>> GetAllTheCategoriesThatTheUserFollowsAsync(CategoryDirection? direction = null,
             CategorySortFollows? sort = null,
             int? page = null,
-            int? per_page = null)
+            int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/me/categories");
@@ -344,7 +356,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<Category>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Category>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -359,22 +371,24 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="category">The name of the category.</param>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The video was returned.
         /// 404 Not Found   No such category exists, or the video doesn't belong to it.
         /// </returns>
-        public virtual Task<RestResult<Video>> GetASpecificVideoInACategoryAsync(string category, string video_id) => RootAuthorization()
+        public virtual Task<RestResult<Video>> GetASpecificVideoInACategoryAsync(string category, string video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/categories/{category}/videos/{video_id}")
-            .GetAsync<Video>();
+            .GetAsync<Video>(cancellationToken);
 
         /// <summary>
         /// This method returns every category that contains the specified video.
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<VimeoList<Category>>> GetAllTheCategoriesToWhichAVideoBelongsAsync(string video_id) => RootAuthorization()
+        public virtual Task<RestResult<VimeoList<Category>>> GetAllTheCategoriesToWhichAVideoBelongsAsync(string video_id, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/categories")
-            .GetAsync<VimeoList<Category>>();
+            .GetAsync<VimeoList<Category>>(cancellationToken);
 
         /// <summary>
         /// This method returns every video that belongs to the specified category.
@@ -390,6 +404,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 200 OK	The videos were returned.
         /// 404 Not Found   No such category exists.
@@ -400,7 +415,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             CategorySort? sort = null,
             int? page = null,
-            int? per_page = null)
+            int? per_page = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
                 .Command($"/categories/{category}/videos");
@@ -430,7 +445,7 @@ namespace Mafesoft.VimeoClient.Common
                 root = root.Parameter("per_page", per_page);
             }
 
-            var result = await root.GetAsync<Pagination<Video>>().ConfigureAwait(false);
+            var result = await root.GetAsync<Pagination<Video>>(cancellationToken).ConfigureAwait(false);
 
             return result.WithNavigation(RootAuthorization);
         }
@@ -442,12 +457,13 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         /// <param name="video_id">The ID of the video.</param>
         /// <param name="categories">An array of the names of the desired categories.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>
         /// 201 Created	The categories were suggested.
         /// 403 Forbidden The authenticated user doesn't own this video.
         /// 404 Not Found   No such video exists, or no such category exists.
         /// </returns>
-        public virtual Task<RestResult<Category>> SuggestCategoriesForAVideoAsync(string video_id, string[] categories) => RootAuthorization()
+        public virtual Task<RestResult<Category>> SuggestCategoriesForAVideoAsync(string video_id, string[] categories, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/categories")
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
@@ -457,23 +473,23 @@ namespace Mafesoft.VimeoClient.Common
                     pars.Add("category[]", cat);
                 }
             })
-            .PutAsync<Category>();
+            .PutAsync<Category>(cancellationToken);
 
         #endregion
 
         #region [ Overloads with int video_id ]
 
         /// <inheritdoc cref="GetASpecificVideoInACategory(string, string)"/>
-        public virtual Task<RestResult<Video>> GetASpecificVideoInACategoryAsync(string category, int video_id)
-            => GetASpecificVideoInACategoryAsync(category, video_id.ToString(CultureInfo.InvariantCulture));
+        public virtual Task<RestResult<Video>> GetASpecificVideoInACategoryAsync(string category, int video_id, CancellationToken cancellationToken = default)
+            => GetASpecificVideoInACategoryAsync(category, video_id.ToString(CultureInfo.InvariantCulture), cancellationToken: cancellationToken);
 
         /// <inheritdoc cref="GetAllTheCategoriesToWhichAVideoBelongs(string)"/>
-        public virtual Task<RestResult<VimeoList<Category>>> GetAllTheCategoriesToWhichAVideoBelongsAsync(int video_id)
-            => GetAllTheCategoriesToWhichAVideoBelongsAsync(video_id.ToString(CultureInfo.InvariantCulture));
+        public virtual Task<RestResult<VimeoList<Category>>> GetAllTheCategoriesToWhichAVideoBelongsAsync(int video_id, CancellationToken cancellationToken = default)
+            => GetAllTheCategoriesToWhichAVideoBelongsAsync(video_id.ToString(CultureInfo.InvariantCulture), cancellationToken: cancellationToken);
 
         /// <inheritdoc cref="SuggestCategoriesForAVideo(string, string[])"/>
-        public virtual Task<RestResult<Category>> SuggestCategoriesForAVideoAsync(int video_id, string[] categories)
-            => SuggestCategoriesForAVideoAsync(video_id.ToString(CultureInfo.InvariantCulture), categories);
+        public virtual Task<RestResult<Category>> SuggestCategoriesForAVideoAsync(int video_id, string[] categories, CancellationToken cancellationToken = default)
+            => SuggestCategoriesForAVideoAsync(video_id.ToString(CultureInfo.InvariantCulture), categories, cancellationToken: cancellationToken);
 
         #endregion
     }

@@ -92,6 +92,13 @@ var me = await client.Me.GetTheUserAsync();
 var videos = await client.Videos.GetAllTheVideosThatTheUserHasUploadedAsync(per_page: 25);
 ```
 
+Every asynchronous method accepts an optional `CancellationToken` as last parameter;
+when the token is canceled the request is stopped and the result has `IsCancellationRequested` set:
+
+```c#
+var video = await client.Videos.GetSpecificVideoAsync(videoId, cancellationToken);
+```
+
 ## Vimeo API version
 
 Every request sends the header `Accept: application/vnd.vimeo.*+json;version=3.4`.

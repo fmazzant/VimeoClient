@@ -225,7 +225,7 @@ namespace Mafesoft.VimeoClient.Tests
 
         private static object[] Arguments(ParameterInfo[] parameters) => parameters.Select(p => Value(p.ParameterType)).ToArray();
 
-        private static object Value(Type type)
+        internal static object Value(Type type)
         {
             var nullable = Nullable.GetUnderlyingType(type);
             if (nullable != null)
