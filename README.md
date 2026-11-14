@@ -2,9 +2,9 @@
 
 [![NuGet](https://img.shields.io/nuget/v/Mafesoft.VimeoClient?style=flat-square&label=nuget)](https://www.nuget.org/packages/Mafesoft.VimeoClient)
 [![Downloads](https://img.shields.io/nuget/dt/Mafesoft.VimeoClient?style=flat-square&label=downloads)](https://www.nuget.org/packages/Mafesoft.VimeoClient)
-[![Build](https://img.shields.io/github/actions/workflow/status/fmazzant/VimeoClient/ci.yml?branch=master&style=flat-square&label=build)](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/fmazzant/VimeoClient/blob/master/LICENSE)
-[![CodeQL](https://img.shields.io/github/actions/workflow/status/fmazzant/VimeoClient/codeql.yml?branch=master&style=flat-square&label=codeql)](https://github.com/fmazzant/VimeoClient/actions/workflows/codeql.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/fmazzant/VimeoClient/ci.yml?branch=main&style=flat-square&label=build)](https://github.com/fmazzant/VimeoClient/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/fmazzant/VimeoClient/blob/main/LICENSE)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/fmazzant/VimeoClient/codeql.yml?branch=main&style=flat-square&label=codeql)](https://github.com/fmazzant/VimeoClient/actions/workflows/codeql.yml)
 [![.NET](https://img.shields.io/badge/.NET-10%20%7C%208%20%7C%20Standard%202.1%20%7C%20Standard%202.0%20%7C%20Framework%204.6.2%2B-512BD4?style=flat-square)](#)
 
 [![Mafe.VimeoClient downloads](https://img.shields.io/badge/Mafe.VimeoClient%20downloads-2.1k-lightgrey?style=flat-square)](https://www.nuget.org/packages/Mafe.VimeoClient)

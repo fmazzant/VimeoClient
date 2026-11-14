@@ -7,9 +7,9 @@ name: NuGet
 # - manually, from GitHub: Actions > NuGet > Run workflow, on a branch (not on a tag):
 #   - "version" empty: publishes the <Version> of the selected branch;
 #   - "version" filled in (e.g. 3.4.0.3 or 3.5.0-beta.1): publishes that version, overriding <Version>.
-#   CLI: gh workflow run nuget.yml --ref master -f version=3.4.0.3
+#   CLI: gh workflow run nuget.yml --ref main -f version=3.4.0.3
 # The tests run on every target framework (Windows) before the package is built and published.
-# Merging into master does NOT publish anything.
+# Merging into main does NOT publish anything.
 #
 # Authentication: NuGet Trusted Publishing (https://learn.microsoft.com/nuget/nuget-org/trusted-publishing),
 # no long-lived API key. The NuGet/login step exchanges the GitHub OIDC token for a temporary API key (valid 1 hour).
