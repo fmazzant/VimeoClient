@@ -133,7 +133,7 @@ All the operations of the Vimeo API 3.4 OpenAPI specification are implemented.
 | Property | Section | Notes |
 |---|---|---|
 | `client.Me` / `client.Users` | Users: essentials, feeds, followers, pictures, watch history, LMS packages | `Me` works on the authenticated user |
-| `client.Videos` | Videos: essentials, uploads, versions, audio tracks, text tracks, transcripts, thumbnails, chapters, animated thumbnails, fragments, trimming, credits, comments, tags, privacy, AI | |
+| `client.Videos` | Videos: essentials, uploads, versions, audio tracks, text tracks, transcripts, thumbnails, chapters, animated thumbnails, fragments, trimming, credits, comments, tags, privacy, AI, ratings (thumbs up/down, 1-5 stars) | |
 | `client.Channels` | Channels: essentials, categories, moderators, members, subscriptions, tags, videos | includes comments, credits, thumbnails, privacy and text tracks of channel videos |
 | `client.ShowCases` | Showcases (albums): essentials, videos, custom logos and thumbnails | |
 | `client.Folders` | Folders (projects): essentials, items, videos | |
@@ -202,6 +202,17 @@ var thumbset = client.Videos.CreateASetOfAnimatedThumbnailsForAVideo(videoId, du
 var answer = client.Videos.AskAQuestionAboutAVideo(videoId, "What is the video about?");
 var metadata = client.Videos.GetAIGeneratedVideoMetadata(videoId); // title, description and tags
 var dubbing = client.Videos.StartAIAudioDubbingForAVideo(videoId, language: "it");
+```
+
+### Videos: ratings
+
+Viewers can rate a video with thumbs up/down or 1-5 stars (Vimeo, May 2026, paid plans).
+Not to be confused with the content ratings (`GetAllContentRatings`), the content classification of a video.
+
+```c#
+client.Videos.EditTheRatingSettingsOfAVideo(videoId, enabled: true, type: VideoRatingType.stars);
+var settings = client.Videos.GetTheRatingSettingsOfAVideo(videoId);
+var ratings = await client.Videos.GetTheRatingsOfAVideoAsync(videoId); // total, average, thumbs up/down
 ```
 
 ### Videos: versions, audio tracks, transcripts, fragments, trimming

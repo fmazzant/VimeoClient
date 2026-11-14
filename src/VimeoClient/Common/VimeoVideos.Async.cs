@@ -1868,6 +1868,52 @@ namespace Mafesoft.VimeoClient.Common
 
         #endregion
 
+        #region [ Ratings ]
+
+        /// <summary>
+        /// This method returns the summary of the ratings (thumbs up/down or 1-5 stars) that the viewers gave to the specified video.
+        /// Not to be confused with the content ratings (<see cref="GetAllContentRatings"/>).
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
+        /// <returns>
+        /// 200 OK	The ratings of the video were returned.
+        /// </returns>
+        public virtual Task<RestResult<VideoRatings>> GetTheRatingsOfAVideoAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
+            .Command($"/videos/{video_id}/ratings")
+            .GetAsync<VideoRatings>(cancellationToken);
+
+        /// <summary>
+        /// This method returns the rating settings of the specified video: whether the rating widget is enabled and its type.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
+        /// <returns>
+        /// 200 OK	The rating settings of the video were returned.
+        /// </returns>
+        public virtual Task<RestResult<VideoRatingSettings>> GetTheRatingSettingsOfAVideoAsync(int video_id, CancellationToken cancellationToken = default) => RootAuthorization()
+            .Command($"/videos/{video_id}/ratings/settings")
+            .GetAsync<VideoRatingSettings>(cancellationToken);
+
+        /// <summary>
+        /// This method edits the rating settings of the specified video: it enables or disables the rating widget and sets its type.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="enabled">Whether the viewers can rate the video.</param>
+        /// <param name="type">The type of the rating widget: thumbs (up/down) or stars (1-5).</param>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
+        /// <returns>
+        /// 200 OK	The rating settings of the video were edited.
+        /// </returns>
+        public virtual Task<RestResult<VideoRatingSettings>> EditTheRatingSettingsOfAVideoAsync(int video_id, bool? enabled = null, VideoRatingType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            .Command($"/videos/{video_id}/ratings/settings")
+            .JsonPayload(new VimeoPayload()
+                .Set("enabled", enabled)
+                .Set("type", VimeoRestBuilderExtensions.ToVimeoValue(type)))
+            .PatchAsync<VideoRatingSettings>(cancellationToken);
+
+        #endregion
+
         #region [ Moderation ]
 
         /// <summary>

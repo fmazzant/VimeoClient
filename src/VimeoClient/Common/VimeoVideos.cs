@@ -1793,6 +1793,49 @@ namespace Mafesoft.VimeoClient.Common
 
         #endregion
 
+        #region [ Ratings ]
+
+        /// <summary>
+        /// This method returns the summary of the ratings (thumbs up/down or 1-5 stars) that the viewers gave to the specified video.
+        /// Not to be confused with the content ratings (<see cref="GetAllContentRatings"/>).
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 200 OK	The ratings of the video were returned.
+        /// </returns>
+        public virtual RestResult<VideoRatings> GetTheRatingsOfAVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/ratings")
+            .Get<VideoRatings>();
+
+        /// <summary>
+        /// This method returns the rating settings of the specified video: whether the rating widget is enabled and its type.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <returns>
+        /// 200 OK	The rating settings of the video were returned.
+        /// </returns>
+        public virtual RestResult<VideoRatingSettings> GetTheRatingSettingsOfAVideo(int video_id) => RootAuthorization()
+            .Command($"/videos/{video_id}/ratings/settings")
+            .Get<VideoRatingSettings>();
+
+        /// <summary>
+        /// This method edits the rating settings of the specified video: it enables or disables the rating widget and sets its type.
+        /// </summary>
+        /// <param name="video_id">The ID of the video.</param>
+        /// <param name="enabled">Whether the viewers can rate the video.</param>
+        /// <param name="type">The type of the rating widget: thumbs (up/down) or stars (1-5).</param>
+        /// <returns>
+        /// 200 OK	The rating settings of the video were edited.
+        /// </returns>
+        public virtual RestResult<VideoRatingSettings> EditTheRatingSettingsOfAVideo(int video_id, bool? enabled = null, VideoRatingType? type = null) => RootAuthorization()
+            .Command($"/videos/{video_id}/ratings/settings")
+            .JsonPayload(new VimeoPayload()
+                .Set("enabled", enabled)
+                .Set("type", VimeoRestBuilderExtensions.ToVimeoValue(type)))
+            .Patch<VideoRatingSettings>();
+
+        #endregion
+
         #region [ Moderation ]
 
         /// <summary>
