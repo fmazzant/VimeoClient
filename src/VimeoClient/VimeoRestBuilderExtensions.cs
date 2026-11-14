@@ -32,6 +32,7 @@ namespace Mafesoft.VimeoClient
     using Mafesoft.RestClient;
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Mafesoft.VimeoClient.Response;
 
     /// <summary>
@@ -152,6 +153,16 @@ namespace Mafesoft.VimeoClient
         /// <returns></returns>
         public static RestResult<Pagination<T>> GetPagination<T>(this RestBuilder root, Func<RestBuilder> rootAuthorization)
             => root.Get<Pagination<T>>().WithNavigation(rootAuthorization);
+
+        /// <summary>
+        /// Executes the GET asynchronously and wires the Next() and Previous() navigation of the returned page.
+        /// </summary>
+        /// <typeparam name="T">The item's type</typeparam>
+        /// <param name="root">The rest builder</param>
+        /// <param name="rootAuthorization">The factory used to build the next and previous calls</param>
+        /// <returns></returns>
+        public static async Task<RestResult<Pagination<T>>> GetPaginationAsync<T>(this RestBuilder root, Func<RestBuilder> rootAuthorization)
+            => (await root.GetAsync<Pagination<T>>().ConfigureAwait(false)).WithNavigation(rootAuthorization);
 
         /// <summary>
         /// Wires the Next() and Previous() navigation of a pagination result.

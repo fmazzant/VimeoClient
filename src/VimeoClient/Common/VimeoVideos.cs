@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Videos
     /// https://developer.vimeo.com/api/reference/videos
     /// </summary>
-    public class VimeoVideos
+    public partial class VimeoVideos
     {
         /// <summary>
         /// Vimeo Properties

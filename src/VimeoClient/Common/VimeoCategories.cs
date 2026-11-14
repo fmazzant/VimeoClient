@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Common
     /// See our Help Center for more details.
     /// https://developer.vimeo.com/api/reference/categories
     /// </summary>
-    public class VimeoCategories
+    public partial class VimeoCategories
     {
         /// <summary>
         /// Vimeo Properties

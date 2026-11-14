@@ -47,7 +47,7 @@ namespace Mafesoft.VimeoClient.Common
     /// See our Help Center for more details.
     /// https://developer.vimeo.com/api/reference/channels
     /// </summary>
-    public class VimeoChannels
+    public partial class VimeoChannels
     {
         /// <summary>
         /// Vimeo Properties
