@@ -46,7 +46,7 @@ namespace Mafesoft.VimeoClient
     /// Version Vimeo API: 3.4
     /// https://developer.vimeo.com/api/guides/start#versioning
     /// </summary>
-    public class Vimeo
+    public partial class Vimeo
     {
         /// <summary>
         /// Properites

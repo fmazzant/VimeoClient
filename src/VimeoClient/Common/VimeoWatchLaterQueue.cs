@@ -38,7 +38,7 @@ namespace Mafesoft.VimeoClient
     /// The Watch Later queue contains all the videos that a Vimeo member has flagged to watch later.
     /// https://developer.vimeo.com/api/reference/watch-later-queue
     /// </summary>
-    public class VimeoWatchLaterQueue
+    public partial class VimeoWatchLaterQueue
     {
         /// <summary>
         /// Vimeo Properties

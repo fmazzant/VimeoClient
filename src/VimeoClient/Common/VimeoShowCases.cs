@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Common
     /// For more information about showcases, see our Help Center.
     /// https://developer.vimeo.com/api/reference/showcases
     /// </summary>
-    public class VimeoShowCases
+    public partial class VimeoShowCases
     {
         /// <summary>
         /// Vimeo Properties

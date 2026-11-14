@@ -19,6 +19,7 @@ If VimeoClient is useful to you, consider [supporting the project](#support). â˜
 |---|---|
 | Whole Vimeo API 3.4 | Every operation of the OpenAPI specification, grouped by section as in the Vimeo reference (`client.Videos`, `client.Live`, `client.OnDemand`â€¦). See [Sections](#sections) |
 | Typed models and parameters | Responses mapped to classes, enums for the documented values, body classes for create and update requests. See [On Demand](#on-demand) |
+| Synchronous and asynchronous | Every method has an asynchronous version (`...Async`) for ASP.NET Core and UI applications. See [Usage](#usage) |
 | Pagination | `Pagination<T>` with `Next()` and `Previous()` to load the other pages. See [Sections](#sections) |
 | Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
 | API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
@@ -84,6 +85,20 @@ var me = client.Me.GetTheUser(); // the authenticated user
 var user = client.Users.GetTheUser(userId); // another user
 ```
 
+Every method has an asynchronous version with the `Async` suffix, which returns a `Task`:
+
+```c#
+var me = await client.Me.GetTheUserAsync();
+var videos = await client.Videos.GetAllTheVideosThatTheUserHasUploadedAsync(per_page: 25);
+```
+
+Every asynchronous method accepts an optional `CancellationToken` as last parameter;
+when the token is canceled the request is stopped and the result has `IsCancellationRequested` set:
+
+```c#
+var video = await client.Videos.GetSpecificVideoAsync(videoId, cancellationToken);
+```
+
 ## Vimeo API version
 
 Every request sends the header `Accept: application/vnd.vimeo.*+json;version=3.4`.
@@ -122,7 +137,7 @@ All the operations of the Vimeo API 3.4 OpenAPI specification are implemented.
 | `client.Channels` | Channels: essentials, categories, moderators, members, subscriptions, tags, videos | includes comments, credits, thumbnails, privacy and text tracks of channel videos |
 | `client.ShowCases` | Showcases (albums): essentials, videos, custom logos and thumbnails | |
 | `client.Folders` | Folders (projects): essentials, items, videos | |
-| `client.Live` | Live events: essentials, destinations, sessions, graphics, scenes, thumbnails, videos | asynchronous methods (`...Async`) |
+| `client.Live` | Live events: essentials, destinations, sessions, graphics, scenes, thumbnails, videos | asynchronous methods only (`...Async`) |
 | `client.OnDemand` | On Demand: pages, backgrounds, genres, posters, promotions, purchases, regions, seasons, videos | |
 | `client.EmbedPresets` | Embed presets: essentials, custom logos, folders, timeline events, videos | |
 | `client.Analytics` | Analytics of the user's content | Enterprise plan |

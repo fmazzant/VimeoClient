@@ -41,7 +41,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Vimeo Pro, Business, and Premium subscribers have access to this feature.For more information, see our Help Center.
     /// https://developer.vimeo.com/api/reference/portfolios
     /// </summary>
-    public class VimeoPortfolios
+    public partial class VimeoPortfolios
     {
         /// <summary>
         /// Vimeo Properties

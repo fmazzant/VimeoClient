@@ -37,7 +37,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Payments: payment methods, subscriptions and subscription plans of the Vimeo payments service.
     /// https://developer.vimeo.com/api/reference/payments
     /// </summary>
-    public class VimeoPayments
+    public partial class VimeoPayments
     {
         /// <summary>
         /// Vimeo Properties

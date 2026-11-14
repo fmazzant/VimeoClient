@@ -40,7 +40,7 @@ namespace Mafesoft.VimeoClient.Common
     /// For more information, see our Help Center FAQs for On Demand purchases or On Demand sales.
     /// https://developer.vimeo.com/api/reference/on-demand
     /// </summary>
-    public class VimeoOnDemand
+    public partial class VimeoOnDemand
     {
         /// <summary>
         /// Vimeo Properties

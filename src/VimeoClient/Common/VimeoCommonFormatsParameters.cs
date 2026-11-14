@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient
     /// https://developer.vimeo.com/guidelines/rate-limiting
     /// https://developer.vimeo.com/api/common-formats#json-filter
     /// </summary>
-    public class VimeoCommonFormatsParameters
+    public partial class VimeoCommonFormatsParameters
     {
         /// <summary>
         /// Vimeo Properties

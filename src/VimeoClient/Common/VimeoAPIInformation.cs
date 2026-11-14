@@ -30,6 +30,7 @@
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
+    using System.Threading;
     using System.Threading.Tasks;
     using Mafesoft.VimeoClient.Model;
 
@@ -76,9 +77,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// This method returns the full OpenAPI specification for the Vimeo API.
         /// </summary>
+        /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<APIApp>> GetTheAPISpecificationAsync() => RootAuthorization()
-            .GetAsync<APIApp>();
+        public virtual Task<RestResult<APIApp>> GetTheAPISpecificationAsync(CancellationToken cancellationToken = default) => RootAuthorization()
+            .GetAsync<APIApp>(cancellationToken);
 
         /// <summary>
         /// This method returns the full OpenAPI specification for the Vimeo API.
