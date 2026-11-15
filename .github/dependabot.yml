@@ -20,11 +20,7 @@ updates:
         update-types: [ minor, patch ]
 
   - package-ecosystem: github-actions
-     directories: 
-      - "/src/VimeoClient"
-      - "/tests/VimeoClient.Tests"
-      - "/tests/VimeoClient.IntegrationTests"
-      - "/samples/VimeoClientSampleApp"
+ directory: "/"
     schedule:
       interval: weekly
       day: monday
