@@ -6,7 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: nuget
-    directory: 
+    directories: 
       - "/src/VimeoClient"
       - "/tests/VimeoClient.Tests"
       - "/tests/VimeoClient.IntegrationTests"
