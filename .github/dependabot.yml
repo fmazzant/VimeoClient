@@ -6,7 +6,11 @@
 version: 2
 updates:
   - package-ecosystem: nuget
-    directory: "/"
+    directory: 
+      - "/src/VimeoClient"
+      - "/tests/VimeoClient.Tests"
+      - "/tests/VimeoClient.IntegrationTests"
+      - "/samples/VimeoClientSampleApp"
     schedule:
       interval: weekly
       day: monday
