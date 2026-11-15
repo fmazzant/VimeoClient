@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mafesoft.RestClient" Version="3.0.0" />
+    <PackageReference Include="Mafesoft.RestClient" Version="3.2.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.404" PrivateAssets="All" />
   </ItemGroup>
 
