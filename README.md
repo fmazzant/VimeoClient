@@ -24,6 +24,7 @@ If VimeoClient is useful to you, consider [supporting the project](#support). â˜
 | Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
 | API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
 | Certificate pinning | Standard TLS validation, or validation plus a list of trusted certificate hashes. See [Certificates](#certificates) |
+| Resumable upload | `UploadAsync` uploads a file with the tus approach: chunks, progress, resume after an error or with `ResumeUploadAsync`. See [Upload a video](#upload-a-video) |
 | Rate limits and retry | Optional retry of 429 and transient errors with backoff and `Retry-After`; `GetRateLimit()` reads the `X-RateLimit-*` headers. See [Rate limits and retry](#rate-limits-and-retry) |
 | Latest Vimeo features | Chapters, animated thumbnails, AI (questions, metadata, dubbing), audio tracks, transcripts, trimming, live scenes and destinations, analytics, webhooks, team custom metadata. See [Videos: chapters, animated thumbnails, AI](#videos-chapters-animated-thumbnails-ai) |
 | Tested | xUnit tests on every target framework against a fake HTTP handler, run on every push and pull request. See [Tests](#tests) |
@@ -125,6 +126,41 @@ The version of the `Mafesoft.VimeoClient` package has three numbers, for example
 - `ValidCertificates` empty: the standard TLS validation is used.
 - `ValidCertificates` set: the certificate must be valid **and** its hash must be in the list (pinning).
 - `Debug = true` skips the validation: use it only in development (default `false`).
+
+## Upload a video
+
+`UploadAsync` uploads a video with the resumable [tus approach](https://developer.vimeo.com/api/upload/videos): it
+creates the video, sends the file in chunks (`PATCH` with `Upload-Offset`) and, after an error, asks Vimeo how much it
+received (`HEAD`) and continues from there.
+
+```c#
+var progress = new Progress<long>(bytes => Console.WriteLine($"{bytes} bytes sent"));
+
+VimeoUploadResult upload = await client.Videos.UploadAsync(
+    "movie.mp4",
+    new VideoUploadParameters { Name = "My movie", PrivacyView = VideoPrivacyView.unlisted },
+    progress,
+    cancellationToken);
+
+if (upload.IsCompleted)
+{
+    Console.WriteLine($"Uploaded: {upload.Video.Link}");   // Vimeo now transcodes the video
+}
+else
+{
+    // Not completed (network down, cancelled...): resume later with the same file
+    using var file = File.OpenRead("movie.mp4");
+    upload = await client.Videos.ResumeUploadAsync(upload.UploadLink, file, progress);
+}
+```
+
+- `UploadAsync(Stream, ...)` uploads a seekable stream (a file or a memory stream) from its current position.
+- It does not throw for HTTP errors: `IsCompleted`, `Offset`, `StatusCode` and `Exception` tell what happened, and
+  `Creation` is the result of the request that created the video.
+- The chunks are 8 MB (`VimeoVideos.UploadChunkSize`); a failed chunk is sent again up to 3 times in a row
+  (`VimeoVideos.UploadChunkRetries`), each time from the offset received by Vimeo.
+- The chunks go to the upload link (the Vimeo upload servers) with the standard TLS validation: `ValidCertificates`
+  pins the certificates of the API end point only.
 
 ## Rate limits and retry
 
