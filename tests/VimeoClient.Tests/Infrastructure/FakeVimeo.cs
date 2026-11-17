@@ -63,6 +63,25 @@ namespace Mafesoft.VimeoClient.Tests.Infrastructure
             return this;
         }
 
+        /// <summary>Returns the responses in order for the requests whose path is <paramref name="path"/>; the last one is repeated.</summary>
+        public FakeHttpHandler RespondInOrder(string path, params Func<HttpResponseMessage>[] sequence)
+        {
+            var next = 0;
+            responses.Add((r => r.RequestUri.AbsolutePath == path, () => sequence[Math.Min(next++, sequence.Length - 1)]()));
+            return this;
+        }
+
+        /// <summary>A JSON response with the given status and headers.</summary>
+        public static HttpResponseMessage Response(HttpStatusCode status, string json = "{}", params (string Name, string Value)[] headers)
+        {
+            var response = Json(json, status);
+            foreach (var (name, value) in headers)
+            {
+                response.Headers.TryAddWithoutValidation(name, value);
+            }
+            return response;
+        }
+
         /// <summary>Returns <paramref name="bytes"/> for the requests whose path is <paramref name="path"/>.</summary>
         public FakeHttpHandler RespondBytes(string path, byte[] bytes, string contentType)
         {

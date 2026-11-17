@@ -24,6 +24,7 @@ If VimeoClient is useful to you, consider [supporting the project](#support). â˜
 | Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
 | API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
 | Certificate pinning | Standard TLS validation, or validation plus a list of trusted certificate hashes. See [Certificates](#certificates) |
+| Rate limits and retry | Optional retry of 429 and transient errors with backoff and `Retry-After`; `GetRateLimit()` reads the `X-RateLimit-*` headers. See [Rate limits and retry](#rate-limits-and-retry) |
 | Latest Vimeo features | Chapters, animated thumbnails, AI (questions, metadata, dubbing), audio tracks, transcripts, trimming, live scenes and destinations, analytics, webhooks, team custom metadata. See [Videos: chapters, animated thumbnails, AI](#videos-chapters-animated-thumbnails-ai) |
 | Tested | xUnit tests on every target framework against a fake HTTP handler, run on every push and pull request. See [Tests](#tests) |
 
@@ -124,6 +125,34 @@ The version of the `Mafesoft.VimeoClient` package has three numbers, for example
 - `ValidCertificates` empty: the standard TLS validation is used.
 - `ValidCertificates` set: the certificate must be valid **and** its hash must be in the list (pinning).
 - `Debug = true` skips the validation: use it only in development (default `false`).
+
+## Rate limits and retry
+
+Vimeo limits the number of requests ([rate limiting](https://developer.vimeo.com/guidelines/rate-limiting)) and answers
+`429 Too Many Requests` over the limit. The retry is off by default; turn it on with `MaxRetries`:
+
+```c#
+var client = new Vimeo(new VimeoProperties
+{
+    AccessToken = "...",
+    MaxRetries = 3,                          // 429, 408, 500, 502, 503, 504, network errors and timeouts
+    RetryDelay = TimeSpan.FromSeconds(1),    // 1s, 2s, 4s (+ jitter); the Retry-After header is honored
+});
+
+var result = client.Videos.GetSpecificVideo(123);
+int retries = result.RetryCount;
+
+VimeoRateLimit limit = result.GetRateLimit();   // X-RateLimit-Limit, -Remaining, -Reset; null without headers
+if (limit?.Remaining == 0)
+{
+    Console.WriteLine($"Limit reached, it resets at {limit.Reset}");
+}
+```
+
+- Only GET, HEAD, PUT and DELETE are retried by default: a POST or a PATCH (creating a video, copying it) could be
+  executed twice. Set `RetryNonIdempotentMethods = true` to retry them too.
+- The `Retry-After` header is honored up to 30 seconds. A `429` without it is retried with the backoff delays: use
+  `GetRateLimit().Reset` to wait for the end of the window yourself.
 
 ## Sections
 

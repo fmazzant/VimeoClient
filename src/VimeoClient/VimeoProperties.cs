@@ -94,5 +94,27 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         public bool Debug { get; set; }
             = false;
+
+        /// <summary>
+        /// How many times a request is sent again after a transient error: 429 Too Many Requests, 408, 500, 502, 503,
+        /// 504, a network error or a timeout. 0 (the default) turns the retry off.
+        /// The delay doubles at every attempt, starting from <see cref="RetryDelay"/> (with jitter); the Retry-After header
+        /// of the response is honored (up to 30 seconds). See <see cref="VimeoRateLimit"/> for the rate limit headers.
+        /// </summary>
+        public int MaxRetries { get; set; }
+            = 0;
+
+        /// <summary>
+        /// The delay before the first retry; it doubles at every retry. 1 second by default.
+        /// </summary>
+        public System.TimeSpan RetryDelay { get; set; }
+            = System.TimeSpan.FromSeconds(1);
+
+        /// <summary>
+        /// Whether POST and PATCH requests are retried too. False by default: a POST or a PATCH that reached Vimeo before
+        /// the error (for example creating a video) would be executed twice. GET, HEAD, PUT and DELETE are always retried.
+        /// </summary>
+        public bool RetryNonIdempotentMethods { get; set; }
+            = false;
     }
 }
