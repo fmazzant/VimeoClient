@@ -40,25 +40,25 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the channels related to this category.
         /// </summary>
         [JsonPropertyName("channels")]
-        public CategoryConnectionEntityChannel Channel { get; set; }
+        public CategoryConnectionEntityChannel? Channel { get; set; }
 
         /// <summary>
         /// Information about the groups related to this category.
         /// </summary>
         [JsonPropertyName("groups")]
-        public CategoryConnectionEntityGroup Group { get; set; }
+        public CategoryConnectionEntityGroup? Group { get; set; }
 
         /// <summary>
         /// Information about the users related to this category.
         /// </summary>
         [JsonPropertyName("users")]
-        public CategoryConnectionEntityUser User { get; set; }
+        public CategoryConnectionEntityUser? User { get; set; }
 
         /// <summary>
         /// Information about the videos related to this category.
         /// </summary>
         [JsonPropertyName("videos")]
-        public CategoryConnectionEntityVideo Video { get; set; }
+        public CategoryConnectionEntityVideo? Video { get; set; }
     }
 
     /// <summary>

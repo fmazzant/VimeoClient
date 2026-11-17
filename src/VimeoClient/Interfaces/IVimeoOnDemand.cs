@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -253,7 +255,7 @@ namespace Mafesoft.VimeoClient.Common
             OnDemandGenrePagesFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             OnDemandGenrePagesSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -766,7 +768,7 @@ namespace Mafesoft.VimeoClient.Common
             OnDemandGenrePagesFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             OnDemandGenrePagesSort? sort = null);
 
         /// <summary>

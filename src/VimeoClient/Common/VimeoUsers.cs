@@ -95,28 +95,28 @@ namespace Mafesoft.VimeoClient.Common
             .EnableFormUrlEncoded(true)
             .FormUrlEncoded((pars) =>
             {
-                pars.Add("available_for_hire", body.AvailableForHire);
-                pars.Add("bio", body.Bio);
-                pars.Add("content_filter", body.ContentFilter);
-                pars.Add("gender", body.Gender);
-                pars.Add("link", body.Link);
-                pars.Add("name", body.Name);
-                pars.Add("password", body.Password);
-                pars.Add("grid", body.Grid);
-                pars.Add("masonry", body.Masonry);
-                pars.Add("profile_preferences", body.ProfilePreferences);
-                pars.Add("videos.privacy.add", body.VideosPrivacyAdd);
-                pars.Add("videos.privacy.comments", body.VideosPrivacyComments);
-                pars.Add("anybody", body.Anybody);
-                pars.Add("contacts", body.Contacts);
-                pars.Add("nobody", body.Nobody);
-                pars.Add("videos.privacy.download", body.VideosPrivacyDownload);
-                pars.Add("videos.privacy.embed", body.VideosPrivacyEmbed);
-                pars.Add("whitelist", body.Whitelist);
-                pars.Add("videos.privacy.view", body.VideosPrivacyView);
-                pars.Add("disable", body.Disable);
-                pars.Add("unlisted", body.Unlisted);
-                pars.Add("users", body.Users);
+                pars.Add("available_for_hire", body.AvailableForHire!); // null is sent as an empty value, as before
+                pars.Add("bio", body.Bio!); // null is sent as an empty value, as before
+                pars.Add("content_filter", body.ContentFilter!); // null is sent as an empty value, as before
+                pars.Add("gender", body.Gender!); // null is sent as an empty value, as before
+                pars.Add("link", body.Link!); // null is sent as an empty value, as before
+                pars.Add("name", body.Name!); // null is sent as an empty value, as before
+                pars.Add("password", body.Password!); // null is sent as an empty value, as before
+                pars.Add("grid", body.Grid!); // null is sent as an empty value, as before
+                pars.Add("masonry", body.Masonry!); // null is sent as an empty value, as before
+                pars.Add("profile_preferences", body.ProfilePreferences!); // null is sent as an empty value, as before
+                pars.Add("videos.privacy.add", body.VideosPrivacyAdd!); // null is sent as an empty value, as before
+                pars.Add("videos.privacy.comments", body.VideosPrivacyComments!); // null is sent as an empty value, as before
+                pars.Add("anybody", body.Anybody!); // null is sent as an empty value, as before
+                pars.Add("contacts", body.Contacts!); // null is sent as an empty value, as before
+                pars.Add("nobody", body.Nobody!); // null is sent as an empty value, as before
+                pars.Add("videos.privacy.download", body.VideosPrivacyDownload!); // null is sent as an empty value, as before
+                pars.Add("videos.privacy.embed", body.VideosPrivacyEmbed!); // null is sent as an empty value, as before
+                pars.Add("whitelist", body.Whitelist!); // null is sent as an empty value, as before
+                pars.Add("videos.privacy.view", body.VideosPrivacyView!); // null is sent as an empty value, as before
+                pars.Add("disable", body.Disable!); // null is sent as an empty value, as before
+                pars.Add("unlisted", body.Unlisted!); // null is sent as an empty value, as before
+                pars.Add("users", body.Users!); // null is sent as an empty value, as before
             })
             .Patch<User>();
 
@@ -451,9 +451,9 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The zipped proxy package was created and returned (raw bytes of the zip file).
         /// </returns>
         public virtual RestResult<byte[]> DownloadAnLmsPackageForAVideo(int user_id, int video_id,
-            string standard = null,
-            string course_title = null,
-            string scoring_algorithm = null,
+            string? standard = null,
+            string? course_title = null,
+            string? scoring_algorithm = null,
             double? passing_score = null,
             double? completion_threshold = null) => RootAuthorization()
             .Command($"/users/{user_id}/lms/download/{video_id}")
@@ -477,7 +477,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        public virtual RestResult<Pagination<User>> SearchForUsers(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null)
+        public virtual RestResult<Pagination<User>> SearchForUsers(UserDirection? direction = null, string? query = null, UserSort? sort = null, int? page = null, int? per_page = null)
         {
             var root = RootUserAuthorization();
 

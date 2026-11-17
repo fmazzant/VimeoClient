@@ -41,12 +41,12 @@ namespace Mafesoft.VimeoClient.Model
         /// drugs, language, nudity, safe, unrated, violence.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The description of this content rating.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

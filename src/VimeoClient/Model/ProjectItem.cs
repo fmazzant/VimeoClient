@@ -43,48 +43,48 @@ namespace Mafesoft.VimeoClient.Model
         /// The project item type: file, folder, live_event, showcase, video.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the item was shared.
         /// </summary>
         [JsonPropertyName("shared_date")]
-        public string SharedDate { get; set; }
+        public string? SharedDate { get; set; }
 
         /// <summary>
         /// The project item file.
         /// </summary>
         [JsonPropertyName("file")]
-        public VimeoFile File { get; set; }
+        public VimeoFile? File { get; set; }
 
         /// <summary>
         /// The project item folder.
         /// </summary>
         [JsonPropertyName("folder")]
-        public Project Folder { get; set; }
+        public Project? Folder { get; set; }
 
         /// <summary>
         /// The project item event.
         /// </summary>
         [JsonPropertyName("live_event")]
-        public LiveEventRecurring LiveEvent { get; set; }
+        public LiveEventRecurring? LiveEvent { get; set; }
 
         /// <summary>
         /// The project item showcase.
         /// </summary>
         [JsonPropertyName("showcase")]
-        public Album Showcase { get; set; }
+        public Album? Showcase { get; set; }
 
         /// <summary>
         /// The project item video.
         /// </summary>
         [JsonPropertyName("video")]
-        public Video Video { get; set; }
+        public Video? Video { get; set; }
 
         /// <summary>
         /// The item's metadata.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public Dictionary<string, JsonElement> Metadata { get; set; }
+        public Dictionary<string, JsonElement>? Metadata { get; set; }
     }
 }

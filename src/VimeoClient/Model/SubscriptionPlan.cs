@@ -42,67 +42,67 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the currency in which the price of the plan is expressed.
         /// </summary>
         [JsonPropertyName("currency")]
-        public SubscriptionPlanCurrency Currency { get; set; }
+        public SubscriptionPlanCurrency? Currency { get; set; }
 
         /// <summary>
         /// Information about the plan discount.
         /// </summary>
         [JsonPropertyName("discount")]
-        public SubscriptionPlanDiscount Discount { get; set; }
+        public SubscriptionPlanDiscount? Discount { get; set; }
 
         /// <summary>
         /// The SKUs of the plans.
         /// </summary>
         [JsonPropertyName("id")]
-        public SubscriptionPlanId Id { get; set; }
+        public SubscriptionPlanId? Id { get; set; }
 
         /// <summary>
         /// The URLs and entitlements of the associated products in the store.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public SubscriptionPlanMetadata Metadata { get; set; }
+        public SubscriptionPlanMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The name of the plan.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Information about the prices associated with the plan.
         /// </summary>
         [JsonPropertyName("price")]
-        public SubscriptionPlanPrice Price { get; set; }
+        public SubscriptionPlanPrice? Price { get; set; }
 
         /// <summary>
         /// The price formatted for the selected locale with the associated currency symbol.
         /// </summary>
         [JsonPropertyName("price_formatted")]
-        public SubscriptionPlanPriceFormatted PriceFormatted { get; set; }
+        public SubscriptionPlanPriceFormatted? PriceFormatted { get; set; }
 
         /// <summary>
         /// Information about the plan's promotion.
         /// </summary>
         [JsonPropertyName("promotion")]
-        public SubscriptionPlanPromotion Promotion { get; set; }
+        public SubscriptionPlanPromotion? Promotion { get; set; }
 
         /// <summary>
         /// The plan type.
         /// </summary>
         [JsonPropertyName("tier")]
-        public string Tier { get; set; }
+        public string? Tier { get; set; }
 
         /// <summary>
         /// The URI of the plan.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -114,7 +114,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The promotion code.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The promotion discount percentage.
@@ -126,19 +126,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The price map of the promotion.
         /// </summary>
         [JsonPropertyName("price")]
-        public SubscriptionPlanPromotionPrice Price { get; set; }
+        public SubscriptionPlanPromotionPrice? Price { get; set; }
 
         /// <summary>
         /// The price map of the promotion formatted for the selected locale.
         /// </summary>
         [JsonPropertyName("price_formatted")]
-        public SubscriptionPlanPromotionPriceFormatted PriceFormatted { get; set; }
+        public SubscriptionPlanPromotionPriceFormatted? PriceFormatted { get; set; }
 
         /// <summary>
         /// Information about the URIs associated with the promotion.
         /// </summary>
         [JsonPropertyName("uri")]
-        public SubscriptionPlanPromotionUri Uri { get; set; }
+        public SubscriptionPlanPromotionUri? Uri { get; set; }
     }
 
     /// <summary>
@@ -150,13 +150,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the annual promotion.
         /// </summary>
         [JsonPropertyName("annual")]
-        public string Annual { get; set; }
+        public string? Annual { get; set; }
 
         /// <summary>
         /// The URI of the monthly promotion.
         /// </summary>
         [JsonPropertyName("monthly")]
-        public string Monthly { get; set; }
+        public string? Monthly { get; set; }
     }
 
     /// <summary>
@@ -168,19 +168,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The promotional annual price, charged annually.
         /// </summary>
         [JsonPropertyName("annual")]
-        public string Annual { get; set; }
+        public string? Annual { get; set; }
 
         /// <summary>
         /// The promotional monthly price, charged annually.
         /// </summary>
         [JsonPropertyName("annual_monthly")]
-        public string AnnualMonthly { get; set; }
+        public string? AnnualMonthly { get; set; }
 
         /// <summary>
         /// The promotional monthly price, charged monthly.
         /// </summary>
         [JsonPropertyName("monthly")]
-        public string Monthly { get; set; }
+        public string? Monthly { get; set; }
     }
 
     /// <summary>
@@ -216,25 +216,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The annual price, charged annually.
         /// </summary>
         [JsonPropertyName("annual")]
-        public string Annual { get; set; }
+        public string? Annual { get; set; }
 
         /// <summary>
         /// The monthly price, charged annually.
         /// </summary>
         [JsonPropertyName("annual_monthly")]
-        public string AnnualMonthly { get; set; }
+        public string? AnnualMonthly { get; set; }
 
         /// <summary>
         /// The monthly price, charged monthly.
         /// </summary>
         [JsonPropertyName("monthly")]
-        public string Monthly { get; set; }
+        public string? Monthly { get; set; }
 
         /// <summary>
         /// The weekly price, charged weekly.
         /// </summary>
         [JsonPropertyName("weekly")]
-        public string Weekly { get; set; }
+        public string? Weekly { get; set; }
     }
 
     /// <summary>
@@ -276,13 +276,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The URLs and entitlements of the associated products in the store.
         /// </summary>
         [JsonPropertyName("entitlements")]
-        public SubscriptionPlanMetadataEntitlements Entitlements { get; set; }
+        public SubscriptionPlanMetadataEntitlements? Entitlements { get; set; }
 
         /// <summary>
         /// -
         /// </summary>
         [JsonPropertyName("interactions")]
-        public SubscriptionPlanMetadataInteractions Interactions { get; set; }
+        public SubscriptionPlanMetadataInteractions? Interactions { get; set; }
 
         /// <summary>
         /// Whether the product is a bandwidth product.
@@ -300,13 +300,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The tax basis of display prices when the payments service returns a display tax.
         /// </summary>
         [JsonPropertyName("price_tax")]
-        public SubscriptionPlanMetadataPriceTax PriceTax { get; set; }
+        public SubscriptionPlanMetadataPriceTax? PriceTax { get; set; }
 
         /// <summary>
         /// Information about the purchased product.
         /// </summary>
         [JsonPropertyName("purchased_product")]
-        public SubscriptionPlanMetadataPurchasedProduct PurchasedProduct { get; set; }
+        public SubscriptionPlanMetadataPurchasedProduct? PurchasedProduct { get; set; }
     }
 
     /// <summary>
@@ -324,7 +324,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The display price of the purchased product formatted for the selected locale.
         /// </summary>
         [JsonPropertyName("display_price_formatted")]
-        public string DisplayPriceFormatted { get; set; }
+        public string? DisplayPriceFormatted { get; set; }
 
         /// <summary>
         /// Whether the purchased product is billed as a monthly subscription.
@@ -348,7 +348,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The resolved display country.
         /// </summary>
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         /// <summary>
         /// Whether the returned prices include tax.
@@ -360,7 +360,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The display tax basis.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 
     /// <summary>
@@ -372,7 +372,7 @@ namespace Mafesoft.VimeoClient.Model
         /// -
         /// </summary>
         [JsonPropertyName("purchase")]
-        public SubscriptionPlanMetadataInteractionsPurchase Purchase { get; set; }
+        public SubscriptionPlanMetadataInteractionsPurchase? Purchase { get; set; }
     }
 
     /// <summary>
@@ -384,13 +384,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The purchase status of the product.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The redirect URIs associated with the plan.
         /// </summary>
         [JsonPropertyName("uri")]
-        public SubscriptionPlanMetadataInteractionsPurchaseUri Uri { get; set; }
+        public SubscriptionPlanMetadataInteractionsPurchaseUri? Uri { get; set; }
     }
 
     /// <summary>
@@ -402,25 +402,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The redirect URI for the annual plan in the user's cart.
         /// </summary>
         [JsonPropertyName("annual")]
-        public string Annual { get; set; }
+        public string? Annual { get; set; }
 
         /// <summary>
         /// The redirect URI for the free trial in the user's cart.
         /// </summary>
         [JsonPropertyName("free_trial")]
-        public string FreeTrial { get; set; }
+        public string? FreeTrial { get; set; }
 
         /// <summary>
         /// The redirect URI for the monthly plan in the user's cart.
         /// </summary>
         [JsonPropertyName("monthly")]
-        public string Monthly { get; set; }
+        public string? Monthly { get; set; }
 
         /// <summary>
         /// The redirect URI for the weekly plan in the user's cart.
         /// </summary>
         [JsonPropertyName("weekly")]
-        public string Weekly { get; set; }
+        public string? Weekly { get; set; }
     }
 
     /// <summary>
@@ -438,7 +438,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The list of entitlement parameters corresponding to the tier.
         /// </summary>
         [JsonPropertyName("params")]
-        public SubscriptionPlanMetadataEntitlementsParams Params { get; set; }
+        public SubscriptionPlanMetadataEntitlementsParams? Params { get; set; }
     }
 
     /// <summary>
@@ -450,31 +450,31 @@ namespace Mafesoft.VimeoClient.Model
         /// AI credits entitlements information.
         /// </summary>
         [JsonPropertyName("ai")]
-        public SubscriptionPlanMetadataEntitlementsParamsAi Ai { get; set; }
+        public SubscriptionPlanMetadataEntitlementsParamsAi? Ai { get; set; }
 
         /// <summary>
         /// Bandwidth entitlement information.
         /// </summary>
         [JsonPropertyName("bandwidth")]
-        public SubscriptionPlanMetadataEntitlementsParamsBandwidth Bandwidth { get; set; }
+        public SubscriptionPlanMetadataEntitlementsParamsBandwidth? Bandwidth { get; set; }
 
         /// <summary>
         /// The restricted video storage limit for the tier, formatted as a human-readable byte string (e.g. "1GB", "50GB", "7TB"). Null means unlimited.
         /// </summary>
         [JsonPropertyName("restricted_video_storage_limit")]
-        public string RestrictedVideoStorageLimit { get; set; }
+        public string? RestrictedVideoStorageLimit { get; set; }
 
         /// <summary>
         /// Team seats entitlement information.
         /// </summary>
         [JsonPropertyName("seats")]
-        public SubscriptionPlanMetadataEntitlementsParamsSeats Seats { get; set; }
+        public SubscriptionPlanMetadataEntitlementsParamsSeats? Seats { get; set; }
 
         /// <summary>
         /// Video storage entitlement information.
         /// </summary>
         [JsonPropertyName("storage")]
-        public SubscriptionPlanMetadataEntitlementsParamsStorage Storage { get; set; }
+        public SubscriptionPlanMetadataEntitlementsParamsStorage? Storage { get; set; }
 
         /// <summary>
         /// The number of team seats included with the tier for the monthly plan.
@@ -486,25 +486,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The amount of video storage for the user's periodic quota for the annual plan. Null means unlimited.
         /// </summary>
         [JsonPropertyName("video_storage_periodic_quota")]
-        public string VideoStoragePeriodicQuota { get; set; }
+        public string? VideoStoragePeriodicQuota { get; set; }
 
         /// <summary>
         /// The video storage total lifetime cap for the annual plan.
         /// </summary>
         [JsonPropertyName("video_storage_quota_cap")]
-        public string VideoStorageQuotaCap { get; set; }
+        public string? VideoStorageQuotaCap { get; set; }
 
         /// <summary>
         /// The video storage quota period for the annual plan.
         /// </summary>
         [JsonPropertyName("video_storage_quota_period")]
-        public string VideoStorageQuotaPeriod { get; set; }
+        public string? VideoStorageQuotaPeriod { get; set; }
 
         /// <summary>
         /// The unit of the video storage for the user's periodic quota for the annual plan.
         /// </summary>
         [JsonPropertyName("video_storage_quota_unit")]
-        public string VideoStorageQuotaUnit { get; set; }
+        public string? VideoStorageQuotaUnit { get; set; }
     }
 
     /// <summary>
@@ -516,25 +516,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The amount of video storage for the user's periodic quota for the annual plan. Null means unlimited.
         /// </summary>
         [JsonPropertyName("periodic_quota")]
-        public string PeriodicQuota { get; set; }
+        public string? PeriodicQuota { get; set; }
 
         /// <summary>
         /// The video storage total lifetime cap for the annual plan.
         /// </summary>
         [JsonPropertyName("quota_cap")]
-        public string QuotaCap { get; set; }
+        public string? QuotaCap { get; set; }
 
         /// <summary>
         /// The video storage quota period for the annual plan.
         /// </summary>
         [JsonPropertyName("quota_period")]
-        public string QuotaPeriod { get; set; }
+        public string? QuotaPeriod { get; set; }
 
         /// <summary>
         /// The unit of the video storage for the user's periodic quota for the annual plan.
         /// </summary>
         [JsonPropertyName("quota_unit")]
-        public string QuotaUnit { get; set; }
+        public string? QuotaUnit { get; set; }
     }
 
     /// <summary>
@@ -558,7 +558,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The team seats mode for the user's team.
         /// </summary>
         [JsonPropertyName("mode")]
-        public string Mode { get; set; }
+        public string? Mode { get; set; }
 
         /// <summary>
         /// The number of team seats included with the tier for the monthly plan.
@@ -576,13 +576,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The amount of bandwidth for the user's period.
         /// </summary>
         [JsonPropertyName("periodic_quota")]
-        public string PeriodicQuota { get; set; }
+        public string? PeriodicQuota { get; set; }
 
         /// <summary>
         /// The quota period unit for the user's bandwidth quota.
         /// </summary>
         [JsonPropertyName("quota_period")]
-        public string QuotaPeriod { get; set; }
+        public string? QuotaPeriod { get; set; }
     }
 
     /// <summary>
@@ -594,7 +594,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The quota period unit for the user's AI credits quota.
         /// </summary>
         [JsonPropertyName("credits_period")]
-        public string CreditsPeriod { get; set; }
+        public string? CreditsPeriod { get; set; }
 
         /// <summary>
         /// The number of AI credits for the user's period.
@@ -612,19 +612,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The SKU of the annual plan.
         /// </summary>
         [JsonPropertyName("annual")]
-        public string Annual { get; set; }
+        public string? Annual { get; set; }
 
         /// <summary>
         /// The SKU of the monthly plan.
         /// </summary>
         [JsonPropertyName("monthly")]
-        public string Monthly { get; set; }
+        public string? Monthly { get; set; }
 
         /// <summary>
         /// The SKU of the weekly plan.
         /// </summary>
         [JsonPropertyName("weekly")]
-        public string Weekly { get; set; }
+        public string? Weekly { get; set; }
     }
 
     /// <summary>
@@ -648,12 +648,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The ISO code of the associated currency.
         /// </summary>
         [JsonPropertyName("currency_code")]
-        public string CurrencyCode { get; set; }
+        public string? CurrencyCode { get; set; }
 
         /// <summary>
         /// The symbol of the associated currency.
         /// </summary>
         [JsonPropertyName("symbol")]
-        public string Symbol { get; set; }
+        public string? Symbol { get; set; }
     }
 }

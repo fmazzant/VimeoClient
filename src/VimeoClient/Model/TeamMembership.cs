@@ -48,7 +48,7 @@ namespace Mafesoft.VimeoClient.Model
         /// AI permission policy names that are switched off at the account level, so they cannot be granted to the member until re-enabled in the account's Vimeo AI settings.
         /// </summary>
         [JsonPropertyName("account_disabled_ai_features")]
-        public string[] AccountDisabledAiFeatures { get; set; }
+        public string[]? AccountDisabledAiFeatures { get; set; }
 
         /// <summary>
         /// Whether the team membership is currently active.
@@ -66,25 +66,25 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about permission policies that can apply to the team member.
         /// </summary>
         [JsonPropertyName("applicable_permission_policies")]
-        public TeamMembershipApplicablePermissionPolicies ApplicablePermissionPolicies { get; set; }
+        public TeamMembershipApplicablePermissionPolicies? ApplicablePermissionPolicies { get; set; }
 
         /// <summary>
         /// An array of the team roles this team member can have.
         /// </summary>
         [JsonPropertyName("applicable_roles")]
-        public TeamRole[] ApplicableRoles { get; set; }
+        public TeamRole[]? ApplicableRoles { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the invite was sent.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The team member's email.
         /// </summary>
         [JsonPropertyName("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// Whether the team member should be excluded from single sign-on.
@@ -108,37 +108,37 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL for the invited user to join the team. The value of this field is null if the invited user has already joined.
         /// </summary>
         [JsonPropertyName("invite_url")]
-        public string InviteUrl { get; set; }
+        public string? InviteUrl { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the invite was accepted.
         /// </summary>
         [JsonPropertyName("joined_time")]
-        public string JoinedTime { get; set; }
+        public string? JoinedTime { get; set; }
 
         /// <summary>
         /// The metadata of the team membership.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public TeamMembershipMetadata Metadata { get; set; }
+        public TeamMembershipMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the team membership was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The allowable permission actions of the team user.
         /// </summary>
         [JsonPropertyName("permission_actions")]
-        public string[] PermissionActions { get; set; }
+        public string[]? PermissionActions { get; set; }
 
         /// <summary>
         /// The team member's permission level.
         /// </summary>
         [JsonPropertyName("permission_level")]
-        public string PermissionLevel { get; set; }
+        public string? PermissionLevel { get; set; }
 
         /// <summary>
         /// Whether the team member has been reminded about the invite.
@@ -150,37 +150,37 @@ namespace Mafesoft.VimeoClient.Model
         /// The resource key of the team membership.
         /// </summary>
         [JsonPropertyName("resource_key")]
-        public string ResourceKey { get; set; }
+        public string? ResourceKey { get; set; }
 
         /// <summary>
         /// The team member's role, translated.
         /// </summary>
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         /// <summary>
         /// The status of the team membership invite.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The URI of the team membership resource.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The team member. The value of this field is null if the user hasn't joined the team yet.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -192,7 +192,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A list of resource URIs related to the user.
         /// </summary>
         [JsonPropertyName("connections")]
-        public TeamMembershipMetadataConnections Connections { get; set; }
+        public TeamMembershipMetadataConnections? Connections { get; set; }
     }
 
     /// <summary>
@@ -204,19 +204,19 @@ namespace Mafesoft.VimeoClient.Model
         /// A standard connection object indicating how to return groups that this team user is a part of.
         /// </summary>
         [JsonPropertyName("groups")]
-        public TeamMembershipMetadataConnectionsGroups Groups { get; set; }
+        public TeamMembershipMetadataConnectionsGroups? Groups { get; set; }
 
         /// <summary>
         /// Information about the team owner.
         /// </summary>
         [JsonPropertyName("owner")]
-        public TeamMembershipMetadataConnectionsOwner Owner { get; set; }
+        public TeamMembershipMetadataConnectionsOwner? Owner { get; set; }
 
         /// <summary>
         /// A standard connection object indicating how to return personal team folders.
         /// </summary>
         [JsonPropertyName("personal_team_folder")]
-        public TeamMembershipMetadataConnectionsPersonalTeamFolder PersonalTeamFolder { get; set; }
+        public TeamMembershipMetadataConnectionsPersonalTeamFolder? PersonalTeamFolder { get; set; }
     }
 
     /// <summary>
@@ -228,7 +228,7 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The total number of personal team folders on this connection.
@@ -240,7 +240,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -252,13 +252,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The display name of the team owner.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The team owner's email address.
         /// </summary>
         [JsonPropertyName("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// The total number of remaining team member invites.
@@ -270,7 +270,7 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The total number of owners on this connection.
@@ -288,7 +288,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -300,13 +300,13 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -318,25 +318,25 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of AI permission policies that can apply to the team member.
         /// </summary>
         [JsonPropertyName("ai")]
-        public TeamMembershipApplicablePermissionPoliciesAiItem[] Ai { get; set; }
+        public TeamMembershipApplicablePermissionPoliciesAiItem[]? Ai { get; set; }
 
         /// <summary>
         /// An array of folder permission policies that can apply to the team member.
         /// </summary>
         [JsonPropertyName("folder")]
-        public TeamMembershipApplicablePermissionPoliciesFolderItem[] Folder { get; set; }
+        public TeamMembershipApplicablePermissionPoliciesFolderItem[]? Folder { get; set; }
 
         /// <summary>
         /// An array of regional delivery permission policies that can apply to the team member.
         /// </summary>
         [JsonPropertyName("regional_delivery")]
-        public TeamMembershipApplicablePermissionPoliciesRegionalDeliveryItem[] RegionalDelivery { get; set; }
+        public TeamMembershipApplicablePermissionPoliciesRegionalDeliveryItem[]? RegionalDelivery { get; set; }
 
         /// <summary>
         /// An array of video permission policies that can apply to the team member.
         /// </summary>
         [JsonPropertyName("video")]
-        public TeamMembershipApplicablePermissionPoliciesVideoItem[] Video { get; set; }
+        public TeamMembershipApplicablePermissionPoliciesVideoItem[]? Video { get; set; }
     }
 
     /// <summary>
@@ -348,31 +348,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The time at which the permission policy was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// The display description of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The display name of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The time at which the permission policy was last modified.
         /// </summary>
         [JsonPropertyName("modified_on")]
-        public string ModifiedOn { get; set; }
+        public string? ModifiedOn { get; set; }
 
         /// <summary>
         /// The name of the permission policy.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The permission actions associated with the policy.
@@ -384,7 +384,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the permission policy.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -396,31 +396,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The time at which the permission policy was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// The display description of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The display name of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The time at which the permission policy was last modified.
         /// </summary>
         [JsonPropertyName("modified_on")]
-        public string ModifiedOn { get; set; }
+        public string? ModifiedOn { get; set; }
 
         /// <summary>
         /// The name of the permission policy.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The permission actions associated with the policy.
@@ -432,7 +432,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the permission policy.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -444,31 +444,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The time at which the permission policy was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// The display description of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The display name of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The time at which the permission policy was last modified.
         /// </summary>
         [JsonPropertyName("modified_on")]
-        public string ModifiedOn { get; set; }
+        public string? ModifiedOn { get; set; }
 
         /// <summary>
         /// The name of the permission policy.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The permission actions associated with the policy.
@@ -480,7 +480,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the permission policy.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -492,31 +492,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The time at which the permission policy was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// The display description of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The display name of the permission policy, translated where applicable.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The time at which the permission policy was last modified.
         /// </summary>
         [JsonPropertyName("modified_on")]
-        public string ModifiedOn { get; set; }
+        public string? ModifiedOn { get; set; }
 
         /// <summary>
         /// The name of the permission policy.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The permission actions associated with the policy.
@@ -528,6 +528,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the permission policy.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

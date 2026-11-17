@@ -42,19 +42,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the fragment was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// Metadata about the fragments.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public VideoFragmentsMetadata Metadata { get; set; }
+        public VideoFragmentsMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the fragment was last updated.
         /// </summary>
         [JsonPropertyName("modified_on")]
-        public string ModifiedOn { get; set; }
+        public string? ModifiedOn { get; set; }
 
         /// <summary>
         /// The time in milliseconds of the fragment's _inpoint_, or the time from the start of the video that marks the beginning of the fragment.
@@ -66,13 +66,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the video fragment.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -84,7 +84,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information that is connected to this resource.
         /// </summary>
         [JsonPropertyName("connections")]
-        public VideoFragmentsMetadataConnections Connections { get; set; }
+        public VideoFragmentsMetadataConnections? Connections { get; set; }
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the videos that belong to this channel.
         /// </summary>
         [JsonPropertyName("clip")]
-        public VideoFragmentsMetadataConnectionsClip Clip { get; set; }
+        public VideoFragmentsMetadataConnectionsClip? Clip { get; set; }
     }
 
     /// <summary>
@@ -108,12 +108,12 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

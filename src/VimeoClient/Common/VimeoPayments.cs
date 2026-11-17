@@ -86,7 +86,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of payments service payment methods was returned.
         /// </returns>
-        public virtual RestResult<Pagination<PaymentMethod>> GetAllThePaymentMethods(string cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null) => RootAuthorization()
+        public virtual RestResult<Pagination<PaymentMethod>> GetAllThePaymentMethods(string? cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null) => RootAuthorization()
             .Command("/me/payment_methods")
             .OptionalParameter("cardmember_name", cardmember_name)
             .OptionalParameter("show_disabled", show_disabled)

@@ -47,6 +47,6 @@ namespace Mafesoft.VimeoClient.Response
         /// data
         /// </summary>
         [JsonPropertyName("data")]
-        public T[] Data { get; set; }
+        public T[]? Data { get; set; }
     }
 }

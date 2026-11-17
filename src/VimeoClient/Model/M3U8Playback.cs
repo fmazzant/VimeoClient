@@ -40,6 +40,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The M3U8 playback URL of the live event.
         /// </summary>
         [JsonPropertyName("m3u8_playback_url")]
-        public string M3U8PlaybackUrl { get; set; }
+        public string? M3U8PlaybackUrl { get; set; }
     }
 }

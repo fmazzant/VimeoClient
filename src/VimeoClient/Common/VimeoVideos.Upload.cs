@@ -51,18 +51,18 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// The result of the request that created the video (POST /me/videos); null for a resumed upload.
         /// </summary>
-        public RestResult<Video> Creation { get; internal set; }
+        public RestResult<Video>? Creation { get; internal set; }
 
         /// <summary>
         /// The created video (its uri, link and upload object); null if it could not be created, or for a resumed upload.
         /// </summary>
-        public Video Video => Creation?.Content;
+        public Video? Video => Creation?.Content;
 
         /// <summary>
         /// The tus upload link: pass it to <see cref="VimeoVideos.ResumeUploadAsync(string, Stream, IProgress{long}, CancellationToken)"/>
         /// to continue an upload that did not complete.
         /// </summary>
-        public string UploadLink { get; internal set; }
+        public string? UploadLink { get; internal set; }
 
         /// <summary>
         /// The size of the file, in bytes.
@@ -87,7 +87,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <summary>
         /// Why the upload did not complete, or null.
         /// </summary>
-        public Exception Exception { get; internal set; }
+        public Exception? Exception { get; internal set; }
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="progress">Reports the bytes received by Vimeo after every chunk (optional).</param>
         /// <param name="cancellationToken">The token to cancel the upload; resume it later with <see cref="ResumeUploadAsync(string, Stream, IProgress{long}, CancellationToken)"/>.</param>
         /// <returns>The created video and the state of the upload. It does not throw for HTTP errors: see <see cref="VimeoUploadResult.IsCompleted"/> and <see cref="VimeoUploadResult.Exception"/>.</returns>
-        public virtual async Task<VimeoUploadResult> UploadAsync(string filePath, VideoUploadParameters parameters = null, IProgress<long> progress = null, CancellationToken cancellationToken = default)
+        public virtual async Task<VimeoUploadResult> UploadAsync(string filePath, VideoUploadParameters? parameters = null, IProgress<long>? progress = null, CancellationToken cancellationToken = default)
         {
             if (filePath == null) throw new ArgumentNullException(nameof(filePath));
 
@@ -142,7 +142,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="progress">Reports the bytes received by Vimeo after every chunk (optional).</param>
         /// <param name="cancellationToken">The token to cancel the upload; resume it later with <see cref="ResumeUploadAsync(string, Stream, IProgress{long}, CancellationToken)"/>.</param>
         /// <returns>The created video and the state of the upload. It does not throw for HTTP errors: see <see cref="VimeoUploadResult.IsCompleted"/> and <see cref="VimeoUploadResult.Exception"/>.</returns>
-        public virtual async Task<VimeoUploadResult> UploadAsync(Stream stream, VideoUploadParameters parameters = null, IProgress<long> progress = null, CancellationToken cancellationToken = default)
+        public virtual async Task<VimeoUploadResult> UploadAsync(Stream stream, VideoUploadParameters? parameters = null, IProgress<long>? progress = null, CancellationToken cancellationToken = default)
         {
             CheckUploadStream(stream);
 
@@ -154,7 +154,8 @@ namespace Mafesoft.VimeoClient.Common
 
             var result = new VimeoUploadResult { Size = size };
             result.Creation = await UploadAVideoAsync(parameters, cancellationToken).ConfigureAwait(false);
-            if (!result.Creation.IsSuccessStatusCode || string.IsNullOrEmpty(result.Video?.Upload?.UploadLink))
+            var uploadLink = result.Video?.Upload?.UploadLink;
+            if (!result.Creation.IsSuccessStatusCode || uploadLink == null || uploadLink.Length == 0)
             {
                 result.StatusCode = result.Creation.Response != null ? result.Creation.StatusCode : (HttpStatusCode?)null;
                 result.Exception = result.Creation.Exception
@@ -162,7 +163,7 @@ namespace Mafesoft.VimeoClient.Common
                 return result;
             }
 
-            result.UploadLink = result.Video.Upload.UploadLink;
+            result.UploadLink = uploadLink;
             await SendChunksAsync(result, stream, start, progress, readOffsetFirst: false, cancellationToken).ConfigureAwait(false);
             return result;
         }
@@ -175,7 +176,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="progress">Reports the bytes received by Vimeo after every chunk (optional).</param>
         /// <param name="cancellationToken">The token to cancel the upload.</param>
         /// <returns>The state of the upload. It does not throw for HTTP errors: see <see cref="VimeoUploadResult.IsCompleted"/> and <see cref="VimeoUploadResult.Exception"/>.</returns>
-        public virtual async Task<VimeoUploadResult> ResumeUploadAsync(string uploadLink, Stream stream, IProgress<long> progress = null, CancellationToken cancellationToken = default)
+        public virtual async Task<VimeoUploadResult> ResumeUploadAsync(string uploadLink, Stream stream, IProgress<long>? progress = null, CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrEmpty(uploadLink)) throw new ArgumentNullException(nameof(uploadLink));
             CheckUploadStream(stream);
@@ -195,7 +196,7 @@ namespace Mafesoft.VimeoClient.Common
             }
         }
 
-        private async Task SendChunksAsync(VimeoUploadResult result, Stream stream, long start, IProgress<long> progress, bool readOffsetFirst, CancellationToken cancellationToken)
+        private async Task SendChunksAsync(VimeoUploadResult result, Stream stream, long start, IProgress<long>? progress, bool readOffsetFirst, CancellationToken cancellationToken)
         {
             var client = Vimeo.UploadHttpClient;
             var buffer = new byte[(int)Math.Max(1, Math.Min(Math.Max(1, UploadChunkSize), result.Size))];

@@ -169,7 +169,7 @@ namespace Mafesoft.VimeoClient
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null)
         {
             var root = RootAuthorization()
@@ -230,7 +230,7 @@ namespace Mafesoft.VimeoClient
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null)
         {
             var root = RootAuthorization()

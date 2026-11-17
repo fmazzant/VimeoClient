@@ -41,49 +41,49 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the folder was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the user last performed an action on the folder.
         /// </summary>
         [JsonPropertyName("last_user_action_event_date")]
-        public string LastUserActionEventDate { get; set; }
+        public string? LastUserActionEventDate { get; set; }
 
         /// <summary>
         /// The URL to access the folder in a browser.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the folder.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public ProjectMetadata Metadata { get; set; }
+        public ProjectMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the folder was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The name of the folder.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The privacy settings of the folder.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public ProjectPrivacy Privacy { get; set; }
+        public ProjectPrivacy? Privacy { get; set; }
 
         /// <summary>
         /// The owner of the folder.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ namespace Mafesoft.VimeoClient.Model
         /// Who can view the folder (for instance: anybody, nobody, team).
         /// </summary>
         [JsonPropertyName("view")]
-        public string View { get; set; }
+        public string? View { get; set; }
     }
 
     /// <summary>
@@ -107,7 +107,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information that is connected to this resource.
         /// </summary>
         [JsonPropertyName("connections")]
-        public ProjectConnection Connections { get; set; }
+        public ProjectConnection? Connections { get; set; }
     }
 
     /// <summary>
@@ -119,30 +119,30 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the subfolders of the folder.
         /// </summary>
         [JsonPropertyName("folders")]
-        public GenericRelatedEntity Folders { get; set; }
+        public GenericRelatedEntity? Folders { get; set; }
 
         /// <summary>
         /// Information about the items (videos and subfolders) of the folder.
         /// </summary>
         [JsonPropertyName("items")]
-        public GenericRelatedEntity Items { get; set; }
+        public GenericRelatedEntity? Items { get; set; }
 
         /// <summary>
         /// Information about the parent folder.
         /// </summary>
         [JsonPropertyName("parent_folder")]
-        public GenericRelatedEntity ParentFolder { get; set; }
+        public GenericRelatedEntity? ParentFolder { get; set; }
 
         /// <summary>
         /// Information about the users of the folder.
         /// </summary>
         [JsonPropertyName("users")]
-        public GenericRelatedEntity Users { get; set; }
+        public GenericRelatedEntity? Users { get; set; }
 
         /// <summary>
         /// Information about the videos of the folder.
         /// </summary>
         [JsonPropertyName("videos")]
-        public GenericRelatedEntity Videos { get; set; }
+        public GenericRelatedEntity? Videos { get; set; }
     }
 }

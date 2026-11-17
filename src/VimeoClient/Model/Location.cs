@@ -40,25 +40,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The parsed city.
         /// </summary>
         [JsonPropertyName("city")]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         /// <summary>
         /// The parsed country.
         /// </summary>
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         /// <summary>
         /// The ISO 3166-1 alpha-2 code of the country.
         /// </summary>
         [JsonPropertyName("country_iso_code")]
-        public string CountryIsoCode { get; set; }
+        public string? CountryIsoCode { get; set; }
 
         /// <summary>
         /// The formatted address.
         /// </summary>
         [JsonPropertyName("formatted_address")]
-        public string FormattedAddress { get; set; }
+        public string? FormattedAddress { get; set; }
 
         /// <summary>
         /// The latitude.
@@ -76,24 +76,24 @@ namespace Mafesoft.VimeoClient.Model
         /// The parsed neighborhood.
         /// </summary>
         [JsonPropertyName("neighborhood")]
-        public string Neighborhood { get; set; }
+        public string? Neighborhood { get; set; }
 
         /// <summary>
         /// The parsed state.
         /// </summary>
         [JsonPropertyName("state")]
-        public string State { get; set; }
+        public string? State { get; set; }
 
         /// <summary>
         /// The ISO code of the state.
         /// </summary>
         [JsonPropertyName("state_iso_code")]
-        public string StateIsoCode { get; set; }
+        public string? StateIsoCode { get; set; }
 
         /// <summary>
         /// The parsed sub-locality.
         /// </summary>
         [JsonPropertyName("sub_locality")]
-        public string SubLocality { get; set; }
+        public string? SubLocality { get; set; }
     }
 }

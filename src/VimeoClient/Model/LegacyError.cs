@@ -40,12 +40,12 @@ namespace Mafesoft.VimeoClient.Model
         /// User-friendly error message.
         /// </summary>
         [JsonPropertyName("error")]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
 
         /// <summary>
         /// The error as string
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => ErrorMessage;
+        public override string ToString() => ErrorMessage ?? string.Empty;
     }
 }

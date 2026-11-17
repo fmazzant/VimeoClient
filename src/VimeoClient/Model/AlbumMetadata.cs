@@ -41,12 +41,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The connections of the showcase (available_videos, videos...).
         /// </summary>
         [JsonPropertyName("connections")]
-        public Dictionary<string, GenericRelatedEntity> Connections { get; set; }
+        public Dictionary<string, GenericRelatedEntity>? Connections { get; set; }
 
         /// <summary>
         /// The interactions of the authenticated user with the showcase (add_custom_thumbnails, add_live_events, add_logos, add_to, add_videos...).
         /// </summary>
         [JsonPropertyName("interactions")]
-        public Dictionary<string, GenericRelatedEntity> Interactions { get; set; }
+        public Dictionary<string, GenericRelatedEntity>? Interactions { get; set; }
     }
 }

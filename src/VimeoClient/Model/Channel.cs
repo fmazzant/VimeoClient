@@ -40,55 +40,55 @@ namespace Mafesoft.VimeoClient.Model
         /// The active icon for the category.
         /// </summary>
         [JsonPropertyName("categories")]
-        public Category[] Categories { get; set; }
+        public Category[]? Categories { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the channel was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The display name that identifies the channel.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// A brief explanation of the channel's content.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The banner that appears by default at the top of the channel page.
         /// </summary>
         [JsonPropertyName("header")]
-        public Picture Header { get; set; }
+        public Picture? Header { get; set; }
 
         /// <summary>
         /// The URL to access the channel in a browser.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the channel.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public ChannelMetadata Metadata { get; set; }
+        public ChannelMetadata? Metadata { get; set; }
 
         /// <summary>
         /// An array of all tags assigned to the channel.
         /// </summary>
         [JsonPropertyName("tags")]
-        public Tag[] Tags { get; set; }
+        public Tag[]? Tags { get; set; }
 
         /// <summary>
         /// The Vimeo user who owns the channel.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// Override ToString method

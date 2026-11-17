@@ -40,6 +40,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The permissible actions related to the category.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public Follow Follow { get; set; }
+        public Follow? Follow { get; set; }
     }
 }

@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -127,7 +129,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -147,7 +149,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -167,7 +169,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         Task<RestResult<Pagination<Video>>> GetAllTheVideosThatTheUserHasUploadedAsync(int user_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             VideoDirection? direction = null,
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
@@ -175,7 +177,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? include_team_content = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -193,7 +195,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideosThatTheUserHasUploadedAsync(string containing_uri = null,
+        Task<RestResult<Pagination<Video>>> GetAllTheVideosThatTheUserHasUploadedAsync(string? containing_uri = null,
             VideoDirection? direction = null,
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
@@ -201,7 +203,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? include_team_content = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -220,11 +222,11 @@ namespace Mafesoft.VimeoClient.Common
         Task<RestResult<Pagination<Video>>> SearchForVideosAsync(string query,
             VideoDirection? direction = null,
             VideoSearchFilter? filter = null,
-            string links = null,
+            string? links = null,
             int? page = null,
             int? per_page = null,
             VideoSort? sort = null,
-            string uris = null, CancellationToken cancellationToken = default);
+            string? uris = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method deletes one or more videos belonging to the specified user.
@@ -260,7 +262,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied video was created.
         /// </returns>
-        Task<RestResult<Video>> CopyAVideoAsync(int user_id, int video_id, string name = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Video>> CopyAVideoAsync(int user_id, int video_id, string? name = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method creates a copy of the specified video of the authenticated user.
@@ -271,7 +273,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied video was created.
         /// </returns>
-        Task<RestResult<Video>> MeCopyAVideoAsync(int video_id, string name = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Video>> MeCopyAVideoAsync(int video_id, string? name = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method sets, updates, or clears custom metadata values on a single video.
@@ -358,7 +360,7 @@ namespace Mafesoft.VimeoClient.Common
             VideoDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoCreditSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -487,7 +489,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int user_id, int video_id, string[] add_to = null, string[] remove_from = null, CancellationToken cancellationToken = default);
+        Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int user_id, int video_id, string[]? add_to = null, string[]? remove_from = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method adds the specified video to, or removes it from, a list of showcases.
@@ -497,7 +499,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int video_id, string[] add_to = null, string[] remove_from = null, CancellationToken cancellationToken = default);
+        Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int video_id, string[]? add_to = null, string[]? remove_from = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns all the showcases that contain the specified video.
@@ -1101,7 +1103,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The suggested questions and answers.
         /// </returns>
-        Task<RestResult<AiResponse<AiQuestion[]>>> GetSuggestedQuestionsForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AiResponse<AiQuestion[]>>> GetSuggestedQuestionsForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method asks a question about a video and returns an AI-generated answer with relevant quotes.
@@ -1114,7 +1116,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The AI-generated answer.
         /// </returns>
-        Task<RestResult<AiResponse<AiQuestion>>> AskAQuestionAboutAVideoAsync(int video_id, string question, string language = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AiResponse<AiQuestion>>> AskAQuestionAboutAVideoAsync(int video_id, string question, string? language = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns AI-generated metadata for the specified video: title, description and tags.
@@ -1158,7 +1160,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 202 Accepted	The transcription job was queued.
         /// </returns>
-        Task<RestResult<AiStatus>> StartAITranscriptionForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AiStatus>> StartAITranscriptionForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns the audio dubbing jobs of a video.
@@ -1169,7 +1171,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The dubbing status was returned.
         /// </returns>
-        Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAIDubbingStatusForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAIDubbingStatusForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method starts an AI audio dubbing job for a video.
@@ -1183,7 +1185,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 202 Accepted	The dubbing job was queued.
         /// </returns>
-        Task<RestResult<AiStatus>> StartAIAudioDubbingForAVideoAsync(int video_id, string language, string accent = null, AiDubbingApiVersion? dubbing_api_version = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AiStatus>> StartAIAudioDubbingForAVideoAsync(int video_id, string language, string? accent = null, AiDubbingApiVersion? dubbing_api_version = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns the subtitle translation jobs of a video.
@@ -1194,7 +1196,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The subtitle translation status was returned.
         /// </returns>
-        Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAISubtitleTranslationStatusForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAISubtitleTranslationStatusForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method starts an AI subtitle translation job for a video.
@@ -1254,11 +1256,11 @@ namespace Mafesoft.VimeoClient.Common
         Task<RestResult<AudioTrack>> CreateAnAudioTrackForAVideoVersionAsync(int video_id, int version_id,
             string upload_approach,
             long? upload_size = null,
-            string upload_link = null,
-            string upload_redirect_url = null,
-            string language_code = null,
-            string type = null,
-            string provenance = null,
+            string? upload_link = null,
+            string? upload_redirect_url = null,
+            string? language_code = null,
+            string? type = null,
+            string? provenance = null,
             bool? active = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -1288,9 +1290,9 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The audio track was edited.
         /// </returns>
         Task<RestResult<AudioTrack>> EditAnAudioTrackOfAVideoVersionAsync(int video_id, int version_id, string audiotrack_id,
-            string language_code = null,
-            string type = null,
-            string provenance = null,
+            string? language_code = null,
+            string? type = null,
+            string? provenance = null,
             bool? active = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -1441,8 +1443,8 @@ namespace Mafesoft.VimeoClient.Common
             VideoDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
-            string sort = null, CancellationToken cancellationToken = default);
+            string? query = null,
+            string? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns the reasons that content of the specified type can be reported for on Vimeo.
@@ -1472,7 +1474,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="progress">Reports the bytes received by Vimeo after every chunk (optional).</param>
         /// <param name="cancellationToken">The token to cancel the upload; resume it later with <see cref="ResumeUploadAsync(string, Stream, IProgress{long}, CancellationToken)"/>.</param>
         /// <returns>The created video and the state of the upload. It does not throw for HTTP errors: see <see cref="VimeoUploadResult.IsCompleted"/> and <see cref="VimeoUploadResult.Exception"/>.</returns>
-        Task<VimeoUploadResult> UploadAsync(string filePath, VideoUploadParameters parameters = null, IProgress<long> progress = null, CancellationToken cancellationToken = default);
+        Task<VimeoUploadResult> UploadAsync(string filePath, VideoUploadParameters? parameters = null, IProgress<long>? progress = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Uploads a video with the resumable tus approach: creates the video (POST /me/videos), sends the stream in chunks
@@ -1483,7 +1485,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="progress">Reports the bytes received by Vimeo after every chunk (optional).</param>
         /// <param name="cancellationToken">The token to cancel the upload; resume it later with <see cref="ResumeUploadAsync(string, Stream, IProgress{long}, CancellationToken)"/>.</param>
         /// <returns>The created video and the state of the upload. It does not throw for HTTP errors: see <see cref="VimeoUploadResult.IsCompleted"/> and <see cref="VimeoUploadResult.Exception"/>.</returns>
-        Task<VimeoUploadResult> UploadAsync(Stream stream, VideoUploadParameters parameters = null, IProgress<long> progress = null, CancellationToken cancellationToken = default);
+        Task<VimeoUploadResult> UploadAsync(Stream stream, VideoUploadParameters? parameters = null, IProgress<long>? progress = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Continues a tus upload that did not complete: reads from Vimeo the bytes already received (HEAD) and sends the rest.
@@ -1493,7 +1495,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="progress">Reports the bytes received by Vimeo after every chunk (optional).</param>
         /// <param name="cancellationToken">The token to cancel the upload.</param>
         /// <returns>The state of the upload. It does not throw for HTTP errors: see <see cref="VimeoUploadResult.IsCompleted"/> and <see cref="VimeoUploadResult.Exception"/>.</returns>
-        Task<VimeoUploadResult> ResumeUploadAsync(string uploadLink, Stream stream, IProgress<long> progress = null, CancellationToken cancellationToken = default);
+        Task<VimeoUploadResult> ResumeUploadAsync(string uploadLink, Stream stream, IProgress<long>? progress = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method checks whether the authenticated user owns the specified video.
@@ -1554,13 +1556,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInWhichTheUserAppears(int user_id,
-            VideoDirection? direction = null,
-            VideoFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheVideosInWhichTheUserAppears(int user_id,
+            VideoDirection? direction = null,
+            VideoFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoSort? sort = null);
 
         /// <summary>
@@ -1574,12 +1576,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInWhichTheUserAppears(VideoDirection? direction = null,
-            VideoFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheVideosInWhichTheUserAppears(VideoDirection? direction = null,
+            VideoFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoSort? sort = null);
 
         /// <summary>
@@ -1597,16 +1599,16 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> GetAllTheVideosThatTheUserHasUploaded(int user_id,
-            string containing_uri = null,
-            VideoDirection? direction = null,
-            VideoFilter? filter = null,
-            bool? filter_embeddable = null,
-            bool? filter_playable = null,
-            bool? include_team_content = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheVideosThatTheUserHasUploaded(int user_id,
+            string? containing_uri = null,
+            VideoDirection? direction = null,
+            VideoFilter? filter = null,
+            bool? filter_embeddable = null,
+            bool? filter_playable = null,
+            bool? include_team_content = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoSort? sort = null);
 
         /// <summary>
@@ -1623,15 +1625,15 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> GetAllTheVideosThatTheUserHasUploaded(string containing_uri = null,
-            VideoDirection? direction = null,
-            VideoFilter? filter = null,
-            bool? filter_embeddable = null,
-            bool? filter_playable = null,
-            bool? include_team_content = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheVideosThatTheUserHasUploaded(string? containing_uri = null,
+            VideoDirection? direction = null,
+            VideoFilter? filter = null,
+            bool? filter_embeddable = null,
+            bool? filter_playable = null,
+            bool? include_team_content = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoSort? sort = null);
 
         /// <summary>
@@ -1646,14 +1648,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="uris">A comma-separated list of video URIs to find.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> SearchForVideos(string query,
-            VideoDirection? direction = null,
-            VideoSearchFilter? filter = null,
-            string links = null,
-            int? page = null,
-            int? per_page = null,
-            VideoSort? sort = null,
-            string uris = null);
+        RestResult<Pagination<Video>> SearchForVideos(string query,
+            VideoDirection? direction = null,
+            VideoSearchFilter? filter = null,
+            string? links = null,
+            int? page = null,
+            int? per_page = null,
+            VideoSort? sort = null,
+            string? uris = null);
 
         /// <summary>
         /// This method deletes one or more videos belonging to the specified user.
@@ -1686,7 +1688,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied video was created.
         /// </returns>
-        RestResult<Video> CopyAVideo(int user_id, int video_id, string name = null);
+        RestResult<Video> CopyAVideo(int user_id, int video_id, string? name = null);
 
         /// <summary>
         /// This method creates a copy of the specified video of the authenticated user.
@@ -1696,7 +1698,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied video was created.
         /// </returns>
-        RestResult<Video> MeCopyAVideo(int video_id, string name = null);
+        RestResult<Video> MeCopyAVideo(int video_id, string? name = null);
 
         /// <summary>
         /// This method sets, updates, or clears custom metadata values on a single video.
@@ -1771,11 +1773,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAVideo(int video_id,
-            VideoDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAVideo(int video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoCreditSort? sort = null);
 
         /// <summary>
@@ -1798,9 +1800,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Domain>> GetAllTheDomainsOnAVideoWhitelist(int video_id,
-            VideoDirection? direction = null,
-            int? page = null,
+        RestResult<Pagination<Domain>> GetAllTheDomainsOnAVideoWhitelist(int video_id,
+            VideoDirection? direction = null,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1843,8 +1845,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateVideo(int video_id,
-            int? page = null,
+        RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateVideo(int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1880,8 +1882,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> GetAllTheRelatedVideosOfAVideo(int video_id,
-            int? page = null,
+        RestResult<Pagination<Video>> GetAllTheRelatedVideosOfAVideo(int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1892,7 +1894,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="add_to">The URIs of the showcases to which to add the video.</param>
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <returns></returns>
-        RestResult AddOrRemoveAVideoFromAListOfShowcases(int user_id, int video_id, string[] add_to = null, string[] remove_from = null);
+        RestResult AddOrRemoveAVideoFromAListOfShowcases(int user_id, int video_id, string[]? add_to = null, string[]? remove_from = null);
 
         /// <summary>
         /// This method adds the specified video to, or removes it from, a list of showcases.
@@ -1901,7 +1903,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="add_to">The URIs of the showcases to which to add the video.</param>
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <returns></returns>
-        RestResult AddOrRemoveAVideoFromAListOfShowcases(int video_id, string[] add_to = null, string[] remove_from = null);
+        RestResult AddOrRemoveAVideoFromAListOfShowcases(int video_id, string[]? add_to = null, string[]? remove_from = null);
 
         /// <summary>
         /// This method returns all the showcases that contain the specified video.
@@ -1911,9 +1913,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Album>> GetAllTheShowcasesThatContainAVideo(int video_id,
-            VideoDirection? direction = null,
-            int? page = null,
+        RestResult<Pagination<Album>> GetAllTheShowcasesThatContainAVideo(int video_id,
+            VideoDirection? direction = null,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1950,8 +1952,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Tag>> GetAllTheTagsOfAVideo(int video_id,
-            int? page = null,
+        RestResult<Pagination<Tag>> GetAllTheTagsOfAVideo(int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1963,10 +1965,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns></returns>
-        RestResult<Pagination<Video>> GetAllTheVideosWithASpecificTag(string word,
-            VideoDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
+        RestResult<Pagination<Video>> GetAllTheVideosWithASpecificTag(string word,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
             VideoTagSort? sort = null);
 
         /// <summary>
@@ -2021,8 +2023,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAVideo(int video_id,
-            int? page = null,
+        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAVideo(int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2067,8 +2069,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAVideo(int video_id,
-            int? page = null,
+        RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAVideo(int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2176,8 +2178,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<VideoVersions>> GetAllTheVersionsOfAVideo(int video_id,
-            int? page = null,
+        RestResult<Pagination<VideoVersions>> GetAllTheVersionsOfAVideo(int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2235,8 +2237,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Comment>> GetAllTheRepliesToAVideoComment(int video_id, int comment_id,
-            int? page = null,
+        RestResult<Pagination<Comment>> GetAllTheRepliesToAVideoComment(int video_id, int comment_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2247,9 +2249,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<Comment>> GetAllTheVideoCommentsOnAVideo(int video_id,
-            VideoDirection? direction = null,
-            int? page = null,
+        RestResult<Pagination<Comment>> GetAllTheVideoCommentsOnAVideo(int video_id,
+            VideoDirection? direction = null,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2451,7 +2453,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The suggested questions and answers.
         /// </returns>
-        RestResult<AiResponse<AiQuestion[]>> GetSuggestedQuestionsForAVideo(int video_id, string language = null);
+        RestResult<AiResponse<AiQuestion[]>> GetSuggestedQuestionsForAVideo(int video_id, string? language = null);
 
         /// <summary>
         /// This method asks a question about a video and returns an AI-generated answer with relevant quotes.
@@ -2463,7 +2465,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The AI-generated answer.
         /// </returns>
-        RestResult<AiResponse<AiQuestion>> AskAQuestionAboutAVideo(int video_id, string question, string language = null);
+        RestResult<AiResponse<AiQuestion>> AskAQuestionAboutAVideo(int video_id, string question, string? language = null);
 
         /// <summary>
         /// This method returns AI-generated metadata for the specified video: title, description and tags.
@@ -2503,7 +2505,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 202 Accepted	The transcription job was queued.
         /// </returns>
-        RestResult<AiStatus> StartAITranscriptionForAVideo(int video_id, string language = null);
+        RestResult<AiStatus> StartAITranscriptionForAVideo(int video_id, string? language = null);
 
         /// <summary>
         /// This method returns the audio dubbing jobs of a video.
@@ -2513,7 +2515,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The dubbing status was returned.
         /// </returns>
-        RestResult<AiResponse<AiTranslationJob[]>> GetAIDubbingStatusForAVideo(int video_id, string language = null);
+        RestResult<AiResponse<AiTranslationJob[]>> GetAIDubbingStatusForAVideo(int video_id, string? language = null);
 
         /// <summary>
         /// This method starts an AI audio dubbing job for a video.
@@ -2526,7 +2528,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 202 Accepted	The dubbing job was queued.
         /// </returns>
-        RestResult<AiStatus> StartAIAudioDubbingForAVideo(int video_id, string language, string accent = null, AiDubbingApiVersion? dubbing_api_version = null);
+        RestResult<AiStatus> StartAIAudioDubbingForAVideo(int video_id, string language, string? accent = null, AiDubbingApiVersion? dubbing_api_version = null);
 
         /// <summary>
         /// This method returns the subtitle translation jobs of a video.
@@ -2536,7 +2538,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The subtitle translation status was returned.
         /// </returns>
-        RestResult<AiResponse<AiTranslationJob[]>> GetAISubtitleTranslationStatusForAVideo(int video_id, string language = null);
+        RestResult<AiResponse<AiTranslationJob[]>> GetAISubtitleTranslationStatusForAVideo(int video_id, string? language = null);
 
         /// <summary>
         /// This method starts an AI subtitle translation job for a video.
@@ -2559,8 +2561,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The versions were returned.
         /// </returns>
-        RestResult<Pagination<VideoVersions>> GetAllTheVersionsOfAChannelVideo(string channel_id, int video_id,
-            int? page = null,
+        RestResult<Pagination<VideoVersions>> GetAllTheVersionsOfAChannelVideo(string channel_id, int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2589,14 +2591,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The audio track was created.
         /// </returns>
-        RestResult<AudioTrack> CreateAnAudioTrackForAVideoVersion(int video_id, int version_id,
-            string upload_approach,
-            long? upload_size = null,
-            string upload_link = null,
-            string upload_redirect_url = null,
-            string language_code = null,
-            string type = null,
-            string provenance = null,
+        RestResult<AudioTrack> CreateAnAudioTrackForAVideoVersion(int video_id, int version_id,
+            string upload_approach,
+            long? upload_size = null,
+            string? upload_link = null,
+            string? upload_redirect_url = null,
+            string? language_code = null,
+            string? type = null,
+            string? provenance = null,
             bool? active = null);
 
         /// <summary>
@@ -2623,10 +2625,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The audio track was edited.
         /// </returns>
-        RestResult<AudioTrack> EditAnAudioTrackOfAVideoVersion(int video_id, int version_id, string audiotrack_id,
-            string language_code = null,
-            string type = null,
-            string provenance = null,
+        RestResult<AudioTrack> EditAnAudioTrackOfAVideoVersion(int video_id, int version_id, string audiotrack_id,
+            string? language_code = null,
+            string? type = null,
+            string? provenance = null,
             bool? active = null);
 
         /// <summary>
@@ -2671,8 +2673,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The text tracks were returned.
         /// </returns>
-        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAVideoVersion(int video_id, int version_id,
-            int? page = null,
+        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAVideoVersion(int video_id, int version_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2685,8 +2687,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The text tracks were returned.
         /// </returns>
-        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAShowcaseVideo(int album_id, int video_id,
-            int? page = null,
+        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAShowcaseVideo(int album_id, int video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -2761,12 +2763,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The users who can be credited were returned.
         /// </returns>
-        RestResult<Pagination<User>> GetTheUsersWhoCanBeCreditedOnAVideo(int video_id,
-            VideoDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
-            string sort = null);
+        RestResult<Pagination<User>> GetTheUsersWhoCanBeCreditedOnAVideo(int video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
+            string? sort = null);
 
         /// <summary>
         /// This method returns the reasons that content of the specified type can be reported for on Vimeo.

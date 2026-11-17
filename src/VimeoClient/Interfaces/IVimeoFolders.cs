@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -180,7 +182,7 @@ namespace Mafesoft.VimeoClient.Common
             FolderSort? sort = null,
             int? page = null,
             int? per_page = null,
-            string query = null, CancellationToken cancellationToken = default);
+            string? query = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns all the folders belonging to the authenticated user.
@@ -199,7 +201,7 @@ namespace Mafesoft.VimeoClient.Common
             FolderSort? sort = null,
             int? page = null,
             int? per_page = null,
-            string query = null, CancellationToken cancellationToken = default);
+            string? query = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns the private-to-me folder of the specified user.
@@ -232,7 +234,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             FolderItemSort? sort = null,
-            string clip_privacy_filters = null, CancellationToken cancellationToken = default);
+            string? clip_privacy_filters = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns every item (videos, folders, live events, files) that belongs to the specified folder of the authenticated user.
@@ -254,7 +256,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             FolderItemSort? sort = null,
-            string clip_privacy_filters = null, CancellationToken cancellationToken = default);
+            string? clip_privacy_filters = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method removes the specified items from a folder of the authenticated user.
@@ -339,7 +341,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string? query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns all the videos that belong to the specified folder.
@@ -356,7 +358,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string? query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.
@@ -542,7 +544,7 @@ namespace Mafesoft.VimeoClient.Common
             FolderSort? sort = null,
             int? page = null,
             int? per_page = null,
-            string query = null);
+            string? query = null);
 
         /// <summary>
         /// This method returns all the folders belonging to the authenticated user.
@@ -560,7 +562,7 @@ namespace Mafesoft.VimeoClient.Common
             FolderSort? sort = null,
             int? page = null,
             int? per_page = null,
-            string query = null);
+            string? query = null);
 
         /// <summary>
         /// This method returns the private-to-me folder of the specified user.
@@ -591,7 +593,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             FolderItemSort? sort = null,
-            string clip_privacy_filters = null);
+            string? clip_privacy_filters = null);
 
         /// <summary>
         /// This method returns every item (videos, folders, live events, files) that belongs to the specified folder of the authenticated user.
@@ -612,7 +614,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             FolderItemSort? sort = null,
-            string clip_privacy_filters = null);
+            string? clip_privacy_filters = null);
 
         /// <summary>
         /// This method removes the specified items from a folder of the authenticated user.
@@ -691,7 +693,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null);
+        RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string? query = null, FilderAllVideoSort? sort = null);
 
         /// <summary>
         /// This method returns all the videos that belong to the specified folder.
@@ -707,7 +709,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null);
+        RestResult<Pagination<Video>> GetAllTheVideoInAFolder(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string? query = null, FilderAllVideoSort? sort = null);
 
         /// <summary>
         /// This method removes multiple videos from the specified folder. The authenticated user must be the owner of the folder.

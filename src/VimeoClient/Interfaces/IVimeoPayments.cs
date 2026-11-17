@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -57,7 +59,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of payments service payment methods was returned.
         /// </returns>
-        Task<RestResult<Pagination<PaymentMethod>>> GetAllThePaymentMethodsAsync(string cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Pagination<PaymentMethod>>> GetAllThePaymentMethodsAsync(string? cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns information about the specified Vimeo payments service payment method.
@@ -115,7 +117,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of payments service payment methods was returned.
         /// </returns>
-        RestResult<Pagination<PaymentMethod>> GetAllThePaymentMethods(string cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null);
+        RestResult<Pagination<PaymentMethod>> GetAllThePaymentMethods(string? cardmember_name = null, bool? show_disabled = null, int? page = null, int? per_page = null);
 
         /// <summary>
         /// This method returns information about the specified Vimeo payments service payment method.

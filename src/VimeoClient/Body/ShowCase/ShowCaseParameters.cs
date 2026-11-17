@@ -41,22 +41,22 @@ namespace Mafesoft.VimeoClient.Body.ShowCase
         /// <summary>
         /// The name of the showcase. Required when creating a showcase.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The hexadecimal code for the color of the player buttons and showcase controls.
         /// </summary>
-        public string BrandColor { get; set; }
+        public string? BrandColor { get; set; }
 
         /// <summary>
         /// The description of the showcase.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The custom domain of the showcase.
         /// </summary>
-        public string Domain { get; set; }
+        public string? Domain { get; set; }
 
         /// <summary>
         /// Whether to hide Vimeo navigation when displaying the showcase.
@@ -81,7 +81,7 @@ namespace Mafesoft.VimeoClient.Body.ShowCase
         /// <summary>
         /// The showcase's password. This field is required only when privacy is password.
         /// </summary>
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// The privacy level of the showcase.
@@ -106,7 +106,7 @@ namespace Mafesoft.VimeoClient.Body.ShowCase
         /// <summary>
         /// The custom Vimeo URL of the showcase.
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// Whether the user has opted in to use a custom domain for the showcase.
@@ -117,9 +117,9 @@ namespace Mafesoft.VimeoClient.Body.ShowCase
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             Add(dict, "name", Name);
             Add(dict, "brand_color", BrandColor);
@@ -143,7 +143,7 @@ namespace Mafesoft.VimeoClient.Body.ShowCase
         /// <summary>
         /// Adds the value only when it is set
         /// </summary>
-        private static void Add(Dictionary<string, string> dict, string key, object value)
+        private static void Add(Dictionary<string, string?> dict, string key, object? value)
         {
             var vimeoValue = VimeoRestBuilderExtensions.ToVimeoValue(value);
             if (!string.IsNullOrEmpty(vimeoValue))

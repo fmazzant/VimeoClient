@@ -48,13 +48,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The unique identifier of the graphic item.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The type of the graphic item. The value of this field is always `agoraMedia` for this object.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The timestamp in milliseconds since the Unix epoch when the item was last updated.
@@ -78,18 +78,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL to the standard-resolution video thumbnail image.
         /// </summary>
         [JsonPropertyName("videoThumb")]
-        public string VideoThumb { get; set; }
+        public string? VideoThumb { get; set; }
 
         /// <summary>
         /// The URL to the high-resolution video thumbnail image.
         /// </summary>
         [JsonPropertyName("videoThumbFullSize")]
-        public string VideoThumbFullSize { get; set; }
+        public string? VideoThumbFullSize { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 }

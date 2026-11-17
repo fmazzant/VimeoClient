@@ -213,7 +213,7 @@ namespace Mafesoft.VimeoClient.Common
             LiveFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             LiveSort? sort = null,
             LiveType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events")
@@ -238,7 +238,7 @@ namespace Mafesoft.VimeoClient.Common
             LiveFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             LiveSort? sort = null,
             LiveType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events")
@@ -263,7 +263,7 @@ namespace Mafesoft.VimeoClient.Common
             LiveFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             LiveSort? sort = null,
             LiveType? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events")
@@ -279,7 +279,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="parameters">The fields to update</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id, LiveParameters parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int user_id, int live_event_id, LiveParameters? parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}")
            .JsonPayload(parameters)
            .PatchAsync<LiveEventRecurring>(cancellationToken);
@@ -291,7 +291,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="parameters">The fields to update</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchSpecificLiveStreamAsync(int live_event_id, LiveParameters? parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events/{live_event_id}")
            .JsonPayload(parameters)
            .PatchAsync<LiveEventRecurring>(cancellationToken);
@@ -303,7 +303,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="parameters">The fields to update</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id, LiveParameters parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public Task<RestResult<LiveEventRecurring>> PatchMeSpecificLiveStreamAsync(int live_event_id, LiveParameters? parameters = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/live_events/{live_event_id}")
             .JsonPayload(parameters)
             .PatchAsync<LiveEventRecurring>(cancellationToken);
@@ -320,7 +320,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id, string[] domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int user_id, int live_event_id, string[]? domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/users/{user_id}/live_events/{live_event_id}/privacy/domains")
            .PutAsync(cancellationToken);
 
@@ -331,7 +331,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public Task<RestResult<string>> PutEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[]? domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
           .Command($"/live_events/{live_event_id}/privacy/domains")
           .PutAsync(cancellationToken);
 
@@ -342,7 +342,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="domains">An array of the domains on which the embedded live event can appear.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public Task<RestResult<string>> PutMeEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[] domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public Task<RestResult<string>> PutMeEmbedALiveEventOnOneOrMoreDomainsAsync(int live_event_id, string[]? domains = null, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/privacy/domains")
            .PutAsync(cancellationToken);
 
@@ -532,7 +532,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int user_id, int live_event_id, int thumbnail_id, bool active, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/pictures/{thumbnail_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -545,7 +545,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<Picture>> EditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/live_events/{live_event_id}/pictures/{thumbnail_id}")
-           .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+           .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
            .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -558,7 +558,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public Task<RestResult<Picture>> MeEditALiveEventThumbnailAsync(int live_event_id, int thumbnail_id, bool active, CancellationToken cancellationToken = default) => RootAuthorization()
            .Command($"/me/live_events/{live_event_id}/pictures/{thumbnail_id}")
-           .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+           .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
            .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -844,14 +844,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The event destination was updated.
         /// </returns>
         public virtual Task<RestResult<LiveEventDestination>> UpdateAnEventDestinationAsync(long destination_id,
-            string display_name = null,
+            string? display_name = null,
             bool? is_enabled = null,
-            string privacy = null,
-            string provider_destination_id = null,
-            string service_name = null,
-            string stream_key = null,
-            string stream_url = null,
-            string type = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? privacy = null,
+            string? provider_destination_id = null,
+            string? service_name = null,
+            string? stream_key = null,
+            string? stream_url = null,
+            string? type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/destination/{destination_id}")
             .JsonPayload(new VimeoPayload()
                 .Set("display_name", display_name)
@@ -903,7 +903,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The new OTT destination was created.
         /// </returns>
-        public virtual Task<RestResult<OttDestination>> CreateAnOttDestinationForAnEventAsync(int user_id, int live_event_id, VimeoPayload body = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<OttDestination>> CreateAnOttDestinationForAnEventAsync(int user_id, int live_event_id, VimeoPayload? body = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/live_events/{live_event_id}/ott_destinations")
             .JsonPayload(body)
             .PostAsync<OttDestination>(cancellationToken);
@@ -996,7 +996,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The scene was created.
         /// </returns>
-        public virtual Task<RestResult<ComposerScene>> CreateASceneForAnEventAsync(int live_event_id, string scene_type = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<ComposerScene>> CreateASceneForAnEventAsync(int live_event_id, string? scene_type = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes")
             .JsonPayload(new VimeoPayload().Set("scene_type", scene_type))
             .PostAsync<ComposerScene>(cancellationToken);
@@ -1013,7 +1013,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The scene was returned.
         /// </returns>
-        public virtual Task<RestResult<ComposerScene>> UpdateASceneOfAnEventAsync(int live_event_id, string scene_id, VimeoPayload body = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<ComposerScene>> UpdateASceneOfAnEventAsync(int live_event_id, string scene_id, VimeoPayload? body = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/live_events/{live_event_id}/composer/scenes/{scene_id}")
             .JsonPayload(body)
             .PatchAsync<ComposerScene>(cancellationToken);

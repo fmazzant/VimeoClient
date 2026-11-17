@@ -40,19 +40,19 @@ namespace Mafesoft.VimeoClient.Model
         /// Information on purchasing this video.
         /// </summary>
         [JsonPropertyName("buy")]
-        public PurchaseInteractionDrm Buy { get; set; }
+        public PurchaseInteractionDrm? Buy { get; set; }
 
         /// <summary>
         /// Information on renting this video.
         /// </summary>
         [JsonPropertyName("rent")]
-        public PurchaseInteractionDrm Rent { get; set; }
+        public PurchaseInteractionDrm? Rent { get; set; }
 
         /// <summary>
         /// Information on subscribing to this video.
         /// </summary>
         [JsonPropertyName("subscribe")]
-        public PurchaseInteractionSubscribe Subscribe { get; set; }
+        public PurchaseInteractionSubscribe? Subscribe { get; set; }
     }
 
     /// <summary>
@@ -76,30 +76,30 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the On Demand video will expire.
         /// </summary>
         [JsonPropertyName("expires_time")]
-        public string ExpiresTime { get; set; }
+        public string? ExpiresTime { get; set; }
 
         /// <summary>
         /// The URL to purchase this On Demand subscription on Vimeo.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the On Demand was purchased.
         /// </summary>
         [JsonPropertyName("purchase_time")]
-        public string PurchaseTime { get; set; }
+        public string? PurchaseTime { get; set; }
 
         /// <summary>
         /// The user's streaming access to this On Demand subscription: available, purchased, restricted, unavailable.
         /// </summary>
         [JsonPropertyName("stream")]
-        public string Stream { get; set; }
+        public string? Stream { get; set; }
 
         /// <summary>
         /// The On Demand subscription's product URI.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

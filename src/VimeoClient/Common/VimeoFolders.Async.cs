@@ -197,7 +197,7 @@ namespace Mafesoft.VimeoClient.Common
             FolderSort? sort = null,
             int? page = null,
             int? per_page = null,
-            string query = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? query = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/projects")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
             .GetPaginationAsync<Project>(RootAuthorization, cancellationToken);
@@ -219,7 +219,7 @@ namespace Mafesoft.VimeoClient.Common
             FolderSort? sort = null,
             int? page = null,
             int? per_page = null,
-            string query = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? query = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/projects")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
             .GetPaginationAsync<Project>(RootAuthorization, cancellationToken);
@@ -261,7 +261,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             FolderItemSort? sort = null,
-            string clip_privacy_filters = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? clip_privacy_filters = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/projects/{project_id}/items")
             .ListParameters(direction, filter, page, per_page, null, sort)
             .OptionalParameter("clip_privacy_filters", clip_privacy_filters)
@@ -287,7 +287,7 @@ namespace Mafesoft.VimeoClient.Common
             int? page = null,
             int? per_page = null,
             FolderItemSort? sort = null,
-            string clip_privacy_filters = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? clip_privacy_filters = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/projects/{project_id}/items")
             .ListParameters(direction, filter, page, per_page, null, sort)
             .OptionalParameter("clip_privacy_filters", clip_privacy_filters)
@@ -395,7 +395,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, int user_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string? query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/projects/{project_id}/videos")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
             .GetPaginationAsync<Video>(RootAuthorization, cancellationToken);
@@ -415,7 +415,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 401 Unauthorized Error code 8000: The user credentials are invalid.
         /// 404 Not Found   Error code 5000: No such folder exists.
         /// </returns>
-        public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideoInAFolderAsync(int project_id, FolderDirection? direction = null, int? page = null, int? per_page = null, string? query = null, FilderAllVideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/projects/{project_id}/videos")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
             .GetPaginationAsync<Video>(RootAuthorization, cancellationToken);

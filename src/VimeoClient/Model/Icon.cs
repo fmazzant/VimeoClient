@@ -40,14 +40,14 @@ namespace Mafesoft.VimeoClient.Model
         [JsonPropertyName("active")]
         public bool Active { get; set; }
         /// <summary>The URL of the picture.</summary>
-        public string link { get; set; }
+        public string? link { get; set; }
         /// <summary>The resource key of the picture.</summary>
-        public string resource_key { get; set; }
+        public string? resource_key { get; set; }
         /// <summary>The available sizes of the picture.</summary>
-        public Size[] sizes { get; set; }
+        public Size[]? sizes { get; set; }
         /// <summary>The type of the picture.</summary>
-        public string type { get; set; }
+        public string? type { get; set; }
         /// <summary>The URI of the picture.</summary>
-        public string uri { get; set; }
+        public string? uri { get; set; }
     }
 }

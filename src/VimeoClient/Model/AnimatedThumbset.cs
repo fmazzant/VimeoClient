@@ -40,25 +40,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the video from which the set of animated thumbnails was created.
         /// </summary>
         [JsonPropertyName("clip_uri")]
-        public string ClipUri { get; set; }
+        public string? ClipUri { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the GIF was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// All the animated thumbnails in the set.
         /// </summary>
         [JsonPropertyName("sizes")]
-        public AnimatedThumbnail[] Sizes { get; set; }
+        public AnimatedThumbnail[]? Sizes { get; set; }
 
         /// <summary>
         /// The availability of the animated thumbnails: cancelled, completed, failed, started.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The file format of the animated thumbnail.
         /// </summary>
         [JsonPropertyName("file_format")]
-        public string FileFormat { get; set; }
+        public string? FileFormat { get; set; }
 
         /// <summary>
         /// The file size of the animated thumbnail in bytes.
@@ -100,19 +100,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL of the animated thumbnail file.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The URL of the animated thumbnail file with a play button overlay.
         /// </summary>
         [JsonPropertyName("link_with_play_button")]
-        public string LinkWithPlayButton { get; set; }
+        public string? LinkWithPlayButton { get; set; }
 
         /// <summary>
         /// The profile ID of the animated thumbnail.
         /// </summary>
         [JsonPropertyName("profile_id")]
-        public string ProfileId { get; set; }
+        public string? ProfileId { get; set; }
 
         /// <summary>
         /// The time in the video, in seconds, corresponding to the start of the animation.
@@ -124,7 +124,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The ID of the animated thumbnail.
         /// </summary>
         [JsonPropertyName("uuid")]
-        public string Uuid { get; set; }
+        public string? Uuid { get; set; }
 
         /// <summary>
         /// The width of the animated thumbnail in pixels.

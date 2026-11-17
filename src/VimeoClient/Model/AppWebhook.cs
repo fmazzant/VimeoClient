@@ -48,19 +48,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the webhook was created.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the webhook was most recently disabled. If this field isn't present in the response, the webhook isn't disabled.
         /// </summary>
         [JsonPropertyName("disabled_on")]
-        public string DisabledOn { get; set; }
+        public string? DisabledOn { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the webhook was most recently enabled. If this field doesn't appear in the response, the webhook is disabled.
         /// </summary>
         [JsonPropertyName("enabled_on")]
-        public string EnabledOn { get; set; }
+        public string? EnabledOn { get; set; }
 
         /// <summary>
         /// The failure error rate at the time that the webhook was most recently disabled. If this field doesn't appear in the response, the webhook wasn't disabled after being active.
@@ -78,13 +78,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the last request to the webhook URL was made before the webhook was disabled. If this field doesn't appear in the response, the webhook wasn't disabled after being active.
         /// </summary>
         [JsonPropertyName("last_request_time_before_disabling")]
-        public string LastRequestTimeBeforeDisabling { get; set; }
+        public string? LastRequestTimeBeforeDisabling { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the webhook was most recently modified.
         /// </summary>
         [JsonPropertyName("modified_on")]
-        public string ModifiedOn { get; set; }
+        public string? ModifiedOn { get; set; }
 
         /// <summary>
         /// The number of requests that were executed before the webhook was most recently disabled. If this field doesn't appear in the response, the webhook wasn't disabled after being active.
@@ -102,7 +102,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The secret key that is passed on webhook payloads. If this field isn't present in the response, no secret key is passed.
         /// </summary>
         [JsonPropertyName("secret")]
-        public string Secret { get; set; }
+        public string? Secret { get; set; }
 
         /// <summary>
         /// The time period in seconds over which requests were executed before the webhook was most recently disabled. If this field doesn't appear in the response, the webhook wasn't disabled after being active.
@@ -114,24 +114,24 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the webhook.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The type of event that triggers the webhook.
         /// </summary>
         [JsonPropertyName("webhook_type")]
-        public string WebhookType { get; set; }
+        public string? WebhookType { get; set; }
 
         /// <summary>
         /// The URL to which data is sent when the webhook is triggered.
         /// </summary>
         [JsonPropertyName("webhook_url")]
-        public string WebhookUrl { get; set; }
+        public string? WebhookUrl { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 }

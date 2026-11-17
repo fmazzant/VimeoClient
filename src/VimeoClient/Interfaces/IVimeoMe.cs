@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -132,10 +134,10 @@ namespace Mafesoft.VimeoClient.Common
         /// </param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<string>> GetAllTheFollowersOfTheUserWithPagingAsync(UserDirection? direction,
-            int? page,
-            int? per_page,
-            string query,
+        Task<RestResult<string>> GetAllTheFollowersOfTheUserWithPagingAsync(UserDirection? direction,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -165,11 +167,11 @@ namespace Mafesoft.VimeoClient.Common
         /// </param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<string>> GetAllTheUsersThatTheUserIsFollowingAsync(UserDirection? direction,
-            string filter,
-            int? page,
-            int? per_page,
-            string query,
+        Task<RestResult<string>> GetAllTheUsersThatTheUserIsFollowingAsync(UserDirection? direction,
+            string filter,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -316,10 +318,10 @@ namespace Mafesoft.VimeoClient.Common
         ///     date
         /// </param>
         /// <returns></returns>
-        RestResult<string> GetAllTheFollowersOfTheUserWithPaging(UserDirection? direction,
-            int? page,
-            int? per_page,
-            string query,
+        RestResult<string> GetAllTheFollowersOfTheUserWithPaging(UserDirection? direction,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort);
 
         /// <summary>
@@ -348,11 +350,11 @@ namespace Mafesoft.VimeoClient.Common
         ///     date
         /// </param>
         /// <returns></returns>
-        RestResult<string> GetAllTheUsersThatTheUserIsFollowing(UserDirection? direction,
-            string filter,
-            int? page,
-            int? per_page,
-            string query,
+        RestResult<string> GetAllTheUsersThatTheUserIsFollowing(UserDirection? direction,
+            string filter,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort);
 
         /// <summary>

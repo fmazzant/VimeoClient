@@ -43,7 +43,7 @@ namespace Mafesoft.VimeoClient.Model
         /// members     - Only group members can comment on the group.
         /// </summary>
         [JsonPropertyName("comment")]
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         /// <summary>
         /// Who can invite new members to the group.
@@ -52,7 +52,7 @@ namespace Mafesoft.VimeoClient.Model
         ///  members     - Only group members can invite new members.
         /// </summary>
         [JsonPropertyName("invite")]
-        public string Invite { get; set; }
+        public string? Invite { get; set; }
 
         /// <summary>
         /// Who can join the group.
@@ -61,7 +61,7 @@ namespace Mafesoft.VimeoClient.Model
         /// members     - Only people with a Vimeo account can join the group.
         /// </summary>
         [JsonPropertyName("join")]
-        public string Join { get; set; }
+        public string? Join { get; set; }
 
         /// <summary>
         /// Who can add videos to the group.
@@ -70,7 +70,7 @@ namespace Mafesoft.VimeoClient.Model
         /// members - Only group members can add videos to the group.
         /// </summary>
         [JsonPropertyName("videos")]
-        public string Videos { get; set; }
+        public string? Videos { get; set; }
 
         /// <summary>
         /// Who can access the group.
@@ -79,6 +79,6 @@ namespace Mafesoft.VimeoClient.Model
         /// members - Only group members can access the group.
         /// </summary>
         [JsonPropertyName("view")]
-        public string View { get; set; }
+        public string? View { get; set; }
     }
 }

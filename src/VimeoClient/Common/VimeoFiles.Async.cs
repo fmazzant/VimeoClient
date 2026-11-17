@@ -50,7 +50,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The file was returned.
         /// 400 Bad Request	Error code 2209: the file is password protected and no password was supplied.
         /// </returns>
-        public virtual Task<RestResult<HostedFile>> GetAFileAsync(string file_id, string password = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<HostedFile>> GetAFileAsync(string file_id, string? password = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/files/{file_id}")
             .OptionalParameter("password", password)
             .GetAsync<HostedFile>(cancellationToken);

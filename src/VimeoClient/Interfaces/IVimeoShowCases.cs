@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -90,17 +92,17 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="theme">The color theme of the showcase</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Album>> CreateAShowcaseAsync(int user_id,
-            string name,
-            string brand_color = null,
-            string description = null,
-            bool hide_nav = false,
-            bool hide_upcoming = false,
-            ShowCasesLayout? layout = null,
-            string password = null,
-            ShowCasesPrivacy? privacy = null,
-            bool review_mode = false,
-            ShowCasesSort? sort = null,
+        Task<RestResult<Album>> CreateAShowcaseAsync(int user_id,
+            string name,
+            string? brand_color = null,
+            string? description = null,
+            bool hide_nav = false,
+            bool hide_upcoming = false,
+            ShowCasesLayout? layout = null,
+            string? password = null,
+            ShowCasesPrivacy? privacy = null,
+            bool review_mode = false,
+            ShowCasesSort? sort = null,
             ShowCasesTheme? theme = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -119,16 +121,16 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="theme">The color theme of the showcase</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Album>> CreateAShowcaseAsync(string name,
-           string brand_color = null,
-           string description = null,
-           bool hide_nav = false,
-           bool hide_upcoming = false,
-           ShowCasesLayout? layout = null,
-           string password = null,
-           ShowCasesPrivacy? privacy = null,
-           bool review_mode = false,
-           ShowCasesSort? sort = null,
+        Task<RestResult<Album>> CreateAShowcaseAsync(string name,
+           string? brand_color = null,
+           string? description = null,
+           bool hide_nav = false,
+           bool hide_upcoming = false,
+           ShowCasesLayout? layout = null,
+           string? password = null,
+           ShowCasesPrivacy? privacy = null,
+           bool review_mode = false,
+           ShowCasesSort? sort = null,
            ShowCasesTheme? theme = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -221,11 +223,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The showcases were returned.
         /// </returns>
-        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesThatBelongToTheUserAsync(int user_id,
-            ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesThatBelongToTheUserAsync(int user_id,
+            ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -240,10 +242,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The showcases were returned.
         /// </returns>
-        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesThatBelongToTheUserAsync(ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesThatBelongToTheUserAsync(ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -281,7 +283,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        Task<RestResult<Album>> CopyAShowcaseAsync(int user_id, int album_id, string name = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Album>> CopyAShowcaseAsync(int user_id, int album_id, string? name = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method creates a copy of the specified showcase of the authenticated user.
@@ -292,7 +294,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        Task<RestResult<Album>> MeCopyAShowcaseAsync(int album_id, string name = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Album>> MeCopyAShowcaseAsync(int album_id, string? name = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method adds a custom logo to the specified showcase.
@@ -614,7 +616,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int user_id, int album_id, int video_id, string password = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int user_id, int album_id, int video_id, string? password = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns a single video belonging to the specified showcase.
@@ -627,7 +629,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int album_id, int video_id, string password = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int album_id, int video_id, string? password = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns all the showcases to which the authenticated user can add or remove the specified video.
@@ -644,11 +646,11 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The showcases were returned.
         /// 404 Not Found Error code 5000: No such video exists.
         /// </returns>
-        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideoAsync(int user_id, int video_id,
-            ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideoAsync(int user_id, int video_id,
+            ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -665,11 +667,11 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The showcases were returned.
         /// 404 Not Found Error code 5000: No such video exists.
         /// </returns>
-        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideoAsync(int video_id,
-            ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Album>>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideoAsync(int video_id,
+            ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -688,12 +690,12 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcaseAsync(int user_id, int album_id,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Video>>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcaseAsync(int user_id, int album_id,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -711,12 +713,12 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcaseAsync(int album_id,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Video>>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcaseAsync(int album_id,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -739,16 +741,16 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAShowcaseAsync(int user_id, int album_id,
-            string containing_uri = null,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            string password = null,
-            int? per_page = null,
-            string query = null,
-            ShowCasesVideosSort? sort = null,
+        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAShowcaseAsync(int user_id, int album_id,
+            string? containing_uri = null,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            string? password = null,
+            int? per_page = null,
+            string? query = null,
+            ShowCasesVideosSort? sort = null,
             bool? weak_search = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -770,16 +772,16 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAShowcaseAsync(int album_id,
-            string containing_uri = null,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            string password = null,
-            int? per_page = null,
-            string query = null,
-            ShowCasesVideosSort? sort = null,
+        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAShowcaseAsync(int album_id,
+            string? containing_uri = null,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            string? password = null,
+            int? per_page = null,
+            string? query = null,
+            ShowCasesVideosSort? sort = null,
             bool? weak_search = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -906,17 +908,17 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The default sort order of the videos as they appear in the showcase</param>
         /// <param name="theme">The color theme of the showcase</param>
         /// <returns></returns>
-        RestResult<Album> CreateAShowcase(int user_id,
-            string name,
-            string brand_color = null,
-            string description = null,
-            bool hide_nav = false,
-            bool hide_upcoming = false,
-            ShowCasesLayout? layout = null,
-            string password = null,
-            ShowCasesPrivacy? privacy = null,
-            bool review_mode = false,
-            ShowCasesSort? sort = null,
+        RestResult<Album> CreateAShowcase(int user_id,
+            string name,
+            string? brand_color = null,
+            string? description = null,
+            bool hide_nav = false,
+            bool hide_upcoming = false,
+            ShowCasesLayout? layout = null,
+            string? password = null,
+            ShowCasesPrivacy? privacy = null,
+            bool review_mode = false,
+            ShowCasesSort? sort = null,
             ShowCasesTheme? theme = null);
 
         /// <summary>
@@ -934,16 +936,16 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The default sort order of the videos as they appear in the showcase</param>
         /// <param name="theme">The color theme of the showcase</param>
         /// <returns></returns>
-        RestResult<Album> CreateAShowcase(string name,
-           string brand_color = null,
-           string description = null,
-           bool hide_nav = false,
-           bool hide_upcoming = false,
-           ShowCasesLayout? layout = null,
-           string password = null,
-           ShowCasesPrivacy? privacy = null,
-           bool review_mode = false,
-           ShowCasesSort? sort = null,
+        RestResult<Album> CreateAShowcase(string name,
+           string? brand_color = null,
+           string? description = null,
+           bool hide_nav = false,
+           bool hide_upcoming = false,
+           ShowCasesLayout? layout = null,
+           string? password = null,
+           ShowCasesPrivacy? privacy = null,
+           bool review_mode = false,
+           ShowCasesSort? sort = null,
            ShowCasesTheme? theme = null);
 
         /// <summary>
@@ -1029,11 +1031,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The showcases were returned.
         /// </returns>
-        RestResult<Pagination<Album>> GetAllTheShowcasesThatBelongToTheUser(int user_id,
-            ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Album>> GetAllTheShowcasesThatBelongToTheUser(int user_id,
+            ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null);
 
         /// <summary>
@@ -1047,10 +1049,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The showcases were returned.
         /// </returns>
-        RestResult<Pagination<Album>> GetAllTheShowcasesThatBelongToTheUser(ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Album>> GetAllTheShowcasesThatBelongToTheUser(ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null);
 
         /// <summary>
@@ -1085,7 +1087,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        RestResult<Album> CopyAShowcase(int user_id, int album_id, string name = null);
+        RestResult<Album> CopyAShowcase(int user_id, int album_id, string? name = null);
 
         /// <summary>
         /// This method creates a copy of the specified showcase of the authenticated user.
@@ -1095,7 +1097,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        RestResult<Album> MeCopyAShowcase(int album_id, string name = null);
+        RestResult<Album> MeCopyAShowcase(int album_id, string? name = null);
 
         /// <summary>
         /// This method adds a custom logo to the specified showcase.
@@ -1392,7 +1394,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        RestResult<Video> GetASpecificVideoInAShowcase(int user_id, int album_id, int video_id, string password = null);
+        RestResult<Video> GetASpecificVideoInAShowcase(int user_id, int album_id, int video_id, string? password = null);
 
         /// <summary>
         /// This method returns a single video belonging to the specified showcase.
@@ -1404,7 +1406,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        RestResult<Video> GetASpecificVideoInAShowcase(int album_id, int video_id, string password = null);
+        RestResult<Video> GetASpecificVideoInAShowcase(int album_id, int video_id, string? password = null);
 
         /// <summary>
         /// This method returns all the showcases to which the authenticated user can add or remove the specified video.
@@ -1420,11 +1422,11 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The showcases were returned.
         /// 404 Not Found Error code 5000: No such video exists.
         /// </returns>
-        RestResult<Pagination<Album>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideo(int user_id, int video_id,
-            ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Album>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideo(int user_id, int video_id,
+            ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null);
 
         /// <summary>
@@ -1440,11 +1442,11 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The showcases were returned.
         /// 404 Not Found Error code 5000: No such video exists.
         /// </returns>
-        RestResult<Pagination<Album>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id,
-            ShowCasesDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Album>> GetAllTheShowcasesToWhichTheUserCanAddOrRemoveASpecificVideo(int video_id,
+            ShowCasesDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null);
 
         /// <summary>
@@ -1462,12 +1464,12 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        RestResult<Pagination<Video>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcase(int user_id, int album_id,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcase(int user_id, int album_id,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null);
 
         /// <summary>
@@ -1484,12 +1486,12 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        RestResult<Pagination<Video>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcase(int album_id,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheUserVideosThatCanBeAddedToOrRemovedFromAShowcase(int album_id,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null);
 
         /// <summary>
@@ -1511,16 +1513,16 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInAShowcase(int user_id, int album_id,
-            string containing_uri = null,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            string password = null,
-            int? per_page = null,
-            string query = null,
-            ShowCasesVideosSort? sort = null,
+        RestResult<Pagination<Video>> GetAllTheVideosInAShowcase(int user_id, int album_id,
+            string? containing_uri = null,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            string? password = null,
+            int? per_page = null,
+            string? query = null,
+            ShowCasesVideosSort? sort = null,
             bool? weak_search = null);
 
         /// <summary>
@@ -1541,16 +1543,16 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The videos were returned.
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInAShowcase(int album_id,
-            string containing_uri = null,
-            ShowCasesDirection? direction = null,
-            ShowCasesVideosFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            string password = null,
-            int? per_page = null,
-            string query = null,
-            ShowCasesVideosSort? sort = null,
+        RestResult<Pagination<Video>> GetAllTheVideosInAShowcase(int album_id,
+            string? containing_uri = null,
+            ShowCasesDirection? direction = null,
+            ShowCasesVideosFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            string? password = null,
+            int? per_page = null,
+            string? query = null,
+            ShowCasesVideosSort? sort = null,
             bool? weak_search = null);
 
         /// <summary>

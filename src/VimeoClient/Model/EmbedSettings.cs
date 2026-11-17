@@ -53,7 +53,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information about the buttons that appear on the interface of the embeddable player.
         /// </summary>
         [JsonPropertyName("buttons")]
-        public EmbedButtons Buttons { get; set; }
+        public EmbedButtons? Buttons { get; set; }
 
         /// <summary>
         /// Whether clicking the closed-captions button reveals the caption-language menu.
@@ -83,25 +83,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The primary player color, which controls the color of the progress bar, buttons, and more.
         /// </summary>
         [JsonPropertyName("color")]
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         /// <summary>
         /// The four player colors.
         /// </summary>
         [JsonPropertyName("colors")]
-        public EmbedColors Colors { get; set; }
+        public EmbedColors? Colors { get; set; }
 
         /// <summary>
         /// The end screen of the embeddable player.
         /// </summary>
         [JsonPropertyName("end_screen")]
-        public EmbedEndScreen EndScreen { get; set; }
+        public EmbedEndScreen? EndScreen { get; set; }
 
         /// <summary>
         /// The play button's settings.
         /// </summary>
         [JsonPropertyName("play_button")]
-        public EmbedPlayButton PlayButton { get; set; }
+        public EmbedPlayButton? PlayButton { get; set; }
 
         /// <summary>
         /// Whether to show the quality selector in the embeddable player.
@@ -125,7 +125,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information about the logo in the corner of the embeddable player.
         /// </summary>
         [JsonPropertyName("logos")]
-        public EmbedLogos Logos { get; set; }
+        public EmbedLogos? Logos { get; set; }
 
         /// <summary>
         /// Whether the playbar appears in the embeddable player.
@@ -143,13 +143,13 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information relating to the embeddable player's title bar.
         /// </summary>
         [JsonPropertyName("title")]
-        public EmbedTitle Title { get; set; }
+        public EmbedTitle? Title { get; set; }
 
         /// <summary>
         /// The URI of the embed preset.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// Whether the volume controls appear in the embeddable player.
@@ -215,7 +215,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The custom logo.
         /// </summary>
         [JsonPropertyName("custom")]
-        public EmbedCustomLogo Custom { get; set; }
+        public EmbedCustomLogo? Custom { get; set; }
 
         /// <summary>
         /// Whether the Vimeo logo appears.
@@ -239,7 +239,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL that loads when the user clicks the custom logo.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Whether the custom logo is always visible.
@@ -251,7 +251,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL of the custom logo image.
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
     }
 
     /// <summary>
@@ -263,25 +263,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The first player color: progress bar and buttons.
         /// </summary>
         [JsonPropertyName("color_one")]
-        public string ColorOne { get; set; }
+        public string? ColorOne { get; set; }
 
         /// <summary>
         /// The second player color: player accent.
         /// </summary>
         [JsonPropertyName("color_two")]
-        public string ColorTwo { get; set; }
+        public string? ColorTwo { get; set; }
 
         /// <summary>
         /// The third player color: text and icons.
         /// </summary>
         [JsonPropertyName("color_three")]
-        public string ColorThree { get; set; }
+        public string? ColorThree { get; set; }
 
         /// <summary>
         /// The fourth player color: player background.
         /// </summary>
         [JsonPropertyName("color_four")]
-        public string ColorFour { get; set; }
+        public string? ColorFour { get; set; }
     }
 
     /// <summary>
@@ -293,7 +293,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The end screen type: beginning, custom, email, empty, image, link, loop, nothing, share, text, threevideos, thumbnail, videos.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 
     /// <summary>
@@ -305,7 +305,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The position of the play button: auto, bottom, center.
         /// </summary>
         [JsonPropertyName("position")]
-        public string Position { get; set; }
+        public string? Position { get; set; }
     }
 
     /// <summary>
@@ -317,18 +317,18 @@ namespace Mafesoft.VimeoClient.Model
         /// How the embeddable player handles the video title.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// How the embeddable player handles the video owner's information.
         /// </summary>
         [JsonPropertyName("owner")]
-        public string Owner { get; set; }
+        public string? Owner { get; set; }
 
         /// <summary>
         /// How the embeddable player handles the video owner's portrait.
         /// </summary>
         [JsonPropertyName("portrait")]
-        public string Portrait { get; set; }
+        public string? Portrait { get; set; }
     }
 }

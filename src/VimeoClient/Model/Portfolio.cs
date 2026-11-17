@@ -41,44 +41,44 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the portfolio was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The description of the portfolio.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The URL to access the portfolio in a browser.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the portfolio.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public PortfolioMetadata Metadata { get; set; }
+        public PortfolioMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the portfolio was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The display name of the portfolio.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The default video sort order of the portfolio
         /// (alphabetical, clips, date, likes, manual, modified, plays).
         /// </summary>
         [JsonPropertyName("sort")]
-        public string Sort { get; set; }
+        public string? Sort { get; set; }
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information that is connected to this resource.
         /// </summary>
         [JsonPropertyName("connections")]
-        public PortfolioConnection Connections { get; set; }
+        public PortfolioConnection? Connections { get; set; }
     }
 
     /// <summary>
@@ -102,6 +102,6 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the videos contained within this portfolio.
         /// </summary>
         [JsonPropertyName("videos")]
-        public GenericRelatedEntity Videos { get; set; }
+        public GenericRelatedEntity? Videos { get; set; }
     }
 }

@@ -40,6 +40,6 @@ namespace Mafesoft.VimeoClient.Model
         /// Status code for this video's availability.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 }

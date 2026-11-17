@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// builder.Services.AddVimeoClient(builder.Configuration.GetSection("Vimeo"));
         /// </code>
         /// </example>
-        public static IServiceCollection AddVimeoClient(this IServiceCollection services, IConfiguration configuration, Action<VimeoProperties> configure = null)
+        public static IServiceCollection AddVimeoClient(this IServiceCollection services, IConfiguration configuration, Action<VimeoProperties>? configure = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));

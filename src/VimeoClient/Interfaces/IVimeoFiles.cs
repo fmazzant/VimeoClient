@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -55,7 +57,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The file was returned.
         /// 400 Bad Request	Error code 2209: the file is password protected and no password was supplied.
         /// </returns>
-        Task<RestResult<HostedFile>> GetAFileAsync(string file_id, string password = null, CancellationToken cancellationToken = default);
+        Task<RestResult<HostedFile>> GetAFileAsync(string file_id, string? password = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns a single hosted file by its public ID.
@@ -67,7 +69,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The file was returned.
         /// 400 Bad Request	Error code 2209: the file is password protected and no password was supplied.
         /// </returns>
-        RestResult<HostedFile> GetAFile(string file_id, string password = null);
+        RestResult<HostedFile> GetAFile(string file_id, string? password = null);
     }
 
     public partial class VimeoFiles : IVimeoFiles

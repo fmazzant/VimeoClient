@@ -135,10 +135,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned.
         /// </returns>
         public virtual RestResult<Pagination<Group>> GetAllGroups(GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null) => RootAuthorization()
             .Command($"/groups")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -149,10 +149,10 @@ namespace Mafesoft.VimeoClient.Common
         /// </summary>
         [Obsolete("Use GetAllGroups(direction, filter, page, per_page, query, sort)")]
         public virtual RestResult<Pagination<Group>> GetAllTheVideosThatHaveASpecificEmbedPreset(GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null) => GetAllGroups(direction, filter, page, per_page, query, sort);
 
         #endregion
@@ -258,10 +258,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned
         /// </returns>
         public virtual RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(int user_id, GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null)
         {
             var root = RootAuthorization()
@@ -313,7 +313,7 @@ namespace Mafesoft.VimeoClient.Common
             GroupFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null)
         {
             var root = RootAuthorization()
@@ -367,7 +367,7 @@ namespace Mafesoft.VimeoClient.Common
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null)
         {
             var root = RootAuthorization()
@@ -469,7 +469,7 @@ namespace Mafesoft.VimeoClient.Common
            bool? filter_embeddable = null,
            int? page = null,
            int? per_page = null,
-           string query = null,
+           string? query = null,
            VideoSort? sort = null)
         {
             var root = RootAuthorization()

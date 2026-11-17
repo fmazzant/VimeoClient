@@ -40,12 +40,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The tag value
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The normalized canonical tag name.
         /// </summary>
         [JsonPropertyName("canonical")]
-        public string Canonical { get; set; }
+        public string? Canonical { get; set; }
     }
 }

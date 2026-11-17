@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Body.EmbedPreset
         /// The name of the embed preset.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Whether to apply the preset to all of the user's videos.
@@ -54,7 +54,7 @@ namespace Mafesoft.VimeoClient.Body.EmbedPreset
         /// The embed settings of the preset.
         /// </summary>
         [JsonPropertyName("embed")]
-        public EmbedSettings Embed { get; set; }
+        public EmbedSettings? Embed { get; set; }
 
         /// <summary>
         /// Builds the JSON body: only the values that are set are sent.
@@ -66,6 +66,6 @@ namespace Mafesoft.VimeoClient.Body.EmbedPreset
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 }

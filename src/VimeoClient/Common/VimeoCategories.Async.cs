@@ -117,7 +117,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual async Task<RestResult<Pagination<Channel>>> GetAllTheChannelsInACategoryAsync(string category,
             CategoryDirection? direction = null,
-            string query = null,
+            string? query = null,
             CategorySortAllChannel? sort = null,
             int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default)
@@ -169,7 +169,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public virtual async Task<RestResult<Pagination<Group>>> GetAllTheGroupsInACategoryAsync(string category,
             CategoryDirection? direction = null,
-            string query = null,
+            string? query = null,
             CategorySortAllGroup? sort = null,
             int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default)

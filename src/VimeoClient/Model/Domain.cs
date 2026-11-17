@@ -46,6 +46,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The domain name.
         /// </summary>
         [JsonPropertyName("domain")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

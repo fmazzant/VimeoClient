@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient
 {
     using Mafesoft.RestClient;
@@ -135,7 +137,7 @@ namespace Mafesoft.VimeoClient
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -160,7 +162,7 @@ namespace Mafesoft.VimeoClient
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -245,7 +247,7 @@ namespace Mafesoft.VimeoClient
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null);
 
         /// <summary>
@@ -269,7 +271,7 @@ namespace Mafesoft.VimeoClient
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null);
     }
 

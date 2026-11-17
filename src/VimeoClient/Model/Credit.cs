@@ -40,24 +40,24 @@ namespace Mafesoft.VimeoClient.Model
         /// The character's name.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The character's role.
         /// </summary>
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         /// <summary>
         /// The Vimeo user associated with this credit.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// The video associated with this credit.
         /// </summary>
         [JsonPropertyName("video")]
-        public Video Video { get; set; }
+        public Video? Video { get; set; }
     }
 }

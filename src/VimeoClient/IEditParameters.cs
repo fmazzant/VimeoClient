@@ -41,6 +41,6 @@ namespace Mafesoft.VimeoClient
         /// Only the values that are set are returned.
         /// </summary>
         /// <returns>The key/value pairs</returns>
-        IEnumerable<KeyValuePair<string, string>> ToEnumerable();
+        IEnumerable<KeyValuePair<string, string?>> ToEnumerable();
     }
 }

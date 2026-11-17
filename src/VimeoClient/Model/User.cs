@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The authenticated user's canonical relative URI.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
 }

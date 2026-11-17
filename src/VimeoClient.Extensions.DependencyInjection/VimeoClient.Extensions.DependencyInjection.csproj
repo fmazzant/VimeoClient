@@ -19,6 +19,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyName>Mafesoft.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Mafesoft.VimeoClient.Extensions.DependencyInjection</RootNamespace>
+    <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 

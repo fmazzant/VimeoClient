@@ -63,7 +63,7 @@ namespace Mafesoft.VimeoClient.Body.Channel
         /// <summary>
         /// Name of channel
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Privacy
@@ -73,20 +73,20 @@ namespace Mafesoft.VimeoClient.Body.Channel
         /// <summary>
         /// Description
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Link
         /// </summary>
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Convert object to key value pair enumerable 
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.Add("name", this.Name);
             dict.Add("privacy", this.Privacy.ToString());

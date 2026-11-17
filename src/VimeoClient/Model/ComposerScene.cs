@@ -42,31 +42,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The collection of graphic items, such as lower thirds, polls, and images, associated with this scene.
         /// </summary>
         [JsonPropertyName("graphics")]
-        public ComposerSceneGraphicItem[] Graphics { get; set; }
+        public ComposerSceneGraphicItem[]? Graphics { get; set; }
 
         /// <summary>
         /// The unique identifier of the scene.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The additional information about the scene.
         /// </summary>
         [JsonPropertyName("meta")]
-        public ComposerSceneMeta Meta { get; set; }
+        public ComposerSceneMeta? Meta { get; set; }
 
         /// <summary>
         /// The name of the scene.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -90,12 +90,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The unique identifier of the graphic item.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The type of the graphic item.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 }

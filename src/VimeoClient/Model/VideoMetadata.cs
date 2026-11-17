@@ -40,12 +40,12 @@ namespace Mafesoft.VimeoClient.Model
         /// A list of resource URIs related to the video.
         /// </summary>
         [JsonPropertyName("connections")]
-        public VideoMetadataConnection Connections { get; set; }
+        public VideoMetadataConnection? Connections { get; set; }
 
         /// <summary>
         ///  A list of resource URIs related to the video.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public VideoMetadataInteraction Interactions { get; set; }
+        public VideoMetadataInteraction? Interactions { get; set; }
     }
 }

@@ -46,13 +46,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The upload URL for the picture. This field appears only when the picture is created.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The base link of the picture.
         /// </summary>
         [JsonPropertyName("base_link")]
-        public string BaseLink { get; set; }
+        public string? BaseLink { get; set; }
 
         /// <summary>
         /// Whether the picture is the default picture of the resource.
@@ -64,12 +64,12 @@ namespace Mafesoft.VimeoClient.Model
         /// An array containing reference information about all available image files.
         /// </summary>
         [JsonPropertyName("sizes")]
-        public Size[] Sizes { get; set; }
+        public Size[]? Sizes { get; set; }
 
         /// <summary>
         /// The type of the picture: caution, custom or default.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 }
