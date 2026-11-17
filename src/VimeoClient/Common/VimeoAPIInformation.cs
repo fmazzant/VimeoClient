@@ -38,7 +38,7 @@ namespace Mafesoft.VimeoClient.Common
     /// Vimeo API Information
     /// https://developer.vimeo.com/api/reference/api-information
     /// </summary>
-    public class VimeoAPIInformation
+    public partial class VimeoAPIInformation
     {
         /// <summary>
         /// Vimeo Properties

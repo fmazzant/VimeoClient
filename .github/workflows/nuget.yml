@@ -1,6 +1,6 @@
 name: NuGet
 
-# Publishes Mafesoft.VimeoClient:
+# Publishes Mafesoft.VimeoClient and Mafesoft.VimeoClient.Extensions.DependencyInjection (same version):
 # - when a version tag is pushed:
 #     git tag v3.4.0.3 && git push origin v3.4.0.3
 #   the tag must match <Version> in src/VimeoClient/VimeoClient.csproj;
@@ -71,6 +71,13 @@ jobs:
         INPUT_VERSION="${INPUT_VERSION#v}"
         PROJECT=src/VimeoClient/VimeoClient.csproj
         PROJECT_VERSION="$(dotnet msbuild "$PROJECT" -getProperty:Version | tr -d '\r')"
+        # Mafesoft.VimeoClient.Extensions.DependencyInjection is published with the same version
+        DI_PROJECT=src/VimeoClient.Extensions.DependencyInjection/VimeoClient.Extensions.DependencyInjection.csproj
+        DI_VERSION="$(dotnet msbuild "$DI_PROJECT" -getProperty:Version | tr -d '\r')"
+        if [ "$DI_VERSION" != "$PROJECT_VERSION" ]; then
+          echo "::error::$DI_PROJECT has version $DI_VERSION, expected $PROJECT_VERSION (as $PROJECT)"
+          exit 1
+        fi
         if [ "$GITHUB_REF_TYPE" = "tag" ]; then
           if [ -n "$INPUT_VERSION" ]; then
             echo "::error::The version input is for manual runs on a branch, this run is on the tag $GITHUB_REF_NAME"
@@ -105,7 +112,9 @@ jobs:
       run: dotnet test --no-build -c Release src/VimeoClient.sln
 
     - name: Package
-      run: dotnet pack --no-build -c Release ${PACKAGE_VERSION:+"-p:Version=$PACKAGE_VERSION"} -o artifacts src/VimeoClient/VimeoClient.csproj
+      run: |
+        dotnet pack --no-build -c Release ${PACKAGE_VERSION:+"-p:Version=$PACKAGE_VERSION"} -o artifacts src/VimeoClient/VimeoClient.csproj
+        dotnet pack --no-build -c Release ${PACKAGE_VERSION:+"-p:Version=$PACKAGE_VERSION"} -o artifacts src/VimeoClient.Extensions.DependencyInjection/VimeoClient.Extensions.DependencyInjection.csproj
 
     # The symbol package (.snupkg, IncludeSymbols in the csproj) must sit next to each .nupkg:
     # it is pushed together with the .nupkg by the publish step below.

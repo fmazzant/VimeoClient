@@ -24,6 +24,7 @@ If VimeoClient is useful to you, consider [supporting the project](#support). â˜
 | Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
 | API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
 | Certificate pinning | Standard TLS validation, or validation plus a list of trusted certificate hashes. See [Certificates](#certificates) |
+| Dependency injection and interfaces | `services.AddVimeoClient(...)` from code or configuration; `IVimeo` and an interface for every section to mock the client. See [Dependency injection](#dependency-injection) |
 | Resumable upload | `UploadAsync` uploads a file with the tus approach: chunks, progress, resume after an error or with `ResumeUploadAsync`. See [Upload a video](#upload-a-video) |
 | Rate limits and retry | Optional retry of 429 and transient errors with backoff and `Retry-After`; `GetRateLimit()` reads the `X-RateLimit-*` headers. See [Rate limits and retry](#rate-limits-and-retry) |
 | Latest Vimeo features | Chapters, animated thumbnails, AI (questions, metadata, dubbing), audio tracks, transcripts, trimming, live scenes and destinations, analytics, webhooks, team custom metadata. See [Videos: chapters, animated thumbnails, AI](#videos-chapters-animated-thumbnails-ai) |
@@ -126,6 +127,34 @@ The version of the `Mafesoft.VimeoClient` package has three numbers, for example
 - `ValidCertificates` empty: the standard TLS validation is used.
 - `ValidCertificates` set: the certificate must be valid **and** its hash must be in the list (pinning).
 - `Debug = true` skips the validation: use it only in development (default `false`).
+
+## Dependency injection
+
+```
+dotnet add package Mafesoft.VimeoClient.Extensions.DependencyInjection
+```
+
+```c#
+// appsettings.json: { "Vimeo": { "AccessToken": "...", "MaxRetries": 3 } }
+builder.Services.AddVimeoClient(builder.Configuration.GetSection("Vimeo"));
+
+// or in code
+builder.Services.AddVimeoClient(options => options.AccessToken = builder.Configuration["Vimeo:AccessToken"]);
+```
+
+```c#
+public class VideoService(IVimeoVideos videos)          // or IVimeo for the whole client
+{
+    public Task<RestResult<Video>> GetAsync(int id) => videos.GetSpecificVideoAsync(id);
+}
+```
+
+- `Vimeo`, `IVimeo` and `VimeoProperties` are singletons; the interface of every section (`IVimeoVideos`,
+  `IVimeoUsers`, ...) is registered too, so a class receives only the section it uses. A client registered before
+  (for example a fake in the tests) is kept.
+- `IVimeo` and the section interfaces are in the main package: mock them in the tests of the application. They are
+  generated from the classes by `tools/GenerateInterfaces.cs` (`dotnet run tools/GenerateInterfaces.cs`), and a test
+  fails when a public method is missing from its interface.
 
 ## Upload a video
 
