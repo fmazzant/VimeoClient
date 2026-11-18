@@ -71,6 +71,14 @@ namespace Mafesoft.VimeoClient.Tests.Infrastructure
             return this;
         }
 
+        /// <summary>Answers the requests that match <paramref name="match"/> with a response computed from the request.</summary>
+        public FakeHttpHandler RespondWith(Func<HttpRequestMessage, bool> match, Func<HttpRequestMessage, HttpResponseMessage> respond)
+        {
+            HttpRequestMessage current = null;
+            responses.Add((r => { current = r; return match(r); }, () => respond(current)));
+            return this;
+        }
+
         /// <summary>A JSON response with the given status and headers.</summary>
         public static HttpResponseMessage Response(HttpStatusCode status, string json = "{}", params (string Name, string Value)[] headers)
         {
@@ -141,5 +149,7 @@ namespace Mafesoft.VimeoClient.Tests.Infrastructure
         }
 
         protected override RestBuilder Root() => base.Root().UseHttpClient(httpClient);
+
+        protected override HttpClient UploadHttpClient => httpClient;
     }
 }
