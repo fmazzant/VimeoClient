@@ -31,3 +31,5 @@
 /tests/VimeoClient.IntegrationTests/bin
 /tests/VimeoClient.IntegrationTests/obj
 /samples/VimeoClientSampleApp/bin/Release
+/src/VimeoClient.Extensions.DependencyInjection/bin
+/src/VimeoClient.Extensions.DependencyInjection/obj

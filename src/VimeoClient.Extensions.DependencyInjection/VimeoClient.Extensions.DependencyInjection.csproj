@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
+    <PackageId>Mafesoft.VimeoClient.Extensions.DependencyInjection</PackageId>
+    <!-- The same version as Mafesoft.VimeoClient (src/VimeoClient/VimeoClient.csproj): nuget.yml checks it -->
+    <Version>3.4.1</Version>
+    <Authors>Federico Mazzanti</Authors>
+    <Company>Federico Mazzanti</Company>
+    <Description>Registers Mafesoft.VimeoClient in the Microsoft.Extensions dependency injection: services.AddVimeoClient(options => ...) or from the configuration, with IVimeo and the interfaces of the sections (IVimeoVideos, ...).</Description>
+    <Copyright>Copyright (c) 2026 Federico Mazzanti</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/fmazzant/VimeoClient</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fmazzant/VimeoClient</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>vimeo, vimeo-client, dependency-injection, aspnetcore, mafesoft</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+    <AssemblyName>Mafesoft.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Mafesoft.VimeoClient.Extensions.DependencyInjection</RootNamespace>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <!-- XML documentation, symbols and SourceLink, as the main package -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1587</NoWarn>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- The versions that Mafesoft.RestClient already brings (Microsoft.Extensions 10.0.14): the application can use any newer one -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.14" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.14" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.404" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VimeoClient\VimeoClient.csproj" />
+  </ItemGroup>
+
+</Project>

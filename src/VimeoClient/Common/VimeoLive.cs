@@ -44,7 +44,7 @@ namespace Mafesoft.VimeoClient.Common
     /// https://developer.vimeo.com/api/reference/live
     /// Learn more about Vimeo Enterprise.
     /// </summary>
-    public class VimeoLive
+    public partial class VimeoLive
     {
         /// <summary>
         /// Vimeo Properties
