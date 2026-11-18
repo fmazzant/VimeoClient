@@ -46,12 +46,12 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The name of the On Demand page. Required.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The description of the On Demand page. Required.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The content ratings of the On Demand page. Required.
@@ -62,42 +62,42 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The custom string to use in the Vimeo URL of the On Demand page.
         /// </summary>
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The custom domain of the On Demand page.
         /// </summary>
-        public string DomainLink { get; set; }
+        public string? DomainLink { get; set; }
 
         /// <summary>
         /// The accepted currencies: AUD, CAD, CHF, DKK, EUR, GBP, JPY, KRW, NOK, PLN, SEK, USD.
         /// </summary>
-        public List<string> AcceptedCurrencies { get; set; }
+        public List<string>? AcceptedCurrencies { get; set; }
 
         /// <summary>
         /// The purchase option of the page.
         /// </summary>
-        public OnDemandPriceOption Buy { get; set; }
+        public OnDemandPriceOption? Buy { get; set; }
 
         /// <summary>
         /// The rental option of the page.
         /// </summary>
-        public OnDemandPriceOption Rent { get; set; }
+        public OnDemandPriceOption? Rent { get; set; }
 
         /// <summary>
         /// The purchase option of the episodes (series only).
         /// </summary>
-        public OnDemandPriceOption EpisodesBuy { get; set; }
+        public OnDemandPriceOption? EpisodesBuy { get; set; }
 
         /// <summary>
         /// The rental option of the episodes (series only).
         /// </summary>
-        public OnDemandPriceOption EpisodesRent { get; set; }
+        public OnDemandPriceOption? EpisodesRent { get; set; }
 
         /// <summary>
         /// The monthly subscription option of the page.
         /// </summary>
-        public OnDemandPriceOption SubscriptionMonthly { get; set; }
+        public OnDemandPriceOption? SubscriptionMonthly { get; set; }
 
         /// <summary>
         /// Builds the JSON body
@@ -127,6 +127,6 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 }

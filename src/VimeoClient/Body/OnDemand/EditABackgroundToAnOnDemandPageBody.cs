@@ -52,7 +52,7 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 
     /// <summary>

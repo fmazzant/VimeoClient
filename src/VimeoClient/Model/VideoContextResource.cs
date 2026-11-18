@@ -40,6 +40,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The contextual resource type.
         /// </summary>
         [JsonPropertyName("resource_type")]
-        public string ResourceType { get; set; }
+        public string? ResourceType { get; set; }
     }
 }

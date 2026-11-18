@@ -45,12 +45,12 @@ namespace Mafesoft.VimeoClient.Model
         ///     Uploaded by - An Unloaded By action.
         /// </summary>
         [JsonPropertyName("action")]
-        public string Action { get; set; }
+        public string? Action { get; set; }
 
         /// <summary>
         /// The contextual resource: a user, group, or channel representation, or an object of a tag.
         /// </summary>
         [JsonPropertyName("resource")]
-        public VideoContextResource Resource { get; set; }
+        public VideoContextResource? Resource { get; set; }
     }
 }

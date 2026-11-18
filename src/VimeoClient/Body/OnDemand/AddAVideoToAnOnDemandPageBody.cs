@@ -76,12 +76,12 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The purchase price by currency code.
         /// </summary>
-        public Dictionary<string, double> BuyPrice { get; set; }
+        public Dictionary<string, double>? BuyPrice { get; set; }
 
         /// <summary>
         /// The rental price by currency code.
         /// </summary>
-        public Dictionary<string, double> RentPrice { get; set; }
+        public Dictionary<string, double>? RentPrice { get; set; }
 
         /// <summary>
         /// Builds the JSON body
@@ -98,6 +98,6 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 }

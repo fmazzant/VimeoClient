@@ -41,7 +41,7 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// The title of the chapter.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The timecode of the chapter in seconds from the start of the video.
@@ -53,13 +53,13 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// The URI of the chapter's active thumbnail.
         /// </summary>
         [JsonPropertyName("active_thumbnail_uri")]
-        public string ActiveThumbnailUri { get; set; }
+        public string? ActiveThumbnailUri { get; set; }
 
         /// <summary>
         /// The URIs of the thumbnails associated with the chapter (only to add a chapter).
         /// </summary>
         [JsonPropertyName("thumbnail_uris")]
-        public string[] ThumbnailUris { get; set; }
+        public string[]? ThumbnailUris { get; set; }
 
         /// <summary>
         /// Builds the JSON body: only the values that are set are sent.
@@ -71,6 +71,6 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 }

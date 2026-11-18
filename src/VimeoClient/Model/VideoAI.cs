@@ -51,13 +51,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The status of the job: not_started, processing, completed, failed...
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The language of the job.
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The ID of the generated text track, when it exists.
@@ -75,13 +75,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The data of the response.
         /// </summary>
         [JsonPropertyName("data")]
-        public TData Data { get; set; }
+        public TData? Data { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -100,19 +100,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The language code.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The language name.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The available accents (dubbing only).
         /// </summary>
         [JsonPropertyName("accents")]
-        public AiAccent[] Accents { get; set; }
+        public AiAccent[]? Accents { get; set; }
     }
 
     /// <summary>
@@ -124,19 +124,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The accent key to send as accent.
         /// </summary>
         [JsonPropertyName("key")]
-        public string Key { get; set; }
+        public string? Key { get; set; }
 
         /// <summary>
         /// The accent label.
         /// </summary>
         [JsonPropertyName("label")]
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
         /// The accent locale.
         /// </summary>
         [JsonPropertyName("locale")]
-        public string Locale { get; set; }
+        public string? Locale { get; set; }
     }
 
     /// <summary>
@@ -148,25 +148,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The question.
         /// </summary>
         [JsonPropertyName("question")]
-        public string Question { get; set; }
+        public string? Question { get; set; }
 
         /// <summary>
         /// The AI-generated answer.
         /// </summary>
         [JsonPropertyName("answer")]
-        public string Answer { get; set; }
+        public string? Answer { get; set; }
 
         /// <summary>
         /// The relevant quotes of the video.
         /// </summary>
         [JsonPropertyName("relevant_quotes")]
-        public AiQuote[] RelevantQuotes { get; set; }
+        public AiQuote[]? RelevantQuotes { get; set; }
 
         /// <summary>
         /// The related questions.
         /// </summary>
         [JsonPropertyName("related_questions")]
-        public string[] RelatedQuestions { get; set; }
+        public string[]? RelatedQuestions { get; set; }
     }
 
     /// <summary>
@@ -178,7 +178,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The quote.
         /// </summary>
         [JsonPropertyName("quote")]
-        public string Quote { get; set; }
+        public string? Quote { get; set; }
 
         /// <summary>
         /// The timecode of the quote.
@@ -196,19 +196,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The suggested title.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The suggested description.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The suggested tags.
         /// </summary>
         [JsonPropertyName("tags")]
-        public string[] Tags { get; set; }
+        public string[]? Tags { get; set; }
     }
 
     /// <summary>
@@ -220,19 +220,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The target language.
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The status: processing, completed, failed, completed_with_deleted_texttrack, completed_with_deleted_audiotrack.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The accent (dubbing only).
         /// </summary>
         [JsonPropertyName("accent")]
-        public string Accent { get; set; }
+        public string? Accent { get; set; }
 
         /// <summary>
         /// The ID of the generated text track.
@@ -244,13 +244,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the generated audio track (dubbing only).
         /// </summary>
         [JsonPropertyName("audiotrack_uri")]
-        public string AudioTrackUri { get; set; }
+        public string? AudioTrackUri { get; set; }
 
         /// <summary>
         /// The status of the latest regeneration, when the last action was a regeneration.
         /// </summary>
         [JsonPropertyName("latest_regeneration")]
-        public AiRegeneration LatestRegeneration { get; set; }
+        public AiRegeneration? LatestRegeneration { get; set; }
     }
 
     /// <summary>
@@ -262,13 +262,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The status of the regeneration.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The fields not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -280,13 +280,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The segment UUID.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The updated text of the segment; null for timestamp-only changes.
         /// </summary>
         [JsonPropertyName("text")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// The start time in milliseconds.
@@ -322,7 +322,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The type of the text track.
         /// </summary>
         [JsonPropertyName("track_type")]
-        public string TrackType { get; set; }
+        public string? TrackType { get; set; }
 
         /// <summary>
         /// The number of segments updated.

@@ -41,13 +41,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The version of the OpenAPI specification.
         /// </summary>
         [JsonPropertyName("openapi")]
-        public string OpenAPI { get; set; }
+        public string? OpenAPI { get; set; }
 
         /// <summary>
         /// The information about the API.
         /// </summary>
         [JsonPropertyName("info")]
-        public Info Info { get; set; }
+        public Info? Info { get; set; }
     }
 
     /// <summary>
@@ -59,25 +59,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The title of the API.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The description of the API.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The version of the API.
         /// </summary>
         [JsonPropertyName("version")]
-        public string Version { get; set; }
+        public string? Version { get; set; }
 
         /// <summary>
         /// The contact information of the API.
         /// </summary>
         [JsonPropertyName("contact")]
-        public Contact Contact { get; set; }
+        public Contact? Contact { get; set; }
     }
 
     /// <summary>
@@ -89,6 +89,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The contact URL.
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
     }
 }

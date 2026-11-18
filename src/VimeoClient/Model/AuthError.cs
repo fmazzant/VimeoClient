@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the error.
         /// </summary>
         [JsonPropertyName("error")]
-        public string ErrorName { get; set; }
+        public string? ErrorName { get; set; }
 
         /// <summary>
         /// The description of the error.
         /// </summary>
         [JsonPropertyName("error_description")]
-        public string ErrorDescription { get; set; }
+        public string? ErrorDescription { get; set; }
 
         /// <summary>
         /// The error as string

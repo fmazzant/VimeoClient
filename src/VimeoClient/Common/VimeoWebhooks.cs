@@ -108,7 +108,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The webhook was added.
         /// 400 Bad Request	Error code 3143: the webhook type already exists for the app.
         /// </returns>
-        public virtual RestResult<AppWebhook> AddAWebhookForAnApp(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string secret = null) => RootAuthorization()
+        public virtual RestResult<AppWebhook> AddAWebhookForAnApp(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string? secret = null) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks")
             .JsonPayload(new VimeoPayload()
                 .Set("webhook_type", webhook_type)
@@ -143,7 +143,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The webhook was updated.
         /// </returns>
-        public virtual RestResult<AppWebhook> UpdateAWebhook(long app_id, long webhook_id, string webhook_type = null, string webhook_url = null, bool? is_enabled = null, string secret = null) => RootAuthorization()
+        public virtual RestResult<AppWebhook> UpdateAWebhook(long app_id, long webhook_id, string? webhook_type = null, string? webhook_url = null, bool? is_enabled = null, string? secret = null) => RootAuthorization()
             .Command($"/apps/{app_id}/webhooks/{webhook_id}")
             .JsonPayload(new VimeoPayload()
                 .Set("webhook_type", webhook_type)

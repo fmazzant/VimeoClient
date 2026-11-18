@@ -40,66 +40,66 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the group was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The group's description.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The link to the group.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the group was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The group's display name.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The active picture for the group.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
 
         /// <summary>
         /// Metadata about the group.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public GroupMetadata Metadata { get; set; }
+        public GroupMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The group's privacy settings.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public GroupPrivacy Privacy { get; set; }
+        public GroupPrivacy? Privacy { get; set; }
 
         /// <summary>
         /// The resource key of the group.
         /// </summary>
         [JsonPropertyName("resource_key")]
-        public string ResourceKey { get; set; }
+        public string? ResourceKey { get; set; }
 
         /// <summary>
         /// The canonical relative URI of the group.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The owner of the group.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace Mafesoft.VimeoClient.Model
         /// 360 director timeline
         /// </summary>
         [JsonPropertyName("comments")]
-        public string[] DirectorTimeline { get; set; }
+        public string[]? DirectorTimeline { get; set; }
 
         /// <summary>
         /// The director timeline pitch, from -90 (minimum) to 90 (maximum).
@@ -82,7 +82,7 @@ namespace Mafesoft.VimeoClient.Model
         ///     pyramid - The spatial projection is pyramid-shaped.
         /// </summary>
         [JsonPropertyName("projection")]
-        public string Projection { get; set; }
+        public string? Projection { get; set; }
 
         /// <summary>
         /// The 360 stereo format:
@@ -91,7 +91,7 @@ namespace Mafesoft.VimeoClient.Model
         ///     mono - The audio is monaural.
         /// </summary>
         [JsonPropertyName("stereo_format")]
-        public string StereoFormat { get; set; }
+        public string? StereoFormat { get; set; }
 
     }
 }

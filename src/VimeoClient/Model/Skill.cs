@@ -40,6 +40,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the skill.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

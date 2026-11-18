@@ -92,6 +92,10 @@ namespace Mafesoft.VimeoClient.Tests
             {
                 return; // params overload without token: covered by its overload with the token
             }
+            if (method.ReturnType.IsGenericType && !typeof(RestResult).IsAssignableFrom(method.ReturnType.GetGenericArguments()[0]))
+            {
+                return; // not a single request (the tus upload helper): covered by UploadTests
+            }
 
             using var source = new CancellationTokenSource();
             source.Cancel();

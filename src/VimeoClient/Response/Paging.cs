@@ -40,25 +40,25 @@ namespace Mafesoft.VimeoClient.Response
         /// uri next page
         /// </summary>
         [JsonPropertyName("next")]
-        public string Next { get; set; }
+        public string? Next { get; set; }
 
         /// <summary>
         /// uri previous page
         /// </summary>
         [JsonPropertyName("previous")]
-        public string Previous { get; set; }
+        public string? Previous { get; set; }
 
         /// <summary>
         /// uri first page
         /// </summary>
         [JsonPropertyName("first")]
-        public string First { get; set; }
+        public string? First { get; set; }
 
         /// <summary>
         /// uri last page
         /// </summary>
         [JsonPropertyName("last")]
-        public string Last { get; set; }
+        public string? Last { get; set; }
 
         /// <summary>
         /// true if exists a single page, false otherwise

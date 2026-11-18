@@ -93,12 +93,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public virtual Task<RestResult<Album>> CreateAShowcaseAsync(int user_id,
             string name,
-            string brand_color = null,
-            string description = null,
+            string? brand_color = null,
+            string? description = null,
             bool hide_nav = false,
             bool hide_upcoming = false,
             ShowCasesLayout? layout = null,
-            string password = null,
+            string? password = null,
             ShowCasesPrivacy? privacy = null,
             bool review_mode = false,
             ShowCasesSort? sort = null,
@@ -122,12 +122,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual Task<RestResult<Album>> CreateAShowcaseAsync(string name,
-           string brand_color = null,
-           string description = null,
+           string? brand_color = null,
+           string? description = null,
            bool hide_nav = false,
            bool hide_upcoming = false,
            ShowCasesLayout? layout = null,
-           string password = null,
+           string? password = null,
            ShowCasesPrivacy? privacy = null,
            bool review_mode = false,
            ShowCasesSort? sort = null,
@@ -242,7 +242,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -263,7 +263,7 @@ namespace Mafesoft.VimeoClient.Common
         public virtual Task<RestResult<Pagination<Album>>> GetAllTheShowcasesThatBelongToTheUserAsync(ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -312,7 +312,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        public virtual Task<RestResult<Album>> CopyAShowcaseAsync(int user_id, int album_id, string name = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Album>> CopyAShowcaseAsync(int user_id, int album_id, string? name = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/copy")
             .JsonPayload(new VimeoPayload().Set("name", name))
             .PostAsync<Album>(cancellationToken);
@@ -326,7 +326,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        public virtual Task<RestResult<Album>> MeCopyAShowcaseAsync(int album_id, string name = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Album>> MeCopyAShowcaseAsync(int album_id, string? name = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/copy")
             .JsonPayload(new VimeoPayload().Set("name", name))
             .PostAsync<Album>(cancellationToken);
@@ -465,7 +465,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<Picture>> ReplaceACustomShowcaseLogoAsync(int user_id, int album_id, int logo_id, bool active = true, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/logos/{logo_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<Picture>> ReplaceACustomShowcaseLogoAsync(int album_id, int logo_id, bool active = true, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/logos/{logo_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .PatchAsync<Picture>(cancellationToken);
 
         #endregion
@@ -618,7 +618,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<Picture>> ReplaceACustomShowcaseThumbnailAsync(int user_id, int album_id, int thumbnail_id, bool active = true, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/custom_thumbnails/{thumbnail_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .PatchAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -634,7 +634,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<Picture>> ReplaceACustomShowcaseThumbnailAsync(int album_id, int thumbnail_id, bool active = true, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/custom_thumbnails/{thumbnail_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .PatchAsync<Picture>(cancellationToken);
 
         #endregion
@@ -686,7 +686,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<Picture>> CreateAThumbnailForAShowcaseFromAShowcaseVideoAsync(int user_id, int album_id, int video_id, double? time_code = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos/{video_id}/set_album_thumbnail")
-            .FormUrlEncoded(new KeyValuePair<string, object>("time_code", time_code))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("time_code", time_code))
             .PostAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -702,7 +702,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<Picture>> MeCreateAThumbnailForAShowcaseFromAShowcaseVideoAsync(int album_id, int video_id, double? time_code = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos/{video_id}/set_album_thumbnail")
-            .FormUrlEncoded(new KeyValuePair<string, object>("time_code", time_code))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("time_code", time_code))
             .PostAsync<Picture>(cancellationToken);
 
         /// <summary>
@@ -717,7 +717,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        public virtual Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int user_id, int album_id, int video_id, string password = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int user_id, int album_id, int video_id, string? password = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos/{video_id}")
             .OptionalParameter("password", password)
             .GetAsync<Video>(cancellationToken);
@@ -733,7 +733,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        public virtual Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int album_id, int video_id, string password = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Video>> GetASpecificVideoInAShowcaseAsync(int album_id, int video_id, string? password = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos/{video_id}")
             .OptionalParameter("password", password)
             .GetAsync<Video>(cancellationToken);
@@ -757,7 +757,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/videos/{video_id}/available_albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -781,7 +781,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/available_albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -808,7 +808,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesVideosFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/available_videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -834,7 +834,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesVideosFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/albums/{album_id}/available_videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -861,14 +861,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
         public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideosInAShowcaseAsync(int user_id, int album_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             ShowCasesDirection? direction = null,
             ShowCasesVideosFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,
-            string password = null,
+            string? password = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null,
             bool? weak_search = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos")
@@ -899,14 +899,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
         public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideosInAShowcaseAsync(int album_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             ShowCasesDirection? direction = null,
             ShowCasesVideosFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,
-            string password = null,
+            string? password = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null,
             bool? weak_search = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos")
@@ -964,7 +964,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<string>> ReplaceAllTheVideosInAShowcaseAsync(int user_id, int album_id, string[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos")
-            .FormUrlEncoded(new KeyValuePair<string, object>("videos", videos))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("videos", videos))
             .PutAsync(cancellationToken);
 
         /// <summary>
@@ -982,7 +982,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual Task<RestResult<string>> ReplaceAllTheVideosInAShowcaseAsync(int album_id, string[] videos, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos")
-            .FormUrlEncoded(new KeyValuePair<string, object>("videos", videos))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("videos", videos))
             .PutAsync(cancellationToken);
 
         /// <summary>

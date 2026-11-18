@@ -66,31 +66,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The IANA media type of the file.
         /// </summary>
         [JsonPropertyName("content_type")]
-        public string ContentType { get; set; }
+        public string? ContentType { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the file was uploaded.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The user who deleted this file. Null when the file was deleted by its owner, isn't in Recently Deleted, or was moved to permanent deletion.
         /// </summary>
         [JsonPropertyName("deleted_by")]
-        public HostedFileDeletedBy DeletedBy { get; set; }
+        public HostedFileDeletedBy? DeletedBy { get; set; }
 
         /// <summary>
         /// The description of the file. A Quill Delta JSON string when rich text is enabled.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// A signed URL to download the original file, when the current user is allowed to download it.
         /// </summary>
         [JsonPropertyName("download_url")]
-        public string DownloadUrl { get; set; }
+        public string? DownloadUrl { get; set; }
 
         /// <summary>
         /// The size of the file in bytes.
@@ -120,73 +120,73 @@ namespace Mafesoft.VimeoClient.Model
         /// -
         /// </summary>
         [JsonPropertyName("metadata")]
-        public HostedFileMetadata Metadata { get; set; }
+        public HostedFileMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the file was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The display name of the file.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The folder that contains the file, when the file lives inside a folder.
         /// </summary>
         [JsonPropertyName("parent_folder")]
-        public HostedFileParentFolder ParentFolder { get; set; }
+        public HostedFileParentFolder? ParentFolder { get; set; }
 
         /// <summary>
         /// The password required to view the file. Only returned to the owner or a user with edit access, and only when **privacy** is `password`.
         /// </summary>
         [JsonPropertyName("password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// The privacy of the file.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public string Privacy { get; set; }
+        public string? Privacy { get; set; }
 
         /// <summary>
         /// The public identifier of the file.
         /// </summary>
         [JsonPropertyName("public_id")]
-        public string PublicId { get; set; }
+        public string? PublicId { get; set; }
 
         /// <summary>
         /// The image that represents the file in a library, when one has been generated.
         /// </summary>
         [JsonPropertyName("thumbnail")]
-        public HostedFileThumbnail Thumbnail { get; set; }
+        public HostedFileThumbnail? Thumbnail { get; set; }
 
         /// <summary>
         /// The file's upload information.
         /// </summary>
         [JsonPropertyName("upload")]
-        public HostedFileUpload Upload { get; set; }
+        public HostedFileUpload? Upload { get; set; }
 
         /// <summary>
         /// The upload state of the file.
         /// </summary>
         [JsonPropertyName("upload_state")]
-        public string UploadState { get; set; }
+        public string? UploadState { get; set; }
 
         /// <summary>
         /// The file's uploader.
         /// </summary>
         [JsonPropertyName("uploader")]
-        public HostedFileUploader Uploader { get; set; }
+        public HostedFileUploader? Uploader { get; set; }
 
         /// <summary>
         /// The URI of the file.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The pixel width of the file, for visual items (images) where it is known.
@@ -198,7 +198,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -210,19 +210,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The profile link of the user who uploaded the file.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The display name of the user who uploaded the file.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The active portrait of the user who uploaded the file.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
     }
 
     /// <summary>
@@ -234,19 +234,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The approach for uploading the file.
         /// </summary>
         [JsonPropertyName("approach")]
-        public string Approach { get; set; }
+        public string? Approach { get; set; }
 
         /// <summary>
         /// The error that caused the upload to fail.
         /// </summary>
         [JsonPropertyName("error")]
-        public string Error { get; set; }
+        public string? Error { get; set; }
 
         /// <summary>
         /// The HTML form for uploading a file through the POST approach.
         /// </summary>
         [JsonPropertyName("form")]
-        public string Form { get; set; }
+        public string? Form { get; set; }
 
         /// <summary>
         /// The file size in bytes.
@@ -258,13 +258,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The status of the file upload.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The link for sending file data.
         /// </summary>
         [JsonPropertyName("upload_link")]
-        public string UploadLink { get; set; }
+        public string? UploadLink { get; set; }
     }
 
     /// <summary>
@@ -276,7 +276,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL of the thumbnail image on the Vimeo CDN.
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
     }
 
     /// <summary>
@@ -294,13 +294,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The display name of the parent folder.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The API URI of the parent folder.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -312,7 +312,7 @@ namespace Mafesoft.VimeoClient.Model
         /// -
         /// </summary>
         [JsonPropertyName("connections")]
-        public HostedFileMetadataConnections Connections { get; set; }
+        public HostedFileMetadataConnections? Connections { get; set; }
     }
 
     /// <summary>
@@ -324,7 +324,7 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the file's ancestry, ordered from the direct parent folder to higher-level ancestors.
         /// </summary>
         [JsonPropertyName("ancestor_path")]
-        public HostedFileMetadataConnectionsAncestorPathItem[] AncestorPath { get; set; }
+        public HostedFileMetadataConnectionsAncestorPathItem[]? AncestorPath { get; set; }
     }
 
     /// <summary>
@@ -336,13 +336,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The link to the folder.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The name of the folder.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
     /// <summary>
@@ -354,18 +354,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The display name of the user who deleted the file.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The portrait of the user who deleted the file.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
 
         /// <summary>
         /// The URI of the user who deleted the file.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

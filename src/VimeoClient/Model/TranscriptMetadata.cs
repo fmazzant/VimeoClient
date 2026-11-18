@@ -54,7 +54,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The ID of the container.
         /// </summary>
         [JsonPropertyName("container_id")]
-        public string ContainerId { get; set; }
+        public string? ContainerId { get; set; }
 
         /// <summary>
         /// Whether the transcript has been marked as deleted.
@@ -72,19 +72,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The ID of the transcript.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The kind of transcript. The value of this field can be `captions` for caption transcripts or `subtitles` for subtitle transcripts.
         /// </summary>
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string? Kind { get; set; }
 
         /// <summary>
         /// The language in which the transcript appears.
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The total number of speakers in the transcript.
@@ -102,7 +102,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The UUID of the transcript status.
         /// </summary>
         [JsonPropertyName("transcript_status_uuid")]
-        public string TranscriptStatusUuid { get; set; }
+        public string? TranscriptStatusUuid { get; set; }
 
         /// <summary>
         /// The total number of words in the transcript.
@@ -114,6 +114,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 }

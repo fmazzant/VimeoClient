@@ -69,59 +69,59 @@ namespace Mafesoft.VimeoClient.Response
         /// Paging
         /// </summary>
         [JsonPropertyName("paging")]
-        public Paging Paging { get; set; }
+        public Paging? Paging { get; set; }
 
         /// <summary>
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public List<T> Data { get; set; }
+        public List<T>? Data { get; set; }
 
         /// <summary>
         /// Next Action
         /// </summary>
-        internal Func<RestResult<Pagination<T>>> NextAction { get; set; } = new Func<RestResult<Pagination<T>>>(() => { return null; });
+        internal Func<RestResult<Pagination<T>>?> NextAction { get; set; } = () => null;
 
         /// <summary>
         /// Go to Next page if it is exists
         /// </summary>
         /// <returns>The next page, or null when this is the last page.</returns>
-        public RestResult<Pagination<T>> Next() => NextAction();
+        public RestResult<Pagination<T>>? Next() => NextAction();
 
         /// <summary>
         /// Next Action, asynchronous
         /// </summary>
-        internal Func<CancellationToken, Task<RestResult<Pagination<T>>>> NextAsyncAction { get; set; } = (cancellationToken) => Task.FromResult<RestResult<Pagination<T>>>(null);
+        internal Func<CancellationToken, Task<RestResult<Pagination<T>>?>> NextAsyncAction { get; set; } = (cancellationToken) => Task.FromResult<RestResult<Pagination<T>>?>(null);
 
         /// <summary>
         /// Loads the next page asynchronously, if it exists.
         /// </summary>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The next page, or null when this is the last page.</returns>
-        public Task<RestResult<Pagination<T>>> NextAsync(CancellationToken cancellationToken = default) => NextAsyncAction(cancellationToken);
+        public Task<RestResult<Pagination<T>>?> NextAsync(CancellationToken cancellationToken = default) => NextAsyncAction(cancellationToken);
 
         /// <summary>
         /// Previous Action
         /// </summary>
-        internal Func<RestResult<Pagination<T>>> PreviousAction { get; set; } = new Func<RestResult<Pagination<T>>>(() => { return null; });
+        internal Func<RestResult<Pagination<T>>?> PreviousAction { get; set; } = () => null;
 
         /// <summary>
         /// Go to previuous oage if it is existes
         /// </summary>
         /// <returns>The previous page, or null when this is the first page.</returns>
-        public RestResult<Pagination<T>> Previous() => PreviousAction();
+        public RestResult<Pagination<T>>? Previous() => PreviousAction();
 
         /// <summary>
         /// Previous Action, asynchronous
         /// </summary>
-        internal Func<CancellationToken, Task<RestResult<Pagination<T>>>> PreviousAsyncAction { get; set; } = (cancellationToken) => Task.FromResult<RestResult<Pagination<T>>>(null);
+        internal Func<CancellationToken, Task<RestResult<Pagination<T>>?>> PreviousAsyncAction { get; set; } = (cancellationToken) => Task.FromResult<RestResult<Pagination<T>>?>(null);
 
         /// <summary>
         /// Loads the previous page asynchronously, if it exists.
         /// </summary>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The previous page, or null when this is the first page.</returns>
-        public Task<RestResult<Pagination<T>>> PreviousAsync(CancellationToken cancellationToken = default) => PreviousAsyncAction(cancellationToken);
+        public Task<RestResult<Pagination<T>>?> PreviousAsync(CancellationToken cancellationToken = default) => PreviousAsyncAction(cancellationToken);
 
         /// <summary>
         /// Returns the items of this page and of all the next pages.

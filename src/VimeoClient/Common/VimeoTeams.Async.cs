@@ -140,7 +140,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of incomplete videos was returned.
         /// </returns>
-        public virtual Task<RestResult<JsonElement>> GetTheVideosMissingMandatoryCustomMetadataAsync(string user_id, string sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<JsonElement>> GetTheVideosMissingMandatoryCustomMetadataAsync(string user_id, string? sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata/incomplete_videos")
             .ListParameters(page: page, per_page: per_page, sort: sort)
             .GetAsync<JsonElement>(cancellationToken);

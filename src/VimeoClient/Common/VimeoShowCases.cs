@@ -127,12 +127,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public virtual RestResult<Album> CreateAShowcase(int user_id,
             string name,
-            string brand_color = null,
-            string description = null,
+            string? brand_color = null,
+            string? description = null,
             bool hide_nav = false,
             bool hide_upcoming = false,
             ShowCasesLayout? layout = null,
-            string password = null,
+            string? password = null,
             ShowCasesPrivacy? privacy = null,
             bool review_mode = false,
             ShowCasesSort? sort = null,
@@ -155,12 +155,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="theme">The color theme of the showcase</param>
         /// <returns></returns>
         public virtual RestResult<Album> CreateAShowcase(string name,
-           string brand_color = null,
-           string description = null,
+           string? brand_color = null,
+           string? description = null,
            bool hide_nav = false,
            bool hide_upcoming = false,
            ShowCasesLayout? layout = null,
-           string password = null,
+           string? password = null,
            ShowCasesPrivacy? privacy = null,
            bool review_mode = false,
            ShowCasesSort? sort = null,
@@ -268,7 +268,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null) => RootAuthorization()
             .Command($"/users/{user_id}/albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -288,7 +288,7 @@ namespace Mafesoft.VimeoClient.Common
         public virtual RestResult<Pagination<Album>> GetAllTheShowcasesThatBelongToTheUser(ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null) => RootAuthorization()
             .Command($"/me/albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -334,7 +334,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        public virtual RestResult<Album> CopyAShowcase(int user_id, int album_id, string name = null) => RootAuthorization()
+        public virtual RestResult<Album> CopyAShowcase(int user_id, int album_id, string? name = null) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/copy")
             .JsonPayload(new VimeoPayload().Set("name", name))
             .Post<Album>();
@@ -347,7 +347,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied showcase was created.
         /// </returns>
-        public virtual RestResult<Album> MeCopyAShowcase(int album_id, string name = null) => RootAuthorization()
+        public virtual RestResult<Album> MeCopyAShowcase(int album_id, string? name = null) => RootAuthorization()
             .Command($"/me/albums/{album_id}/copy")
             .JsonPayload(new VimeoPayload().Set("name", name))
             .Post<Album>();
@@ -477,7 +477,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Picture> ReplaceACustomShowcaseLogo(int user_id, int album_id, int logo_id, bool active = true) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/logos/{logo_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .Patch<Picture>();
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Picture> ReplaceACustomShowcaseLogo(int album_id, int logo_id, bool active = true) => RootAuthorization()
             .Command($"/me/albums/{album_id}/logos/{logo_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .Patch<Picture>();
 
         #endregion
@@ -620,7 +620,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Picture> ReplaceACustomShowcaseThumbnail(int user_id, int album_id, int thumbnail_id, bool active = true) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/custom_thumbnails/{thumbnail_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .Patch<Picture>();
 
         /// <summary>
@@ -635,7 +635,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Picture> ReplaceACustomShowcaseThumbnail(int album_id, int thumbnail_id, bool active = true) => RootAuthorization()
             .Command($"/me/albums/{album_id}/custom_thumbnails/{thumbnail_id}")
-            .FormUrlEncoded(new KeyValuePair<string, object>("active", active))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("active", active))
             .Patch<Picture>();
 
         #endregion
@@ -684,7 +684,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Picture> CreateAThumbnailForAShowcaseFromAShowcaseVideo(int user_id, int album_id, int video_id, double? time_code = null) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos/{video_id}/set_album_thumbnail")
-            .FormUrlEncoded(new KeyValuePair<string, object>("time_code", time_code))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("time_code", time_code))
             .Post<Picture>();
 
         /// <summary>
@@ -699,7 +699,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Picture> MeCreateAThumbnailForAShowcaseFromAShowcaseVideo(int album_id, int video_id, double? time_code = null) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos/{video_id}/set_album_thumbnail")
-            .FormUrlEncoded(new KeyValuePair<string, object>("time_code", time_code))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("time_code", time_code))
             .Post<Picture>();
 
         /// <summary>
@@ -713,7 +713,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        public virtual RestResult<Video> GetASpecificVideoInAShowcase(int user_id, int album_id, int video_id, string password = null) => RootAuthorization()
+        public virtual RestResult<Video> GetASpecificVideoInAShowcase(int user_id, int album_id, int video_id, string? password = null) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos/{video_id}")
             .OptionalParameter("password", password)
             .Get<Video>();
@@ -728,7 +728,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The video was returned.
         /// 404 Not Found Error code 5000: No such showcase or video exists.
         /// </returns>
-        public virtual RestResult<Video> GetASpecificVideoInAShowcase(int album_id, int video_id, string password = null) => RootAuthorization()
+        public virtual RestResult<Video> GetASpecificVideoInAShowcase(int album_id, int video_id, string? password = null) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos/{video_id}")
             .OptionalParameter("password", password)
             .Get<Video>();
@@ -751,7 +751,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null) => RootAuthorization()
             .Command($"/users/{user_id}/videos/{video_id}/available_albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -774,7 +774,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesGetAllSort? sort = null) => RootAuthorization()
             .Command($"/videos/{video_id}/available_albums")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -800,7 +800,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesVideosFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/available_videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -825,7 +825,7 @@ namespace Mafesoft.VimeoClient.Common
             ShowCasesVideosFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null) => RootAuthorization()
             .Command($"/albums/{album_id}/available_videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -851,14 +851,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
         public virtual RestResult<Pagination<Video>> GetAllTheVideosInAShowcase(int user_id, int album_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             ShowCasesDirection? direction = null,
             ShowCasesVideosFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,
-            string password = null,
+            string? password = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null,
             bool? weak_search = null) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos")
@@ -888,14 +888,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 404 Not Found Error code 5000: No such showcase exists.
         /// </returns>
         public virtual RestResult<Pagination<Video>> GetAllTheVideosInAShowcase(int album_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             ShowCasesDirection? direction = null,
             ShowCasesVideosFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,
-            string password = null,
+            string? password = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ShowCasesVideosSort? sort = null,
             bool? weak_search = null) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos")
@@ -950,7 +950,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult ReplaceAllTheVideosInAShowcase(int user_id, int album_id, string[] videos) => RootAuthorization()
             .Command($"/users/{user_id}/albums/{album_id}/videos")
-            .FormUrlEncoded(new KeyValuePair<string, object>("videos", videos))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("videos", videos))
             .Put();
 
         /// <summary>
@@ -967,7 +967,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult ReplaceAllTheVideosInAShowcase(int album_id, string[] videos) => RootAuthorization()
             .Command($"/me/albums/{album_id}/videos")
-            .FormUrlEncoded(new KeyValuePair<string, object>("videos", videos))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("videos", videos))
             .Put();
 
         /// <summary>
@@ -1005,12 +1005,12 @@ namespace Mafesoft.VimeoClient.Common
         /// Builds the showcase body from the legacy CreateAShowcase arguments
         /// </summary>
         private static ShowCaseEditParameters ToParameters(string name,
-            string brand_color,
-            string description,
+            string? brand_color,
+            string? description,
             bool hide_nav,
             bool hide_upcoming,
             ShowCasesLayout? layout,
-            string password,
+            string? password,
             ShowCasesPrivacy? privacy,
             bool review_mode,
             ShowCasesSort? sort,

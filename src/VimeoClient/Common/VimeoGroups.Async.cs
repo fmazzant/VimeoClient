@@ -103,10 +103,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned.
         /// </returns>
         public virtual Task<RestResult<Pagination<Group>>> GetAllGroupsAsync(GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/groups")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -222,10 +222,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned
         /// </returns>
         public virtual async Task<RestResult<Pagination<Group>>> GetAllTheGroupsThatTheUserHasJoinedAsync(int user_id, GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
@@ -280,7 +280,7 @@ namespace Mafesoft.VimeoClient.Common
             GroupFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
@@ -337,7 +337,7 @@ namespace Mafesoft.VimeoClient.Common
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
@@ -445,7 +445,7 @@ namespace Mafesoft.VimeoClient.Common
            bool? filter_embeddable = null,
            int? page = null,
            int? per_page = null,
-           string query = null,
+           string? query = null,
            VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()

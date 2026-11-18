@@ -297,7 +297,7 @@ namespace Mafesoft.VimeoClient.Common
             OnDemandGenrePagesFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             OnDemandGenrePagesSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/ondemand/genres/{genre_id}/pages")
             .ListParameters(direction, filter, page, per_page, query, sort)

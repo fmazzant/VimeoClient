@@ -41,43 +41,43 @@ namespace Mafesoft.VimeoClient.Model
         /// The access token string.
         /// </summary>
         [JsonPropertyName("access_token")]
-        public string AccessToken { get; set; }
+        public string? AccessToken { get; set; }
 
         /// <summary>
         /// The API application associated with the token.
         /// </summary>
         [JsonPropertyName("app")]
-        public APIApp App { get; set; }
+        public APIApp? App { get; set; }
 
         /// <summary>
         /// The token's expiration date.
         /// </summary>
         [JsonPropertyName("expires_on")]
-        public string ExpiresOn { get; set; }
+        public string? ExpiresOn { get; set; }
 
         /// <summary>
         /// The refresh token string.
         /// </summary>
         [JsonPropertyName("refresh_token")]
-        public string RefreshToken { get; set; }
+        public string? RefreshToken { get; set; }
 
         /// <summary>
         /// The scope or scopes that the token supports.
         /// </summary>
         [JsonPropertyName("scope")]
-        public string Scope { get; set; }
+        public string? Scope { get; set; }
 
         /// <summary>
         /// The token type.
         /// bearer - The token is of the bearer type.
         /// </summary>
         [JsonPropertyName("token_type")]
-        public string token_type { get; set; }
+        public string? token_type { get; set; }
 
         /// <summary>
         /// The user associated with the token.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

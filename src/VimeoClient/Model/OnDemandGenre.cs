@@ -40,24 +40,24 @@ namespace Mafesoft.VimeoClient.Model
         /// The canonical name or URL slug for this genre.
         /// </summary>
         [JsonPropertyName("canonical")]
-        public string Canonical { get; set; }
+        public string? Canonical { get; set; }
 
         /// <summary>
         /// The Vimeo URL for this genre.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the genre.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public OnDemandMetadata Metadata { get; set; }
+        public OnDemandMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The descriptive name of this genre.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

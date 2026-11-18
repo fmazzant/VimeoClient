@@ -127,7 +127,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/appearances")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -151,7 +151,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/appearances")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -175,7 +175,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
         public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideosThatTheUserHasUploadedAsync(int user_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             VideoDirection? direction = null,
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
@@ -183,7 +183,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? include_team_content = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -208,7 +208,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideosThatTheUserHasUploadedAsync(string containing_uri = null,
+        public virtual Task<RestResult<Pagination<Video>>> GetAllTheVideosThatTheUserHasUploadedAsync(string? containing_uri = null,
             VideoDirection? direction = null,
             VideoFilter? filter = null,
             bool? filter_embeddable = null,
@@ -216,7 +216,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? include_team_content = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
@@ -242,11 +242,11 @@ namespace Mafesoft.VimeoClient.Common
         public virtual Task<RestResult<Pagination<Video>>> SearchForVideosAsync(string query,
             VideoDirection? direction = null,
             VideoSearchFilter? filter = null,
-            string links = null,
+            string? links = null,
             int? page = null,
             int? per_page = null,
             VideoSort? sort = null,
-            string uris = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? uris = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos")
             .ListParameters(direction, filter, page, per_page, query, sort)
             .OptionalParameter("links", links)
@@ -295,7 +295,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied video was created.
         /// </returns>
-        public virtual Task<RestResult<Video>> CopyAVideoAsync(int user_id, int video_id, string name = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Video>> CopyAVideoAsync(int user_id, int video_id, string? name = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/videos/{video_id}/copy")
             .JsonPayload(new VimeoPayload().Set("name", name))
             .PostAsync<Video>(cancellationToken);
@@ -309,7 +309,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 201 Created	The copied video was created.
         /// </returns>
-        public virtual Task<RestResult<Video>> MeCopyAVideoAsync(int video_id, string name = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<Video>> MeCopyAVideoAsync(int video_id, string? name = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/me/videos/{video_id}/copy")
             .JsonPayload(new VimeoPayload().Set("name", name))
             .PostAsync<Video>(cancellationToken);
@@ -431,7 +431,7 @@ namespace Mafesoft.VimeoClient.Common
             VideoDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoCreditSort? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/credits")
             .ListParameters(direction, null, page, per_page, query, sort)
@@ -615,7 +615,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int user_id, int video_id, string[] add_to = null, string[] remove_from = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int user_id, int video_id, string[]? add_to = null, string[]? remove_from = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/users/{user_id}/videos/{video_id}/albums")
             .Payload(new Dictionary<string, string[]>
             {
@@ -632,7 +632,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="remove_from">The URIs of the showcases from which to remove the video.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int video_id, string[] add_to = null, string[] remove_from = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<string>> AddOrRemoveAVideoFromAListOfShowcasesAsync(int video_id, string[]? add_to = null, string[]? remove_from = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/albums")
             .Payload(new Dictionary<string, string[]>
             {
@@ -1419,7 +1419,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The suggested questions and answers.
         /// </returns>
-        public virtual Task<RestResult<AiResponse<AiQuestion[]>>> GetSuggestedQuestionsForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<AiResponse<AiQuestion[]>>> GetSuggestedQuestionsForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/ai/ask")
             .OptionalParameter("language", language)
             .GetAsync<AiResponse<AiQuestion[]>>(cancellationToken);
@@ -1435,7 +1435,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The AI-generated answer.
         /// </returns>
-        public virtual Task<RestResult<AiResponse<AiQuestion>>> AskAQuestionAboutAVideoAsync(int video_id, string question, string language = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<AiResponse<AiQuestion>>> AskAQuestionAboutAVideoAsync(int video_id, string question, string? language = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/ai/ask")
             .JsonPayload(new VimeoPayload().Set("question", question).Set("language", language))
             .PostAsync<AiResponse<AiQuestion>>(cancellationToken);
@@ -1489,7 +1489,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 202 Accepted	The transcription job was queued.
         /// </returns>
-        public virtual Task<RestResult<AiStatus>> StartAITranscriptionForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<AiStatus>> StartAITranscriptionForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/ai/transcribe")
             .JsonPayload(new VimeoPayload().Set("language", language))
             .PostAsync<AiStatus>(cancellationToken);
@@ -1503,7 +1503,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The dubbing status was returned.
         /// </returns>
-        public virtual Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAIDubbingStatusForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAIDubbingStatusForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/ai/translate/dubbing")
             .OptionalParameter("language", language)
             .GetAsync<AiResponse<AiTranslationJob[]>>(cancellationToken);
@@ -1520,7 +1520,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 202 Accepted	The dubbing job was queued.
         /// </returns>
-        public virtual Task<RestResult<AiStatus>> StartAIAudioDubbingForAVideoAsync(int video_id, string language, string accent = null, AiDubbingApiVersion? dubbing_api_version = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<AiStatus>> StartAIAudioDubbingForAVideoAsync(int video_id, string language, string? accent = null, AiDubbingApiVersion? dubbing_api_version = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/ai/translate/dubbing")
             .JsonPayload(new VimeoPayload().Set("language", language).Set("accent", accent).Set("dubbing_api_version", dubbing_api_version))
             .PostAsync<AiStatus>(cancellationToken);
@@ -1534,7 +1534,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The subtitle translation status was returned.
         /// </returns>
-        public virtual Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAISubtitleTranslationStatusForAVideoAsync(int video_id, string language = null, CancellationToken cancellationToken = default) => RootAuthorization()
+        public virtual Task<RestResult<AiResponse<AiTranslationJob[]>>> GetAISubtitleTranslationStatusForAVideoAsync(int video_id, string? language = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/ai/translate/subtitles")
             .OptionalParameter("language", language)
             .GetAsync<AiResponse<AiTranslationJob[]>>(cancellationToken);
@@ -1609,11 +1609,11 @@ namespace Mafesoft.VimeoClient.Common
         public virtual Task<RestResult<AudioTrack>> CreateAnAudioTrackForAVideoVersionAsync(int video_id, int version_id,
             string upload_approach,
             long? upload_size = null,
-            string upload_link = null,
-            string upload_redirect_url = null,
-            string language_code = null,
-            string type = null,
-            string provenance = null,
+            string? upload_link = null,
+            string? upload_redirect_url = null,
+            string? language_code = null,
+            string? type = null,
+            string? provenance = null,
             bool? active = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/versions/{version_id}/audiotracks")
             .JsonPayload(new VimeoPayload()
@@ -1656,9 +1656,9 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The audio track was edited.
         /// </returns>
         public virtual Task<RestResult<AudioTrack>> EditAnAudioTrackOfAVideoVersionAsync(int video_id, int version_id, string audiotrack_id,
-            string language_code = null,
-            string type = null,
-            string provenance = null,
+            string? language_code = null,
+            string? type = null,
+            string? provenance = null,
             bool? active = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/versions/{version_id}/audiotracks/{audiotrack_id}")
             .JsonPayload(new VimeoPayload()
@@ -1860,8 +1860,8 @@ namespace Mafesoft.VimeoClient.Common
             VideoDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
-            string sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
+            string? query = null,
+            string? sort = null, CancellationToken cancellationToken = default) => RootAuthorization()
             .Command($"/videos/{video_id}/credits/available_users")
             .ListParameters(direction, null, page, per_page, query, sort)
             .GetPaginationAsync<User>(RootAuthorization, cancellationToken);

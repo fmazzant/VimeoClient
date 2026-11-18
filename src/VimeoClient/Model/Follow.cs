@@ -46,12 +46,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the user followed the category, or the null value if the user hasn't followed the category.
         /// </summary>
         [JsonPropertyName("added_time")]
-        public string AddedTime { get; set; }
+        public string? AddedTime { get; set; }
 
         /// <summary>
         /// The URI for following or unfollowing the category: PUT to this URI to follow the category, or DELETE to this URI to unfollow the category.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

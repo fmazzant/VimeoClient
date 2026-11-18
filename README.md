@@ -24,6 +24,9 @@ If VimeoClient is useful to you, consider [supporting the project](#support). â˜
 | Nothing lost | Unmapped fields in `AdditionalData`, undocumented responses as raw `JsonElement`, undocumented bodies as `VimeoPayload`. See [Sections](#sections) |
 | API version | The `Accept` header asks for the Vimeo API 3.4 by default; another version can be requested with `ApiVersion`. See [Vimeo API version](#vimeo-api-version) |
 | Certificate pinning | Standard TLS validation, or validation plus a list of trusted certificate hashes. See [Certificates](#certificates) |
+| Dependency injection and interfaces | `services.AddVimeoClient(...)` from code or configuration; `IVimeo` and an interface for every section to mock the client. See [Dependency injection](#dependency-injection) |
+| Resumable upload | `UploadAsync` uploads a file with the tus approach: chunks, progress, resume after an error or with `ResumeUploadAsync`. See [Upload a video](#upload-a-video) |
+| Rate limits and retry | Optional retry of 429 and transient errors with backoff and `Retry-After`; `GetRateLimit()` reads the `X-RateLimit-*` headers. See [Rate limits and retry](#rate-limits-and-retry) |
 | Latest Vimeo features | Chapters, animated thumbnails, AI (questions, metadata, dubbing), audio tracks, transcripts, trimming, live scenes and destinations, analytics, webhooks, team custom metadata. See [Videos: chapters, animated thumbnails, AI](#videos-chapters-animated-thumbnails-ai) |
 | Tested | xUnit tests on every target framework against a fake HTTP handler, run on every push and pull request. See [Tests](#tests) |
 
@@ -124,6 +127,97 @@ The version of the `Mafesoft.VimeoClient` package has three numbers, for example
 - `ValidCertificates` empty: the standard TLS validation is used.
 - `ValidCertificates` set: the certificate must be valid **and** its hash must be in the list (pinning).
 - `Debug = true` skips the validation: use it only in development (default `false`).
+
+## Dependency injection
+
+```
+dotnet add package Mafesoft.VimeoClient.Extensions.DependencyInjection
+```
+
+```c#
+// appsettings.json: { "Vimeo": { "AccessToken": "...", "MaxRetries": 3 } }
+builder.Services.AddVimeoClient(builder.Configuration.GetSection("Vimeo"));
+
+// or in code
+builder.Services.AddVimeoClient(options => options.AccessToken = builder.Configuration["Vimeo:AccessToken"]);
+```
+
+```c#
+public class VideoService(IVimeoVideos videos)          // or IVimeo for the whole client
+{
+    public Task<RestResult<Video>> GetAsync(int id) => videos.GetSpecificVideoAsync(id);
+}
+```
+
+- `Vimeo`, `IVimeo` and `VimeoProperties` are singletons; the interface of every section (`IVimeoVideos`,
+  `IVimeoUsers`, ...) is registered too, so a class receives only the section it uses. A client registered before
+  (for example a fake in the tests) is kept.
+- `IVimeo` and the section interfaces are in the main package: mock them in the tests of the application. They are
+  generated from the classes by `tools/GenerateInterfaces.cs` (`dotnet run tools/GenerateInterfaces.cs`), and a test
+  fails when a public method is missing from its interface.
+
+## Upload a video
+
+`UploadAsync` uploads a video with the resumable [tus approach](https://developer.vimeo.com/api/upload/videos): it
+creates the video, sends the file in chunks (`PATCH` with `Upload-Offset`) and, after an error, asks Vimeo how much it
+received (`HEAD`) and continues from there.
+
+```c#
+var progress = new Progress<long>(bytes => Console.WriteLine($"{bytes} bytes sent"));
+
+VimeoUploadResult upload = await client.Videos.UploadAsync(
+    "movie.mp4",
+    new VideoUploadParameters { Name = "My movie", PrivacyView = VideoPrivacyView.unlisted },
+    progress,
+    cancellationToken);
+
+if (upload.IsCompleted)
+{
+    Console.WriteLine($"Uploaded: {upload.Video.Link}");   // Vimeo now transcodes the video
+}
+else
+{
+    // Not completed (network down, cancelled...): resume later with the same file
+    using var file = File.OpenRead("movie.mp4");
+    upload = await client.Videos.ResumeUploadAsync(upload.UploadLink, file, progress);
+}
+```
+
+- `UploadAsync(Stream, ...)` uploads a seekable stream (a file or a memory stream) from its current position.
+- It does not throw for HTTP errors: `IsCompleted`, `Offset`, `StatusCode` and `Exception` tell what happened, and
+  `Creation` is the result of the request that created the video.
+- The chunks are 8 MB (`VimeoVideos.UploadChunkSize`); a failed chunk is sent again up to 3 times in a row
+  (`VimeoVideos.UploadChunkRetries`), each time from the offset received by Vimeo.
+- The chunks go to the upload link (the Vimeo upload servers) with the standard TLS validation: `ValidCertificates`
+  pins the certificates of the API end point only.
+
+## Rate limits and retry
+
+Vimeo limits the number of requests ([rate limiting](https://developer.vimeo.com/guidelines/rate-limiting)) and answers
+`429 Too Many Requests` over the limit. The retry is off by default; turn it on with `MaxRetries`:
+
+```c#
+var client = new Vimeo(new VimeoProperties
+{
+    AccessToken = "...",
+    MaxRetries = 3,                          // 429, 408, 500, 502, 503, 504, network errors and timeouts
+    RetryDelay = TimeSpan.FromSeconds(1),    // 1s, 2s, 4s (+ jitter); the Retry-After header is honored
+});
+
+var result = client.Videos.GetSpecificVideo(123);
+int retries = result.RetryCount;
+
+VimeoRateLimit limit = result.GetRateLimit();   // X-RateLimit-Limit, -Remaining, -Reset; null without headers
+if (limit?.Remaining == 0)
+{
+    Console.WriteLine($"Limit reached, it resets at {limit.Reset}");
+}
+```
+
+- Only GET, HEAD, PUT and DELETE are retried by default: a POST or a PATCH (creating a video, copying it) could be
+  executed twice. Set `RetryNonIdempotentMethods = true` to retry them too.
+- The `Retry-After` header is honored up to 30 seconds. A `429` without it is retried with the backoff delays: use
+  `GetRateLimit().Reset` to wait for the end of the window yourself.
 
 ## Sections
 

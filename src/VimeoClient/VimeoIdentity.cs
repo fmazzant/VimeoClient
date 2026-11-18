@@ -42,18 +42,18 @@ namespace Mafesoft.VimeoClient
         /// The resource key of the entity.
         /// </summary>
         [JsonPropertyName("resource_key")]
-        public string ResourceKey { get; set; }
+        public string? ResourceKey { get; set; }
 
         /// <summary>
         /// The unique identifier to access the category resource.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The unique indetity get Uri
         /// </summary>
-        public string Identity => Uri.Split('/').Last();
+        public string? Identity => Uri?.Split('/').Last();
 
         /// <summary>
         /// The unique indetity get Uri

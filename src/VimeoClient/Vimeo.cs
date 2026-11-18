@@ -94,7 +94,7 @@ namespace Mafesoft.VimeoClient
         /// Vimeo End Point root
         /// </summary>
         /// <returns>The request builder for the Vimeo end point, with the Accept header and the certificate validation.</returns>
-        protected virtual RestBuilder Root() => Rest
+        protected virtual RestBuilder Root() => ApplyRetry(Rest
             .Build()
             .Url(new Uri(Properties.EndPoint))
             .Header((headers) =>
@@ -118,10 +118,29 @@ namespace Mafesoft.VimeoClient
                     return noErrors;
                 }
 
-                var certificate = cert.GetCertHashString();
-                var contains = Properties.ValidCertificates.Contains(certificate);
+                var certificate = cert?.GetCertHashString();
+                var contains = certificate != null && Properties.ValidCertificates.Contains(certificate);
                 return noErrors && contains;
-            });
+            }));
+
+        private static readonly Lazy<System.Net.Http.HttpClient> SharedUploadHttpClient = new Lazy<System.Net.Http.HttpClient>(
+            () => new System.Net.Http.HttpClient { Timeout = TimeSpan.FromMinutes(30) });
+
+        /// <summary>
+        /// The HttpClient of the tus uploads (<see cref="VimeoVideos.UploadAsync(System.IO.Stream, Body.Video.VideoUploadParameters, IProgress{long}, System.Threading.CancellationToken)"/>):
+        /// the chunks go to the upload link of the video, on the Vimeo upload servers, with a raw body that the request
+        /// builder of the API does not send. The standard TLS validation applies (not <see cref="VimeoProperties.ValidCertificates"/>,
+        /// which pins the certificates of the API end point). One shared instance, with a timeout of 30 minutes per chunk.
+        /// </summary>
+        protected internal virtual System.Net.Http.HttpClient UploadHttpClient => SharedUploadHttpClient.Value;
+
+        /// <summary>
+        /// Retries the transient errors (429, 408, 5xx, network errors, timeouts) when <see cref="VimeoProperties.MaxRetries"/>
+        /// is greater than 0, with exponential backoff from <see cref="VimeoProperties.RetryDelay"/> and the Retry-After header.
+        /// </summary>
+        private RestBuilder ApplyRetry(RestBuilder builder) => Properties.MaxRetries > 0
+            ? builder.Retry(Properties.MaxRetries, Properties.RetryDelay, Properties.RetryNonIdempotentMethods)
+            : builder;
 
         /// <summary>
         /// Vimeo End Point root with Bearer authentication

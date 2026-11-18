@@ -46,18 +46,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the subscription expires.
         /// </summary>
         [JsonPropertyName("expires_time")]
-        public string ExpiresTime { get; set; }
+        public string? ExpiresTime { get; set; }
 
         /// <summary>
         /// The tine in ISO 8601 format when the subscription was purchased.
         /// </summary>
         [JsonPropertyName("purchase_time")]
-        public string PurchaseTime { get; set; }
+        public string? PurchaseTime { get; set; }
 
         /// <summary>
         /// The stream type.
         /// </summary>
         [JsonPropertyName("stream")]
-        public string Stream { get; set; }
+        public string? Stream { get; set; }
     }
 }

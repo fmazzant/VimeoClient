@@ -69,23 +69,23 @@ namespace Mafesoft.VimeoClient.Body
         /// <summary>
         /// The access token string.
         /// </summary>
-        public string access_token { get; set; }
+        public string? access_token { get; set; }
 
         /// <summary>
         /// The type of the access token, which for the Vimeo API is always bearer.
         /// </summary>
-        public string token_type { get; set; }
+        public string? token_type { get; set; }
 
         /// <summary>
         /// The space-separated list of scopes associated with the access token. 
         /// The default value is public. 
         /// </summary>
-        public string scope { get; set; }
+        public string? scope { get; set; }
 
         /// <summary>
         /// The complete representation of the authenticated end user. For more information, see the API Reference.
         /// </summary>
-        public User user { get; set; }
+        public User? user { get; set; }
     }
 
     /// <summary>
@@ -109,16 +109,16 @@ namespace Mafesoft.VimeoClient.Body
         ///     Public data, private data Your app runs on a browserless or limited-input device.
         ///  
         /// </summary>
-        public string grant_type { get; set; }
+        public string? grant_type { get; set; }
 
         /// <summary>
         /// The authorization code to exchange for an access token.
         /// </summary>
-        public string code { get; set; }
+        public string? code { get; set; }
 
         /// <summary>
         /// A redirect URI associated with your app. To add or review redirect URIs, access your app's information page from My Apps.
         /// </summary>
-        public string redirect_uri { get; set; }
+        public string? redirect_uri { get; set; }
     }
 }

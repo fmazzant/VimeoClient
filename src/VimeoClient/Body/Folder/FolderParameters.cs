@@ -75,12 +75,12 @@ namespace Mafesoft.VimeoClient.Body.Folder
         /// <summary>
         /// The name of the folder.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The URI of the parent folder (only on create). Use it to create a subfolder.
         /// </summary>
-        public string ParentFolderUri { get; set; }
+        public string? ParentFolderUri { get; set; }
 
         /// <summary>
         /// The ID of the Slack incoming webhook.
@@ -103,9 +103,9 @@ namespace Mafesoft.VimeoClient.Body.Folder
         /// Only the values that are set are sent to Vimeo.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             if (!string.IsNullOrEmpty(Name))
             {

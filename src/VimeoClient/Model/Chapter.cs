@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The URI of the active thumbnail.
         /// </summary>
         [JsonPropertyName("active_thumbnail_uri")]
-        public string ActiveThumbnailUri { get; set; }
+        public string? ActiveThumbnailUri { get; set; }
 
         /// <summary>
         /// The thumbnails associated with the video chapter.
         /// </summary>
         [JsonPropertyName("thumbnails")]
-        public Picture[] Thumbnails { get; set; }
+        public Picture[]? Thumbnails { get; set; }
 
         /// <summary>
         /// The timecode of the chapter in seconds from the start of the video.
@@ -58,6 +58,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The title of the chapter.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
     }
 }

@@ -40,36 +40,36 @@ namespace Mafesoft.VimeoClient.Model
         /// The video to upload.
         /// </summary>
         [JsonPropertyName("clip")]
-        public Video Clip { get; set; }
+        public Video? Clip { get; set; }
 
         /// <summary>
         /// The completion URI of the upload (streaming approach).
         /// </summary>
         [JsonPropertyName("complete_uri")]
-        public string CompleteUri { get; set; }
+        public string? CompleteUri { get; set; }
 
         /// <summary>
         /// The HTML upload form (post approach).
         /// </summary>
         [JsonPropertyName("form")]
-        public string Form { get; set; }
+        public string? Form { get; set; }
 
         /// <summary>
         /// The upload ticket ID.
         /// </summary>
         [JsonPropertyName("ticket_id")]
-        public string TicketId { get; set; }
+        public string? TicketId { get; set; }
 
         /// <summary>
         /// The link of the upload.
         /// </summary>
         [JsonPropertyName("upload_link")]
-        public string UploadLink { get; set; }
+        public string? UploadLink { get; set; }
 
         /// <summary>
         /// The owner of the uploaded video.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

@@ -40,19 +40,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The description for this season.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The season container's metadata.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public OnDemandMetadata Metadata { get; set; }
+        public OnDemandMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The descriptive name of the season.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The position of the season relative to other seasons in the series.
@@ -64,12 +64,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The type of season.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The owner of the season.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

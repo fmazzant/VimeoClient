@@ -175,7 +175,7 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The promotion code (single promotions only).
         /// </summary>
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The type of discount.
@@ -190,12 +190,12 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The time in ISO 8601 format when the promotion ends.
         /// </summary>
-        public string EndTime { get; set; }
+        public string? EndTime { get; set; }
 
         /// <summary>
         /// The description of the promotion.
         /// </summary>
-        public string Label { get; set; }
+        public string? Label { get; set; }
 
         /// <summary>
         /// The percentage of the discount (when DiscountType is percent).
@@ -210,7 +210,7 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The time in ISO 8601 format when the promotion starts.
         /// </summary>
-        public string StartTime { get; set; }
+        public string? StartTime { get; set; }
 
         /// <summary>
         /// The streaming period of the promotion. Required.
@@ -249,6 +249,6 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 }

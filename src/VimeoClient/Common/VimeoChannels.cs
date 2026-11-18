@@ -108,9 +108,9 @@ namespace Mafesoft.VimeoClient.Common
             {
                 foreach (var item in obj.ToEnumerable())
                 {
-                    if (item.Value != null)
+                    if (item.Value is string value)
                     {
-                        pars.Add(item.Key, item.Value);
+                        pars.Add(item.Key, value);
                     }
                 }
             })
@@ -146,7 +146,7 @@ namespace Mafesoft.VimeoClient.Common
             {
                 foreach (var item in obj.ToEnumerable())
                 {
-                    pars.Add(item.Key, item.Value);
+                    pars.Add(item.Key, item.Value!); // null is sent as an empty value, as before
                 }
             })
             .Patch<Channel>();
@@ -175,7 +175,7 @@ namespace Mafesoft.VimeoClient.Common
             ChannelFilter? filter,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ChannelSortGetAllChannel? sort = null)
         {
             var root = RootAuthorization()
@@ -225,7 +225,7 @@ namespace Mafesoft.VimeoClient.Common
             ChannelFilter? filter,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ChannelSortGetAllChannelSubscribe? sort = null)
         {
             var root = RootAuthorization()
@@ -273,7 +273,7 @@ namespace Mafesoft.VimeoClient.Common
             ChannelFilter? filter,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ChannelSortGetAllChannelSubscribe? sort = null)
         {
             var root = RootAuthorization()
@@ -439,7 +439,7 @@ namespace Mafesoft.VimeoClient.Common
             ChannelDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ChannelSortAllModerators? sort = null)
             => RootAuthorization()
                .Command($"/channels/{channel_id}/moderators")
@@ -642,7 +642,7 @@ namespace Mafesoft.VimeoClient.Common
             ChannelDirection? direction,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ChannelSortAllModerators? sort = null) => RootAuthorization()
             .Command($"/channels/{channel_id}/users")
             .Parameter((p) =>
@@ -742,7 +742,7 @@ namespace Mafesoft.VimeoClient.Common
             {
                 foreach (var item in tags)
                 {
-                    p.Add("tags[]", item.Name);
+                    p.Add("tags[]", item.Name!); // null is sent as an empty value, as before
                 }
             })
             .Put<VimeoList<Tag>>();
@@ -820,7 +820,7 @@ namespace Mafesoft.VimeoClient.Common
             {
                 foreach (var item in video_uri)
                 {
-                    p.Add("video_uri", item.Uri);
+                    p.Add("video_uri", item.Uri!); // null is sent as an empty value, as before
                 }
             })
            .Put();
@@ -873,13 +873,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <returns>The videos of the channel, one page at a time.</returns>
         public virtual RestResult<Pagination<Video>> GetAllTheVideosInAChannel(string channel_id,
-            string containing_uri = null,
+            string? containing_uri = null,
             ChannelDirection? direction = null,
             ChannelFilter? filter = null,
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             ChannelSortGetAllVideos? sort = null)
         {
             var root = RootAuthorization()
@@ -988,7 +988,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Comment> AddACommentToAChannelVideo(string channel_id, string video_id, string text) => RootAuthorization()
             .Command($"/channels/{channel_id}/videos/{video_id}/comments")
-            .FormUrlEncoded(new KeyValuePair<string, object>("text", text))
+            .FormUrlEncoded(new KeyValuePair<string, object?>("text", text))
             .Post<Comment>();
 
         /// <summary>
@@ -1008,7 +1008,7 @@ namespace Mafesoft.VimeoClient.Common
             VideoDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoCreditSort? sort = null) => RootAuthorization()
             .Command($"/channels/{channel_id}/videos/{video_id}/credits")
             .ListParameters(direction, null, page, per_page, query, sort)
@@ -1152,7 +1152,7 @@ namespace Mafesoft.VimeoClient.Common
             => AddACommentToAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), text);
 
         /// <inheritdoc cref="GetAllTheCreditedUsersInAChannelVideo(string, string, VideoDirection?, int?, int?, string, VideoCreditSort?)"/>
-        public virtual RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string query = null, VideoCreditSort? sort = null)
+        public virtual RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string? query = null, VideoCreditSort? sort = null)
             => GetAllTheCreditedUsersInAChannelVideo(channel_id, video_id.ToString(CultureInfo.InvariantCulture), direction, page, per_page, query, sort);
 
         /// <inheritdoc cref="CreditAUserInAChannelVideo(string, string, CreditParameters)"/>

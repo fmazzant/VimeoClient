@@ -153,7 +153,7 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         internal void WriteTo(VimeoPayload payload, string path) => payload
             .Set($"{path}.active", Active)
             .Set($"{path}.download", Download)
-            .Set($"{path}.period", Period.HasValue ? VimeoRestBuilderExtensions.ToVimeoValue(Period).Replace('_', ' ') : null)
+            .Set($"{path}.period", Period.HasValue ? VimeoRestBuilderExtensions.ToVimeoValue(Period)?.Replace('_', ' ') : null)
             .SetPrices($"{path}.price", Price?.Count > 0 ? Price : null);
     }
 }

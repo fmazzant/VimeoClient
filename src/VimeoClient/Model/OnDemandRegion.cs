@@ -40,18 +40,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The ISO 3166-1 alpha-2 code of the region (for example US).
         /// </summary>
         [JsonPropertyName("country_code")]
-        public string CountryCode { get; set; }
+        public string? CountryCode { get; set; }
 
         /// <summary>
         /// The descriptive name of the region.
         /// </summary>
         [JsonPropertyName("country_name")]
-        public string CountryName { get; set; }
+        public string? CountryName { get; set; }
 
         /// <summary>
         /// The region's continent.
         /// </summary>
         [JsonPropertyName("continent")]
-        public string Continent { get; set; }
+        public string? Continent { get; set; }
     }
 }

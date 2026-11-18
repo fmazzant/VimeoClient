@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the destination target, whether a page, profile name, or the like.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The ID of the destination.
@@ -66,37 +66,37 @@ namespace Mafesoft.VimeoClient.Model
         /// Metadata about the event destination.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public LiveEventDestinationMetadata Metadata { get; set; }
+        public LiveEventDestinationMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The privacy setting of the destination.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public string Privacy { get; set; }
+        public string? Privacy { get; set; }
 
         /// <summary>
         /// The broadcast ID of the destination service.
         /// </summary>
         [JsonPropertyName("provider_broadcast_id")]
-        public string ProviderBroadcastId { get; set; }
+        public string? ProviderBroadcastId { get; set; }
 
         /// <summary>
         /// The destination ID of the destination service.
         /// </summary>
         [JsonPropertyName("provider_destination_id")]
-        public string ProviderDestinationId { get; set; }
+        public string? ProviderDestinationId { get; set; }
 
         /// <summary>
         /// The user ID of the destination service.
         /// </summary>
         [JsonPropertyName("provider_user_id")]
-        public string ProviderUserId { get; set; }
+        public string? ProviderUserId { get; set; }
 
         /// <summary>
         /// The ID of the scheduled live video.
         /// </summary>
         [JsonPropertyName("provider_video_id")]
-        public string ProviderVideoId { get; set; }
+        public string? ProviderVideoId { get; set; }
 
         /// <summary>
         /// The time in Unix timestamp format when live streaming is scheduled to start.
@@ -108,43 +108,43 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the destination service.
         /// </summary>
         [JsonPropertyName("service_name")]
-        public string ServiceName { get; set; }
+        public string? ServiceName { get; set; }
 
         /// <summary>
         /// The status of the destination.
         /// </summary>
         [JsonPropertyName("state")]
-        public string State { get; set; }
+        public string? State { get; set; }
 
         /// <summary>
         /// The message that describes the state of the destination.
         /// </summary>
         [JsonPropertyName("state_message")]
-        public string StateMessage { get; set; }
+        public string? StateMessage { get; set; }
 
         /// <summary>
         /// The stream key for the simulcast destination.
         /// </summary>
         [JsonPropertyName("stream_key")]
-        public string StreamKey { get; set; }
+        public string? StreamKey { get; set; }
 
         /// <summary>
         /// The RTMP URL to stream to.
         /// </summary>
         [JsonPropertyName("stream_url")]
-        public string StreamUrl { get; set; }
+        public string? StreamUrl { get; set; }
 
         /// <summary>
         /// The type of the simulcast destination.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The name of the destination's owner.
         /// </summary>
         [JsonPropertyName("user_display_name")]
-        public string UserDisplayName { get; set; }
+        public string? UserDisplayName { get; set; }
 
         /// <summary>
         /// The ID of the destination's owner.
@@ -156,7 +156,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -174,7 +174,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A list of resource URIs related to the event destination.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public LiveEventDestinationMetadataInteractions Interactions { get; set; }
+        public LiveEventDestinationMetadataInteractions? Interactions { get; set; }
     }
 
     /// <summary>
@@ -186,7 +186,7 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about where and how to edit an item.
         /// </summary>
         [JsonPropertyName("edit")]
-        public LiveEventDestinationMetadataInteractionsEdit Edit { get; set; }
+        public LiveEventDestinationMetadataInteractionsEdit? Edit { get; set; }
     }
 
     /// <summary>
@@ -198,12 +198,12 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

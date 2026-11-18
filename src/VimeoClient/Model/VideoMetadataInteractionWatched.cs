@@ -46,18 +46,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the user watched the video.
         /// </summary>
         [JsonPropertyName("added_time")]
-        public string AddedTime { get; set; }
+        public string? AddedTime { get; set; }
 
         /// <summary>
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

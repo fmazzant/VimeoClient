@@ -46,48 +46,48 @@ namespace Mafesoft.VimeoClient.Model
         /// The read-only display language.
         /// </summary>
         [JsonPropertyName("display_language")]
-        public string DisplayLanguage { get; set; }
+        public string? DisplayLanguage { get; set; }
 
         /// <summary>
         /// The SRT download URL for HLS.
         /// </summary>
         [JsonPropertyName("hls_link")]
-        public string HlsLink { get; set; }
+        public string? HlsLink { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the HLS read-only link expires.
         /// </summary>
         [JsonPropertyName("hls_link_expires_time")]
-        public string HlsLinkExpiresTime { get; set; }
+        public string? HlsLinkExpiresTime { get; set; }
 
         /// <summary>
         /// The language code for this text track.
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The read-only URL of the text track file, intended for use with HLS playback.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the read-only link expires.
         /// </summary>
         [JsonPropertyName("link_expires_time")]
-        public string LinkExpiresTime { get; set; }
+        public string? LinkExpiresTime { get; set; }
 
         /// <summary>
         /// The descriptive label of this text track.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The type of the text track: captions, chapters, descriptions, metadata, subtitles.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 }

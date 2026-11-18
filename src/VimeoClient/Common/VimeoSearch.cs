@@ -95,14 +95,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The federated search results were returned.
         /// </returns>
         public virtual RestResult<Pagination<ProjectItem>> SearchTheItemsOfAUser(string user_id,
-            string query = null,
-            string[] query_fields = null,
-            string filter = null,
-            string[] filter_privacy = null,
-            string modified_start_date = null,
-            string modified_end_date = null,
-            string direction = null,
-            string sort = null,
+            string? query = null,
+            string[]? query_fields = null,
+            string? filter = null,
+            string[]? filter_privacy = null,
+            string? modified_start_date = null,
+            string? modified_end_date = null,
+            string? direction = null,
+            string? sort = null,
             int? page = null,
             int? per_page = null) => SearchParameters(RootAuthorization().Command($"/search/{user_id}/items"),
                 query, query_fields, filter, filter_privacy, modified_start_date, modified_end_date, direction, sort, page, per_page)
@@ -128,14 +128,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The federated search results were returned.
         /// </returns>
         public virtual RestResult<Pagination<ProjectItem>> SearchTheItemsOfAWorkspace(string workspace_uuid,
-            string query = null,
-            string[] query_fields = null,
-            string filter = null,
-            string[] filter_privacy = null,
-            string modified_start_date = null,
-            string modified_end_date = null,
-            string direction = null,
-            string sort = null,
+            string? query = null,
+            string[]? query_fields = null,
+            string? filter = null,
+            string[]? filter_privacy = null,
+            string? modified_start_date = null,
+            string? modified_end_date = null,
+            string? direction = null,
+            string? sort = null,
             int? page = null,
             int? per_page = null) => SearchParameters(RootAuthorization().Command($"/workspaces/search/{workspace_uuid}/items"),
                 query, query_fields, filter, filter_privacy, modified_start_date, modified_end_date, direction, sort, page, per_page)
@@ -147,9 +147,9 @@ namespace Mafesoft.VimeoClient.Common
         /// Adds the federated search query parameters.
         /// </summary>
         protected virtual RestBuilder SearchParameters(RestBuilder root,
-            string query, string[] query_fields, string filter, string[] filter_privacy,
-            string modified_start_date, string modified_end_date,
-            string direction, string sort, int? page, int? per_page) => root
+            string? query, string[]? query_fields, string? filter, string[]? filter_privacy,
+            string? modified_start_date, string? modified_end_date,
+            string? direction, string? sort, int? page, int? per_page) => root
             .OptionalParameter("query_fields", query_fields)
             .OptionalParameter("filter_privacy", filter_privacy)
             .OptionalParameter("modified_start_date", modified_start_date)

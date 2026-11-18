@@ -40,12 +40,12 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information that is connected to this resource.
         /// </summary>
         [JsonPropertyName("connections")]
-        public CategoryConnection connections { get; set; }
+        public CategoryConnection? connections { get; set; }
 
         /// <summary>
         /// The permissible actions related to the category.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public Interaction interactions { get; set; }
+        public Interaction? interactions { get; set; }
     }
 }

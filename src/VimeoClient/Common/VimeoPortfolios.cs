@@ -118,7 +118,7 @@ namespace Mafesoft.VimeoClient.Common
             PortfolioDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             PortfolioSort? sort = null) => RootAuthorization()
             .Command($"/users/{user_id}/portfolios")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -136,7 +136,7 @@ namespace Mafesoft.VimeoClient.Common
         public virtual RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             PortfolioSort? sort = null) => RootAuthorization()
             .Command($"/me/portfolios")
             .ListParameters(direction: direction, page: page, per_page: per_page, query: query, sort: sort)
@@ -237,7 +237,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <returns>The videos were returned.</returns>
         public virtual RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id,
-           string containing_uri,
+           string? containing_uri,
            VideoFilter? filter = null,
            bool filter_embeddable = false,
            int? page = null,

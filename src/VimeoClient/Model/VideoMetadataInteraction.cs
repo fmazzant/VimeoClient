@@ -41,55 +41,55 @@ namespace Mafesoft.VimeoClient.Model
         /// include information about adding or removing the video from the album.
         /// </summary>
         [JsonPropertyName("album")]
-        public VideoMetadataInteractionAlbum Album { get; set; }
+        public VideoMetadataInteractionAlbum? Album { get; set; }
 
         /// <summary>
         /// The Buy interaction for a On Demand video.
         /// </summary>
         [JsonPropertyName("buy")]
-        public VideoMetadataInteractionBuy Buy { get; set; }
+        public VideoMetadataInteractionBuy? Buy { get; set; }
 
         /// <summary>
         /// When a video is referenced by a channel URI, if the user is a moderator of the channel, 
         /// include information about removing the video from the channel.
         /// </summary>
         [JsonPropertyName("channel")]
-        public VideoMetadataInteractionChannel Channel { get; set; }
+        public VideoMetadataInteractionChannel? Channel { get; set; }
 
         /// <summary>
         /// Information about whether the authenticated user has liked this video.
         /// </summary>
         [JsonPropertyName("like")]
-        public VideoMetadataInteractionLike Like { get; set; }
+        public VideoMetadataInteractionLike? Like { get; set; }
 
         /// <summary>
         /// The Rent interaction for an On Demand video.
         /// </summary>
         [JsonPropertyName("rent")]
-        public VideoMetadataInteractionRent Rent { get; set; }
+        public VideoMetadataInteractionRent? Rent { get; set; }
 
         /// <summary>
         /// Information about where and how to report a video.
         /// </summary>
         [JsonPropertyName("report")]
-        public VideoMetadataInteractionReport Report { get; set; }
+        public VideoMetadataInteractionReport? Report { get; set; }
 
         /// <summary>
         /// Subscription information for an On Demand video.
         /// </summary>
         [JsonPropertyName("subscribe")]
-        public VideoMetadataInteractionSubscribe Subscribe { get; set; }
+        public VideoMetadataInteractionSubscribe? Subscribe { get; set; }
 
         /// <summary>
         /// Information about removing this video from the user's list of watched videos.
         /// </summary>
         [JsonPropertyName("watched")]
-        public VideoMetadataInteractionWatched Watched { get; set; }
+        public VideoMetadataInteractionWatched? Watched { get; set; }
 
         /// <summary>
         /// Information about whether this video appears on the authenticated user's Watch Later list.
         /// </summary>
         [JsonPropertyName("watchlater")]
-        public VideoMetadataInteractionWachlater Watchlater { get; set; }
+        public VideoMetadataInteractionWachlater? Watchlater { get; set; }
     }
 }

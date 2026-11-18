@@ -53,13 +53,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The country (when the dimension is country).
         /// </summary>
         [JsonPropertyName("country")]
-        public AnalyticsCountry Country { get; set; }
+        public AnalyticsCountry? Country { get; set; }
 
         /// <summary>
         /// The type of device (when the dimension is device_type).
         /// </summary>
         [JsonPropertyName("device_type")]
-        public string DeviceType { get; set; }
+        public string? DeviceType { get; set; }
 
         /// <summary>
         /// The number of downloads of the corresponding Vimeo content.
@@ -71,13 +71,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The domain name of the website (when the dimension is embed_domain).
         /// </summary>
         [JsonPropertyName("embed_domain")]
-        public string EmbedDomain { get; set; }
+        public string? EmbedDomain { get; set; }
 
         /// <summary>
         /// The end time of the time interval in ISO 8601 format.
         /// </summary>
         [JsonPropertyName("end_date")]
-        public string EndDate { get; set; }
+        public string? EndDate { get; set; }
 
         /// <summary>
         /// The number of finishes of the corresponding Vimeo content.
@@ -95,13 +95,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The metadata of the result: the associated video (when the dimension is video).
         /// </summary>
         [JsonPropertyName("metadata")]
-        public AnalyticsMetadata Metadata { get; set; }
+        public AnalyticsMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The start time of the time interval in ISO 8601 format.
         /// </summary>
         [JsonPropertyName("start_date")]
-        public string StartDate { get; set; }
+        public string? StartDate { get; set; }
 
         /// <summary>
         /// The total time watched in seconds of the corresponding Vimeo content.
@@ -137,13 +137,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The country code in ISO-3166 format.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The name of the country.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
     /// <summary>
@@ -155,7 +155,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The connections of the result.
         /// </summary>
         [JsonPropertyName("connections")]
-        public AnalyticsMetadataConnections Connections { get; set; }
+        public AnalyticsMetadataConnections? Connections { get; set; }
     }
 
     /// <summary>
@@ -167,7 +167,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The associated video. This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("video")]
-        public AnalyticsVideo Video { get; set; }
+        public AnalyticsVideo? Video { get; set; }
     }
 
     /// <summary>
@@ -179,7 +179,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the video was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The duration of the associated video.
@@ -191,24 +191,24 @@ namespace Mafesoft.VimeoClient.Model
         /// The link to the video management page.
         /// </summary>
         [JsonPropertyName("manage_link")]
-        public string ManageLink { get; set; }
+        public string? ManageLink { get; set; }
 
         /// <summary>
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The title of the associated video.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

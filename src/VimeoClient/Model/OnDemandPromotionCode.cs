@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The promotion code.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The URL to redeem the promotion code.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The number of times that the code has been used.
