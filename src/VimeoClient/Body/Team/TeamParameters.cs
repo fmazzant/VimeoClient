@@ -53,14 +53,14 @@ namespace Mafesoft.VimeoClient.Body.Team
         /// The display name of the field. Required when creating a new field. Up to 255 characters.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The data type of the field: bool, date, int, multi-select, select, str.
         /// Required when creating a new field. Immutable after creation.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Whether videos must have a value for this field. Required when creating a new field.
@@ -73,19 +73,19 @@ namespace Mafesoft.VimeoClient.Body.Team
         /// A short explanation of the field's purpose. Up to 1024 characters.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The value applied by default when a video doesn't specify one.
         /// </summary>
         [JsonPropertyName("default_value")]
-        public string DefaultValue { get; set; }
+        public string? DefaultValue { get; set; }
 
         /// <summary>
         /// The list of allowed values. Required for select and multi-select fields.
         /// </summary>
         [JsonPropertyName("values")]
-        public string[] Values { get; set; }
+        public string[]? Values { get; set; }
     }
 
     /// <summary>
@@ -98,12 +98,12 @@ namespace Mafesoft.VimeoClient.Body.Team
         /// The existing value the operation targets. Required for rename and delete.
         /// </summary>
         [JsonPropertyName("old_value")]
-        public string OldValue { get; set; }
+        public string? OldValue { get; set; }
 
         /// <summary>
         /// The replacement value. Required for rename and add.
         /// </summary>
         [JsonPropertyName("new_value")]
-        public string NewValue { get; set; }
+        public string? NewValue { get; set; }
     }
 }

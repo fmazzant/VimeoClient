@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information that is connected to this resource
         /// </summary>
         [JsonPropertyName("connections")]
-        public GroupConnection Connections { get; set; }
+        public GroupConnection? Connections { get; set; }
 
         /// <summary>
         /// User actions that have involved the group. This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public GroupInteractions Interactions { get; set; }
+        public GroupInteractions? Interactions { get; set; }
     }
 
     /// <summary>
@@ -58,13 +58,13 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the members or moderators of the group.
         /// </summary>
         [JsonPropertyName("users")]
-        public GroupConnectionUsersEntity Users { get; set; }
+        public GroupConnectionUsersEntity? Users { get; set; }
 
         /// <summary>
         ///  Information about the videos contained within the group.
         /// </summary>
         [JsonPropertyName("videos")]
-        public GroupConnectionVideosEntity Videos { get; set; }
+        public GroupConnectionVideosEntity? Videos { get; set; }
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ namespace Mafesoft.VimeoClient.Model
         /// An action indicating that someone has joined the group. This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("join")]
-        public GroupInteractionsJoin Join { get; set; }
+        public GroupInteractionsJoin? Join { get; set; }
     }
 
     /// <summary>
@@ -104,13 +104,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the authenticated user joined the group.This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("added_time")]
-        public string AddedTime { get; set; }
+        public string? AddedTime { get; set; }
 
         /// <summary>
         /// The authenticated user's title. If not applicable, this field takes the null value. This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Whether the authenticated user is a moderator or subscriber.This data requires a bearer token with the private scope.
@@ -119,7 +119,7 @@ namespace Mafesoft.VimeoClient.Model
         ///     moderator - The authenticated user is a moderator.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The URI for following the group.
@@ -127,6 +127,6 @@ namespace Mafesoft.VimeoClient.Model
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -112,11 +114,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<Channel>>> GetAllChannelsAsync(ChannelDirection? direction,
-            ChannelFilter? filter,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Channel>>> GetAllChannelsAsync(ChannelDirection? direction,
+            ChannelFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllChannel? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -131,12 +133,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<Channel>>> GetAllTheChannelsToWhichAUserSubscribesAsync(string user_id,
-            ChannelDirection? direction,
-            ChannelFilter? filter,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Channel>>> GetAllTheChannelsToWhichAUserSubscribesAsync(string user_id,
+            ChannelDirection? direction,
+            ChannelFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllChannelSubscribe? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -150,11 +152,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<Channel>>> GetAllTheChannelsToWhichAUserSubscribesAsync(ChannelDirection? direction,
-            ChannelFilter? filter,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Channel>>> GetAllTheChannelsToWhichAUserSubscribesAsync(ChannelDirection? direction,
+            ChannelFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllChannelSubscribe? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -254,11 +256,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The moderators of the channel, one page at a time.</returns>
-        Task<RestResult<Pagination<User>>> GetAllTheModeratorsOfAChannelAsync(string channel_id,
-            ChannelDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<User>>> GetAllTheModeratorsOfAChannelAsync(string channel_id,
+            ChannelDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortAllModerators? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -306,9 +308,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<User>>> GetAllTheUsersWhoCanAccessAPrivateChannelAsync(string channel_id,
-            ChannelDirection? direction = null,
-            int? page = null,
+        Task<RestResult<Pagination<User>>> GetAllTheUsersWhoCanAccessAPrivateChannelAsync(string channel_id,
+            ChannelDirection? direction = null,
+            int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -375,12 +377,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<User>>> GetAllTheFollowersOfAChannelAsync(string channel_id,
-            ChannelFollowersOfAChannelFilter filter,
-            ChannelDirection? direction,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<User>>> GetAllTheFollowersOfAChannelAsync(string channel_id,
+            ChannelFollowersOfAChannelFilter filter,
+            ChannelDirection? direction,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortAllModerators? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -545,14 +547,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The videos of the channel, one page at a time.</returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAChannelAsync(string channel_id,
-            string containing_uri = null,
-            ChannelDirection? direction = null,
-            ChannelFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAChannelAsync(string channel_id,
+            string? containing_uri = null,
+            ChannelDirection? direction = null,
+            ChannelFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllVideos? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -593,9 +595,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The comments were returned.
         /// </returns>
-        Task<RestResult<Pagination<Comment>>> GetAllTheCommentsOnAChannelVideoAsync(string channel_id, string video_id,
-            VideoDirection? direction = null,
-            int? page = null,
+        Task<RestResult<Pagination<Comment>>> GetAllTheCommentsOnAChannelVideoAsync(string channel_id, string video_id,
+            VideoDirection? direction = null,
+            int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -626,11 +628,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The credits were returned.
         /// </returns>
-        Task<RestResult<Pagination<Credit>>> GetAllTheCreditedUsersInAChannelVideoAsync(string channel_id, string video_id,
-            VideoDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Credit>>> GetAllTheCreditedUsersInAChannelVideoAsync(string channel_id, string video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoCreditSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -658,8 +660,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The thumbnails were returned.
         /// </returns>
-        Task<RestResult<Pagination<Picture>>> GetAllTheThumbnailsOfAChannelVideoAsync(string channel_id, string video_id,
-            int? page = null,
+        Task<RestResult<Pagination<Picture>>> GetAllTheThumbnailsOfAChannelVideoAsync(string channel_id, string video_id,
+            int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -685,8 +687,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
-        Task<RestResult<Pagination<User>>> GetAllTheUsersWhoCanViewAPrivateChannelVideoAsync(string channel_id, string video_id,
-            int? page = null,
+        Task<RestResult<Pagination<User>>> GetAllTheUsersWhoCanViewAPrivateChannelVideoAsync(string channel_id, string video_id,
+            int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -712,8 +714,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The text tracks were returned.
         /// </returns>
-        Task<RestResult<Pagination<TextTrack>>> GetAllTheTextTracksOfAChannelVideoAsync(string channel_id, string video_id,
-            int? page = null,
+        Task<RestResult<Pagination<TextTrack>>> GetAllTheTextTracksOfAChannelVideoAsync(string channel_id, string video_id,
+            int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -747,7 +749,7 @@ namespace Mafesoft.VimeoClient.Common
         Task<RestResult<Comment>> AddACommentToAChannelVideoAsync(string channel_id, int video_id, string text, CancellationToken cancellationToken = default);
 
         /// <inheritdoc cref="GetAllTheCreditedUsersInAChannelVideo(string, string, VideoDirection?, int?, int?, string, VideoCreditSort?)"/>
-        Task<RestResult<Pagination<Credit>>> GetAllTheCreditedUsersInAChannelVideoAsync(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string query = null, VideoCreditSort? sort = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Pagination<Credit>>> GetAllTheCreditedUsersInAChannelVideoAsync(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string? query = null, VideoCreditSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <inheritdoc cref="CreditAUserInAChannelVideo(string, string, CreditParameters)"/>
         Task<RestResult<Credit>> CreditAUserInAChannelVideoAsync(string channel_id, int video_id, CreditParameters parameters, CancellationToken cancellationToken = default);
@@ -825,11 +827,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        RestResult<Pagination<Channel>> GetAllChannels(ChannelDirection? direction,
-            ChannelFilter? filter,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Channel>> GetAllChannels(ChannelDirection? direction,
+            ChannelFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllChannel? sort = null);
 
         /// <summary>
@@ -843,12 +845,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        RestResult<Pagination<Channel>> GetAllTheChannelsToWhichAUserSubscribes(string user_id,
-            ChannelDirection? direction,
-            ChannelFilter? filter,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Channel>> GetAllTheChannelsToWhichAUserSubscribes(string user_id,
+            ChannelDirection? direction,
+            ChannelFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllChannelSubscribe? sort = null);
 
         /// <summary>
@@ -861,11 +863,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        RestResult<Pagination<Channel>> GetAllTheChannelsToWhichAUserSubscribes(ChannelDirection? direction,
-            ChannelFilter? filter,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Channel>> GetAllTheChannelsToWhichAUserSubscribes(ChannelDirection? direction,
+            ChannelFilter? filter,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllChannelSubscribe? sort = null);
 
         /// <summary>
@@ -957,11 +959,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns>The moderators of the channel, one page at a time.</returns>
-        RestResult<Pagination<User>> GetAllTheModeratorsOfAChannel(string channel_id,
-            ChannelDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<User>> GetAllTheModeratorsOfAChannel(string channel_id,
+            ChannelDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortAllModerators? sort = null);
 
         /// <summary>
@@ -1005,9 +1007,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">	The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<User>> GetAllTheUsersWhoCanAccessAPrivateChannel(string channel_id,
-            ChannelDirection? direction = null,
-            int? page = null,
+        RestResult<Pagination<User>> GetAllTheUsersWhoCanAccessAPrivateChannel(string channel_id,
+            ChannelDirection? direction = null,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1068,12 +1070,12 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns></returns>
-        RestResult<Pagination<User>> GetAllTheFollowersOfAChannel(string channel_id,
-            ChannelFollowersOfAChannelFilter filter,
-            ChannelDirection? direction,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<User>> GetAllTheFollowersOfAChannel(string channel_id,
+            ChannelFollowersOfAChannelFilter filter,
+            ChannelDirection? direction,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortAllModerators? sort = null);
 
         /// <summary>
@@ -1224,14 +1226,14 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results.</param>
         /// <returns>The videos of the channel, one page at a time.</returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInAChannel(string channel_id,
-            string containing_uri = null,
-            ChannelDirection? direction = null,
-            ChannelFilter? filter = null,
-            bool? filter_embeddable = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Video>> GetAllTheVideosInAChannel(string channel_id,
+            string? containing_uri = null,
+            ChannelDirection? direction = null,
+            ChannelFilter? filter = null,
+            bool? filter_embeddable = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             ChannelSortGetAllVideos? sort = null);
 
         /// <summary>
@@ -1269,9 +1271,9 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The comments were returned.
         /// </returns>
-        RestResult<Pagination<Comment>> GetAllTheCommentsOnAChannelVideo(string channel_id, string video_id,
-            VideoDirection? direction = null,
-            int? page = null,
+        RestResult<Pagination<Comment>> GetAllTheCommentsOnAChannelVideo(string channel_id, string video_id,
+            VideoDirection? direction = null,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1300,11 +1302,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The credits were returned.
         /// </returns>
-        RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, string video_id,
-            VideoDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, string video_id,
+            VideoDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             VideoCreditSort? sort = null);
 
         /// <summary>
@@ -1330,8 +1332,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The thumbnails were returned.
         /// </returns>
-        RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAChannelVideo(string channel_id, string video_id,
-            int? page = null,
+        RestResult<Pagination<Picture>> GetAllTheThumbnailsOfAChannelVideo(string channel_id, string video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1355,8 +1357,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The users were returned.
         /// </returns>
-        RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateChannelVideo(string channel_id, string video_id,
-            int? page = null,
+        RestResult<Pagination<User>> GetAllTheUsersWhoCanViewAPrivateChannelVideo(string channel_id, string video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1380,8 +1382,8 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The text tracks were returned.
         /// </returns>
-        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAChannelVideo(string channel_id, string video_id,
-            int? page = null,
+        RestResult<Pagination<TextTrack>> GetAllTheTextTracksOfAChannelVideo(string channel_id, string video_id,
+            int? page = null,
             int? per_page = null);
 
         /// <summary>
@@ -1414,7 +1416,7 @@ namespace Mafesoft.VimeoClient.Common
         RestResult<Comment> AddACommentToAChannelVideo(string channel_id, int video_id, string text);
 
         /// <inheritdoc cref="GetAllTheCreditedUsersInAChannelVideo(string, string, VideoDirection?, int?, int?, string, VideoCreditSort?)"/>
-        RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string query = null, VideoCreditSort? sort = null);
+        RestResult<Pagination<Credit>> GetAllTheCreditedUsersInAChannelVideo(string channel_id, int video_id, VideoDirection? direction = null, int? page = null, int? per_page = null, string? query = null, VideoCreditSort? sort = null);
 
         /// <inheritdoc cref="CreditAUserInAChannelVideo(string, string, CreditParameters)"/>
         RestResult<Credit> CreditAUserInAChannelVideo(string channel_id, int video_id, CreditParameters parameters);

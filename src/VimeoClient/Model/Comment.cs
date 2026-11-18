@@ -40,25 +40,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the comment was posted.
         /// </summary>
         [JsonPropertyName("created_on")]
-        public string CreatedOn { get; set; }
+        public string? CreatedOn { get; set; }
 
         /// <summary>
         /// The URL to access the comment in a browser.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the comment.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public CommentMetadata Metadata { get; set; }
+        public CommentMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The content of the comment.
         /// </summary>
         [JsonPropertyName("text")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// The Vimeo content to which the comment relates.
@@ -67,13 +67,13 @@ namespace Mafesoft.VimeoClient.Model
         ///     group - The comment is about a group.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The user who posted the comment.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A list of resource URIs related to the comment.
         /// </summary>
         [JsonPropertyName("connections")]
-        public CommentMetadataConnections Connections { get; set; }
+        public CommentMetadataConnections? Connections { get; set; }
     }
 
     /// <summary>
@@ -97,6 +97,6 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about the replies to this comment.
         /// </summary>
         [JsonPropertyName("replies")]
-        public GenericRelatedEntity Replies { get; set; }
+        public GenericRelatedEntity? Replies { get; set; }
     }
 }

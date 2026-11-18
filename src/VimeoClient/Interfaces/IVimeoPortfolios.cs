@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -82,11 +84,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>200 OK	The portfolios were returned.</returns>
-        Task<RestResult<Pagination<Portfolio>>> GetAllThePortfoliosThatBelongToTheUserAsync(int user_id,
-            PortfolioDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Portfolio>>> GetAllThePortfoliosThatBelongToTheUserAsync(int user_id,
+            PortfolioDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             PortfolioSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -99,10 +101,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>200 OK	The portfolios were returned.</returns>
-        Task<RestResult<Pagination<Portfolio>>> GetAllThePortfoliosThatBelongToTheUserAsync(PortfolioDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        Task<RestResult<Pagination<Portfolio>>> GetAllThePortfoliosThatBelongToTheUserAsync(PortfolioDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             PortfolioSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -167,13 +169,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The videos were returned.</returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAPortfolioAsync(int user_id, int portfolio_id,
-            string containing_uri,
-            VideoFilter? filter = null,
-            bool filter_embeddable = false,
-            int? page = null,
-            int? per_page = null,
-            VideoSort? sort = null
+        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAPortfolioAsync(int user_id, int portfolio_id,
+            string containing_uri,
+            VideoFilter? filter = null,
+            bool filter_embeddable = false,
+            int? page = null,
+            int? per_page = null,
+            VideoSort? sort = null
             , CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -189,13 +191,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="sort">The way to sort the results</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns>The videos were returned.</returns>
-        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAPortfolioAsync(int portfolio_id,
-           string containing_uri,
-           VideoFilter? filter = null,
-           bool filter_embeddable = false,
-           int? page = null,
-           int? per_page = null,
-           VideoSort? sort = null
+        Task<RestResult<Pagination<Video>>> GetAllTheVideosInAPortfolioAsync(int portfolio_id,
+           string? containing_uri,
+           VideoFilter? filter = null,
+           bool filter_embeddable = false,
+           int? page = null,
+           int? per_page = null,
+           VideoSort? sort = null
            , CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -262,11 +264,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns>200 OK	The portfolios were returned.</returns>
-        RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(int user_id,
-            PortfolioDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(int user_id,
+            PortfolioDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             PortfolioSort? sort = null);
 
         /// <summary>
@@ -278,10 +280,10 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="query">The search query to use to filter the results.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns>200 OK	The portfolios were returned.</returns>
-        RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
-            int? page = null,
-            int? per_page = null,
-            string query = null,
+        RestResult<Pagination<Portfolio>> GetAllThePortfoliosThatBelongToTheUser(PortfolioDirection? direction = null,
+            int? page = null,
+            int? per_page = null,
+            string? query = null,
             PortfolioSort? sort = null);
 
         /// <summary>
@@ -341,13 +343,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns>The videos were returned.</returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int user_id, int portfolio_id,
-            string containing_uri,
-            VideoFilter? filter = null,
-            bool filter_embeddable = false,
-            int? page = null,
-            int? per_page = null,
-            VideoSort? sort = null
+        RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int user_id, int portfolio_id,
+            string containing_uri,
+            VideoFilter? filter = null,
+            bool filter_embeddable = false,
+            int? page = null,
+            int? per_page = null,
+            VideoSort? sort = null
             );
 
         /// <summary>
@@ -362,13 +364,13 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="sort">The way to sort the results</param>
         /// <returns>The videos were returned.</returns>
-        RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id,
-           string containing_uri,
-           VideoFilter? filter = null,
-           bool filter_embeddable = false,
-           int? page = null,
-           int? per_page = null,
-           VideoSort? sort = null
+        RestResult<Pagination<Video>> GetAllTheVideosInAPortfolio(int portfolio_id,
+           string? containing_uri,
+           VideoFilter? filter = null,
+           bool filter_embeddable = false,
+           int? page = null,
+           int? per_page = null,
+           VideoSort? sort = null
            );
 
         /// <summary>

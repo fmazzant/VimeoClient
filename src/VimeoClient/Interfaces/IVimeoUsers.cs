@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -146,11 +148,11 @@ namespace Mafesoft.VimeoClient.Common
         /// </param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<User>>> GetAllTheFollowersOfTheUserWithPagingAsync(int user_id,
-            UserDirection? direction,
-            int? page,
-            int? per_page,
-            string query,
+        Task<RestResult<Pagination<User>>> GetAllTheFollowersOfTheUserWithPagingAsync(int user_id,
+            UserDirection? direction,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -188,12 +190,12 @@ namespace Mafesoft.VimeoClient.Common
         /// </param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<User>>> GetAllTheUsersThatTheUserIsFollowingAsync(int user_id,
-            UserDirection? direction,
-            string filter,
-            int? page,
-            int? per_page,
-            string query,
+        Task<RestResult<Pagination<User>>> GetAllTheUsersThatTheUserIsFollowingAsync(int user_id,
+            UserDirection? direction,
+            string filter,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -267,11 +269,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The zipped proxy package was created and returned (raw bytes of the zip file).
         /// </returns>
-        Task<RestResult<byte[]>> DownloadAnLmsPackageForAVideoAsync(int user_id, int video_id,
-            string standard = null,
-            string course_title = null,
-            string scoring_algorithm = null,
-            double? passing_score = null,
+        Task<RestResult<byte[]>> DownloadAnLmsPackageForAVideoAsync(int user_id, int video_id,
+            string? standard = null,
+            string? course_title = null,
+            string? scoring_algorithm = null,
+            double? passing_score = null,
             double? completion_threshold = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -284,7 +286,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<Pagination<User>>> SearchForUsersAsync(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default);
+        Task<RestResult<Pagination<User>>> SearchForUsersAsync(UserDirection? direction = null, string? query = null, UserSort? sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method edits the Vimeo account of the authenticated user.
@@ -377,11 +379,11 @@ namespace Mafesoft.VimeoClient.Common
         ///     date
         /// </param>
         /// <returns></returns>
-        RestResult<Pagination<User>> GetAllTheFollowersOfTheUserWithPaging(int user_id,
-            UserDirection? direction,
-            int? page,
-            int? per_page,
-            string query,
+        RestResult<Pagination<User>> GetAllTheFollowersOfTheUserWithPaging(int user_id,
+            UserDirection? direction,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort);
 
         /// <summary>
@@ -418,12 +420,12 @@ namespace Mafesoft.VimeoClient.Common
         ///     date
         /// </param>
         /// <returns></returns>
-        RestResult<Pagination<User>> GetAllTheUsersThatTheUserIsFollowing(int user_id,
-            UserDirection? direction,
-            string filter,
-            int? page,
-            int? per_page,
-            string query,
+        RestResult<Pagination<User>> GetAllTheUsersThatTheUserIsFollowing(int user_id,
+            UserDirection? direction,
+            string filter,
+            int? page,
+            int? per_page,
+            string query,
             UserSort? sort);
 
         /// <summary>
@@ -491,11 +493,11 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The zipped proxy package was created and returned (raw bytes of the zip file).
         /// </returns>
-        RestResult<byte[]> DownloadAnLmsPackageForAVideo(int user_id, int video_id,
-            string standard = null,
-            string course_title = null,
-            string scoring_algorithm = null,
-            double? passing_score = null,
+        RestResult<byte[]> DownloadAnLmsPackageForAVideo(int user_id, int video_id,
+            string? standard = null,
+            string? course_title = null,
+            string? scoring_algorithm = null,
+            double? passing_score = null,
             double? completion_threshold = null);
 
         /// <summary>
@@ -507,7 +509,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <param name="page">The page number of the results to show.</param>
         /// <param name="per_page">The number of items to show on each page of results, up to a maximum of 100.</param>
         /// <returns></returns>
-        RestResult<Pagination<User>> SearchForUsers(UserDirection? direction = null, string query = null, UserSort? sort = null, int? page = null, int? per_page = null);
+        RestResult<Pagination<User>> SearchForUsers(UserDirection? direction = null, string? query = null, UserSort? sort = null, int? page = null, int? per_page = null);
     }
 
     public partial class VimeoUsers : IVimeoUsers

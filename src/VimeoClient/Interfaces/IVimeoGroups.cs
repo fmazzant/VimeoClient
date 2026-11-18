@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -97,10 +99,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned.
         /// </returns>
         Task<RestResult<Pagination<Group>>> GetAllGroupsAsync(GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -193,10 +195,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned
         /// </returns>
         Task<RestResult<Pagination<Group>>> GetAllTheGroupsThatTheUserHasJoinedAsync(int user_id, GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -216,7 +218,7 @@ namespace Mafesoft.VimeoClient.Common
             GroupFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -238,7 +240,7 @@ namespace Mafesoft.VimeoClient.Common
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -300,7 +302,7 @@ namespace Mafesoft.VimeoClient.Common
            bool? filter_embeddable = null,
            int? page = null,
            int? per_page = null,
-           string query = null,
+           string? query = null,
            VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -356,20 +358,20 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned.
         /// </returns>
         RestResult<Pagination<Group>> GetAllGroups(GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null);
 
         /// <summary>
         /// Obsolete: the name was wrong, use GetAllGroups.
         /// </summary>
         RestResult<Pagination<Group>> GetAllTheVideosThatHaveASpecificEmbedPreset(GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null);
 
         /// <summary>
@@ -455,10 +457,10 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The groups were returned
         /// </returns>
         RestResult<Pagination<Group>> GetAllTheGroupsThatTheUserHasJoined(int user_id, GroupDirection? direction = null,
-            string filter = null,
+            string? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null);
 
         /// <summary>
@@ -477,7 +479,7 @@ namespace Mafesoft.VimeoClient.Common
             GroupFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             GroupSort? sort = null);
 
         /// <summary>
@@ -498,7 +500,7 @@ namespace Mafesoft.VimeoClient.Common
             UserFilter? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null);
 
         /// <summary>
@@ -556,7 +558,7 @@ namespace Mafesoft.VimeoClient.Common
            bool? filter_embeddable = null,
            int? page = null,
            int? per_page = null,
-           string query = null,
+           string? query = null,
            VideoSort? sort = null);
 
         /// <summary>

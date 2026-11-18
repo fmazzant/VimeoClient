@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// A collection of information that is connected to this resource
         /// </summary>
         [JsonPropertyName("connections")]
-        public ChannelConnection Connections { get; set; }
+        public ChannelConnection? Connections { get; set; }
 
         /// <summary>
         /// A list of resource URIs related to the channel.
         /// </summary>
         [JsonPropertyName("interactions")]
-        public ChannelInteractions Interactions { get; set; }
+        public ChannelInteractions? Interactions { get; set; }
     }
 
     /// <summary>
@@ -59,19 +59,19 @@ namespace Mafesoft.VimeoClient.Model
         ///	This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("privacy_users")]
-        public ChannelConnectionPrivacyUsersEntity PrivacyUsers { get; set; }
+        public ChannelConnectionPrivacyUsersEntity? PrivacyUsers { get; set; }
 
         /// <summary>
         /// Information about the users following or moderating this channel.
         /// </summary>
         [JsonPropertyName("users")]
-        public ChannelConnectionUsersEntity Users { get; set; }
+        public ChannelConnectionUsersEntity? Users { get; set; }
 
         /// <summary>
         ///  Information about the videos that belong to this channel.
         /// </summary>
         [JsonPropertyName("videos")]
-        public ChannelConnectionVideosEntity videos { get; set; }
+        public ChannelConnectionVideosEntity? videos { get; set; }
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ namespace Mafesoft.VimeoClient.Model
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("add_moderators")]
-        public ChannelInteractions AddModerators { get; set; }
+        public ChannelInteractions? AddModerators { get; set; }
 
         /// <summary>
         /// When a channel appears in the context of adding or removing a video from it (/videos/{video_id}/available_channels), 
@@ -108,20 +108,20 @@ namespace Mafesoft.VimeoClient.Model
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("add_to")]
-        public ChannelInteractionsAddToEntity AddTo { get; set; }
+        public ChannelInteractionsAddToEntity? AddTo { get; set; }
 
         /// <summary>
         /// An action indicating if the authenticated user has followed this channel. This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("follow")]
-        public ChannelInteractionsFollowEntity Follow { get; set; }
+        public ChannelInteractionsFollowEntity? Follow { get; set; }
 
         /// <summary>
         /// An action indicating that the authenticated user is a moderator of the channel and may therefore add or remove videos from the channel. 
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("moderate_videos")]
-        public ChannelInteractionsModerateVideosEntity ModerateVideos { get; set; }
+        public ChannelInteractionsModerateVideosEntity? ModerateVideos { get; set; }
     }
 
     /// <summary>
@@ -134,13 +134,13 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -154,13 +154,13 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -179,7 +179,7 @@ namespace Mafesoft.VimeoClient.Model
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("added_time")]
-        public string AddedTime { get; set; }
+        public string? AddedTime { get; set; }
 
         /// <summary>
         /// Whether the authenticated user is a moderator or subscriber. This data requires a bearer token with the private scope.
@@ -188,14 +188,14 @@ namespace Mafesoft.VimeoClient.Model
         ///     - subscriber    The authenticated user is a subscriber.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The URI for following or unfollowing this channel.PUT to this URI to follow the channel, or DELETE to this URI to unfollow the channel.
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 
     /// <summary>
@@ -208,12 +208,12 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

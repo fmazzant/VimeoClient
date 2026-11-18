@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -113,14 +115,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The event destination was updated.
         /// </returns>
         Task<RestResult<LiveEventDestination>> UpdateAnEventDestinationAsync(long destination_id,
-            string display_name = null,
+            string? display_name = null,
             bool? is_enabled = null,
-            string privacy = null,
-            string provider_destination_id = null,
-            string service_name = null,
-            string stream_key = null,
-            string stream_url = null,
-            string type = null, CancellationToken cancellationToken = default);
+            string? privacy = null,
+            string? provider_destination_id = null,
+            string? service_name = null,
+            string? stream_key = null,
+            string? stream_url = null,
+            string? type = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method deletes the specified event destination belonging to the authenticated user.
@@ -157,7 +159,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The new OTT destination was created.
         /// </returns>
-        Task<RestResult<OttDestination>> CreateAnOttDestinationForAnEventAsync(int user_id, int live_event_id, VimeoPayload body = null, CancellationToken cancellationToken = default);
+        Task<RestResult<OttDestination>> CreateAnOttDestinationForAnEventAsync(int user_id, int live_event_id, VimeoPayload? body = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method deletes an OTT channel as the destination of the specified event. The authenticated user must be the owner of the event.
@@ -228,7 +230,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The scene was created.
         /// </returns>
-        Task<RestResult<ComposerScene>> CreateASceneForAnEventAsync(int live_event_id, string scene_type = null, CancellationToken cancellationToken = default);
+        Task<RestResult<ComposerScene>> CreateASceneForAnEventAsync(int live_event_id, string? scene_type = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method updates a scene belonging to the specified event.
@@ -242,7 +244,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The scene was returned.
         /// </returns>
-        Task<RestResult<ComposerScene>> UpdateASceneOfAnEventAsync(int live_event_id, string scene_id, VimeoPayload body = null, CancellationToken cancellationToken = default);
+        Task<RestResult<ComposerScene>> UpdateASceneOfAnEventAsync(int live_event_id, string scene_id, VimeoPayload? body = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method attaches a graphic item to the specified scene.

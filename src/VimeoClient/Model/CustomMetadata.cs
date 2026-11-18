@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// Default value for the metadata field.
         /// </summary>
         [JsonPropertyName("default")]
-        public string Default { get; set; }
+        public string? Default { get; set; }
 
         /// <summary>
         /// Optional description of the metadata field.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The unique identifier of the metadata field.
@@ -64,19 +64,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the metadata field.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The data type of the metadata field: bool, date, int, multi-select, select, str.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Allowed values for select/multi-select types.
         /// </summary>
         [JsonPropertyName("values")]
-        public string[] Values { get; set; }
+        public string[]? Values { get; set; }
     }
 
     /// <summary>
@@ -88,13 +88,13 @@ namespace Mafesoft.VimeoClient.Model
         /// Default value.
         /// </summary>
         [JsonPropertyName("default")]
-        public string Default { get; set; }
+        public string? Default { get; set; }
 
         /// <summary>
         /// Optional description.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The unique identifier of the metadata field.
@@ -106,7 +106,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The current value for the video.
         /// </summary>
         [JsonPropertyName("field_value")]
-        public string FieldValue { get; set; }
+        public string? FieldValue { get; set; }
 
         /// <summary>
         /// Whether this metadata field is required.
@@ -118,18 +118,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the metadata field.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The data type of the metadata field.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// Allowed values for select/multi-select types.
         /// </summary>
         [JsonPropertyName("values")]
-        public string[] Values { get; set; }
+        public string[]? Values { get; set; }
     }
 }

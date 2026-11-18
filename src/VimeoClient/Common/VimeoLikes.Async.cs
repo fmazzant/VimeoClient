@@ -141,7 +141,7 @@ namespace Mafesoft.VimeoClient.Common
         public virtual async Task<RestResult<Pagination<User>>> GetAllTheUsersWhoHaveLikedAVideoAsync(int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
@@ -192,7 +192,7 @@ namespace Mafesoft.VimeoClient.Common
         public virtual async Task<RestResult<Pagination<User>>> GetAllTheUsersWhoHaveLikedAVideoAsync(int channel_id, int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
@@ -296,7 +296,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()
@@ -353,7 +353,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default)
         {
             var root = RootAuthorization()

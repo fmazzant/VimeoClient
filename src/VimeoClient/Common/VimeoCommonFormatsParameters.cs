@@ -118,7 +118,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="sort">The way to sort the results (an enum value or a string)</param>
         /// <param name="direction">The sort direction of the results: asc or desc</param>
         /// <returns></returns>
-        public virtual RestResult<T> SortAndDirection<T>(string command, object sort, object direction = null) where T : new() => RootAuthorization()
+        public virtual RestResult<T> SortAndDirection<T>(string command, object sort, object? direction = null) where T : new() => RootAuthorization()
             .Command(command)
             .OptionalParameter("sort", sort)
             .OptionalParameter("direction", direction)

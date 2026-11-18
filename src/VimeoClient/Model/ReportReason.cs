@@ -41,7 +41,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The reasons: categories, submittable reasons and external hand-offs.
         /// </summary>
         [JsonPropertyName("reasons")]
-        public ReportReasonNode[] Reasons { get; set; }
+        public ReportReasonNode[]? Reasons { get; set; }
     }
 
     /// <summary>
@@ -53,43 +53,43 @@ namespace Mafesoft.VimeoClient.Model
         /// A human-readable description of the category or leaf, in the requesting user's locale.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// For external-handoff leaves, the dedicated form to use instead of the API.
         /// </summary>
         [JsonPropertyName("external_url")]
-        public string ExternalUrl { get; set; }
+        public string? ExternalUrl { get; set; }
 
         /// <summary>
         /// For reason leaves with a gender fork, the distinct variant to submit when the target is a woman or girl.
         /// </summary>
         [JsonPropertyName("gendered")]
-        public ReportReasonGenderedVariant Gendered { get; set; }
+        public ReportReasonGenderedVariant? Gendered { get; set; }
 
         /// <summary>
         /// Stable identifier for this node: the opaque reason UUID for a submittable leaf.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The node kind: category, external, reason.
         /// </summary>
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string? Kind { get; set; }
 
         /// <summary>
         /// The display name for the category or leaf, in the requesting user's locale.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The id of the node this is nested under, or null at the top level.
         /// </summary>
         [JsonPropertyName("parent_id")]
-        public string ParentId { get; set; }
+        public string? ParentId { get; set; }
     }
 
     /// <summary>
@@ -101,19 +101,19 @@ namespace Mafesoft.VimeoClient.Model
         /// A human-readable description of the gendered variant.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The display name of the gendered variant.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The opaque reason UUID to submit when the target is a woman or girl.
         /// </summary>
         [JsonPropertyName("uuid")]
-        public string Uuid { get; set; }
+        public string? Uuid { get; set; }
     }
 
     /// <summary>

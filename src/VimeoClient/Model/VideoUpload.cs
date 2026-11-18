@@ -40,31 +40,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The approach for uploading the video.
         /// </summary>
         [JsonPropertyName("approach")]
-        public string Approach { get; set; }
+        public string? Approach { get; set; }
 
         /// <summary>
         /// The URI for completing the upload.
         /// </summary>
         [JsonPropertyName("complete_uri")]
-        public string CompleteUri { get; set; }
+        public string? CompleteUri { get; set; }
 
         /// <summary>
         /// The HTML form for uploading a video through the post approach.
         /// </summary>
         [JsonPropertyName("form")]
-        public string Form { get; set; }
+        public string? Form { get; set; }
 
         /// <summary>
         /// The link of the video to capture through the pull approach.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The redirect URL for the upload app.
         /// </summary>
         [JsonPropertyName("redirect_url")]
-        public string RedirectUrl { get; set; }
+        public string? RedirectUrl { get; set; }
 
         /// <summary>
         /// The file size in bytes of the uploaded video.
@@ -80,12 +80,12 @@ namespace Mafesoft.VimeoClient.Model
         ///     in_progress - The upload is underway.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// The link for sending video file data.
         /// </summary>
         [JsonPropertyName("upload_link")]
-        public string UploadLink { get; set; }
+        public string? UploadLink { get; set; }
     }
 }

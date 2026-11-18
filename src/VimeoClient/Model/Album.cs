@@ -58,37 +58,37 @@ namespace Mafesoft.VimeoClient.Model
         /// The hexadecimal code for the color of the player buttons and showcase controls.
         /// </summary>
         [JsonPropertyName("brand_color")]
-        public string BrandColor { get; set; }
+        public string? BrandColor { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the showcase was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The custom logo of the showcase.
         /// </summary>
         [JsonPropertyName("custom_logo")]
-        public Picture CustomLogo { get; set; }
+        public Picture? CustomLogo { get; set; }
 
         /// <summary>
         /// The description of the showcase.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The custom domain of the showcase.
         /// </summary>
         [JsonPropertyName("domain")]
-        public string Domain { get; set; }
+        public string? Domain { get; set; }
 
         /// <summary>
         /// Whether the user has a certified custom domain.
         /// </summary>
         [JsonPropertyName("domain_certificate_state")]
-        public string DomainCertificateState { get; set; }
+        public string? DomainCertificateState { get; set; }
 
         /// <summary>
         /// The total duration in seconds of all the videos in the showcase.
@@ -100,7 +100,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The embed settings of the showcase.
         /// </summary>
         [JsonPropertyName("embed")]
-        public EmbedSettings Embed { get; set; }
+        public EmbedSettings? Embed { get; set; }
 
         /// <summary>
         /// Whether to hide Vimeo navigation when displaying the showcase.
@@ -124,43 +124,43 @@ namespace Mafesoft.VimeoClient.Model
         /// The type of layout for presenting the showcase: grid or player.
         /// </summary>
         [JsonPropertyName("layout")]
-        public string Layout { get; set; }
+        public string? Layout { get; set; }
 
         /// <summary>
         /// The URL to access the showcase.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the showcase.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public AlbumMetadata Metadata { get; set; }
+        public AlbumMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the showcase was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The display name of the showcase.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The active image for the showcase.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
 
         /// <summary>
         /// The privacy settings of the showcase.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public AlbumPrivacy Privacy { get; set; }
+        public AlbumPrivacy? Privacy { get; set; }
 
         /// <summary>
         /// Whether showcase videos use the review mode URL.
@@ -172,19 +172,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The default sort order of the videos as they appear in the showcase.
         /// </summary>
         [JsonPropertyName("sort")]
-        public string Sort { get; set; }
+        public string? Sort { get; set; }
 
         /// <summary>
         /// The color theme of the showcase: dark or standard.
         /// </summary>
         [JsonPropertyName("theme")]
-        public string Theme { get; set; }
+        public string? Theme { get; set; }
 
         /// <summary>
         /// The custom Vimeo URL of the showcase.
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// Whether the user has opted in to use a custom domain for the showcase.
@@ -196,7 +196,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The owner of the showcase.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// The showcase identity
@@ -214,12 +214,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The privacy-enabled password to see this showcase. Present only when privacy.view is password.
         /// </summary>
         [JsonPropertyName("password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// Who can view the showcase: anybody, embed_only, nobody, password, team or unlisted.
         /// </summary>
         [JsonPropertyName("view")]
-        public string View { get; set; }
+        public string? View { get; set; }
     }
 }

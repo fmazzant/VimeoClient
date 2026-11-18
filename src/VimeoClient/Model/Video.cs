@@ -40,31 +40,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The categories to which this video belongs.
         /// </summary>
         [JsonPropertyName("categories")]
-        public Category[] Categories { get; set; }
+        public Category[]? Categories { get; set; }
 
         /// <summary>
         /// The content ratings of this video.
         /// </summary>
         [JsonPropertyName("content_rating")]
-        public string[] ContentRating { get; set; }
+        public string[]? ContentRating { get; set; }
 
         /// <summary>
         /// The context of the video's subscription, if this video is part of a subscription.
         /// </summary>
         [JsonPropertyName("context")]
-        public VideoContext Context { get; set; }
+        public VideoContext? Context { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the video was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// A brief explanation of the video's content.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The video's duration in seconds.
@@ -76,7 +76,7 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about embedding this video.
         /// </summary>
         [JsonPropertyName("embed")]
-        public EmbedSettings Embed { get; set; }
+        public EmbedSettings? Embed { get; set; }
 
         /// <summary>
         /// The video's height in pixels.
@@ -88,13 +88,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The video's primary language.
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the user last modified the video.
         /// </summary>
         [JsonPropertyName("last_user_action_event_date")]
-        public string LastUserActionEventDate { get; set; }
+        public string? LastUserActionEventDate { get; set; }
 
         /// <summary>
         /// The Creative Commons license used for the video:
@@ -108,74 +108,74 @@ namespace Mafesoft.VimeoClient.Model
         ///     cc0 - Public Domain Dedication
         /// </summary>
         [JsonPropertyName("license")]
-        public string License { get; set; }
+        public string? License { get; set; }
 
         /// <summary>
         /// The link to the video.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The video's metadata.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public VideoMetadata Metadata { get; set; }
+        public VideoMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the video metadata was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The video's title.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Information about the folder that contains this video.
         /// </summary>
         [JsonPropertyName("parent_folder")]
-        public Project ParentFolder { get; set; }
+        public Project? ParentFolder { get; set; }
 
         /// <summary>
         /// The privacy-enabled password to watch this video.Only users can see their own video passwords. 
         /// This data requires a bearer token with the private scope.
         /// </summary>
         [JsonPropertyName("password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// The active picture for this video.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
 
         /// <summary>
         /// The video's privacy setting.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public VideoPrivacy Privacy { get; set; }
+        public VideoPrivacy? Privacy { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the video was released.
         /// </summary>
         [JsonPropertyName("release_time")]
-        public string ReleaseTime { get; set; }
+        public string? ReleaseTime { get; set; }
 
         /// <summary>
         /// 360 spatial data.
         /// </summary>
         [JsonPropertyName("spatial")]
-        public VideoSpatial Spatial { get; set; }
+        public VideoSpatial? Spatial { get; set; }
 
         /// <summary>
         /// A collection of stats associated with this video.
         /// </summary>
         [JsonPropertyName("state")]
-        public VideoState State { get; set; }
+        public VideoState? State { get; set; }
 
         /// <summary>
         /// The status code for the availability of the video. This field is deprecated in favor of upload and transcode.
@@ -191,19 +191,19 @@ namespace Mafesoft.VimeoClient.Model
         ///     uploading_error - There was an error in uploading the video.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         /// <summary>
         /// An array of all tags assigned to this video.
         /// </summary>
         [JsonPropertyName("tags")]
-        public Tag[] Tags { get; set; }
+        public Tag[]? Tags { get; set; }
 
         /// <summary>
         /// The transcode information for a video upload.
         /// </summary>
         [JsonPropertyName("transcode")]
-        public VideoTranscode Transcode { get; set; }
+        public VideoTranscode? Transcode { get; set; }
 
         /// <summary>
         /// The type of the video.
@@ -213,19 +213,19 @@ namespace Mafesoft.VimeoClient.Model
         ///     video - The video is a standard Vimeo video.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The upload information for this video.
         /// </summary>
         [JsonPropertyName("upload")]
-        public VideoUpload Upload { get; set; }
+        public VideoUpload? Upload { get; set; }
 
         /// <summary>
         /// The video owner.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
 
         /// <summary>
         /// The video's width in pixels.

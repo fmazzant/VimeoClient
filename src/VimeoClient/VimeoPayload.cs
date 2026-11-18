@@ -60,7 +60,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="path">The dotted path, for instance buy.price.USD</param>
         /// <param name="value">The value</param>
         /// <returns>This payload, to chain the calls</returns>
-        public VimeoPayload Set(string path, object value)
+        public VimeoPayload Set(string path, object? value)
         {
             if (value == null)
             {
@@ -69,7 +69,7 @@ namespace Mafesoft.VimeoClient
 
             if (value is Enum)
             {
-                value = VimeoRestBuilderExtensions.ToVimeoValue(value);
+                value = VimeoRestBuilderExtensions.ToVimeoValue(value)!; // an enum value is never null
             }
 
             var keys = path.Split('.');
@@ -95,7 +95,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="path">The dotted path of the price object</param>
         /// <param name="prices">The prices by currency</param>
         /// <returns>This payload, to chain the calls</returns>
-        public VimeoPayload SetPrices(string path, IDictionary<string, double> prices)
+        public VimeoPayload SetPrices(string path, IDictionary<string, double>? prices)
         {
             if (prices == null)
             {
@@ -143,7 +143,7 @@ namespace Mafesoft.VimeoClient
             return payload;
         }
 
-        private static object ToPayloadValue(object value)
+        private static object? ToPayloadValue(object? value)
         {
             switch (value)
             {
@@ -169,9 +169,9 @@ namespace Mafesoft.VimeoClient
         /// Flattens the payload in dotted key/value pairs
         /// </summary>
         /// <returns>The dotted key/value pairs, for instance buy.price.USD=2.99</returns>
-        public IEnumerable<KeyValuePair<string, string>> Flatten() => Flatten(null, this);
+        public IEnumerable<KeyValuePair<string, string?>> Flatten() => Flatten(null, this);
 
-        private static IEnumerable<KeyValuePair<string, string>> Flatten(string prefix, VimeoPayload payload)
+        private static IEnumerable<KeyValuePair<string, string?>> Flatten(string? prefix, VimeoPayload payload)
         {
             foreach (var item in payload)
             {
@@ -186,11 +186,11 @@ namespace Mafesoft.VimeoClient
                 }
                 else if (item.Value is IEnumerable values && !(item.Value is string))
                 {
-                    yield return new KeyValuePair<string, string>(key, string.Join(",", values.Cast<object>().Select(VimeoRestBuilderExtensions.ToVimeoValue)));
+                    yield return new KeyValuePair<string, string?>(key, string.Join(",", values.Cast<object>().Select(VimeoRestBuilderExtensions.ToVimeoValue)));
                 }
                 else
                 {
-                    yield return new KeyValuePair<string, string>(key, VimeoRestBuilderExtensions.ToVimeoValue(item.Value));
+                    yield return new KeyValuePair<string, string?>(key, VimeoRestBuilderExtensions.ToVimeoValue(item.Value));
                 }
             }
         }

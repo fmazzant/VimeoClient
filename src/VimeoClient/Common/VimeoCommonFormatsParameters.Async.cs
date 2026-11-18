@@ -86,7 +86,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="direction">The sort direction of the results: asc or desc</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        public virtual Task<RestResult<T>> SortAndDirectionAsync<T>(string command, object sort, object direction = null, CancellationToken cancellationToken = default) where T : new() => RootAuthorization()
+        public virtual Task<RestResult<T>> SortAndDirectionAsync<T>(string command, object sort, object? direction = null, CancellationToken cancellationToken = default) where T : new() => RootAuthorization()
             .Command(command)
             .OptionalParameter("sort", sort)
             .OptionalParameter("direction", direction)

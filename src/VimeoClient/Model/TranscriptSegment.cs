@@ -66,61 +66,61 @@ namespace Mafesoft.VimeoClient.Model
         /// The segment identifier.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The type of caption that the segment originates from.
         /// </summary>
         [JsonPropertyName("kind")]
-        public string Kind { get; set; }
+        public string? Kind { get; set; }
 
         /// <summary>
         /// The language of the segment.
         /// </summary>
         [JsonPropertyName("language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The line data for the segment.
         /// </summary>
         [JsonPropertyName("lines")]
-        public TranscriptSegmentLineItem[] Lines { get; set; }
+        public TranscriptSegmentLineItem[]? Lines { get; set; }
 
         /// <summary>
         /// The speaker identifier.
         /// </summary>
         [JsonPropertyName("speaker")]
-        public string Speaker { get; set; }
+        public string? Speaker { get; set; }
 
         /// <summary>
         /// The relative URI of the text track that the segment comes from.
         /// </summary>
         [JsonPropertyName("text_track_uri")]
-        public string TextTrackUri { get; set; }
+        public string? TextTrackUri { get; set; }
 
         /// <summary>
         /// The translation metadata of the segment.
         /// </summary>
         [JsonPropertyName("translation_metadata")]
-        public TranscriptSegmentTranslationMetadata TranslationMetadata { get; set; }
+        public TranscriptSegmentTranslationMetadata? TranslationMetadata { get; set; }
 
         /// <summary>
         /// The canonical relative URI of the segment's video.
         /// </summary>
         [JsonPropertyName("video_uri")]
-        public string VideoUri { get; set; }
+        public string? VideoUri { get; set; }
 
         /// <summary>
         /// The word data for the segment.
         /// </summary>
         [JsonPropertyName("words")]
-        public TranscriptSegmentWordItem[] Words { get; set; }
+        public TranscriptSegmentWordItem[]? Words { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The word text.
         /// </summary>
         [JsonPropertyName("word")]
-        public string Word { get; set; }
+        public string? Word { get; set; }
     }
 
     /// <summary>
@@ -162,25 +162,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The ID of the translation's audio track.
         /// </summary>
         [JsonPropertyName("audio_track_id")]
-        public string AudioTrackId { get; set; }
+        public string? AudioTrackId { get; set; }
 
         /// <summary>
         /// The translation language in ISO 639-1 format.
         /// </summary>
         [JsonPropertyName("dominant_language")]
-        public string DominantLanguage { get; set; }
+        public string? DominantLanguage { get; set; }
 
         /// <summary>
         /// The vendor ID of the translation's dubbing.
         /// </summary>
         [JsonPropertyName("dubbing_id")]
-        public string DubbingId { get; set; }
+        public string? DubbingId { get; set; }
 
         /// <summary>
         /// The vendor ID of the translation's segment.
         /// </summary>
         [JsonPropertyName("dubbing_segment_id")]
-        public string DubbingSegmentId { get; set; }
+        public string? DubbingSegmentId { get; set; }
 
         /// <summary>
         /// Whether the translation's segment is out of sync.
@@ -198,12 +198,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The text from the segment line.
         /// </summary>
         [JsonPropertyName("text")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// The speaker of the segment line.
         /// </summary>
         [JsonPropertyName("voice")]
-        public string Voice { get; set; }
+        public string? Voice { get; set; }
     }
 }

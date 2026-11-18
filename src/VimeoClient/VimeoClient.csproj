@@ -18,6 +18,9 @@
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyName>Mafesoft.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Mafesoft.VimeoClient</RootNamespace>
+    <!-- Nullable reference types (issue #18): which fields of the Vimeo responses and which parameters can be null -->
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <!-- XML documentation: published with the package, IntelliSense shows it to the users of the package -->

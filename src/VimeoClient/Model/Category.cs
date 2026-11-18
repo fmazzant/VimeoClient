@@ -40,49 +40,49 @@ namespace Mafesoft.VimeoClient.Model
         /// The active icon for the category.
         /// </summary>
         [JsonPropertyName("icon")]
-        public Picture Icon { get; set; }
+        public Picture? Icon { get; set; }
 
         /// <summary>
         /// The most recent time in ISO 8601 format when the video was featured.
         /// </summary>
         [JsonPropertyName("last_video_featured_time")]
-        public string LastVideoFeaturedTime { get; set; }
+        public string? LastVideoFeaturedTime { get; set; }
 
         /// <summary>
         /// The URL to access the category in a browser.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Metadata about the category.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public CategoryMetadata Metadata { get; set; }
+        public CategoryMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The display name that identifies the category.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The container of the category's parent category, if the current category is a subcategory.
         /// </summary>
         [JsonPropertyName("parent")]
-        public Subcategory Parent { get; set; }
+        public Subcategory? Parent { get; set; }
 
         /// <summary>
         /// The active picture for this category.The default shows vertical color bars.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
 
         /// <summary>
         /// All the subcategories that belong to the category, if the current category is a top-level parent.
         /// </summary>
         [JsonPropertyName("subcategories")]
-        public Subcategory[] Subcategories { get; set; }
+        public Subcategory[]? Subcategories { get; set; }
 
         /// <summary>
         /// Whether the category isn't a subcategory of another category.

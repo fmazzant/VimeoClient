@@ -40,12 +40,12 @@ namespace Mafesoft.VimeoClient.Model
         /// All HTTP methods permitted on this endpoint.
         /// </summary>
         [JsonPropertyName("methods")]
-        public string[] Methods { get; set; }
+        public string[]? Methods { get; set; }
 
         /// <summary>
         /// The path section of the URL, which, when appended to the API host https://api.vimeo.com, builds a full API endpoint.
         /// </summary>
         [JsonPropertyName("path")]
-        public string Path { get; set; }
+        public string? Path { get; set; }
     }
 }

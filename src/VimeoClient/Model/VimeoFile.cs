@@ -67,25 +67,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The IANA media type of the file.
         /// </summary>
         [JsonPropertyName("content_type")]
-        public string ContentType { get; set; }
+        public string? ContentType { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the file was uploaded.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The description of the file.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// A signed URL to download the original file, when the current user is allowed to.
         /// </summary>
         [JsonPropertyName("download_url")]
-        public string DownloadUrl { get; set; }
+        public string? DownloadUrl { get; set; }
 
         /// <summary>
         /// The size of the file in bytes.
@@ -115,55 +115,55 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the file was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The display name of the file.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The folder that contains the file.
         /// </summary>
         [JsonPropertyName("parent_folder")]
-        public Project ParentFolder { get; set; }
+        public Project? ParentFolder { get; set; }
 
         /// <summary>
         /// The privacy of the file: nobody, password, team, unlisted.
         /// </summary>
         [JsonPropertyName("privacy")]
-        public string Privacy { get; set; }
+        public string? Privacy { get; set; }
 
         /// <summary>
         /// The public identifier of the file.
         /// </summary>
         [JsonPropertyName("public_id")]
-        public string PublicId { get; set; }
+        public string? PublicId { get; set; }
 
         /// <summary>
         /// The image that represents the file.
         /// </summary>
         [JsonPropertyName("thumbnail")]
-        public Picture Thumbnail { get; set; }
+        public Picture? Thumbnail { get; set; }
 
         /// <summary>
         /// The upload state of the file: complete, failed, uploading.
         /// </summary>
         [JsonPropertyName("upload_state")]
-        public string UploadState { get; set; }
+        public string? UploadState { get; set; }
 
         /// <summary>
         /// The file's uploader.
         /// </summary>
         [JsonPropertyName("uploader")]
-        public User Uploader { get; set; }
+        public User? Uploader { get; set; }
 
         /// <summary>
         /// The URI of the file.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The pixel width of the file, for images.
@@ -175,6 +175,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The fields of the response not mapped by the library (metadata, upload, deleted_by...).
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 }

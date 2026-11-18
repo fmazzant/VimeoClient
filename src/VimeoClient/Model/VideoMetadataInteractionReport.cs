@@ -40,18 +40,18 @@ namespace Mafesoft.VimeoClient.Model
         /// An array of HTTP methods permitted on this URI.
         /// </summary>
         [JsonPropertyName("options")]
-        public string[] Options { get; set; }
+        public string[]? Options { get; set; }
 
         /// <summary>
         /// A list of valid reasons for reporting a video.
         /// </summary>
         [JsonPropertyName("reason")]
-        public string[] Reason { get; set; }
+        public string[]? Reason { get; set; }
 
         /// <summary>
         /// The API URI that resolves to the connection data.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

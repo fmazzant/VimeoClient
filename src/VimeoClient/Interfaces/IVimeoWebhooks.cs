@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -77,7 +79,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The webhook was added.
         /// 400 Bad Request	Error code 3143: the webhook type already exists for the app.
         /// </returns>
-        Task<RestResult<AppWebhook>> AddAWebhookForAnAppAsync(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string secret = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AppWebhook>> AddAWebhookForAnAppAsync(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string? secret = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method returns the specified webhook.
@@ -105,7 +107,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The webhook was updated.
         /// </returns>
-        Task<RestResult<AppWebhook>> UpdateAWebhookAsync(long app_id, long webhook_id, string webhook_type = null, string webhook_url = null, bool? is_enabled = null, string secret = null, CancellationToken cancellationToken = default);
+        Task<RestResult<AppWebhook>> UpdateAWebhookAsync(long app_id, long webhook_id, string? webhook_type = null, string? webhook_url = null, bool? is_enabled = null, string? secret = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method deletes the specified webhook.
@@ -149,7 +151,7 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The webhook was added.
         /// 400 Bad Request	Error code 3143: the webhook type already exists for the app.
         /// </returns>
-        RestResult<AppWebhook> AddAWebhookForAnApp(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string secret = null);
+        RestResult<AppWebhook> AddAWebhookForAnApp(long app_id, string webhook_type, string webhook_url, bool? is_enabled = null, string? secret = null);
 
         /// <summary>
         /// This method returns the specified webhook.
@@ -175,7 +177,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The webhook was updated.
         /// </returns>
-        RestResult<AppWebhook> UpdateAWebhook(long app_id, long webhook_id, string webhook_type = null, string webhook_url = null, bool? is_enabled = null, string secret = null);
+        RestResult<AppWebhook> UpdateAWebhook(long app_id, long webhook_id, string? webhook_type = null, string? webhook_url = null, bool? is_enabled = null, string? secret = null);
 
         /// <summary>
         /// This method deletes the specified webhook.

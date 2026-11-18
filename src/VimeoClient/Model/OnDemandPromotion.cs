@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The type of access that this promotion grants.
         /// </summary>
         [JsonPropertyName("access_type")]
-        public string AccessType { get; set; }
+        public string? AccessType { get; set; }
 
         /// <summary>
         /// The promotion code (single use promotions).
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The amount of the discount.
@@ -64,7 +64,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The type of discount: dollars, free or percent.
         /// </summary>
         [JsonPropertyName("discount_type")]
-        public string DiscountType { get; set; }
+        public string? DiscountType { get; set; }
 
         /// <summary>
         /// Whether the promotion includes the download.
@@ -76,19 +76,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the promotion ends.
         /// </summary>
         [JsonPropertyName("end_time")]
-        public string EndTime { get; set; }
+        public string? EndTime { get; set; }
 
         /// <summary>
         /// The product that the promotion is for: buy, rent or subscribe.
         /// </summary>
         [JsonPropertyName("product_type")]
-        public string ProductType { get; set; }
+        public string? ProductType { get; set; }
 
         /// <summary>
         /// The time in ISO 8601 format when the promotion starts.
         /// </summary>
         [JsonPropertyName("start_time")]
-        public string StartTime { get; set; }
+        public string? StartTime { get; set; }
 
         /// <summary>
         /// The total number of times that the promotion can be used.
@@ -100,6 +100,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The type of the promotion: batch or single.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 }

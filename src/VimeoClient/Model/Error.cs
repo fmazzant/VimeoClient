@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The error message that developers receive.
         /// </summary>
         [JsonPropertyName("developer_message")]
-        public string DeveloperMessage { get; set; }
+        public string? DeveloperMessage { get; set; }
 
         /// <summary>
         /// The error message that non-developer users receive.
         /// </summary>
         [JsonPropertyName("error")]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
 
         /// <summary>
         /// The error code.
@@ -58,7 +58,7 @@ namespace Mafesoft.VimeoClient.Model
         /// A link to more information about the error.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The error as string

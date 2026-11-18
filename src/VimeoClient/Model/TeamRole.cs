@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The applicable permission policies for the role.
         /// </summary>
         [JsonPropertyName("applicable_permission_policies")]
-        public TeamRoleApplicablePermissionPolicies ApplicablePermissionPolicies { get; set; }
+        public TeamRoleApplicablePermissionPolicies? ApplicablePermissionPolicies { get; set; }
 
         /// <summary>
         /// The total number of team members with this role.
@@ -54,13 +54,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The translated display description of the role.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The translated display name of the role.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// Whether the role is disabled for certain team members.
@@ -72,25 +72,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The untranslated role of the user who made the request.
         /// </summary>
         [JsonPropertyName("permission_level")]
-        public string PermissionLevel { get; set; }
+        public string? PermissionLevel { get; set; }
 
         /// <summary>
         /// The untranslated role of the user who made the request.
         /// </summary>
         [JsonPropertyName("role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         /// <summary>
         /// The URI of the team role.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -102,25 +102,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The applicable AI-related permission policies for the role.
         /// </summary>
         [JsonPropertyName("ai")]
-        public TeamRoleApplicablePermissionPoliciesAiItem[] Ai { get; set; }
+        public TeamRoleApplicablePermissionPoliciesAiItem[]? Ai { get; set; }
 
         /// <summary>
         /// The applicable folder-related permission policies for the role.
         /// </summary>
         [JsonPropertyName("folder")]
-        public string[] Folder { get; set; }
+        public string[]? Folder { get; set; }
 
         /// <summary>
         /// The applicable permission policies related to regional delivery for the role.
         /// </summary>
         [JsonPropertyName("regional_delivery")]
-        public TeamRoleApplicablePermissionPoliciesRegionalDeliveryItem[] RegionalDelivery { get; set; }
+        public TeamRoleApplicablePermissionPoliciesRegionalDeliveryItem[]? RegionalDelivery { get; set; }
 
         /// <summary>
         /// The applicable video-related permission policies for the role.
         /// </summary>
         [JsonPropertyName("video")]
-        public string[] Video { get; set; }
+        public string[]? Video { get; set; }
     }
 
     /// <summary>
@@ -132,19 +132,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The translated display description of the regional delivery permission policy.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The translated display name of the regional delivery permission policy.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The name of the regional delivery permission policy.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
     /// <summary>
@@ -156,18 +156,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The translated display description of the AI permission policy.
         /// </summary>
         [JsonPropertyName("display_description")]
-        public string DisplayDescription { get; set; }
+        public string? DisplayDescription { get; set; }
 
         /// <summary>
         /// The translated display name of the AI permission policy.
         /// </summary>
         [JsonPropertyName("display_name")]
-        public string DisplayName { get; set; }
+        public string? DisplayName { get; set; }
 
         /// <summary>
         /// The name of the AI permission policy.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

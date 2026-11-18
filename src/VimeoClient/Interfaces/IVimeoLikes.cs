@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -134,7 +136,7 @@ namespace Mafesoft.VimeoClient.Common
         Task<RestResult<Pagination<User>>> GetAllTheUsersWhoHaveLikedAVideoAsync(int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -154,7 +156,7 @@ namespace Mafesoft.VimeoClient.Common
         Task<RestResult<Pagination<User>>> GetAllTheUsersWhoHaveLikedAVideoAsync(int channel_id, int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -196,7 +198,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -218,7 +220,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null, CancellationToken cancellationToken = default);
 
         /// <summary>
@@ -301,7 +303,7 @@ namespace Mafesoft.VimeoClient.Common
         RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideo(int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null);
 
         /// <summary>
@@ -320,7 +322,7 @@ namespace Mafesoft.VimeoClient.Common
         RestResult<Pagination<User>> GetAllTheUsersWhoHaveLikedAVideo(int channel_id, int video_id, UserDirection? direction = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             UserSort? sort = null);
 
         /// <summary>
@@ -360,7 +362,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null);
 
         /// <summary>
@@ -381,7 +383,7 @@ namespace Mafesoft.VimeoClient.Common
             bool? filter_embeddable = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
+            string? query = null,
             VideoSort? sort = null);
     }
 

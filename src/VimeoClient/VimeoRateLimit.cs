@@ -67,7 +67,7 @@ namespace Mafesoft.VimeoClient
         /// Reads the rate limit headers; null when the response has none of them (or there is no response).
         /// </summary>
         /// <param name="headers">The headers of the response.</param>
-        public static VimeoRateLimit FromHeaders(HttpResponseHeaders headers)
+        public static VimeoRateLimit? FromHeaders(HttpResponseHeaders? headers)
         {
             if (headers == null)
             {
@@ -83,7 +83,7 @@ namespace Mafesoft.VimeoClient
             return limit.Limit == null && limit.Remaining == null && limit.Reset == null ? null : limit;
         }
 
-        private static string Read(HttpResponseHeaders headers, string name) =>
+        private static string? Read(HttpResponseHeaders headers, string name) =>
             headers.TryGetValues(name, out var values) ? values.FirstOrDefault()?.Trim() : null;
 
         private static int? ReadInt(HttpResponseHeaders headers, string name) =>
@@ -117,7 +117,7 @@ namespace Mafesoft.VimeoClient
         /// no response was received.
         /// </summary>
         /// <param name="result">The result of a request.</param>
-        public static VimeoRateLimit GetRateLimit(this RestResult result) =>
+        public static VimeoRateLimit? GetRateLimit(this RestResult? result) =>
             VimeoRateLimit.FromHeaders(result?.Response?.Headers);
     }
 }

@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -126,7 +128,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of incomplete videos was returned.
         /// </returns>
-        Task<RestResult<JsonElement>> GetTheVideosMissingMandatoryCustomMetadataAsync(string user_id, string sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default);
+        Task<RestResult<JsonElement>> GetTheVideosMissingMandatoryCustomMetadataAsync(string user_id, string? sort = null, int? page = null, int? per_page = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method modifies the allowed values of a select or multi-select custom metadata field:
@@ -213,7 +215,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of incomplete videos was returned.
         /// </returns>
-        RestResult<JsonElement> GetTheVideosMissingMandatoryCustomMetadata(string user_id, string sort = null, int? page = null, int? per_page = null);
+        RestResult<JsonElement> GetTheVideosMissingMandatoryCustomMetadata(string user_id, string? sort = null, int? page = null, int? per_page = null);
 
         /// <summary>
         /// This method modifies the allowed values of a select or multi-select custom metadata field:

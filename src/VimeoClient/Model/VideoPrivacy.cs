@@ -50,7 +50,7 @@ namespace Mafesoft.VimeoClient.Model
         ///     nobody - No one can comment on the video.
         /// </summary>
         [JsonPropertyName("comments")]
-        public string Comments { get; set; }
+        public string? Comments { get; set; }
 
         /// <summary>
         /// The video's download permission setting.
@@ -65,7 +65,7 @@ namespace Mafesoft.VimeoClient.Model
         ///     public - Anyone can embed the video.
         /// </summary>
         [JsonPropertyName("embed")]
-        public string Embed { get; set; }
+        public string? Embed { get; set; }
 
         /// <summary>
         /// The general privacy setting for the video:
@@ -79,6 +79,6 @@ namespace Mafesoft.VimeoClient.Model
         ///     users - Only people with a Vimeo account can view the video.
         /// </summary>
         [JsonPropertyName("view")]
-        public string View { get; set; }
+        public string? View { get; set; }
     }
 }

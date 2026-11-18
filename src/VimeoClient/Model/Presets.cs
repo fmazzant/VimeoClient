@@ -41,25 +41,25 @@ namespace Mafesoft.VimeoClient.Model
         /// The preset's metadata.
         /// </summary>
         [JsonPropertyName("metadata")]
-        public PresetsMetadata Metadata { get; set; }
+        public PresetsMetadata? Metadata { get; set; }
 
         /// <summary>
         /// The display name of the preset group.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The contents of the presets group.
         /// </summary>
         [JsonPropertyName("settings")]
-        public PresetsSettings Settings { get; set; }
+        public PresetsSettings? Settings { get; set; }
 
         /// <summary>
         /// The owner of the preset.
         /// </summary>
         [JsonPropertyName("user")]
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The connections of the preset (videos).
         /// </summary>
         [JsonPropertyName("connections")]
-        public Dictionary<string, GenericRelatedEntity> Connections { get; set; }
+        public Dictionary<string, GenericRelatedEntity>? Connections { get; set; }
     }
 
     /// <summary>
@@ -83,19 +83,19 @@ namespace Mafesoft.VimeoClient.Model
         /// The buttons of the embeddable player.
         /// </summary>
         [JsonPropertyName("buttons")]
-        public PresetsButtons Buttons { get; set; }
+        public PresetsButtons? Buttons { get; set; }
 
         /// <summary>
         /// The logos of the embeddable player.
         /// </summary>
         [JsonPropertyName("logos")]
-        public PresetsLogos Logos { get; set; }
+        public PresetsLogos? Logos { get; set; }
 
         /// <summary>
         /// The outro of the embeddable player.
         /// </summary>
         [JsonPropertyName("outro")]
-        public PresetsOutro Outro { get; set; }
+        public PresetsOutro? Outro { get; set; }
     }
 
     /// <summary>
@@ -173,31 +173,31 @@ namespace Mafesoft.VimeoClient.Model
         /// The clips of the outro (comma-separated video IDs).
         /// </summary>
         [JsonPropertyName("clips")]
-        public string Clips { get; set; }
+        public string? Clips { get; set; }
 
         /// <summary>
         /// The outro link.
         /// </summary>
         [JsonPropertyName("link")]
-        public PresetsOutroLink Link { get; set; }
+        public PresetsOutroLink? Link { get; set; }
 
         /// <summary>
         /// The outro text.
         /// </summary>
         [JsonPropertyName("text")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// The type of the outro: beginning, link, no idea, text, threevideos, videos.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The videos of the outro.
         /// </summary>
         [JsonPropertyName("videos")]
-        public string Videos { get; set; }
+        public string? Videos { get; set; }
     }
 
     /// <summary>
@@ -209,12 +209,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the link.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The URL of the link.
         /// </summary>
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string? Url { get; set; }
     }
 }

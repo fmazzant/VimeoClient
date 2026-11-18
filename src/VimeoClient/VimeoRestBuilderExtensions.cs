@@ -51,7 +51,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="key">The parameter's name</param>
         /// <param name="value">The parameter's value</param>
         /// <returns></returns>
-        public static RestBuilder OptionalParameter(this RestBuilder root, string key, object value)
+        public static RestBuilder OptionalParameter(this RestBuilder root, string key, object? value)
         {
             var vimeoValue = ToVimeoValue(value);
             return string.IsNullOrEmpty(vimeoValue) ? root : root.Parameter(key, vimeoValue);
@@ -62,12 +62,12 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <returns></returns>
         public static RestBuilder ListParameters(this RestBuilder root,
-            object direction = null,
-            object filter = null,
+            object? direction = null,
+            object? filter = null,
             int? page = null,
             int? per_page = null,
-            string query = null,
-            object sort = null) => root
+            string? query = null,
+            object? sort = null) => root
             .OptionalParameter("direction", direction)
             .OptionalParameter("filter", filter)
             .OptionalParameter("page", page)
@@ -104,7 +104,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="root">The rest builder</param>
         /// <param name="parameters">The body parameters</param>
         /// <returns></returns>
-        public static RestBuilder JsonPayload(this RestBuilder root, IPayloadParameters parameters)
+        public static RestBuilder JsonPayload(this RestBuilder root, IPayloadParameters? parameters)
             => root.Payload<Dictionary<string, object>>(parameters?.ToPayload() ?? new VimeoPayload());
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="root">The rest builder</param>
         /// <param name="payload">The body</param>
         /// <returns></returns>
-        public static RestBuilder JsonPayload(this RestBuilder root, VimeoPayload payload)
+        public static RestBuilder JsonPayload(this RestBuilder root, VimeoPayload? payload)
             => root.Payload<Dictionary<string, object>>(payload ?? new VimeoPayload());
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="root">The rest builder</param>
         /// <param name="values">The body values</param>
         /// <returns></returns>
-        public static RestBuilder FormUrlEncoded(this RestBuilder root, params KeyValuePair<string, object>[] values) => root
+        public static RestBuilder FormUrlEncoded(this RestBuilder root, params KeyValuePair<string, object?>[] values) => root
             .FormUrlEncoded(true, (pars) =>
             {
                 foreach (var item in values)
@@ -175,26 +175,30 @@ namespace Mafesoft.VimeoClient
         /// <returns></returns>
         public static RestResult<Pagination<T>> WithNavigation<T>(this RestResult<Pagination<T>> result, Func<RestBuilder> rootAuthorization)
         {
-            var paging = result?.Content?.Paging;
+            var content = result.Content;
+            var next = content?.Paging?.Next;
+            var previous = content?.Paging?.Previous;
 
-            if (paging?.Next != null)
+            if (content != null && next != null)
             {
-                result.Content.NextAction = () => rootAuthorization()
-                    .Command(paging.Next)
+                content.NextAction = () => rootAuthorization()
+                    .Command(next)
                     .GetPagination<T>(rootAuthorization);
-                result.Content.NextAsyncAction = (cancellationToken) => rootAuthorization()
-                    .Command(paging.Next)
-                    .GetPaginationAsync<T>(rootAuthorization, cancellationToken);
+                content.NextAsyncAction = async (cancellationToken) => await rootAuthorization()
+                    .Command(next)
+                    .GetPaginationAsync<T>(rootAuthorization, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
-            if (paging?.Previous != null)
+            if (content != null && previous != null)
             {
-                result.Content.PreviousAction = () => rootAuthorization()
-                    .Command(paging.Previous)
+                content.PreviousAction = () => rootAuthorization()
+                    .Command(previous)
                     .GetPagination<T>(rootAuthorization);
-                result.Content.PreviousAsyncAction = (cancellationToken) => rootAuthorization()
-                    .Command(paging.Previous)
-                    .GetPaginationAsync<T>(rootAuthorization, cancellationToken);
+                content.PreviousAsyncAction = async (cancellationToken) => await rootAuthorization()
+                    .Command(previous)
+                    .GetPaginationAsync<T>(rootAuthorization, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return result;
@@ -208,7 +212,7 @@ namespace Mafesoft.VimeoClient
         /// </summary>
         /// <param name="value">The value</param>
         /// <returns></returns>
-        public static string ToVimeoValue(object value)
+        public static string? ToVimeoValue(object? value)
         {
             switch (value)
             {

@@ -48,37 +48,37 @@ namespace Mafesoft.VimeoClient.Model
         /// The downloads that are available for the audio track.
         /// </summary>
         [JsonPropertyName("download")]
-        public AudioTrackDownloadItem[] Download { get; set; }
+        public AudioTrackDownloadItem[]? Download { get; set; }
 
         /// <summary>
         /// The language of the audio track.
         /// </summary>
         [JsonPropertyName("language")]
-        public AudioTrackLanguage Language { get; set; }
+        public AudioTrackLanguage? Language { get; set; }
 
         /// <summary>
         /// The origin of the audio track.
         /// </summary>
         [JsonPropertyName("provenance")]
-        public string Provenance { get; set; }
+        public string? Provenance { get; set; }
 
         /// <summary>
         /// The quota parameters for the audio tracks available for this version.
         /// </summary>
         [JsonPropertyName("quota")]
-        public AudioTrackQuota Quota { get; set; }
+        public AudioTrackQuota? Quota { get; set; }
 
         /// <summary>
         /// The transcode information for the audio track.
         /// </summary>
         [JsonPropertyName("transcode")]
-        public AudioTrackTranscode Transcode { get; set; }
+        public AudioTrackTranscode? Transcode { get; set; }
 
         /// <summary>
         /// The type of audio track.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         /// <summary>
         /// The upload information for the audio track.
@@ -90,13 +90,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The audio track's canonical relative URI.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
 
         /// <summary>
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The transcode status of the audio track.
         /// </summary>
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 
     /// <summary>
@@ -150,13 +150,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The standard ISO 639-1 code for the language.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The name of the language.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 
     /// <summary>
@@ -168,24 +168,24 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the audio track link expires.
         /// </summary>
         [JsonPropertyName("expires")]
-        public string Expires { get; set; }
+        public string? Expires { get; set; }
 
         /// <summary>
         /// The file extension of the audio file.
         /// </summary>
         [JsonPropertyName("extension")]
-        public string Extension { get; set; }
+        public string? Extension { get; set; }
 
         /// <summary>
         /// The URL of the audio track download.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The rendition of the audio track.
         /// </summary>
         [JsonPropertyName("rendition")]
-        public string Rendition { get; set; }
+        public string? Rendition { get; set; }
     }
 }

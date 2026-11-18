@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient.Common
 {
     using Mafesoft.RestClient;
@@ -66,14 +68,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The federated search results were returned.
         /// </returns>
         Task<RestResult<Pagination<ProjectItem>>> SearchTheItemsOfAUserAsync(string user_id,
-            string query = null,
-            string[] query_fields = null,
-            string filter = null,
-            string[] filter_privacy = null,
-            string modified_start_date = null,
-            string modified_end_date = null,
-            string direction = null,
-            string sort = null,
+            string? query = null,
+            string[]? query_fields = null,
+            string? filter = null,
+            string[]? filter_privacy = null,
+            string? modified_start_date = null,
+            string? modified_end_date = null,
+            string? direction = null,
+            string? sort = null,
             int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
@@ -98,14 +100,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The federated search results were returned.
         /// </returns>
         Task<RestResult<Pagination<ProjectItem>>> SearchTheItemsOfAWorkspaceAsync(string workspace_uuid,
-            string query = null,
-            string[] query_fields = null,
-            string filter = null,
-            string[] filter_privacy = null,
-            string modified_start_date = null,
-            string modified_end_date = null,
-            string direction = null,
-            string sort = null,
+            string? query = null,
+            string[]? query_fields = null,
+            string? filter = null,
+            string[]? filter_privacy = null,
+            string? modified_start_date = null,
+            string? modified_end_date = null,
+            string? direction = null,
+            string? sort = null,
             int? page = null,
             int? per_page = null, CancellationToken cancellationToken = default);
 
@@ -129,14 +131,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The federated search results were returned.
         /// </returns>
         RestResult<Pagination<ProjectItem>> SearchTheItemsOfAUser(string user_id,
-            string query = null,
-            string[] query_fields = null,
-            string filter = null,
-            string[] filter_privacy = null,
-            string modified_start_date = null,
-            string modified_end_date = null,
-            string direction = null,
-            string sort = null,
+            string? query = null,
+            string[]? query_fields = null,
+            string? filter = null,
+            string[]? filter_privacy = null,
+            string? modified_start_date = null,
+            string? modified_end_date = null,
+            string? direction = null,
+            string? sort = null,
             int? page = null,
             int? per_page = null);
 
@@ -160,14 +162,14 @@ namespace Mafesoft.VimeoClient.Common
         /// 200 OK	The federated search results were returned.
         /// </returns>
         RestResult<Pagination<ProjectItem>> SearchTheItemsOfAWorkspace(string workspace_uuid,
-            string query = null,
-            string[] query_fields = null,
-            string filter = null,
-            string[] filter_privacy = null,
-            string modified_start_date = null,
-            string modified_end_date = null,
-            string direction = null,
-            string sort = null,
+            string? query = null,
+            string[]? query_fields = null,
+            string? filter = null,
+            string[]? filter_privacy = null,
+            string? modified_start_date = null,
+            string? modified_end_date = null,
+            string? direction = null,
+            string? sort = null,
             int? page = null,
             int? per_page = null);
     }

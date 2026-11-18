@@ -150,7 +150,7 @@ namespace Mafesoft.VimeoClient.Common
         /// </returns>
         public virtual RestResult<Pagination<Channel>> GetAllTheChannelsInACategory(string category,
             CategoryDirection? direction = null,
-            string query = null,
+            string? query = null,
             CategorySortAllChannel? sort = null,
             int? page = null,
             int? per_page = null)
@@ -199,7 +199,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns></returns>
         public virtual RestResult<Pagination<Group>> GetAllTheGroupsInACategory(string category,
             CategoryDirection? direction = null,
-            string query = null,
+            string? query = null,
             CategorySortAllGroup? sort = null,
             int? page = null,
             int? per_page = null)

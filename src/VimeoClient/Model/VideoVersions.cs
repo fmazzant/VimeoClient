@@ -46,7 +46,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the video version was created.
         /// </summary>
         [JsonPropertyName("created_time")]
-        public string CreatedTime { get; set; }
+        public string? CreatedTime { get; set; }
 
         /// <summary>
         /// The duration of the video version in seconds.
@@ -58,7 +58,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The file name of the video version.
         /// </summary>
         [JsonPropertyName("filename")]
-        public string Filename { get; set; }
+        public string? Filename { get; set; }
 
         /// <summary>
         /// The size in bytes of the video version file.
@@ -70,18 +70,18 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the video version was last modified.
         /// </summary>
         [JsonPropertyName("modified_time")]
-        public string ModifiedTime { get; set; }
+        public string? ModifiedTime { get; set; }
 
         /// <summary>
         /// The active picture of the video version.
         /// </summary>
         [JsonPropertyName("pictures")]
-        public Picture Pictures { get; set; }
+        public Picture? Pictures { get; set; }
 
         /// <summary>
         /// The upload information for this version.
         /// </summary>
         [JsonPropertyName("upload")]
-        public VideoUpload Upload { get; set; }
+        public VideoUpload? Upload { get; set; }
     }
 }

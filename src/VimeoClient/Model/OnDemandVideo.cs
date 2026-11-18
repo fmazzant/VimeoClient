@@ -40,7 +40,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The On Demand information of the video.
         /// </summary>
         [JsonPropertyName("ondemand")]
-        public OnDemandVideoInfo OnDemand { get; set; }
+        public OnDemandVideoInfo? OnDemand { get; set; }
     }
 
     /// <summary>
@@ -52,13 +52,13 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about purchasing the video.
         /// </summary>
         [JsonPropertyName("buy")]
-        public OnDemandPurchaseOption Buy { get; set; }
+        public OnDemandPurchaseOption? Buy { get; set; }
 
         /// <summary>
         /// The description of the video.
         /// </summary>
         [JsonPropertyName("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The position of the video in the page or season.
@@ -70,18 +70,18 @@ namespace Mafesoft.VimeoClient.Model
         /// Information about renting the video.
         /// </summary>
         [JsonPropertyName("rent")]
-        public OnDemandPurchaseOption Rent { get; set; }
+        public OnDemandPurchaseOption? Rent { get; set; }
 
         /// <summary>
         /// The season that contains the video.
         /// </summary>
         [JsonPropertyName("season")]
-        public OnDemandSeason Season { get; set; }
+        public OnDemandSeason? Season { get; set; }
 
         /// <summary>
         /// The type of the video: extra, main or trailer.
         /// </summary>
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 }

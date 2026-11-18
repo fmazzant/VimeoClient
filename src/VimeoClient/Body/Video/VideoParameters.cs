@@ -179,7 +179,7 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// Adds the value to the dictionary only when it is set.
         /// </summary>
-        public static void AddIfSet(this Dictionary<string, string> dict, string key, object value)
+        public static void AddIfSet(this Dictionary<string, string?> dict, string key, object? value)
         {
             var vimeoValue = VimeoRestBuilderExtensions.ToVimeoValue(value);
             if (vimeoValue != null)
@@ -197,32 +197,32 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The title of the video.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The description of the video.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// The Creative Commons license: by, by-nc, by-nc-nd, by-nc-sa, by-nd, by-sa, cc0.
         /// </summary>
-        public string License { get; set; }
+        public string? License { get; set; }
 
         /// <summary>
         /// The video's default language.
         /// </summary>
-        public string Locale { get; set; }
+        public string? Locale { get; set; }
 
         /// <summary>
         /// The password. Required only when PrivacyView is password.
         /// </summary>
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// A list of values describing the content in this video.
         /// </summary>
-        public string[] ContentRating { get; set; }
+        public string[]? ContentRating { get; set; }
 
         /// <summary>
         /// Who can view the video.
@@ -258,9 +258,9 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.AddIfSet("name", Name);
             dict.AddIfSet("description", Description);
@@ -321,22 +321,22 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The public URL of the video file. Required for the pull approach.
         /// </summary>
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The app's redirect URL. Required for the post approach.
         /// </summary>
-        public string RedirectUrl { get; set; }
+        public string? RedirectUrl { get; set; }
 
         /// <summary>
         /// The title of the video.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The description of the video.
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Who can view the video.
@@ -346,15 +346,15 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The URI of the folder to which the video is uploaded.
         /// </summary>
-        public string FolderUri { get; set; }
+        public string? FolderUri { get; set; }
 
         /// <summary>
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.AddIfSet("upload.approach", Approach);
             dict.AddIfSet("upload.size", Size);
@@ -397,7 +397,7 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The name of the file to upload.
         /// </summary>
-        public string FileName { get; set; }
+        public string? FileName { get; set; }
 
         /// <summary>
         /// The upload approach.
@@ -412,7 +412,7 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The public URL of the video file (pull approach).
         /// </summary>
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Whether this version is the active one (edit only).
@@ -423,9 +423,9 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.AddIfSet("file_name", FileName);
             dict.AddIfSet("upload.approach", Approach);
@@ -467,12 +467,12 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The language code of the text track.
         /// </summary>
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
         /// <summary>
         /// The name of the text track.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The type of the text track.
@@ -483,9 +483,9 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.AddIfSet("active", Active);
             dict.AddIfSet("language", Language);
@@ -504,30 +504,30 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// <summary>
         /// The email address of the credited person.
         /// </summary>
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         /// <summary>
         /// The name of the credited person.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The role of the credited person.
         /// </summary>
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         /// <summary>
         /// The Vimeo URI of the credited person.
         /// </summary>
-        public string UserUri { get; set; }
+        public string? UserUri { get; set; }
 
         /// <summary>
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.AddIfSet("email", Email);
             dict.AddIfSet("name", Name);
@@ -557,9 +557,9 @@ namespace Mafesoft.VimeoClient.Body.Video
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable()
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable()
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>();
+            Dictionary<string, string?> dict = new Dictionary<string, string?>();
 
             dict.AddIfSet("active", Active);
             dict.AddIfSet("time", Time);

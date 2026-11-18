@@ -42,7 +42,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The OTT destination's canonical relative URI.
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// The ID of the OTT channel.
@@ -54,13 +54,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The name of the OTT channel.
         /// </summary>
         [JsonPropertyName("ott_channel_name")]
-        public string OttChannelName { get; set; }
+        public string? OttChannelName { get; set; }
 
         /// <summary>
         /// The subdomain of the OTT channel.
         /// </summary>
         [JsonPropertyName("ott_channel_subdomain")]
-        public string OttChannelSubdomain { get; set; }
+        public string? OttChannelSubdomain { get; set; }
 
         /// <summary>
         /// The ID of the OTT event.
@@ -78,6 +78,6 @@ namespace Mafesoft.VimeoClient.Model
         /// The fields of the response not mapped by the library.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, JsonElement> AdditionalData { get; set; }
+        public Dictionary<string, JsonElement>? AdditionalData { get; set; }
     }
 }

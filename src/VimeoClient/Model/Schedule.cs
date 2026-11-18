@@ -56,13 +56,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The ISO 8601 time on which the live event is expected to be live, with the zero UTC offset Z. This parameter is required when schedule.type is weekly.
         /// </summary>
         [JsonPropertyName("daily_time")]
-        public string daily_time { get; set; }
+        public string? daily_time { get; set; }
 
         /// <summary>
         /// The ISO 8601 time on which the live event is expected to be live, with support for different time offsets. This parameter is required when schedule.type is single.
         /// </summary>
         [JsonPropertyName("start_time")]
-        public string start_time { get; set; }
+        public string? start_time { get; set; }
 
         /// <summary>
         /// How often the live event is expected to be live.
@@ -76,12 +76,12 @@ namespace Mafesoft.VimeoClient.Model
         /// A non-empty array of weekdays on which the live event is expected to be live. Weekdays can range from 1 to 7, where 1 is Monday and 7 is Sunday. This parameter is required when schedule.type is weekly.
         /// </summary>
         [JsonPropertyName("weekdays")]
-        public int[] weekdays { get; set; }
+        public int[]? weekdays { get; set; }
 
         /// <summary>
         /// The description of the next video to be streamed to the live event.
         /// </summary>
         [JsonPropertyName("stream_description")]
-        public string stream_description { get; set; }
+        public string? stream_description { get; set; }
     }
 }

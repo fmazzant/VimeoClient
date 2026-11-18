@@ -39,7 +39,7 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The custom string to use in the Vimeo URL of the On Demand page.
         /// </summary>
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// Whether to enable preorders on the On Demand page.
@@ -49,7 +49,7 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// <summary>
         /// The time in ISO 8601 format when the preorder will be published.
         /// </summary>
-        public string PreorderPublishTime { get; set; }
+        public string? PreorderPublishTime { get; set; }
 
         /// <summary>
         /// Whether to publish the On Demand page.
@@ -76,6 +76,6 @@ namespace Mafesoft.VimeoClient.Body.OnDemand
         /// Convert object to key value pair enumerable
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<KeyValuePair<string, string>> ToEnumerable() => ToPayload().Flatten();
+        public IEnumerable<KeyValuePair<string, string?>> ToEnumerable() => ToPayload().Flatten();
     }
 }

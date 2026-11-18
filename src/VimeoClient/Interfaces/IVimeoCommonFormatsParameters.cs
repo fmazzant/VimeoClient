@@ -32,6 +32,8 @@
 //     Do not edit: run `dotnet run tools/GenerateInterfaces.cs` again.
 // </auto-generated>
 
+#nullable enable
+
 namespace Mafesoft.VimeoClient
 {
     using Mafesoft.RestClient;
@@ -81,7 +83,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="direction">The sort direction of the results: asc or desc</param>
         /// <param name="cancellationToken">The token to cancel the request.</param>
         /// <returns></returns>
-        Task<RestResult<T>> SortAndDirectionAsync<T>(string command, object sort, object direction = null, CancellationToken cancellationToken = default) where T : new();
+        Task<RestResult<T>> SortAndDirectionAsync<T>(string command, object sort, object? direction = null, CancellationToken cancellationToken = default) where T : new();
 
         /// <summary>
         /// Filters the results of a list endpoint.
@@ -187,7 +189,7 @@ namespace Mafesoft.VimeoClient
         /// <param name="sort">The way to sort the results (an enum value or a string)</param>
         /// <param name="direction">The sort direction of the results: asc or desc</param>
         /// <returns></returns>
-        RestResult<T> SortAndDirection<T>(string command, object sort, object direction = null) where T : new();
+        RestResult<T> SortAndDirection<T>(string command, object sort, object? direction = null) where T : new();
 
         /// <summary>
         /// Filters the results of a list endpoint.

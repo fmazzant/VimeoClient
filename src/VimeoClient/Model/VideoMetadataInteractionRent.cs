@@ -40,13 +40,13 @@ namespace Mafesoft.VimeoClient.Model
         /// The currency code for the current user's region.
         /// </summary>
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public string? Currency { get; set; }
 
         /// <summary>
         /// Formatted price to display to rent an On Demand video.
         /// </summary>
         [JsonPropertyName("display_price")]
-        public string DisplayPrice { get; set; }
+        public string? DisplayPrice { get; set; }
 
         /// <summary>
         /// Whether the video has DRM.
@@ -64,7 +64,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The URL to rent the On Demand video on Vimeo.
         /// </summary>
         [JsonPropertyName("link")]
-        public string Link { get; set; }
+        public string? Link { get; set; }
 
         /// <summary>
         /// The numeric value of the price for buying the On Demand video.
@@ -76,7 +76,7 @@ namespace Mafesoft.VimeoClient.Model
         /// The time in ISO 8601 format when the On Demand video was rented.
         /// </summary>
         [JsonPropertyName("purchase_time")]
-        public string PurchaseTime { get; set; }
+        public string? PurchaseTime { get; set; }
 
         /// <summary>
         /// The user's streaming access to this On Demand video:
@@ -87,12 +87,12 @@ namespace Mafesoft.VimeoClient.Model
         ///     unavailable - The video isn't available for streaming.
         /// </summary>
         [JsonPropertyName("stream")]
-        public string Stream { get; set; }
+        public string? Stream { get; set; }
 
         /// <summary>
         /// The product URI to rent the On Demand video.
         /// </summary>
         [JsonPropertyName("uri")]
-        public string Uri { get; set; }
+        public string? Uri { get; set; }
     }
 }

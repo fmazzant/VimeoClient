@@ -169,7 +169,7 @@ namespace Mafesoft.VimeoClient.Common
         /// <returns>
         /// 200 OK	The list of incomplete videos was returned.
         /// </returns>
-        public virtual RestResult<JsonElement> GetTheVideosMissingMandatoryCustomMetadata(string user_id, string sort = null, int? page = null, int? per_page = null) => RootAuthorization()
+        public virtual RestResult<JsonElement> GetTheVideosMissingMandatoryCustomMetadata(string user_id, string? sort = null, int? page = null, int? per_page = null) => RootAuthorization()
             .Command($"/teams/{user_id}/custom_metadata/incomplete_videos")
             .ListParameters(page: page, per_page: per_page, sort: sort)
             .Get<JsonElement>();

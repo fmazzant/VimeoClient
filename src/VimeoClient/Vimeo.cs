@@ -118,8 +118,8 @@ namespace Mafesoft.VimeoClient
                     return noErrors;
                 }
 
-                var certificate = cert.GetCertHashString();
-                var contains = Properties.ValidCertificates.Contains(certificate);
+                var certificate = cert?.GetCertHashString();
+                var contains = certificate != null && Properties.ValidCertificates.Contains(certificate);
                 return noErrors && contains;
             }));
 

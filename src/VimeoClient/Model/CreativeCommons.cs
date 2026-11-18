@@ -40,12 +40,12 @@ namespace Mafesoft.VimeoClient.Model
         /// The Creative Commons license code: by, by-nc, by-nc-nd, by-nc-sa, by-nd, by-sa, cc0.
         /// </summary>
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// The Creative Commons license name.
         /// </summary>
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
