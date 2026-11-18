@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;net8.0;net10.0</TargetFrameworks>
     <PackageId>Mafesoft.VimeoClient.Extensions.DependencyInjection</PackageId>
     <!-- The same version as Mafesoft.VimeoClient (src/VimeoClient/VimeoClient.csproj): nuget.yml checks it -->
-    <Version>3.4.1</Version>
+    <Version>3.4.2</Version>
     <Authors>Federico Mazzanti</Authors>
     <Company>Federico Mazzanti</Company>
     <Description>Registers Mafesoft.VimeoClient in the Microsoft.Extensions dependency injection: services.AddVimeoClient(options => ...) or from the configuration, with IVimeo and the interfaces of the sections (IVimeoVideos, ...).</Description>
