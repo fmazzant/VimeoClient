@@ -94,7 +94,7 @@ namespace Mafesoft.VimeoClient
         /// Vimeo End Point root
         /// </summary>
         /// <returns>The request builder for the Vimeo end point, with the Accept header and the certificate validation.</returns>
-        protected virtual RestBuilder Root() => Rest
+        protected virtual RestBuilder Root() => ApplyRetry(Rest
             .Build()
             .Url(new Uri(Properties.EndPoint))
             .Header((headers) =>
@@ -121,7 +121,15 @@ namespace Mafesoft.VimeoClient
                 var certificate = cert.GetCertHashString();
                 var contains = Properties.ValidCertificates.Contains(certificate);
                 return noErrors && contains;
-            });
+            }));
+
+        /// <summary>
+        /// Retries the transient errors (429, 408, 5xx, network errors, timeouts) when <see cref="VimeoProperties.MaxRetries"/>
+        /// is greater than 0, with exponential backoff from <see cref="VimeoProperties.RetryDelay"/> and the Retry-After header.
+        /// </summary>
+        private RestBuilder ApplyRetry(RestBuilder builder) => Properties.MaxRetries > 0
+            ? builder.Retry(Properties.MaxRetries, Properties.RetryDelay, Properties.RetryNonIdempotentMethods)
+            : builder;
 
         /// <summary>
         /// Vimeo End Point root with Bearer authentication
